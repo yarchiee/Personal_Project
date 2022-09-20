@@ -16,9 +16,12 @@ function App() {
       <GlobalStyle />
       <Header />
       <Routes>
-        <Route path={`/${REPOSITORY}`} element={<Oauth />}></Route>
-        <Route path={`/${REPOSITORY}/label`} element={<Label />}></Route>
-        <Route path={`/${REPOSITORY}`} element={<IssueList />}></Route>
+        <Route path={`/${REPOSITORY}/ooath`} element={<Oauth />}></Route>
+        <Route path={`/${REPOSITORY}`} element={<Label />}></Route>
+        <Route
+          path={`/${REPOSITORY}/issuelist`}
+          element={<IssueList />}
+        ></Route>
         <Route
           path={`/${REPOSITORY}/issuepage`}
           element={<IssuePage />}
