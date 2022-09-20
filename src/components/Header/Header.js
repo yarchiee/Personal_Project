@@ -117,7 +117,7 @@ const UnderLineNavItemPerEach = styled.div`
   margin-right: 8px;
 `;
 const UnderLineNavItemText = styled.div`
-  margin-left: 8px;
+  margin-left: 10px;
 `;
 const UnderLineNavItemChoose = styled(UnderLineNavItemPerEach)`
   line-height: 48px;
