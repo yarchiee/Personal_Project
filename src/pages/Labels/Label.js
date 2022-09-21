@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "../../utils/api";
+import { randomBase16 } from "../../utils/random";
+
 // import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import EditBtn from "./EditBtn";
+import NewLabel from "./NewLabel";
+
 import {
   TagIcon,
   MilestoneIcon,
@@ -165,7 +170,6 @@ const SortListBox = styled.div`
   position: absolute !important;
   right: 48px !important;
   top: 295px;
-  /* display: ${(props) => (props.isShow ? "block" : "none")}; */
 `;
 const SortList = styled.div`
   width: 100%;
@@ -220,10 +224,7 @@ const IssueLabelText = styled.div`
   color: #57606a;
   width: 33.33%;
 `;
-const IfIssueText = styled.div`
-  color: #57606a;
-  width: 25%;
-`;
+
 const IssueLabelEditBtn = styled.button`
   color: #57606a;
   &:hover {
@@ -278,8 +279,21 @@ const ThreeDotIcon = styled(KebabHorizontalIcon)`
 `;
 
 function Label() {
-  // const [userData, setUserData] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
+  const [repoLabelData, setRepoLabelData] = useState([]);
+  const [selectedEdit, setSelectedEdit] = useState();
+
+  useEffect(() => {
+    api.listLabelAll().then((res) => {
+      console.log(res);
+      setRepoLabelData(res);
+    });
+    console.log(randomBase16(6));
+  }, []);
+  console.log(repoLabelData);
+
+  const cancel = () => {
+    setSelectedEdit(undefined);
+  };
 
   return (
     <>
@@ -306,8 +320,10 @@ function Label() {
           <SearchLabelsInput placeholder="Search all labels"></SearchLabelsInput>
         </SearchAllLabelsMobile>
         <LabelBox>
+          <NewLabel />
           <LabelBoxHeader>
             <LabelBoxTitle>9 labels</LabelBoxTitle>
+
             <SelectMenuBtnDetails>
               <SelectMenuBtn>Sort </SelectMenuBtn>
               <SortListBox>
@@ -319,45 +335,38 @@ function Label() {
               </SortListBox>
             </SelectMenuBtnDetails>
           </LabelBoxHeader>
-
-          <EachLabelContainer>
-            <EachLabelIconContainer>
-              <IssueLabel>
-                <IssueLabelP>bug </IssueLabelP>
-              </IssueLabel>
-            </EachLabelIconContainer>
-            <IssueLabelText>Somthing isn't working</IssueLabelText>
-            <EditDeleteAreaDesktop>
-              <IssueLabelEditBtn>Edit</IssueLabelEditBtn>
-              <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
-            </EditDeleteAreaDesktop>
-            <EditDeleteAreaMobile>
-              <ThreeDotBotton>
-                <ThreeDotIcon size={16} />
-              </ThreeDotBotton>
-            </EditDeleteAreaMobile>
-          </EachLabelContainer>
-
-          <EachLabelContainer>
-            <EachLabelIconContainer>
-              <IssueLabel>
-                <IssueLabelP>bug </IssueLabelP>
-              </IssueLabel>
-            </EachLabelIconContainer>
-            <IssueLabelText>Somthing isn't working</IssueLabelText>
-            <IfIssueText>Somthing isn't working</IfIssueText>
-            <EditDeleteAreaDesktop>
-              <IssueLabelEditBtn>Edit</IssueLabelEditBtn>
-              <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
-            </EditDeleteAreaDesktop>
-            <EditDeleteAreaMobile>
-              <ThreeDotBotton>
-                <ThreeDotIcon size={16} />
-              </ThreeDotBotton>
-            </EditDeleteAreaMobile>
-          </EachLabelContainer>
-
-          <EditBtn onClick={(e) => setOpenEdit()} />
+          {repoLabelData.map((data, index) => {
+            return (
+              <>
+                <EachLabelContainer>
+                  <EachLabelIconContainer>
+                    <IssueLabel>
+                      <IssueLabelP>{data.name}</IssueLabelP>
+                    </IssueLabel>
+                  </EachLabelIconContainer>
+                  <IssueLabelText>{data.description}</IssueLabelText>
+                  <EditDeleteAreaDesktop>
+                    <IssueLabelEditBtn
+                      onClick={() => {
+                        setSelectedEdit(index);
+                      }}
+                    >
+                      Edit
+                    </IssueLabelEditBtn>
+                    <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
+                  </EditDeleteAreaDesktop>
+                  <EditDeleteAreaMobile>
+                    <ThreeDotBotton>
+                      <ThreeDotIcon size={16} />
+                    </ThreeDotBotton>
+                  </EditDeleteAreaMobile>
+                </EachLabelContainer>
+                {selectedEdit === index && (
+                  <EditBtn value={data.name} onCancel={cancel} />
+                )}
+              </>
+            );
+          })}
         </LabelBox>
       </RepoContentContainer>
     </>

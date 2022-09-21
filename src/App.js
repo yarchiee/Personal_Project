@@ -4,7 +4,8 @@ import Label from "./pages/Labels/Label";
 import IssueList from "./pages/IssueList/IssueList";
 import IssuePage from "./pages/IssuePage/IssuePage";
 import NewIssuePage from "./pages/NewIssuePage/NewIssuePage";
-import Oauth from "./pages/Oauth";
+import Oauth from "./pages/Oauth/Oauth";
+import GithubOauth from "./pages/Oauth/GithubOAuth";
 import { ResetStyle, GlobalStyle } from "./components/globalStyle.js";
 import { Navigate, Route, Routes } from "react-router-dom";
 const REPOSITORY = "github-project";
@@ -16,6 +17,10 @@ function App() {
       <GlobalStyle />
       <Header />
       <Routes>
+        <Route
+          path={`/${REPOSITORY}/github-ooath`}
+          element={<GithubOauth />}
+        ></Route>
         <Route path={`/${REPOSITORY}/ooath`} element={<Oauth />}></Route>
         <Route path={`/${REPOSITORY}`} element={<Label />}></Route>
         <Route

@@ -1,7 +1,7 @@
 import { supabase } from "../Client";
 
 const api = {
-  hostname: " https://api.github.com/repos",
+  hostname: " https://api.github.com",
 
   async signInWithGithub() {
     /* authenticate with GitHub */
@@ -14,15 +14,26 @@ const api = {
     /* sign the user out */
     await supabase.auth.signOut();
   },
+  async session() {
+    /* sign the user out */
+    await supabase.auth.session();
+  },
   async listLabelPerIssue(owner, issue_number) {
     const response = await fetch(
       `${this.hostname}/${owner}/personal-project/issues/${issue_number}/labels`
     );
     return await response.json();
   },
-  async listLabelAll(owner) {
+  async listLabelAll() {
     const response = await fetch(
-      `${this.hostname}/${owner}/personal-project/labels`
+      `${this.hostname}/repos/yarchiee/Personal_Project/labels`,
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+          Authorization: "Bearer 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",
+        },
+        method: "GET",
+      }
     );
     return await response.json();
   },

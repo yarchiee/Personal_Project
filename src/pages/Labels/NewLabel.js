@@ -1,24 +1,30 @@
 import React from "react";
 import styled from "styled-components";
-import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
+import { SyncIcon } from "@primer/octicons-react";
 const EachLabelContainer = styled.div`
   height: 77px;
   border: 1px solid #d0d7de;
   border-bottom: none;
-  border-top: none;
-  /* border-bottom: none; */
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
   padding: 16px;
   padding-bottom: 0;
   display: flex;
   line-height: 26px;
 `;
 const EditLabelContainer = styled(EachLabelContainer)`
+  border: 1px solid #d0d7de;
   border-top: none;
+  border-bottom: 1px solid #d0d7de;
   height: 93px;
   padding-top: 0;
   padding-bottom: 16px;
-  border-bottom: 1px solid #d0d7de;
   font-weight: 600;
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 `;
 const EachLabelIconContainer = styled.div`
   display: flex;
@@ -41,50 +47,6 @@ const IssueLabelP = styled.p`
   font-weight: 600;
 `;
 
-const IssueLabelDeleteBtn = styled.button`
-  color: #57606a;
-  margin-left: 16px;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-    color: #0969da;
-  }
-`;
-const EditDeleteAreaDesktop = styled.div`
-  margin-left: auto;
-
-  @media screen and (max-width: 1011.9px) {
-    display: none;
-  }
-`;
-const EditDeleteAreaMobile = styled.div`
-  display: none;
-  @media screen and (max-width: 1011.9px) {
-    display: block;
-
-    margin-left: auto;
-  }
-`;
-const ThreeDotBotton = styled.button`
-  width: 42px;
-  height: 28px;
-  background-color: #f6f8fa;
-  border: 1px solid rgba(27, 31, 36, 0.15);
-  border-radius: 6px;
-  margin-top: 7px;
-  &:hover {
-    background-color: #0969da;
-  }
-`;
-const ThreeDotIcon = styled(KebabHorizontalIcon)`
-  display: none;
-  @media screen and (max-width: 1011.9px) {
-    display: block;
-    &:hover {
-      color: #fff;
-    }
-  }
-`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -137,29 +99,21 @@ const ColorSelectBtn = styled.button`
   margin-bottom: 16px;
   margin-right: 8px;
 `;
-const EditBtn = ({ onCancel, value }) => {
+const NewLabel = ({ onClick }) => {
   return (
     <>
       <Wrapper>
-        <EachLabelContainer>
+        <EachLabelContainer onClick={() => onClick && onClick()}>
           <EachLabelIconContainer>
             <IssueLabel>
-              <IssueLabelP>bug </IssueLabelP>
+              <IssueLabelP>labelpreview </IssueLabelP>
             </IssueLabel>
           </EachLabelIconContainer>
-          <EditDeleteAreaDesktop>
-            <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
-          </EditDeleteAreaDesktop>
-          <EditDeleteAreaMobile>
-            <ThreeDotBotton>
-              <ThreeDotIcon size={16} />
-            </ThreeDotBotton>
-          </EditDeleteAreaMobile>
         </EachLabelContainer>
         <EditLabelContainer>
           <EditLabelGroup>
             <EditLabelTitle>Label name</EditLabelTitle>
-            <EditLabelInput defaultValue={value} />
+            <EditLabelInput />
           </EditLabelGroup>
           <EditLabelGroup>
             <EditLabelTitle>Description</EditLabelTitle>
@@ -175,8 +129,8 @@ const EditBtn = ({ onCancel, value }) => {
             </ColorFlex>
           </EditLabelGroup>
           <CheckoutEdit>
-            <EditLabelCancel onClick={onCancel}>Cancel</EditLabelCancel>
-            <EditLabelSave>Save changes</EditLabelSave>
+            <EditLabelCancel>Cancel</EditLabelCancel>
+            <EditLabelSave>Create label</EditLabelSave>
           </CheckoutEdit>
         </EditLabelContainer>
       </Wrapper>
@@ -184,4 +138,4 @@ const EditBtn = ({ onCancel, value }) => {
   );
 };
 
-export default EditBtn;
+export default NewLabel;

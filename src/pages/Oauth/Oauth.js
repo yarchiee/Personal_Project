@@ -1,8 +1,8 @@
-import api from "../utils/api";
+import api from "../../utils/api";
 import { useEffect, useState } from "react";
 // import styled from "styled-components";
 
-import { supabase } from "../Client";
+import { supabase } from "../../Client";
 
 function Oauth() {
   const [user, setUser] = useState(null);
