@@ -4,25 +4,37 @@ import styled from "styled-components";
 import { MarkGithubIcon } from "@primer/octicons-react";
 
 const FooterWidthFullContainer = styled.div`
-  height: 114.2px;
   margin-top: 40px;
-  margin-left: 32px;
-  margin-right: 32px;
-  width: 100%;
-  border-top: 1px solid #d8dee4;
+  /* width: 100%; */
+  height: 114.2px;
   font-size: 12px;
-  position: absolute;
-  bottom: 0;
+  /* position: absolute;
+  bottom: 0; */
+  /* @media screen and (max-width: 1248px) {
+    height: 114.2px;
+    margin-top: 40px; */
+  /* margin-left: 32px; */
+  /* margin-right: 32px; */
+  /* width: 100%; */
+  /* } */
 `;
 const FooterItemContainer = styled.div`
-  padding: 40px 0 8px;
-
+  /* width: 1248px; */
   display: flex;
   align-items: center;
+  padding: 40px 0 8px;
+  border-top: 1px solid #d8dee4;
+  justify-content: center;
+
+  @media screen and (max-width: 1248px) {
+    width: 95%;
+    border-top: 1px solid #d8dee4;
+  }
 `;
 const FooterItemText = styled.div`
   color: #6e7781;
   margin-left: 8px;
+  min-width: 105px;
 `;
 const AreaLabelLinks = styled.div`
   display: flex;

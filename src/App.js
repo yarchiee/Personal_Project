@@ -1,9 +1,9 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Label from "./pages/Label";
-import IssueList from "./pages/IssueList";
-import IssuePage from "./pages/IssuePage";
-import NewIssuePage from "./pages/NewIssuePage";
+import Label from "./pages/Labels/Label";
+import IssueList from "./pages/IssueList/IssueList";
+import IssuePage from "./pages/IssuePage/IssuePage";
+import NewIssuePage from "./pages/NewIssuePage/NewIssuePage";
 import Oauth from "./pages/Oauth";
 import { ResetStyle, GlobalStyle } from "./components/globalStyle.js";
 import { Navigate, Route, Routes } from "react-router-dom";
