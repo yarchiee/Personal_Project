@@ -138,6 +138,7 @@ const ColorSelectBtn = styled.button`
   margin-bottom: 16px;
   margin-right: 8px;
 `;
+
 const EditArea = ({ data, onCancel, labelTagName }) => {
   const [repoLabelArr, setRepoLabelArr] =
     useContext(SelectContext).repoLabelArr;
