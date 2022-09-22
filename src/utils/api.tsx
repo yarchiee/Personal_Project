@@ -30,7 +30,7 @@ const api = {
       {
         headers: {
           Accept: "application/vnd.github+json",
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
         },
         method: "GET",
       }

@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import api from "../../utils/api";
 import { randomBase16 } from "../../utils/random";
 import styled from "styled-components";
-import { useContext } from "react";
 import { SelectContext } from "../../utils/SelectContext";
 
 import LabelList from "./LabelList";
@@ -122,7 +121,7 @@ const LabelBoxTitle = styled.div`
 function Label() {
   const [RepoLabelArr, setRepoLabelArr] =
     useContext(SelectContext).RepoLabelArr;
-  console.log(RepoLabelArr);
+  console.log("test", RepoLabelArr);
 
   useEffect(() => {
     api.listLabelAll().then((res) => {
