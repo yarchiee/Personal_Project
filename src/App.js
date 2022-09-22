@@ -8,7 +8,6 @@ import Oauth from "./pages/Oauth/Oauth";
 import GithubOauth from "./pages/Oauth/GithubOAuth";
 import { ResetStyle, GlobalStyle } from "./components/globalStyle.js";
 import { Navigate, Route, Routes } from "react-router-dom";
-
 const REPOSITORY = "github-project";
 
 function App() {

@@ -279,17 +279,17 @@ const ThreeDotIcon = styled(KebabHorizontalIcon)`
 `;
 
 function Label() {
-  const [RepoLabelArr, setRepoLabelArr] = useState([]);
+  const [repoLabelData, setRepoLabelData] = useState([]);
   const [selectedEdit, setSelectedEdit] = useState();
 
   useEffect(() => {
     api.listLabelAll().then((res) => {
       console.log(res);
-      setRepoLabelArr(res);
+      setRepoLabelData(res);
     });
     console.log(randomBase16(6));
   }, []);
-  console.log(RepoLabelArr);
+  console.log(repoLabelData);
 
   const cancel = () => {
     setSelectedEdit(undefined);
@@ -335,7 +335,7 @@ function Label() {
               </SortListBox>
             </SelectMenuBtnDetails>
           </LabelBoxHeader>
-          {RepoLabelArr.map((data, index) => {
+          {repoLabelData.map((data, index) => {
             return (
               <>
                 <EachLabelContainer>

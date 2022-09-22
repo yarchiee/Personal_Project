@@ -1,15 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import api from "../../utils/api";
 import { randomBase16 } from "../../utils/random";
+
+// import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { useContext } from "react";
-import { SelectContext } from "../../utils/SelectContext";
+import EditBtn from "./EditBtn";
+// import NewLabel from "./NewLabel";
 
-import LabelList from "./LabelList";
-
-import SelectMenuArea from "./Sort";
-import { TagIcon, MilestoneIcon, SearchIcon } from "@primer/octicons-react";
-
+import {
+  TagIcon,
+  MilestoneIcon,
+  SearchIcon,
+  KebabHorizontalIcon,
+} from "@primer/octicons-react";
 const RepoContentContainer = styled.div`
   margin-top: 24px;
   padding: 0 32px;
@@ -33,6 +36,7 @@ const SelectNavItemChoose = styled.div`
   color: #fff;
 `;
 const SelectNavItemNormal = styled.div`
+  /* background-color: #0969da; */
   height: 32px;
   display: flex;
   align-items: center;
@@ -43,6 +47,7 @@ const SelectNavItemNormal = styled.div`
   color: #24292f;
 `;
 const SelectNavItemText = styled.div`
+  /* width: 55px; */
   height: 23px;
   line-height: 23px;
   margin-left: 5px;
@@ -68,6 +73,7 @@ const SearchAllLabelsMobile = styled.div`
     height: 32px;
     padding: 5px 12px 5px;
     border: 1px solid #d8dee4;
+    /* margin-left: 24px; */
     border-radius: 6px;
     align-items: center;
     background-color: #f6f8fa;
@@ -118,19 +124,175 @@ const LabelBoxTitle = styled.div`
   font-weight: 600;
   line-height: 21px;
 `;
+const SelectMenuBtn = styled.summary`
+  color: #57606a;
+  list-style: none;
+  line-height: 21px;
+  &::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: -2px;
+    content: "";
+    border: 4px solid;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  &::-webkit-details-marker {
+    display: none;
+  }
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
+const SelectMenuBtnDetails = styled.details`
+  text-decoration: none;
+  cursor: pointer;
+  list-style: none;
+  background-color: transparent;
+  border: 0;
+`;
+const SortListBox = styled.div`
+  width: 300px;
+  /* height: 100px; */
+  margin-top: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  font-size: 12px;
+  color: #24292f;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(104, 149, 159, 0.2);
+  position: absolute !important;
+  right: 48px !important;
+  top: 295px;
+`;
+const SortList = styled.div`
+  width: 100%;
+  height: 35px;
+  padding: 8px 8px 8px 30px;
+  color: #24292f;
+
+  line-height: 20px;
+  border-bottom: 1px solid #d0d7de;
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+const SortListTitle = styled(SortList)`
+  width: 100%;
+  height: 33px;
+  padding: 8px 10px;
+  color: #24292f;
+  font-weight: 600;
+  line-height: 20px;
+`;
+
+const EachLabelContainer = styled.div`
+  height: 77px;
+  border: 1px solid #d0d7de;
+  border-top: none;
+  padding: 16px;
+  display: flex;
+  line-height: 44px;
+`;
+const EachLabelIconContainer = styled.div`
+  display: flex;
+  line-height: 44px;
+  width: 25%;
+`;
+
+const IssueLabel = styled.div`
+  height: 28px;
+  margin: auto 0;
+`;
+const IssueLabelP = styled.p`
+  padding: 0 10px;
+  font-weight: 500;
+  font-size: 12px;
+  background-color: #d73a4a;
+  color: #fff;
+  line-height: 28px;
+  border-radius: 2em;
+  font-weight: 600;
+`;
+const IssueLabelText = styled.div`
+  color: #57606a;
+  width: 33.33%;
+`;
+
+const IssueLabelEditBtn = styled.button`
+  color: #57606a;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #0969da;
+  }
+`;
+const IssueLabelDeleteBtn = styled.button`
+  color: #57606a;
+  margin-left: 16px;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #0969da;
+  }
+`;
+const EditDeleteAreaDesktop = styled.div`
+  margin-left: auto;
+
+  @media screen and (max-width: 1011.9px) {
+    display: none;
+  }
+`;
+const EditDeleteAreaMobile = styled.div`
+  display: none;
+  @media screen and (max-width: 1011.9px) {
+    display: block;
+
+    margin-left: auto;
+  }
+`;
+const ThreeDotBotton = styled.button`
+  width: 42px;
+  height: 28px;
+  background-color: #f6f8fa;
+  border: 1px solid rgba(27, 31, 36, 0.15);
+  border-radius: 6px;
+  margin-top: 7px;
+  &:hover {
+    background-color: #0969da;
+  }
+`;
+const ThreeDotIcon = styled(KebabHorizontalIcon)`
+  display: none;
+  @media screen and (max-width: 1011.9px) {
+    display: block;
+    &:hover {
+      color: #fff;
+    }
+  }
+`;
 
 function Label() {
-  const [RepoLabelArr, setRepoLabelArr] =
-    useContext(SelectContext).RepoLabelArr;
-  console.log(RepoLabelArr);
+  const [repoLabelData, setRepoLabelData] = useState([]);
+  const [selectedEdit, setSelectedEdit] = useState<number>();
 
   useEffect(() => {
     api.listLabelAll().then((res) => {
       console.log(res);
-      setRepoLabelArr(res);
+      setRepoLabelData(res);
     });
     console.log(randomBase16(6));
   }, []);
+
+  const cancel = () => {
+    setSelectedEdit(null);
+  };
 
   return (
     <>
@@ -157,13 +319,53 @@ function Label() {
           <SearchLabelsInput placeholder="Search all labels"></SearchLabelsInput>
         </SearchAllLabelsMobile>
         <LabelBox>
+          {/* <NewLabel /> */}
           <LabelBoxHeader>
             <LabelBoxTitle>9 labels</LabelBoxTitle>
 
-            <SelectMenuArea />
+            <SelectMenuBtnDetails>
+              <SelectMenuBtn>Sort </SelectMenuBtn>
+              <SortListBox>
+                <SortListTitle>Sort</SortListTitle>
+                <SortList>Alphabetically</SortList>
+                <SortList>Reverse alphabetically</SortList>
+                <SortList>Most issues</SortList>
+                <SortList>Fewest issues</SortList>
+              </SortListBox>
+            </SelectMenuBtnDetails>
           </LabelBoxHeader>
-          {RepoLabelArr.map((data, index) => {
-            return <LabelList data={data} index={index} />;
+          {repoLabelData.map((data, index) => {
+            return (
+              <>
+                <EachLabelContainer>
+                  <EachLabelIconContainer>
+                    <IssueLabel>
+                      <IssueLabelP>{data.name}</IssueLabelP>
+                    </IssueLabel>
+                  </EachLabelIconContainer>
+                  <IssueLabelText>{data.description}</IssueLabelText>
+                  <EditDeleteAreaDesktop>
+                    <IssueLabelEditBtn
+                      onClick={() => {
+                        setSelectedEdit(index);
+                        console.log(index);
+                      }}
+                    >
+                      Edit
+                    </IssueLabelEditBtn>
+                    <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
+                  </EditDeleteAreaDesktop>
+                  <EditDeleteAreaMobile>
+                    <ThreeDotBotton>
+                      <ThreeDotIcon size={16} />
+                    </ThreeDotBotton>
+                  </EditDeleteAreaMobile>
+                </EachLabelContainer>
+                {selectedEdit === index && (
+                  <EditBtn value={data.name} onCancel={cancel} />
+                )}
+              </>
+            );
           })}
         </LabelBox>
       </RepoContentContainer>
