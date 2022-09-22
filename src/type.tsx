@@ -7,4 +7,4 @@ export type RepoLabelData = {
   node_id?: number;
   url?: string;
 };
-export type RepoLabelArr = [RepoLabelData];
+export type repoLabelArr = [RepoLabelData];

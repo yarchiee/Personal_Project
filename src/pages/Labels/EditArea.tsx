@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { SelectContext } from "../../utils/SelectContext";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 const EachLabelContainer = styled.div`
   height: 77px;
@@ -136,7 +138,10 @@ const ColorSelectBtn = styled.button`
   margin-bottom: 16px;
   margin-right: 8px;
 `;
-const EditBtn = ({ onCancel, value }) => {
+const EditArea = ({ data, onCancel, labelTagName }) => {
+  const [repoLabelArr, setRepoLabelArr] =
+    useContext(SelectContext).repoLabelArr;
+  console.log("test", repoLabelArr);
   return (
     <>
       <Wrapper>
@@ -158,7 +163,7 @@ const EditBtn = ({ onCancel, value }) => {
         <EditLabelContainer>
           <EditLabelGroup>
             <EditLabelTitle>Label name</EditLabelTitle>
-            <EditLabelInput defaultValue={value} />
+            <EditLabelInput defaultValue={labelTagName} />
           </EditLabelGroup>
           <EditLabelGroup>
             <EditLabelTitle>Description</EditLabelTitle>
@@ -183,4 +188,4 @@ const EditBtn = ({ onCancel, value }) => {
   );
 };
 
-export default EditBtn;
+export default EditArea;

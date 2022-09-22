@@ -9,21 +9,21 @@ import GithubOauth from "./pages/Oauth/GithubOAuth";
 import { ResetStyle, GlobalStyle } from "./components/globalStyle";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { SelectContext } from "./utils/SelectContext";
-import { RepoLabelArr } from "../src/type";
+import { repoLabelArr } from "../src/type";
 
 import { useState } from "react";
 const REPOSITORY = "github-project";
 
 function App() {
-  const [RepoLabelArr, setRepoLabelArr] = useState<RepoLabelArr>(
-    [] as unknown as RepoLabelArr
+  const [repoLabelArr, setRepoLabelArr] = useState<repoLabelArr>(
+    [] as unknown as repoLabelArr
   );
   const [selectedEdit, setSelectedEdit] = useState<number>();
   return (
     <>
       <SelectContext.Provider
         value={{
-          RepoLabelArr: [RepoLabelArr, setRepoLabelArr],
+          repoLabelArr: [repoLabelArr, setRepoLabelArr],
           selectedEdit: [selectedEdit, setSelectedEdit],
         }}
       >

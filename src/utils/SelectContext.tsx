@@ -1,8 +1,8 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { RepoLabelArr } from "../type";
+import { repoLabelArr } from "../type";
 
 type ContextState = {
-  RepoLabelArr: [RepoLabelArr, Dispatch<SetStateAction<RepoLabelArr>>];
+  repoLabelArr: [repoLabelArr, Dispatch<SetStateAction<repoLabelArr>>];
   selectedEdit: [Number, Dispatch<SetStateAction<Number>>];
 };
 export const SelectContext = createContext({} as ContextState);

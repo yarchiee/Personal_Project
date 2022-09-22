@@ -119,9 +119,9 @@ const LabelBoxTitle = styled.div`
 `;
 
 function Label() {
-  const [RepoLabelArr, setRepoLabelArr] =
-    useContext(SelectContext).RepoLabelArr;
-  console.log("test", RepoLabelArr);
+  const [repoLabelArr, setRepoLabelArr] =
+    useContext(SelectContext).repoLabelArr;
+  console.log("test", repoLabelArr);
 
   useEffect(() => {
     api.listLabelAll().then((res) => {
@@ -161,7 +161,7 @@ function Label() {
 
             <SelectMenuArea />
           </LabelBoxHeader>
-          {RepoLabelArr.map((data, index) => {
+          {repoLabelArr.map((data, index) => {
             return <LabelList data={data} index={index} />;
           })}
         </LabelBox>

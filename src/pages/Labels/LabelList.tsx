@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { KebabHorizontalIcon } from "@primer/octicons-react";
-import EditBtn from "./EditBtn";
+import EditArea from "./EditArea";
 import { useContext } from "react";
 import { SelectContext } from "../../utils/SelectContext";
 
@@ -90,7 +90,7 @@ const ThreeDotIcon = styled(KebabHorizontalIcon)`
 `;
 const LabelList = ({ data, index }) => {
   const [selectedEdit, setSelectedEdit] =
-    useContext(SelectContext)["selectedEdit"];
+    useContext(SelectContext).selectedEdit;
   const cancel = () => {
     setSelectedEdit(null);
   };
@@ -121,7 +121,7 @@ const LabelList = ({ data, index }) => {
         </EditDeleteAreaMobile>
       </EachLabelContainer>
       {selectedEdit === index && (
-        <EditBtn value={data.name} onCancel={cancel} />
+        <EditArea labelTagName={data.name} onCancel={cancel} data={undefined} />
       )}
     </>
   );
