@@ -1,6 +1,6 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Label from "./pages/Labels/Label.tsx";
+import Label from "./pages/Labels/Label";
 import IssueList from "./pages/IssueList/IssueList";
 import IssuePage from "./pages/IssuePage/IssuePage";
 import NewIssuePage from "./pages/NewIssuePage/NewIssuePage";
