@@ -1,186 +1,87 @@
 import styled from "styled-components";
-import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
-const EachLabelContainer = styled.div`
-  height: 77px;
-  border: 1px solid #d0d7de;
-  border-bottom: none;
-  border-top: none;
-  /* border-bottom: none; */
-  padding: 16px;
-  padding-bottom: 0;
-  display: flex;
-  line-height: 26px;
-`;
-const EditLabelContainer = styled(EachLabelContainer)`
-  border-top: none;
-  height: 93px;
-  padding-top: 0;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #d0d7de;
-  font-weight: 600;
-`;
-const EachLabelIconContainer = styled.div`
-  display: flex;
-  line-height: 44px;
-  width: 25%;
-`;
 
-const IssueLabel = styled.div`
-  height: 28px;
-  margin: auto 0;
-`;
-const IssueLabelP = styled.p`
-  padding: 0 10px;
-  font-weight: 500;
-  font-size: 12px;
-  background-color: #d73a4a;
-  color: #fff;
-  line-height: 28px;
-  border-radius: 2em;
-  font-weight: 600;
-`;
-
-const IssueLabelDeleteBtn = styled.button`
+const SelectMenuBtn = styled.summary`
   color: #57606a;
-  margin-left: 16px;
+  list-style: none;
+  line-height: 21px;
+  &::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: -2px;
+    content: "";
+    border: 4px solid;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  &::-webkit-details-marker {
+    display: none;
+  }
   &:hover {
     cursor: pointer;
     text-decoration: underline;
-    color: #0969da;
   }
 `;
-const EditDeleteAreaDesktop = styled.div`
-  margin-left: auto;
+const SelectMenuBtnDetails = styled.details`
+  text-decoration: none;
+  cursor: pointer;
+  list-style: none;
+  background-color: transparent;
+  border: 0;
+`;
+const SortListBox = styled.div`
+  width: 300px;
+  /* height: 100px; */
+  margin-top: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  font-size: 12px;
+  color: #24292f;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(104, 149, 159, 0.2);
+  position: absolute !important;
+  right: 48px !important;
+  top: 295px;
+`;
+const SortList = styled.div`
+  width: 100%;
+  height: 35px;
+  padding: 8px 8px 8px 30px;
+  color: #24292f;
 
-  @media screen and (max-width: 1011.9px) {
-    display: none;
+  line-height: 20px;
+  border-bottom: 1px solid #d0d7de;
+  &:last-child {
+    border-bottom: none;
   }
 `;
-const EditDeleteAreaMobile = styled.div`
-  display: none;
-  @media screen and (max-width: 1011.9px) {
-    display: block;
-
-    margin-left: auto;
-  }
+const SortListTitle = styled(SortList)`
+  width: 100%;
+  height: 33px;
+  padding: 8px 10px;
+  color: #24292f;
+  font-weight: 600;
+  line-height: 20px;
 `;
-const ThreeDotBotton = styled.button`
-  width: 42px;
-  height: 28px;
-  background-color: #f6f8fa;
-  border: 1px solid rgba(27, 31, 36, 0.15);
-  border-radius: 6px;
-  margin-top: 7px;
-  &:hover {
-    background-color: #0969da;
-  }
-`;
-const ThreeDotIcon = styled(KebabHorizontalIcon)`
-  display: none;
-  @media screen and (max-width: 1011.9px) {
-    display: block;
-    &:hover {
-      color: #fff;
-    }
-  }
-`;
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const EditLabelGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-right: 16px;
-`;
-const EditLabelTitle = styled.div`
-  margin-bottom: auto;
-`;
-const EditLabelInput = styled.input`
-  background-color: #f6f8fa;
-  border: 1px solid rgba(27, 36, 31, 0.15);
-  border-radius: 6px;
-  padding: 5px 16px;
-  line-height: 22px;
-  margin-bottom: 16px;
-`;
-const CheckoutEdit = styled.div`
-  margin-top: auto;
-  margin-left: auto;
-  display: flex;
-`;
-const EditLabelCancel = styled.div`
-  height: 32px;
-  background-color: #f6f8fa;
-  border: 1px solid rgba(27, 36, 31, 0.15);
-
-  border-radius: 6px;
-  padding: 5px 16px;
-  line-height: 22px;
-  margin-bottom: 16px;
-  margin-left: 8px;
-`;
-const EditLabelSave = styled(EditLabelCancel)`
-  background-color: #2da44e;
-  color: #fff;
-`;
-const ColorFlex = styled.div`
-  display: flex;
-`;
-const ColorSelectBtn = styled.button`
-  background-color: #f6f8fa;
-  border: 1px solid rgba(27, 36, 31, 0.15);
-  border-radius: 6px;
-  padding: 5px 16px;
-  line-height: 22px;
-  margin-bottom: 16px;
-  margin-right: 8px;
-`;
-const EditBtn = ({ onCancel, value }) => {
+const SelectMenuArea = () => {
   return (
     <>
-      <Wrapper>
-        <EachLabelContainer>
-          <EachLabelIconContainer>
-            <IssueLabel>
-              <IssueLabelP>bug </IssueLabelP>
-            </IssueLabel>
-          </EachLabelIconContainer>
-          <EditDeleteAreaDesktop>
-            <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
-          </EditDeleteAreaDesktop>
-          <EditDeleteAreaMobile>
-            <ThreeDotBotton>
-              <ThreeDotIcon size={16} />
-            </ThreeDotBotton>
-          </EditDeleteAreaMobile>
-        </EachLabelContainer>
-        <EditLabelContainer>
-          <EditLabelGroup>
-            <EditLabelTitle>Label name</EditLabelTitle>
-            <EditLabelInput defaultValue={value} />
-          </EditLabelGroup>
-          <EditLabelGroup>
-            <EditLabelTitle>Description</EditLabelTitle>
-            <EditLabelInput />
-          </EditLabelGroup>
-          <EditLabelGroup>
-            <EditLabelTitle>Color</EditLabelTitle>
-            <ColorFlex>
-              <ColorSelectBtn>
-                <SyncIcon size={16} />
-              </ColorSelectBtn>
-              <EditLabelInput />
-            </ColorFlex>
-          </EditLabelGroup>
-          <CheckoutEdit>
-            <EditLabelCancel onClick={onCancel}>Cancel</EditLabelCancel>
-            <EditLabelSave>Save changes</EditLabelSave>
-          </CheckoutEdit>
-        </EditLabelContainer>
-      </Wrapper>
+      <SelectMenuBtnDetails>
+        <SelectMenuBtn>Sort </SelectMenuBtn>
+        <SortListBox>
+          <SortListTitle>Sort</SortListTitle>
+          <SortList>Alphabetically</SortList>
+          <SortList>Reverse alphabetically</SortList>
+          <SortList>Most issues</SortList>
+          <SortList>Fewest issues</SortList>
+        </SortListBox>
+      </SelectMenuBtnDetails>
     </>
   );
 };
 
-export default EditBtn;
+export default SelectMenuArea;
