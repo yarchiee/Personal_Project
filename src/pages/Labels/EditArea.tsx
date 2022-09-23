@@ -14,6 +14,10 @@ const EachLabelContainer = styled.div`
   padding-bottom: 0;
   display: flex;
   line-height: 26px;
+  @media screen and (max-width: 768px) {
+    /* height: 340px; */
+    flex-direction: column;
+  }
 `;
 const EditLabelContainer = styled(EachLabelContainer)`
   border-top: none;
@@ -22,6 +26,10 @@ const EditLabelContainer = styled(EachLabelContainer)`
   padding-bottom: 16px;
   border-bottom: 1px solid #d0d7de;
   font-weight: 600;
+
+  @media screen and (max-width: 768px) {
+    height: 285px;
+  }
 `;
 const EachLabelIconContainer = styled.div`
   display: flex;
@@ -37,8 +45,10 @@ const IssueLabelP = styled.p`
   padding: 0 10px;
   font-weight: 500;
   font-size: 12px;
-  background-color: #d73a4a;
-  color: #fff;
+  background-color: ${(props) => `#${props.isChange}`};
+  color: ${(props) => props.lightordark};
+  border: 0.5px solid #e1e2e3;
+
   line-height: 28px;
   border-radius: 2em;
   font-weight: 600;
@@ -54,7 +64,9 @@ const IssueLabelDeleteBtn = styled.button`
   }
 `;
 const EditDeleteAreaDesktop = styled.div`
-  margin-left: auto;
+  margin: auto;
+
+  margin-right: 0;
 
   @media screen and (max-width: 1011.9px) {
     display: none;
@@ -64,7 +76,6 @@ const EditDeleteAreaMobile = styled.div`
   display: none;
   @media screen and (max-width: 1011.9px) {
     display: block;
-
     margin-left: auto;
   }
 `;
@@ -96,6 +107,21 @@ const EditLabelGroup = styled.div`
   display: flex;
   flex-direction: column;
   padding-right: 16px;
+  @media screen and (max-width: 768px) {
+    padding-right: 0;
+  }
+`;
+const EditLabelGroup1 = styled(EditLabelGroup)`
+  width: 25%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`;
+const EditLabelGroup2 = styled(EditLabelGroup)`
+  width: 18%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const EditLabelTitle = styled.div`
   margin-bottom: auto;
@@ -107,6 +133,9 @@ const EditLabelInput = styled.input`
   padding: 5px 16px;
   line-height: 22px;
   margin-bottom: 16px;
+  width: 100%;
+  color: #24292f;
+  font-size: 14px;
 `;
 const CheckoutEdit = styled.div`
   margin-top: auto;
@@ -132,18 +161,21 @@ const ColorFlex = styled.div`
   display: flex;
 `;
 const ColorSelectBtn = styled.button`
-  background-color: #f6f8fa;
+  /* background-color: ${(props) => `#${props.$isChange}`}; */
   border: 1px solid rgba(27, 36, 31, 0.15);
   border-radius: 6px;
   padding: 5px 16px;
   line-height: 22px;
   margin-bottom: 16px;
   margin-right: 8px;
+  background-color: ${(props) => `#${props.isChange}`};
+  color: ${(props) => props.lightordark};
 `;
 
 const EditArea = ({ data, onCancel }) => {
   const [editData, setEditData] = useState(data);
   const selectContext = useContext(SelectContext);
+
   const randomColor = () => {
     const newColor = {
       color: randomBase16(6),
@@ -161,13 +193,30 @@ const EditArea = ({ data, onCancel }) => {
       selectContext.selectedEdit[1](newData);
     }
   };
+  function lightOrDark(bgcolor) {
+    const r = parseInt(bgcolor.slice(0, 2), 16);
+    const g = parseInt(bgcolor.slice(2, 4), 16);
+    const b = parseInt(bgcolor.slice(4, 6), 16);
+    const hsp = r * 0.3 + g * 0.6 + b * 0.1;
+    if (hsp > 127.5) {
+      return "black";
+    } else {
+      return "white";
+    }
+  }
+
   return (
     <>
       <Wrapper>
         <EachLabelContainer>
           <EachLabelIconContainer>
             <IssueLabel>
-              <IssueLabelP>{editData?.name} </IssueLabelP>
+              <IssueLabelP
+                isChange={editData?.color}
+                lightordark={lightOrDark(editData?.color)}
+              >
+                {editData?.name}
+              </IssueLabelP>
             </IssueLabel>
           </EachLabelIconContainer>
           <EditDeleteAreaDesktop>
@@ -180,23 +229,27 @@ const EditArea = ({ data, onCancel }) => {
           </EditDeleteAreaMobile>
         </EachLabelContainer>
         <EditLabelContainer>
-          <EditLabelGroup>
+          <EditLabelGroup1>
             <EditLabelTitle>Label name</EditLabelTitle>
             <EditLabelInput defaultValue={editData?.name} />
-          </EditLabelGroup>
-          <EditLabelGroup>
+          </EditLabelGroup1>
+          <EditLabelGroup1>
             <EditLabelTitle>Description</EditLabelTitle>
             <EditLabelInput defaultValue={editData?.description} />
-          </EditLabelGroup>
-          <EditLabelGroup>
+          </EditLabelGroup1>
+          <EditLabelGroup2>
             <EditLabelTitle>Color</EditLabelTitle>
             <ColorFlex>
-              <ColorSelectBtn onClick={randomColor}>
+              <ColorSelectBtn
+                onClick={randomColor}
+                isChange={editData?.color}
+                lightordark={lightOrDark(editData?.color)}
+              >
                 <SyncIcon size={16} />
               </ColorSelectBtn>
               <EditLabelInput defaultValue={editData?.color} />
             </ColorFlex>
-          </EditLabelGroup>
+          </EditLabelGroup2>
           <CheckoutEdit>
             <EditLabelCancel onClick={onCancel}>Cancel</EditLabelCancel>
             <EditLabelSave>Save changes</EditLabelSave>

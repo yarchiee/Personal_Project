@@ -148,7 +148,7 @@ function LabelList(props) {
             <SelectMenuArea />
           </LabelBoxHeader>
           {list.map((data) => {
-            return <Label data={data} />;
+            return <Label data={data} key={data.id} />;
           })}
         </LabelBox>
       </RepoContentContainer>
