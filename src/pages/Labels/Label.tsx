@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { KebabHorizontalIcon } from "@primer/octicons-react";
 import EditArea from "./EditArea";
 import { useEffect, useState } from "react";
-type PropsType = {
+type PropsTypes = {
   $isShow?: boolean;
   isChange?: string;
   lightordark?: string;
 };
-const EachLabelContainer = styled.div<PropsType>`
+const EachLabelContainer = styled.div<PropsTypes>`
   /* height: 77px; */
   border: 1px solid #d0d7de;
   border-top: none;
@@ -29,7 +29,7 @@ const IssueLabel = styled.div`
   height: 28px;
   margin: auto 0;
 `;
-const IssueLabelP = styled.p<PropsType>`
+const IssueLabelP = styled.p<PropsTypes>`
   padding: 0 10px;
   font-weight: 500;
   font-size: 12px;
@@ -104,7 +104,6 @@ const ThreeDotIcon = styled(KebabHorizontalIcon)`
 `;
 const Label = ({ data }) => {
   const [editModal, setEditModal] = useState(false);
-
   const toggleEditModal = () => {
     setEditModal(!editModal);
   };
@@ -120,7 +119,7 @@ const Label = ({ data }) => {
       return "white";
     }
   }
-  // console.log(data.name);
+
   return (
     <>
       <EachLabelContainer $isShow={editModal}>
@@ -131,7 +130,7 @@ const Label = ({ data }) => {
                 isChange={data.color}
                 lightordark={lightOrDark(data.color)}
               >
-                {data.name}{" "}
+                {data.name}
               </IssueLabelP>
             </IssueLabel>
           </EachLabelIconContainer>

@@ -75,6 +75,7 @@ export const GlobalStyle = createGlobalStyle`
 html {
   box-sizing: border-box;
   font-size: 62.5%; 
+  letter-spacing: 0.5px;
   font-family:'Noto Sans TC', sans-serif;
 }
 `;

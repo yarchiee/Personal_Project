@@ -1,6 +1,7 @@
 import styled from "styled-components";
-
+import { useEffect, useState } from "react";
 import Label from "./Label";
+import NewLabel from "./NewLabel";
 
 import SelectMenuArea from "./Sort";
 import { TagIcon, MilestoneIcon, SearchIcon } from "@primer/octicons-react";
@@ -79,7 +80,7 @@ const SearchLabelsInput = styled.input`
   margin-left: 10px;
 `;
 
-const NewLabelBtn = styled.button`
+const NewLabelBtn = styled.div`
   background-color: #2da44e;
   height: 32px;
   align-items: center;
@@ -90,6 +91,7 @@ const NewLabelBtn = styled.button`
   margin-left: auto;
 `;
 const NewLabelBtnText = styled.div`
+  font-weight: 600;
   height: 23px;
   line-height: 23px;
   margin-left: 5px;
@@ -116,6 +118,10 @@ const LabelBoxTitle = styled.div`
 
 function LabelList(props) {
   const list = props.list ? props.list : [];
+  const [createNewLabel, setCreateNewLabel] = useState(false);
+  const toggleNewLabelBtn = () => {
+    setCreateNewLabel(!createNewLabel);
+  };
 
   return (
     <>
@@ -133,7 +139,7 @@ function LabelList(props) {
             <SearchIcon size={16} fill="#57606a" />
             <SearchLabelsInput placeholder="Search all labels"></SearchLabelsInput>
           </SearchAllLabelsDesktop>
-          <NewLabelBtn>
+          <NewLabelBtn onClick={toggleNewLabelBtn}>
             <NewLabelBtnText>New label</NewLabelBtnText>
           </NewLabelBtn>
         </SubNavBox>
@@ -141,12 +147,15 @@ function LabelList(props) {
           <SearchIcon size={16} fill="#57606a" />
           <SearchLabelsInput placeholder="Search all labels"></SearchLabelsInput>
         </SearchAllLabelsMobile>
+        {createNewLabel && <NewLabel onCancel={toggleNewLabelBtn} />}
+
         <LabelBox>
           <LabelBoxHeader>
             <LabelBoxTitle>{list.length} labels</LabelBoxTitle>
 
             <SelectMenuArea />
           </LabelBoxHeader>
+
           {list.map((data) => {
             return <Label data={data} key={data.id} />;
           })}

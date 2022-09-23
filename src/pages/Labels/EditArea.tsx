@@ -1,9 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
 import { SelectContext } from "../../context/SelectContext";
-
+import api from "../../service/api";
 type PropsTypes = {
   lightordark?: string;
   isChange?: string;
@@ -140,6 +140,10 @@ const EditLabelInput = styled.input`
   width: 100%;
   color: #24292f;
   font-size: 14px;
+  &:focus {
+    outline: none !important;
+    border: 3px solid #1d76db;
+  }
 `;
 const CheckoutEdit = styled.div`
   margin-top: auto;
@@ -176,13 +180,13 @@ const ColorSelectBtn = styled.button<PropsTypes>`
 `;
 
 const EditArea = ({ data, onCancel }) => {
+  const selectContext = useContext(SelectContext);
   const [editData, setEditData] = useState(data);
   const [selectColorCode, setSelectColorCode] = useState(`#${editData?.color}`);
   const [typeDescription, setTypeDescription] = useState(editData?.description);
   const [typeLabelName, setTypeLabelName] = useState(editData?.name);
-
-  const selectContext = useContext(SelectContext);
   console.log(editData);
+
   const randomColor = () => {
     const newColor = {
       color: randomBase16(6),
@@ -192,6 +196,7 @@ const EditArea = ({ data, onCancel }) => {
   const updateData = (obj) => {
     const newData = { ...editData, ...obj };
     setEditData(newData);
+    setSelectColorCode(newData.color);
     if (
       selectContext.selectedEdit &&
       Array.isArray(selectContext.selectedEdit) &&
@@ -212,10 +217,13 @@ const EditArea = ({ data, onCancel }) => {
       return "white";
     }
   }
-
-  const updateColor = () => {
-    setSelectColorCode(editData.color);
+  const [list, setList] = useState([]);
+  const fetchData = () => {
+    api.listLabelAll().then((res) => {
+      setList(res);
+    });
   };
+  useEffect(fetchData, []);
 
   return (
     <>
@@ -224,8 +232,8 @@ const EditArea = ({ data, onCancel }) => {
           <EachLabelIconContainer>
             <IssueLabel>
               <IssueLabelP
-                isChange={editData?.color}
-                lightordark={lightOrDark(editData?.color)}
+                isChange={selectColorCode}
+                lightordark={lightOrDark(selectColorCode)}
               >
                 {editData?.name}
               </IssueLabelP>
@@ -266,10 +274,9 @@ const EditArea = ({ data, onCancel }) => {
               <ColorSelectBtn
                 onClick={() => {
                   randomColor();
-                  updateColor();
                 }}
-                isChange={editData?.color}
-                lightordark={lightOrDark(editData?.color)}
+                isChange={selectColorCode}
+                lightordark={lightOrDark(selectColorCode)}
               >
                 <SyncIcon size={16} />
               </ColorSelectBtn>
