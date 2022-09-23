@@ -2,8 +2,12 @@ import styled from "styled-components";
 import { KebabHorizontalIcon } from "@primer/octicons-react";
 import EditArea from "./EditArea";
 import { useEffect, useState } from "react";
-
-const EachLabelContainer = styled.div`
+type PropsType = {
+  $isShow?: boolean;
+  isChange?: string;
+  lightordark?: string;
+};
+const EachLabelContainer = styled.div<PropsType>`
   /* height: 77px; */
   border: 1px solid #d0d7de;
   border-top: none;
@@ -25,7 +29,7 @@ const IssueLabel = styled.div`
   height: 28px;
   margin: auto 0;
 `;
-const IssueLabelP = styled.p`
+const IssueLabelP = styled.p<PropsType>`
   padding: 0 10px;
   font-weight: 500;
   font-size: 12px;

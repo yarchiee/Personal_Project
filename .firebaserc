@@ -1,0 +1,19 @@
+{
+  "projects": {
+    "work": "github-project-798b6",
+    "default": "github-project-798b6"
+  },
+  "targets": {
+    "github-project-798b6": {
+      "hosting": {
+        "storybook": [
+          "github-storybook"
+        ],
+        "github-mockup": [
+          "github-project-798b6"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

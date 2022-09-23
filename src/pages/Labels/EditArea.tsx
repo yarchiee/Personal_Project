@@ -4,6 +4,10 @@ import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
 import { SelectContext } from "../../context/SelectContext";
 
+type PropsTypes = {
+  lightordark?: string;
+  isChange?: string;
+};
 const EachLabelContainer = styled.div`
   height: 77px;
   border: 1px solid #d0d7de;
@@ -41,7 +45,7 @@ const IssueLabel = styled.div`
   height: 28px;
   margin: auto 0;
 `;
-const IssueLabelP = styled.p`
+const IssueLabelP = styled.p<PropsTypes>`
   padding: 0 10px;
   font-weight: 500;
   font-size: 12px;
@@ -160,8 +164,7 @@ const EditLabelSave = styled(EditLabelCancel)`
 const ColorFlex = styled.div`
   display: flex;
 `;
-const ColorSelectBtn = styled.button`
-  /* background-color: ${(props) => `#${props.$isChange}`}; */
+const ColorSelectBtn = styled.button<PropsTypes>`
   border: 1px solid rgba(27, 36, 31, 0.15);
   border-radius: 6px;
   padding: 5px 16px;
