@@ -174,8 +174,12 @@ const ColorSelectBtn = styled.button`
 
 const EditArea = ({ data, onCancel }) => {
   const [editData, setEditData] = useState(data);
-  const selectContext = useContext(SelectContext);
+  const [selectColorCode, setSelectColorCode] = useState(`#${editData?.color}`);
+  const [typeDescription, setTypeDescription] = useState(editData?.description);
+  const [typeLabelName, setTypeLabelName] = useState(editData?.name);
 
+  const selectContext = useContext(SelectContext);
+  console.log(editData);
   const randomColor = () => {
     const newColor = {
       color: randomBase16(6),
@@ -193,6 +197,7 @@ const EditArea = ({ data, onCancel }) => {
       selectContext.selectedEdit[1](newData);
     }
   };
+
   function lightOrDark(bgcolor) {
     const r = parseInt(bgcolor.slice(0, 2), 16);
     const g = parseInt(bgcolor.slice(2, 4), 16);
@@ -204,6 +209,10 @@ const EditArea = ({ data, onCancel }) => {
       return "white";
     }
   }
+
+  const updateColor = () => {
+    setSelectColorCode(editData.color);
+  };
 
   return (
     <>
@@ -231,23 +240,42 @@ const EditArea = ({ data, onCancel }) => {
         <EditLabelContainer>
           <EditLabelGroup1>
             <EditLabelTitle>Label name</EditLabelTitle>
-            <EditLabelInput defaultValue={editData?.name} />
+            <EditLabelInput
+              value={typeLabelName}
+              id="labelname"
+              name="labelname"
+              onChange={(e) => setTypeLabelName(e.target.value)}
+            />
           </EditLabelGroup1>
           <EditLabelGroup1>
             <EditLabelTitle>Description</EditLabelTitle>
-            <EditLabelInput defaultValue={editData?.description} />
+            <EditLabelInput
+              defaultValue={editData?.description}
+              value={typeDescription}
+              id="description"
+              name="description"
+              onChange={(e) => setTypeDescription(e.target.value)}
+            />
           </EditLabelGroup1>
           <EditLabelGroup2>
             <EditLabelTitle>Color</EditLabelTitle>
             <ColorFlex>
               <ColorSelectBtn
-                onClick={randomColor}
+                onClick={() => {
+                  randomColor();
+                  updateColor();
+                }}
                 isChange={editData?.color}
                 lightordark={lightOrDark(editData?.color)}
               >
                 <SyncIcon size={16} />
               </ColorSelectBtn>
-              <EditLabelInput defaultValue={editData?.color} />
+              <EditLabelInput
+                value={selectColorCode}
+                id="colorcode"
+                name="colorcode"
+                onChange={(e) => setSelectColorCode(e.target.value)}
+              />
             </ColorFlex>
           </EditLabelGroup2>
           <CheckoutEdit>

@@ -116,7 +116,7 @@ const Label = ({ data }) => {
       return "white";
     }
   }
-  console.log(data.name);
+  // console.log(data.name);
   return (
     <>
       <EachLabelContainer $isShow={editModal}>
