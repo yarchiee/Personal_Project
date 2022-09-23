@@ -1,6 +1,6 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Label from "./pages/Labels/Label";
+import Labels from "./pages/Labels";
 import IssueList from "./pages/IssueList/IssueList";
 import IssuePage from "./pages/IssuePage/IssuePage";
 import NewIssuePage from "./pages/NewIssuePage/NewIssuePage";
@@ -8,10 +8,10 @@ import Oauth from "./pages/Oauth/Oauth";
 import GithubOauth from "./pages/Oauth/GithubOAuth";
 import { ResetStyle, GlobalStyle } from "./components/globalStyle";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { SelectContext } from "./utils/SelectContext";
+import { SelectContext } from "./context/SelectContext";
 import { repoLabelArr } from "../src/type";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const REPOSITORY = "github-project";
 
 function App() {
@@ -19,6 +19,11 @@ function App() {
     [] as unknown as repoLabelArr
   );
   const [selectedEdit, setSelectedEdit] = useState<number>();
+
+  const returnContext = () => {
+    console.log(selectedEdit);
+  };
+  useEffect(returnContext, [selectedEdit]);
   return (
     <>
       <SelectContext.Provider
@@ -37,7 +42,7 @@ function App() {
           ></Route>
           <Route path={`/${REPOSITORY}/ooath`} element={<Oauth />}></Route>
 
-          <Route path={`/${REPOSITORY}`} element={<Label />}></Route>
+          <Route path={`/${REPOSITORY}`} element={<Labels />}></Route>
 
           <Route
             path={`/${REPOSITORY}/issuelist`}

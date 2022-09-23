@@ -1,4 +1,4 @@
-import api from "../../utils/api";
+import api from "../../service/api";
 import { useEffect, useState } from "react";
 // import styled from "styled-components";
 

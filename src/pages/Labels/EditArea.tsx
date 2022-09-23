@@ -1,7 +1,9 @@
+import { useState, useContext } from "react";
 import styled from "styled-components";
-import { useContext } from "react";
-import { SelectContext } from "../../utils/SelectContext";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
+import { randomBase16 } from "../../utils/random";
+import { SelectContext } from "../../context/SelectContext";
+
 const EachLabelContainer = styled.div`
   height: 77px;
   border: 1px solid #d0d7de;
@@ -139,17 +141,33 @@ const ColorSelectBtn = styled.button`
   margin-right: 8px;
 `;
 
-const EditArea = ({ data, onCancel, labelTagName }) => {
-  const [repoLabelArr, setRepoLabelArr] =
-    useContext(SelectContext).repoLabelArr;
-  console.log("test", repoLabelArr);
+const EditArea = ({ data, onCancel }) => {
+  const [editData, setEditData] = useState(data);
+  const selectContext = useContext(SelectContext);
+  const randomColor = () => {
+    const newColor = {
+      color: randomBase16(6),
+    };
+    updateData(newColor);
+  };
+  const updateData = (obj) => {
+    const newData = { ...editData, ...obj };
+    setEditData(newData);
+    if (
+      selectContext.selectedEdit &&
+      Array.isArray(selectContext.selectedEdit) &&
+      typeof selectContext.selectedEdit[1] === "function"
+    ) {
+      selectContext.selectedEdit[1](newData);
+    }
+  };
   return (
     <>
       <Wrapper>
         <EachLabelContainer>
           <EachLabelIconContainer>
             <IssueLabel>
-              <IssueLabelP>bug </IssueLabelP>
+              <IssueLabelP>{editData?.name} </IssueLabelP>
             </IssueLabel>
           </EachLabelIconContainer>
           <EditDeleteAreaDesktop>
@@ -164,19 +182,19 @@ const EditArea = ({ data, onCancel, labelTagName }) => {
         <EditLabelContainer>
           <EditLabelGroup>
             <EditLabelTitle>Label name</EditLabelTitle>
-            <EditLabelInput defaultValue={labelTagName} />
+            <EditLabelInput defaultValue={editData?.name} />
           </EditLabelGroup>
           <EditLabelGroup>
             <EditLabelTitle>Description</EditLabelTitle>
-            <EditLabelInput />
+            <EditLabelInput defaultValue={editData?.description} />
           </EditLabelGroup>
           <EditLabelGroup>
             <EditLabelTitle>Color</EditLabelTitle>
             <ColorFlex>
-              <ColorSelectBtn>
+              <ColorSelectBtn onClick={randomColor}>
                 <SyncIcon size={16} />
               </ColorSelectBtn>
-              <EditLabelInput />
+              <EditLabelInput defaultValue={editData?.color} />
             </ColorFlex>
           </EditLabelGroup>
           <CheckoutEdit>
