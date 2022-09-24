@@ -37,6 +37,20 @@ const api = {
     );
     return await response.json();
   },
+  async createALabel(data) {
+    const response = await fetch(
+      `${this.hostname}/repos/yarchiee/Personal_Project/labels`,
+      {
+        body: JSON.stringify(data),
+        headers: {
+          Accept: "application/vnd.github+json",
+          Authorization: "Bearer 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",
+        },
+        method: "POST",
+      }
+    );
+    return await response.json();
+  },
 };
 
 export default api;

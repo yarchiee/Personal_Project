@@ -15,10 +15,12 @@ import { useState, useEffect } from "react";
 const REPOSITORY = "github-project";
 
 function App() {
+  // const [repoLabelArr, setRepoLabelArr] = useState<[RepoLabelData]>([]);
   const [repoLabelArr, setRepoLabelArr] = useState<repoLabelArr>(
     [] as unknown as repoLabelArr
   );
   const [selectedEdit, setSelectedEdit] = useState<number>();
+  console.log(repoLabelArr);
 
   const returnContext = () => {
     console.log(selectedEdit);

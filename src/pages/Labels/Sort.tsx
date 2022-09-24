@@ -29,6 +29,7 @@ const SelectMenuBtnDetails = styled.details`
   list-style: none;
   background-color: transparent;
   border: 0;
+  position: relative;
 `;
 const SortListBox = styled.div`
   width: 300px;
@@ -44,8 +45,8 @@ const SortListBox = styled.div`
   border-radius: 6px;
   box-shadow: 0 8px 24px rgba(104, 149, 159, 0.2);
   position: absolute !important;
-  right: 48px !important;
-  top: 295px;
+  right: 10% !important;
+  top: 100%;
 `;
 const SortList = styled.div`
   width: 100%;

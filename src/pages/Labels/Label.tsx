@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { KebabHorizontalIcon } from "@primer/octicons-react";
 import EditArea from "./EditArea";
+import DeleteBtn from "./DeleteBtn";
+
 import { useEffect, useState } from "react";
 type PropsTypes = {
   $isShow?: boolean;
@@ -119,7 +121,11 @@ const Label = ({ data }) => {
       return "white";
     }
   }
-
+  const alertMessage = () => {
+    alert(
+      "Are you sure?Delete a label will remove it from all issues and pull requests."
+    );
+  };
   return (
     <>
       <EachLabelContainer $isShow={editModal}>
@@ -139,7 +145,7 @@ const Label = ({ data }) => {
             <IssueLabelEditBtn onClick={toggleEditModal}>
               Edit
             </IssueLabelEditBtn>
-            <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
+            <DeleteBtn onClick={alertMessage} />
           </EditDeleteAreaDesktop>
           <EditDeleteAreaMobile>
             <ThreeDotBotton>

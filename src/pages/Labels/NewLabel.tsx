@@ -1,9 +1,11 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
 // import { SelectContext } from "../../context/SelectContext";
 import { CreateLabelData } from "../../type";
+import api from "../../service/api";
+import LabelTag from "./LabelTag";
 
 type PropsTypes = {
   $isShow?: boolean;
@@ -179,7 +181,6 @@ const ColorSelectBtn = styled.button<PropsTypes>`
   line-height: 22px;
   margin-bottom: 16px;
   margin-right: 8px;
-  /* background-color: #c2e0c6; */
   background-color: ${(props) => `#${props.isChange}`};
   color: ${(props) => props.lightordark};
 `;
@@ -187,14 +188,15 @@ const NewLabel = ({ onCancel }) => {
   const [createLabelData, setCreateLabelData] = useState<CreateLabelData>(
     [] as unknown as CreateLabelData
   );
-  // const [cancelNewLabel, setCancelNewLabel] = useState(false);
   const [selectColorCode, setSelectColorCode] = useState("c2e0c6");
-  // const [typeDescription, setTypeDescription] = useState();
-  // const [typeLabelName, setTypeLabelName] = useState();
-
-  // const selectContext = useContext(SelectContext);
-  // console.log(createLabelData);
-  // console.log(data);
+  const [typeDescription, setTypeDescription] = useState("");
+  const [typeLabelName, setTypeLabelName] = useState("Label preview");
+  const newCreateData = {
+    name: typeLabelName,
+    description: typeDescription,
+    color: selectColorCode,
+  };
+  console.log(newCreateData);
 
   const randomColor = () => {
     const newColor = {
@@ -223,14 +225,11 @@ const NewLabel = ({ onCancel }) => {
       <Wrapper>
         <EachLabelContainer>
           <EachLabelIconContainer>
-            <IssueLabel>
-              <IssueLabelP
-                isChange={selectColorCode}
-                lightordark={lightOrDark(selectColorCode)}
-              >
-                Label preview
-              </IssueLabelP>
-            </IssueLabel>
+            <LabelTag
+              selectColorCode={selectColorCode}
+              typeLabelName={typeLabelName}
+              lightordark={lightOrDark}
+            />
           </EachLabelIconContainer>
           <EditDeleteAreaDesktop>
             <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
@@ -244,11 +243,25 @@ const NewLabel = ({ onCancel }) => {
         <EditLabelContainer>
           <EditLabelGroup1>
             <EditLabelTitle>Label name</EditLabelTitle>
-            <EditLabelInput placeholder="Label name" />
+            <EditLabelInput
+              // defaultValue="Label name"
+              type="text"
+              placeholder="Label name"
+              value={typeLabelName}
+              id="labelname"
+              name="labelname"
+              onChange={(e) => setTypeLabelName(e.target.value)}
+            />
           </EditLabelGroup1>
           <EditLabelGroup1>
             <EditLabelTitle>Description</EditLabelTitle>
-            <EditLabelInput placeholder="Description (optional)" />
+            <EditLabelInput
+              placeholder="Description (optional)"
+              value={typeDescription}
+              id="description"
+              name="description"
+              onChange={(e) => setTypeDescription(e.target.value)}
+            />
           </EditLabelGroup1>
           <EditLabelGroup2>
             <EditLabelTitle>Color</EditLabelTitle>
@@ -263,6 +276,8 @@ const NewLabel = ({ onCancel }) => {
                 <SyncIcon size={16} />
               </ColorSelectBtn>
               <EditLabelInput
+                maxLength={6}
+                pattern="#?([a-fA-F0-9]{6})"
                 placeholder="#c2e0c"
                 value={selectColorCode}
                 id="colorcode"

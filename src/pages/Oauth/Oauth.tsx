@@ -4,6 +4,13 @@ import { useEffect, useState } from "react";
 
 import { supabase } from "../../Client";
 
+export async function signOut(setUser) {
+  /* sign the user out */
+
+  await supabase.auth.signOut();
+  setUser(null);
+}
+
 function Oauth() {
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -20,11 +27,13 @@ function Oauth() {
     console.log(user);
     setUser(user);
   }
-  function signInWithGithub() {
+
+  const signInWithGithub = () => {
     api.signInWithGithub().then(() => {
       console.log("123");
     });
-  }
+  };
+
   async function session() {
     /* authenticate with GitHub */
     const session = supabase.auth.session();
@@ -34,12 +43,8 @@ function Oauth() {
 
     return session.provider_token;
   }
+  signOut(setUser);
 
-  async function signOut() {
-    /* sign the user out */
-    await supabase.auth.signOut();
-    setUser(null);
-  }
   if (user) {
     return (
       <div>
