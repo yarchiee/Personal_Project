@@ -177,8 +177,8 @@ const RectangleColorGroup = styled.div`
   background-color: #fff;
   border: 1px solid #d0d7de;
   border-radius: 6px;
-  left: 55%;
-  top: 85%;
+  left: 23%;
+  top: 70%;
   display: flex;
   padding: 8px;
   flex-direction: column;
@@ -363,12 +363,18 @@ const EditArea = ({ data, onCancel }) => {
                 <ChooseColorText>Choose from default colors:</ChooseColorText>
                 <ColorChoose>
                   {ButtonColor.darkColors.map((item) => (
-                    <EachColor isBackgroundColor={item} />
+                    <EachColor
+                      isBackgroundColor={item}
+                      onClick={() => setSelectColorCode(`#${item}`)}
+                    />
                   ))}
                 </ColorChoose>
                 <ColorOpcity>
                   {ButtonColor.lightColors.map((item) => (
-                    <EachOpacityColor isBackgroundColor={item} />
+                    <EachOpacityColor
+                      isBackgroundColor={item}
+                      onClick={() => setSelectColorCode(`#${item}`)}
+                    />
                   ))}
                 </ColorOpcity>
               </RectangleColorGroup>
