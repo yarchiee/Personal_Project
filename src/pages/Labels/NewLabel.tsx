@@ -6,6 +6,7 @@ import { randomBase16 } from "../../utils/random";
 import { CreateLabelData } from "../../type";
 import api from "../../service/api";
 import LabelTag from "./LabelTag";
+import DeleteBtn from "./DeleteBtn";
 
 type PropsTypes = {
   $isShow?: boolean;
@@ -181,14 +182,14 @@ const ColorSelectBtn = styled.button<PropsTypes>`
   line-height: 22px;
   margin-bottom: 16px;
   margin-right: 8px;
-  background-color: ${(props) => `#${props.isChange}`};
+  background-color: ${(props) => `${props.isChange}`};
   color: ${(props) => props.lightordark};
 `;
 const NewLabel = ({ onCancel }) => {
   const [createLabelData, setCreateLabelData] = useState<CreateLabelData>(
     [] as unknown as CreateLabelData
   );
-  const [selectColorCode, setSelectColorCode] = useState("c2e0c6");
+  const [selectColorCode, setSelectColorCode] = useState("#c2e0c6");
   const [typeDescription, setTypeDescription] = useState("");
   const [typeLabelName, setTypeLabelName] = useState("Label preview");
   const newCreateData = {
@@ -210,9 +211,9 @@ const NewLabel = ({ onCancel }) => {
     setSelectColorCode(newData.color);
   };
   function lightOrDark(bgcolor) {
-    const r = parseInt(bgcolor.slice(0, 2), 16);
-    const g = parseInt(bgcolor.slice(2, 4), 16);
-    const b = parseInt(bgcolor.slice(4, 6), 16);
+    const r = parseInt(bgcolor.slice(1, 3), 16);
+    const g = parseInt(bgcolor.slice(3, 5), 16);
+    const b = parseInt(bgcolor.slice(5, 7), 16);
     const hsp = r * 0.3 + g * 0.6 + b * 0.1;
     if (hsp > 127.5) {
       return "black";
@@ -220,6 +221,11 @@ const NewLabel = ({ onCancel }) => {
       return "white";
     }
   }
+  const alertMessage = () => {
+    alert(
+      "Are you sure?Delete a label will remove it from all issues and pull requests."
+    );
+  };
   return (
     <>
       <Wrapper>
@@ -232,7 +238,7 @@ const NewLabel = ({ onCancel }) => {
             />
           </EachLabelIconContainer>
           <EditDeleteAreaDesktop>
-            <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
+            <DeleteBtn onClick={alertMessage} />
           </EditDeleteAreaDesktop>
           <EditDeleteAreaMobile>
             <ThreeDotBotton>
@@ -275,6 +281,7 @@ const NewLabel = ({ onCancel }) => {
               >
                 <SyncIcon size={16} />
               </ColorSelectBtn>
+
               <EditLabelInput
                 maxLength={6}
                 pattern="#?([a-fA-F0-9]{6})"

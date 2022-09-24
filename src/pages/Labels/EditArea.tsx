@@ -4,6 +4,7 @@ import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
 import { SelectContext } from "../../context/SelectContext";
 import LabelTag from "./LabelTag";
+import DeleteBtn from "./DeleteBtn";
 
 // import ColorBoard from "./ColorBoard";
 
@@ -44,23 +45,6 @@ const EachLabelIconContainer = styled.div`
   display: flex;
   line-height: 44px;
   width: 25%;
-`;
-
-const IssueLabel = styled.div`
-  height: 28px;
-  margin: auto 0;
-`;
-const IssueLabelP = styled.p<PropsTypes>`
-  padding: 0 10px;
-  font-weight: 500;
-  font-size: 12px;
-  background-color: ${(props) => `#${props.isChange}`};
-  color: ${(props) => props.lightordark};
-  border: 0.5px solid #e1e2e3;
-
-  line-height: 28px;
-  border-radius: 2em;
-  font-weight: 600;
 `;
 
 const IssueLabelDeleteBtn = styled.button`
@@ -230,7 +214,6 @@ const ColorChoose = styled.div`
 const EachColor = styled.div<PropsTypes>`
   width: 24px;
   height: 24px;
-  /* border: 1px solid #000; */
   border-radius: 6px !important;
   cursor: pointer;
   background-color: ${(props) => `#${props.isBackgroundColor}`};
@@ -301,9 +284,9 @@ const EditArea = ({ data, onCancel }) => {
   };
 
   function lightOrDark(bgcolor) {
-    const r = parseInt(bgcolor.slice(0, 2), 16);
-    const g = parseInt(bgcolor.slice(2, 4), 16);
-    const b = parseInt(bgcolor.slice(4, 6), 16);
+    const r = parseInt(bgcolor.slice(1, 3), 16);
+    const g = parseInt(bgcolor.slice(3, 5), 16);
+    const b = parseInt(bgcolor.slice(5, 7), 16);
     const hsp = r * 0.3 + g * 0.6 + b * 0.1;
     if (hsp > 127.5) {
       return "black";
@@ -311,7 +294,11 @@ const EditArea = ({ data, onCancel }) => {
       return "white";
     }
   }
-
+  const alertMessage = () => {
+    alert(
+      "Are you sure?Delete a label will remove it from all issues and pull requests."
+    );
+  };
   return (
     <>
       <Wrapper>
@@ -324,7 +311,7 @@ const EditArea = ({ data, onCancel }) => {
             />
           </EachLabelIconContainer>
           <EditDeleteAreaDesktop>
-            <IssueLabelDeleteBtn>Delete</IssueLabelDeleteBtn>
+            <DeleteBtn onClick={alertMessage} />
           </EditDeleteAreaDesktop>
           <EditDeleteAreaMobile>
             <ThreeDotBotton>

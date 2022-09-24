@@ -60,15 +60,7 @@ const IssueLabelEditBtn = styled.button`
     color: #0969da;
   }
 `;
-const IssueLabelDeleteBtn = styled.button`
-  color: #57606a;
-  margin-left: 16px;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-    color: #0969da;
-  }
-`;
+
 const EditDeleteAreaDesktop = styled.div`
   margin-left: auto;
 
