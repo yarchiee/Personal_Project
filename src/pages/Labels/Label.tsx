@@ -2,8 +2,11 @@ import styled from "styled-components";
 import { KebabHorizontalIcon } from "@primer/octicons-react";
 import EditArea from "./EditArea";
 import DeleteBtn from "./DeleteBtn";
+import MobileEditDelete from "./MobileEditDelete";
 
+import api from "../../services/api";
 import { useEffect, useState } from "react";
+
 type PropsTypes = {
   $isShow?: boolean;
   isChange?: string;
@@ -70,6 +73,7 @@ const EditDeleteAreaDesktop = styled.div`
 `;
 const EditDeleteAreaMobile = styled.div`
   display: none;
+  position: relative;
   @media screen and (max-width: 1011.9px) {
     display: block;
     margin: auto;
@@ -98,8 +102,15 @@ const ThreeDotIcon = styled(KebabHorizontalIcon)`
 `;
 const Label = ({ data, callback }) => {
   const [editModal, setEditModal] = useState(false);
+  const [openReviseBtn, setOpenReviseBtn] = useState(false);
+
   const toggleEditModal = () => {
     setEditModal(!editModal);
+  };
+  const deleteLabel = async () => {
+    const sourceName = data.name;
+    await api.deleteLabel(sourceName);
+    callback();
   };
 
   function lightOrDark(bgcolor) {
@@ -113,10 +124,13 @@ const Label = ({ data, callback }) => {
       return "white";
     }
   }
-  const alertMessage = () => {
-    alert(
+  const popconfirm = () => {
+    const confirm = window.confirm(
       "Are you sure?Delete a label will remove it from all issues and pull requests."
     );
+    if (confirm) {
+      deleteLabel();
+    }
   };
   return (
     <>
@@ -137,12 +151,24 @@ const Label = ({ data, callback }) => {
             <IssueLabelEditBtn onClick={toggleEditModal}>
               Edit
             </IssueLabelEditBtn>
-            <DeleteBtn onClick={alertMessage} />
+            <DeleteBtn onClick={popconfirm} />
           </EditDeleteAreaDesktop>
           <EditDeleteAreaMobile>
-            <ThreeDotBotton>
+            <ThreeDotBotton
+              onClick={() => {
+                setOpenReviseBtn(!openReviseBtn);
+                console.log(openReviseBtn);
+              }}
+            >
               <ThreeDotIcon size={16} />
             </ThreeDotBotton>
+            <MobileEditDelete
+              editModal={editModal}
+              setEditModal={setEditModal}
+              openReviseBtn={openReviseBtn}
+              setOpenReviseBtn={setOpenReviseBtn}
+              toggleEditModal={toggleEditModal}
+            />
           </EditDeleteAreaMobile>
         </EachLabelFlexBox>
       </EachLabelContainer>

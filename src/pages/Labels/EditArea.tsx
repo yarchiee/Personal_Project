@@ -2,17 +2,15 @@ import { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
-// import { SelectContext } from "../../context/SelectContext";
 import LabelTag from "./LabelTag";
 import DeleteBtn from "./DeleteBtn";
-
-// import ColorBoard from "./ColorBoard";
-
 import api from "../../services/api";
+
 type PropsTypes = {
   lightordark?: string;
   isChange?: string;
   isBackgroundColor?: string;
+  colorBoard?: boolean;
 };
 const EachLabelContainer = styled.div`
   height: 77px;
@@ -160,7 +158,7 @@ const ColorSelectBtn = styled.button<PropsTypes>`
   color: ${(props) => props.lightordark};
 `;
 
-const RectangleColorGroup = styled.div`
+const RectangleColorGroup = styled.div<PropsTypes>`
   position: absolute;
   width: 232px;
   margin-right: auto;
@@ -168,11 +166,12 @@ const RectangleColorGroup = styled.div`
   background-color: #fff;
   border: 1px solid #d0d7de;
   border-radius: 6px;
-  left: 23%;
+  left: 30%;
   top: 70%;
   display: flex;
   padding: 8px;
   flex-direction: column;
+  display: ${(props) => (props.colorBoard ? "block" : "none")};
   &::after {
     top: -10.7px;
     left: 10px;
@@ -192,6 +191,9 @@ const RectangleColorGroup = styled.div`
     display: inline-block;
     border-bottom-color: #d0d7de;
     content: "";
+  }
+  @media screen and (max-width: 768px) {
+    left: 10%;
   }
 `;
 const ColorChoose = styled.div`
@@ -243,12 +245,15 @@ const ButtonColor = {
 };
 
 const EditArea = ({ data, onCancel, callback }) => {
+  const [fieldValue, setFieldValue] = useState(false);
   const [editData, setEditData] = useState({
     name: data.name,
     color: data.color,
     description: data.description,
   });
-
+  const handleBlur = () => setFieldValue(false);
+  const handleFocus = () => setFieldValue(true);
+  console.log(fieldValue);
   const randomColor = () => {
     const newColor = {
       color: randomBase16(6),
@@ -275,7 +280,14 @@ const EditArea = ({ data, onCancel, callback }) => {
     await api.updateALabel(sourceName, patchData);
     callback();
   };
-  const popconfirm = () => {};
+  const popconfirm = () => {
+    const confirm = window.confirm(
+      "Are you sure?Delete a label will remove it from all issues and pull requests."
+    );
+    if (confirm) {
+      deleteLabel();
+    }
+  };
   const deleteLabel = async () => {
     const sourceName = data.name;
     await api.deleteLabel(sourceName);
@@ -293,11 +305,7 @@ const EditArea = ({ data, onCancel, callback }) => {
       return "white";
     }
   }
-  // const alertMessage = () => {
-  //   alert(
-  //     "Are you sure?Delete a label will remove it from all issues and pull requests."
-  //   );
-  // };
+
   return (
     <>
       <Wrapper>
@@ -310,7 +318,7 @@ const EditArea = ({ data, onCancel, callback }) => {
             />
           </EachLabelIconContainer>
           <EditDeleteAreaDesktop>
-            <DeleteBtn onClick={deleteLabel} />
+            <DeleteBtn onClick={popconfirm} />
           </EditDeleteAreaDesktop>
           <EditDeleteAreaMobile>
             <ThreeDotBotton>
@@ -352,18 +360,20 @@ const EditArea = ({ data, onCancel, callback }) => {
                 <SyncIcon size={16} />
               </ColorSelectBtn>
               <EditLabelInput
+                onFocus={handleFocus}
+                onBlur={handleBlur}
                 value={editData?.color}
                 id="colorcode"
                 name="colorcode"
                 onChange={(e) => updateData({ color: e.target.value })}
               />
-              <RectangleColorGroup>
+              <RectangleColorGroup colorBoard={fieldValue}>
                 <ChooseColorText>Choose from default colors:</ChooseColorText>
                 <ColorChoose>
                   {ButtonColor.darkColors.map((item) => (
                     <EachColor
                       isBackgroundColor={item}
-                      onClick={() => updateData({ color: `#${item}` })}
+                      onMouseDown={() => updateData({ color: `#${item}` })}
                     />
                   ))}
                 </ColorChoose>
@@ -371,7 +381,7 @@ const EditArea = ({ data, onCancel, callback }) => {
                   {ButtonColor.lightColors.map((item) => (
                     <EachOpacityColor
                       isBackgroundColor={item}
-                      onClick={() => updateData({ color: `#${item}` })}
+                      onMouseDown={() => updateData({ color: `#${item}` })}
                     />
                   ))}
                 </ColorOpcity>

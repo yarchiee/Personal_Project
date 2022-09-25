@@ -12,9 +12,11 @@ type PropsTypes = {
   $isShow?: boolean;
   isChange?: string;
   lightordark?: string;
+  isBackgroundColor?: string;
+  colorBoard?: boolean;
 };
 const EachLabelContainer = styled.div`
-  height: 77px;
+  height: 80px;
   border: 1px solid #d0d7de;
   border-bottom: none;
   /* border-top: none; */
@@ -147,6 +149,7 @@ const EditLabelSave = styled(EditLabelCancel)`
 `;
 const ColorFlex = styled.div`
   display: flex;
+  position: relative;
 `;
 const ColorSelectBtn = styled.button<PropsTypes>`
   border: 1px solid rgba(27, 36, 31, 0.15);
@@ -158,7 +161,93 @@ const ColorSelectBtn = styled.button<PropsTypes>`
   background-color: ${(props) => `${props.isChange}`};
   color: ${(props) => props.lightordark};
 `;
+const RectangleColorGroup = styled.div<PropsTypes>`
+  position: absolute;
+  width: 232px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  left: 30%;
+  top: 70%;
+  display: flex;
+  padding: 8px;
+  flex-direction: column;
+  display: ${(props) => (props.colorBoard ? "block" : "none")};
+  &::after {
+    top: -10.7px;
+    left: 10px;
+    right: auto;
+    border: 7px solid transparent;
+    position: absolute;
+    display: inline-block;
+    border-bottom-color: #fff;
+    content: "";
+  }
+  &::before {
+    top: -12px;
+    left: 10px;
+    right: auto;
+    border: 7px solid transparent;
+    position: absolute;
+    display: inline-block;
+    border-bottom-color: #d0d7de;
+    content: "";
+  }
+  @media screen and (max-width: 768px) {
+    left: 10%;
+  }
+`;
+const ColorChoose = styled.div`
+  width: 100%;
+  height: 24px;
+  margin: 0 0 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+const EachColor = styled.div<PropsTypes>`
+  width: 24px;
+  height: 24px;
+  border-radius: 6px !important;
+  cursor: pointer;
+  background-color: ${(props) => `#${props.isBackgroundColor}`};
+`;
+const EachOpacityColor = styled(EachColor)``;
+const ChooseColorText = styled.div`
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: #57606a;
+  font-weight: 100;
+`;
+const ColorOpcity = styled(ColorChoose)`
+  margin-bottom: 0;
+`;
+const ButtonColor = {
+  darkColors: [
+    "B60205",
+    "D93F0B",
+    "FBCA04",
+    "0E8A16",
+    "006B75",
+    "1D76DB",
+    "0052CC",
+    "5319E7",
+  ],
+  lightColors: [
+    "E99695",
+    "F9D0C4",
+    "FEF2C0",
+    "C2E0C6",
+    "BFDADC",
+    "C5DEF5",
+    "BFD4F2",
+    "D4C5F9",
+  ],
+};
 const NewLabel = ({ onCancel, callback }) => {
+  const [fieldValue, setFieldValue] = useState(false);
   const [createLabelData, setCreateLabelData] = useState<CreateLabelData>(
     [] as unknown as CreateLabelData
   );
@@ -183,15 +272,13 @@ const NewLabel = ({ onCancel, callback }) => {
     setCreateLabelData(newData);
     setSelectColorCode(newData.color);
   };
-  // const createLabel = async () => {
-  //   const sourceName = newCreateData.name;
-  //   const description = newCreateData.description;
-
-  //   const color = newCreateData.color;
-
-  //   await api.createLabel(sourceName, newCreateData);
-  //   callback();
-  // };
+  const createLabel = async () => {
+    //   const sourceName = newCreateData.name;
+    //   const description = newCreateData.description;
+    //   const color = newCreateData.color;
+    //   await api.createLabel(sourceName, newCreateData);
+    //   callback();
+  };
   function lightOrDark(bgcolor) {
     const r = parseInt(bgcolor.slice(1, 3), 16);
     const g = parseInt(bgcolor.slice(3, 5), 16);
@@ -208,6 +295,8 @@ const NewLabel = ({ onCancel, callback }) => {
       "Are you sure?Delete a label will remove it from all issues and pull requests."
     );
   };
+  const handleBlur = () => setFieldValue(false);
+  const handleFocus = () => setFieldValue(true);
   return (
     <>
       <Wrapper>
@@ -233,6 +322,7 @@ const NewLabel = ({ onCancel, callback }) => {
             <EditLabelTitle>Label name</EditLabelTitle>
             <EditLabelInput
               // defaultValue="Label name"
+
               type="text"
               placeholder="Label name"
               value={typeLabelName}
@@ -265,7 +355,9 @@ const NewLabel = ({ onCancel, callback }) => {
               </ColorSelectBtn>
 
               <EditLabelInput
-                maxLength={6}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                maxLength={7}
                 pattern="#?([a-fA-F0-9]{6})"
                 placeholder="#c2e0c"
                 value={selectColorCode}
@@ -273,11 +365,30 @@ const NewLabel = ({ onCancel, callback }) => {
                 name="colorcode"
                 onChange={(e) => setSelectColorCode(e.target.value)}
               />
+              <RectangleColorGroup colorBoard={fieldValue}>
+                <ChooseColorText>Choose from default colors:</ChooseColorText>
+                <ColorChoose>
+                  {ButtonColor.darkColors.map((item) => (
+                    <EachColor
+                      isBackgroundColor={item}
+                      onMouseDown={() => updateData({ color: `#${item}` })}
+                    />
+                  ))}
+                </ColorChoose>
+                <ColorOpcity>
+                  {ButtonColor.lightColors.map((item) => (
+                    <EachOpacityColor
+                      isBackgroundColor={item}
+                      onMouseDown={() => updateData({ color: `#${item}` })}
+                    />
+                  ))}
+                </ColorOpcity>
+              </RectangleColorGroup>
             </ColorFlex>
           </EditLabelGroup2>
           <CheckoutEdit>
             <EditLabelCancel onClick={onCancel}>Cancel</EditLabelCancel>
-            <EditLabelSave>Save changes</EditLabelSave>
+            <EditLabelSave onClick={createLabel}>Save changes</EditLabelSave>
           </CheckoutEdit>
         </EditLabelContainer>
       </Wrapper>
