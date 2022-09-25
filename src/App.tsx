@@ -15,7 +15,6 @@ import { useState, useEffect } from "react";
 const REPOSITORY = "github-project";
 
 function App() {
-  // const [repoLabelArr, setRepoLabelArr] = useState<[RepoLabelData]>([]);
   const [repoLabelArr, setRepoLabelArr] = useState<repoLabelArr>(
     [] as unknown as repoLabelArr
   );
