@@ -2,13 +2,13 @@ import { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
-import { SelectContext } from "../../context/SelectContext";
+// import { SelectContext } from "../../context/SelectContext";
 import LabelTag from "./LabelTag";
 import DeleteBtn from "./DeleteBtn";
 
 // import ColorBoard from "./ColorBoard";
 
-import api from "../../service/api";
+import api from "../../services/api";
 type PropsTypes = {
   lightordark?: string;
   isChange?: string;
@@ -47,15 +47,6 @@ const EachLabelIconContainer = styled.div`
   width: 25%;
 `;
 
-const IssueLabelDeleteBtn = styled.button`
-  color: #57606a;
-  margin-left: 16px;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-    color: #0969da;
-  }
-`;
 const EditDeleteAreaDesktop = styled.div`
   margin: auto;
 
@@ -251,19 +242,13 @@ const ButtonColor = {
   ],
 };
 
-const EditArea = ({ data, onCancel }) => {
-  const selectContext = useContext(SelectContext);
-  const [editData, setEditData] = useState(data);
-  const [selectColorCode, setSelectColorCode] = useState(`#${editData?.color}`);
-  const [typeDescription, setTypeDescription] = useState(editData?.description);
-  const [typeLabelName, setTypeLabelName] = useState(editData?.name);
-  console.log(selectColorCode);
-  const theNewEditData = {
-    name: typeLabelName,
-    description: typeDescription,
-    color: selectColorCode,
-  };
-  console.log(theNewEditData);
+const EditArea = ({ data, onCancel, callback }) => {
+  const [editData, setEditData] = useState({
+    name: data.name,
+    color: data.color,
+    description: data.description,
+  });
+
   const randomColor = () => {
     const newColor = {
       color: randomBase16(6),
@@ -273,14 +258,28 @@ const EditArea = ({ data, onCancel }) => {
   const updateData = (obj) => {
     const newData = { ...editData, ...obj };
     setEditData(newData);
-    setSelectColorCode(newData.color);
-    if (
-      selectContext.selectedEdit &&
-      Array.isArray(selectContext.selectedEdit) &&
-      typeof selectContext.selectedEdit[1] === "function"
-    ) {
-      selectContext.selectedEdit[1](newData);
+  };
+  const mapPatchData = (oldData, newData) => {
+    const patchData = {};
+    for (let i in newData) {
+      if (oldData[i] !== newData[i]) {
+        i !== "name" && (patchData[i] = newData[i]);
+        i == "name" && (patchData["new_name"] = newData[i]);
+      }
     }
+    return patchData;
+  };
+  const updateLabel = async () => {
+    const patchData = mapPatchData(data, editData);
+    const sourceName = data.name;
+    await api.updateALabel(sourceName, patchData);
+    callback();
+  };
+  const popconfirm = () => {};
+  const deleteLabel = async () => {
+    const sourceName = data.name;
+    await api.deleteLabel(sourceName);
+    callback();
   };
 
   function lightOrDark(bgcolor) {
@@ -294,24 +293,24 @@ const EditArea = ({ data, onCancel }) => {
       return "white";
     }
   }
-  const alertMessage = () => {
-    alert(
-      "Are you sure?Delete a label will remove it from all issues and pull requests."
-    );
-  };
+  // const alertMessage = () => {
+  //   alert(
+  //     "Are you sure?Delete a label will remove it from all issues and pull requests."
+  //   );
+  // };
   return (
     <>
       <Wrapper>
         <EachLabelContainer>
           <EachLabelIconContainer>
             <LabelTag
-              selectColorCode={selectColorCode}
-              typeLabelName={typeLabelName}
+              selectColorCode={editData?.color}
+              typeLabelName={editData?.name}
               lightordark={lightOrDark}
             />
           </EachLabelIconContainer>
           <EditDeleteAreaDesktop>
-            <DeleteBtn onClick={alertMessage} />
+            <DeleteBtn onClick={deleteLabel} />
           </EditDeleteAreaDesktop>
           <EditDeleteAreaMobile>
             <ThreeDotBotton>
@@ -324,21 +323,20 @@ const EditArea = ({ data, onCancel }) => {
             <EditLabelTitle>Label name</EditLabelTitle>
             <EditLabelInput
               placeholder="Label name"
-              value={typeLabelName}
+              value={editData?.name}
               id="labelname"
               name="labelname"
-              onChange={(e) => setTypeLabelName(e.target.value)}
+              onChange={(e) => updateData({ name: e.target.value })}
             />
           </EditLabelGroup1>
           <EditLabelGroup1>
             <EditLabelTitle>Description</EditLabelTitle>
             <EditLabelInput
-              // defaultValue={editData?.description}
               placeholder="Description (optional)"
-              value={typeDescription}
+              value={editData?.description}
               id="description"
               name="description"
-              onChange={(e) => setTypeDescription(e.target.value)}
+              onChange={(e) => updateData({ description: e.target.value })}
             />
           </EditLabelGroup1>
           <EditLabelGroup2>
@@ -348,16 +346,16 @@ const EditArea = ({ data, onCancel }) => {
                 onClick={() => {
                   randomColor();
                 }}
-                isChange={selectColorCode}
-                lightordark={lightOrDark(selectColorCode)}
+                isChange={editData?.color}
+                lightordark={lightOrDark(editData?.color)}
               >
                 <SyncIcon size={16} />
               </ColorSelectBtn>
               <EditLabelInput
-                value={selectColorCode}
+                value={editData?.color}
                 id="colorcode"
                 name="colorcode"
-                onChange={(e) => setSelectColorCode(e.target.value)}
+                onChange={(e) => updateData({ color: e.target.value })}
               />
               <RectangleColorGroup>
                 <ChooseColorText>Choose from default colors:</ChooseColorText>
@@ -365,7 +363,7 @@ const EditArea = ({ data, onCancel }) => {
                   {ButtonColor.darkColors.map((item) => (
                     <EachColor
                       isBackgroundColor={item}
-                      onClick={() => setSelectColorCode(`#${item}`)}
+                      onClick={() => updateData({ color: `#${item}` })}
                     />
                   ))}
                 </ColorChoose>
@@ -373,7 +371,7 @@ const EditArea = ({ data, onCancel }) => {
                   {ButtonColor.lightColors.map((item) => (
                     <EachOpacityColor
                       isBackgroundColor={item}
-                      onClick={() => setSelectColorCode(`#${item}`)}
+                      onClick={() => updateData({ color: `#${item}` })}
                     />
                   ))}
                 </ColorOpcity>
@@ -382,7 +380,7 @@ const EditArea = ({ data, onCancel }) => {
           </EditLabelGroup2>
           <CheckoutEdit>
             <EditLabelCancel onClick={onCancel}>Cancel</EditLabelCancel>
-            <EditLabelSave>Save changes</EditLabelSave>
+            <EditLabelSave onClick={updateLabel}>Save changes</EditLabelSave>
           </CheckoutEdit>
         </EditLabelContainer>
       </Wrapper>

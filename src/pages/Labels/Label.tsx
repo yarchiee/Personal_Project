@@ -96,7 +96,7 @@ const ThreeDotIcon = styled(KebabHorizontalIcon)`
     }
   }
 `;
-const Label = ({ data }) => {
+const Label = ({ data, callback }) => {
   const [editModal, setEditModal] = useState(false);
   const toggleEditModal = () => {
     setEditModal(!editModal);
@@ -147,7 +147,9 @@ const Label = ({ data }) => {
         </EachLabelFlexBox>
       </EachLabelContainer>
 
-      {editModal && <EditArea onCancel={toggleEditModal} data={data} />}
+      {editModal && (
+        <EditArea onCancel={toggleEditModal} data={data} callback={callback} />
+      )}
     </>
   );
 };

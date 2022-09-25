@@ -1,7 +1,42 @@
 import { supabase } from "../Client";
+import { Octokit } from "octokit";
+const octokit = new Octokit({
+  auth: "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",
+});
+const setting = {
+  owner: "yarchiee",
+  repo: "Personal_Project",
+};
 
 const api = {
   hostname: " https://api.github.com",
+  async updateALabel(sourceName, data) {
+    /**
+     {
+      owner: setting.owner,
+      repo: setting.repo,
+      name: sourceName,
+      new_name: data.name,
+      description: data.description,
+      color: 'b01f26'
+      }
+     */
+    const patchData = { ...setting, name: sourceName, data };
+    console.log("t");
+    console.log(patchData);
+    const result = await octokit.request(
+      "PATCH /repos/{owner}/{repo}/labels/{name}",
+      patchData
+    );
+    return result;
+  },
+  async deleteLabel(sourceName) {
+    const deleteData = { ...setting, name: sourceName };
+    await octokit.request(
+      "DELETE /repos/{owner}/{repo}/labels/{name}",
+      deleteData
+    );
+  },
 
   async signInWithGithub() {
     /* authenticate with GitHub */

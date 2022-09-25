@@ -4,7 +4,7 @@ import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
 // import { SelectContext } from "../../context/SelectContext";
 import { CreateLabelData } from "../../type";
-import api from "../../service/api";
+import api from "../../services/api";
 import LabelTag from "./LabelTag";
 import DeleteBtn from "./DeleteBtn";
 

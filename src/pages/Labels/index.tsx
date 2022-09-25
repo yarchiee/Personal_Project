@@ -1,6 +1,6 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import LabelList from "./LabelList";
-import api from "../../service/api";
+import api from "../../services/api";
 
 function Labels() {
   const [list, setList] = useState([]);
@@ -10,7 +10,7 @@ function Labels() {
     });
   };
   useEffect(fetchData, []);
-  return <LabelList list={list} />;
+  return <LabelList list={list} callback={fetchData} />;
 }
 
 export default Labels;

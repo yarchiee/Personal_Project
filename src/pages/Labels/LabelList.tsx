@@ -116,8 +116,8 @@ const LabelBoxTitle = styled.div`
   line-height: 21px;
 `;
 
-function LabelList(props) {
-  const list = props.list ? props.list : [];
+function LabelList({ list, callback }) {
+  // const list = props.list ? props.list : [];
   const [createNewLabel, setCreateNewLabel] = useState(false);
   const toggleNewLabelBtn = () => {
     setCreateNewLabel(!createNewLabel);
@@ -157,7 +157,7 @@ function LabelList(props) {
           </LabelBoxHeader>
 
           {list.map((data) => {
-            return <Label data={data} key={data.id} />;
+            return <Label data={data} key={data.id} callback={callback} />;
           })}
         </LabelBox>
       </RepoContentContainer>
