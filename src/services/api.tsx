@@ -39,11 +39,10 @@ const api = {
   },
   async createLabel(newCreateData) {
     await octokit.request("POST /repos/{owner}/{repo}/labels", {
-      owner: "yarchiee",
-      repo: "Personal_Project",
+      ...setting,
       name: newCreateData.name,
       description: newCreateData.description,
-      color: newCreateData.selectColorCode,
+      color: newCreateData.color,
     });
   },
 

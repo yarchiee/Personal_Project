@@ -406,7 +406,14 @@ const EditArea = ({ data, onCancel, callback }) => {
           </EditLabelGroup2>
           <CheckoutEdit>
             <EditLabelCancel onClick={onCancel}>Cancel</EditLabelCancel>
-            <EditLabelSave onClick={updateLabel}>Save changes</EditLabelSave>
+            <EditLabelSave
+              onClick={() => {
+                updateLabel();
+                onCancel();
+              }}
+            >
+              Save changes
+            </EditLabelSave>
           </CheckoutEdit>
         </EditLabelContainer>
       </Wrapper>

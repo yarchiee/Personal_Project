@@ -148,6 +148,7 @@ const EditLabelCancel = styled.button`
   line-height: 22px;
   margin-bottom: 16px;
   margin-left: 8px;
+  font-weight: 600;
   @media screen and (max-width: 768px) {
     margin-left: 0;
     margin-right: 8px;
@@ -221,7 +222,7 @@ const ColorChoose = styled.div`
 const EachColor = styled.div<PropsTypes>`
   width: 24px;
   height: 24px;
-  border-radius: 6px !important;
+  border-radius: 6px;
   cursor: pointer;
   background-color: ${(props) => `#${props.isBackgroundColor}`};
 `;
@@ -283,11 +284,14 @@ const NewLabel = ({ onCancel, callback }) => {
     setCreateLabelData(newData);
     setSelectColorCode(newData.color);
   };
-  const createLabel = async (newCreateData) => {
-    // await api.createLabel(newCreateData);
-    // callback();
+
+  const createLabel = async () => {
+    await api.createLabel(newCreateData);
+    callback();
   };
   function lightOrDark(bgcolor) {
+    console.log(bgcolor);
+
     const r = parseInt(bgcolor.slice(0, 2), 16);
     const g = parseInt(bgcolor.slice(2, 4), 16);
     const b = parseInt(bgcolor.slice(4, 6), 16);
@@ -368,10 +372,16 @@ const NewLabel = ({ onCancel, callback }) => {
                 maxLength={6}
                 pattern="#?([a-fA-F0-9]{6})"
                 placeholder="#c2e0c"
-                value={selectColorCode}
+                value={`#${selectColorCode}`}
                 id="colorcode"
                 name="colorcode"
-                onChange={(e) => setSelectColorCode(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value.length === 0) {
+                    e.target.value = "#";
+                    return;
+                  }
+                  setSelectColorCode(e.target.value.split("#")[1]);
+                }}
               />
               <RectangleColorGroup colorBoard={fieldValue}>
                 <ChooseColorText>Choose from default colors:</ChooseColorText>
@@ -397,7 +407,10 @@ const NewLabel = ({ onCancel, callback }) => {
           <CheckoutEdit>
             <EditLabelCancel onClick={onCancel}>Cancel</EditLabelCancel>
             <EditLabelSave
-              onClick={createLabel}
+              onClick={() => {
+                createLabel();
+                onCancel();
+              }}
               $disabled={typeLabelName === "" ? "0.5" : "1"}
               disabled={typeLabelName === "" ? true : false}
             >
