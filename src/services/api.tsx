@@ -1,7 +1,7 @@
 import { supabase } from "../Client";
 import { Octokit } from "octokit";
 const octokit = new Octokit({
-  auth: "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",
+  auth: "",
 });
 const setting = {
   owner: "yarchiee",
