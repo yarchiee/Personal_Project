@@ -147,7 +147,9 @@ function LabelList({ list, callback }) {
           <SearchIcon size={16} fill="#57606a" />
           <SearchLabelsInput placeholder="Search all labels"></SearchLabelsInput>
         </SearchAllLabelsMobile>
-        {createNewLabel && <NewLabel onCancel={toggleNewLabelBtn} />}
+        {createNewLabel && (
+          <NewLabel onCancel={toggleNewLabelBtn} callback={callback} />
+        )}
 
         <LabelBox>
           <LabelBoxHeader>

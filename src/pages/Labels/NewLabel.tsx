@@ -50,32 +50,6 @@ const EachLabelIconContainer = styled.div`
   width: 25%;
 `;
 
-const IssueLabel = styled.div`
-  height: 28px;
-  margin: auto 0;
-`;
-const IssueLabelP = styled.p<PropsTypes>`
-  padding: 0 10px;
-  font-weight: 500;
-  font-size: 12px;
-  background-color: ${(props) => `#${props.isChange}`};
-  /* background-color: #c2e0c6; */
-  color: ${(props) => props.lightordark};
-  border: 0.5px solid #e1e2e3;
-  line-height: 28px;
-  border-radius: 2em;
-  font-weight: 600;
-`;
-
-const IssueLabelDeleteBtn = styled.button`
-  color: #57606a;
-  margin-left: 16px;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-    color: #0969da;
-  }
-`;
 const EditDeleteAreaDesktop = styled.div`
   margin: auto;
   margin-right: 0;
@@ -113,7 +87,6 @@ const ThreeDotIcon = styled(KebabHorizontalIcon)`
 const Wrapper = styled.div<PropsTypes>`
   display: flex;
   flex-direction: column;
-  /* display: ${(props) => (props.$isShow ? "block" : "none")}; */
 `;
 const EditLabelGroup = styled.div`
   display: flex;
@@ -185,7 +158,7 @@ const ColorSelectBtn = styled.button<PropsTypes>`
   background-color: ${(props) => `${props.isChange}`};
   color: ${(props) => props.lightordark};
 `;
-const NewLabel = ({ onCancel }) => {
+const NewLabel = ({ onCancel, callback }) => {
   const [createLabelData, setCreateLabelData] = useState<CreateLabelData>(
     [] as unknown as CreateLabelData
   );
@@ -210,6 +183,15 @@ const NewLabel = ({ onCancel }) => {
     setCreateLabelData(newData);
     setSelectColorCode(newData.color);
   };
+  // const createLabel = async () => {
+  //   const sourceName = newCreateData.name;
+  //   const description = newCreateData.description;
+
+  //   const color = newCreateData.color;
+
+  //   await api.createLabel(sourceName, newCreateData);
+  //   callback();
+  // };
   function lightOrDark(bgcolor) {
     const r = parseInt(bgcolor.slice(1, 3), 16);
     const g = parseInt(bgcolor.slice(3, 5), 16);
