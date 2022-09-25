@@ -1,4 +1,3 @@
-import { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 
 type PropsTypes = {
@@ -17,7 +16,6 @@ const IssueLabelP = styled.p<PropsTypes>`
   font-weight: 500;
   font-size: 12px;
   background-color: ${(props) => `#${props.isChange}`};
-  /* background-color: #c2e0c6; */
   color: ${(props) => props.lightordark};
   border: 0.5px solid #e1e2e3;
   line-height: 28px;

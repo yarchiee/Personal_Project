@@ -1,8 +1,7 @@
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
-// import { SelectContext } from "../../context/SelectContext";
 import { CreateLabelData } from "../../type";
 import api from "../../services/api";
 import LabelTag from "./LabelTag";
@@ -333,8 +332,6 @@ const NewLabel = ({ onCancel, callback }) => {
           <EditLabelGroup1>
             <EditLabelTitle>Label name</EditLabelTitle>
             <EditLabelInput
-              // defaultValue="Label name"
-
               type="text"
               placeholder="Label name"
               value={typeLabelName}

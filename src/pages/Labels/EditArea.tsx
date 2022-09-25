@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
