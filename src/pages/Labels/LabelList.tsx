@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import Label from "./Label";
 import NewLabel from "./NewLabel";
+import SearchAllLabels from "./SeachAllLabels";
 
 import SelectMenuArea from "./Sort";
 import { TagIcon, MilestoneIcon, SearchIcon } from "@primer/octicons-react";
@@ -43,19 +44,7 @@ const SelectNavItemText = styled.div`
   line-height: 23px;
   margin-left: 5px;
 `;
-const SearchAllLabelsDesktop = styled.div`
-  width: 320px;
-  height: 32px;
-  padding: 5px 12px 5px;
-  border: 1px solid #d8dee4;
-  margin-left: 24px;
-  border-radius: 6px;
-  align-items: center;
-  background-color: #f6f8fa;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-`;
+
 const SearchAllLabelsMobile = styled.div`
   display: none;
   @media screen and (max-width: 768px) {
@@ -135,10 +124,8 @@ function LabelList({ list, callback }) {
             <MilestoneIcon size={16} fill="#24292f" />
             <SelectNavItemText>Milestones</SelectNavItemText>
           </SelectNavItemNormal>
-          <SearchAllLabelsDesktop>
-            <SearchIcon size={16} fill="#57606a" />
-            <SearchLabelsInput placeholder="Search all labels"></SearchLabelsInput>
-          </SearchAllLabelsDesktop>
+
+          <SearchAllLabels />
           <NewLabelBtn onClick={toggleNewLabelBtn}>
             <NewLabelBtnText>New label</NewLabelBtnText>
           </NewLabelBtn>

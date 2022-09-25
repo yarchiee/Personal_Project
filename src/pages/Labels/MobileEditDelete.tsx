@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import EditArea from "./EditArea";
-
 import styled from "styled-components";
 type DisplayProps = {
   display: string;
@@ -107,10 +104,6 @@ const MobileEditDelete = ({
   setOpenReviseBtn,
   toggleEditModal,
 }) => {
-  //   const [selectedEditBtn, setSelectedEditBtn] = useState(false);
-  //   const toggleEdit = () => {
-  //     setSelectedEditBtn(!selectedEditBtn);
-  //   };
   return (
     <>
       <ReviseMenu display={openReviseBtn ? "none" : "block"}>

@@ -10,6 +10,7 @@ type PropsTypes = {
 const IssueLabel = styled.div`
   height: 28px;
   margin: auto 0;
+  display: inline-block;
 `;
 const IssueLabelP = styled.p<PropsTypes>`
   padding: 0 10px;

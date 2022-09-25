@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const IssueLabelDeleteBtn = styled.button`
+  background-color: transparent;
+  border: none;
   color: #57606a;
   margin-left: 16px;
   &:hover {

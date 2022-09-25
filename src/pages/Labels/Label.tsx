@@ -56,6 +56,8 @@ const IssueLabelText = styled.div`
 `;
 
 const IssueLabelEditBtn = styled.button`
+  background-color: transparent;
+  border: none;
   color: #57606a;
   &:hover {
     cursor: pointer;

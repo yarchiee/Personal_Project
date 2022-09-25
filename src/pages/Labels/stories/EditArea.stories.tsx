@@ -15,8 +15,11 @@ const Template = (args) => <EditArea {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  mainImageUrl: "https://api.appworks-school.tw/assets/201807201824/main.jpg",
-  colorCodes: ["FFFFFF", "DDFFBB", "CCCCCC"],
-  title: "前開衩扭結洋裝",
-  price: 799,
+  data: {
+    name: "Hello",
+    color: "000000",
+    description: "",
+  },
+  onCancel: () => {},
+  callback: () => {},
 };
