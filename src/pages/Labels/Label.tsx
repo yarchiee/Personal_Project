@@ -5,7 +5,7 @@ import DeleteBtn from "./DeleteBtn";
 import MobileEditDelete from "./MobileEditDelete";
 
 import api from "../../services/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type PropsTypes = {
   $isShow?: boolean;

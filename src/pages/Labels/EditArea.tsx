@@ -109,6 +109,7 @@ const EditLabelTitle = styled.div`
   margin-bottom: auto;
 `;
 const EditLabelInput = styled.input`
+  display: inline-block;
   background-color: #f6f8fa;
   border: 1px solid rgba(27, 36, 31, 0.15);
   border-radius: 6px;
