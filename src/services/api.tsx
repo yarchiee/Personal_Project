@@ -37,12 +37,14 @@ const api = {
       deleteData
     );
   },
-  async createLabel(sourceName, data) {
-    const createData = { ...setting, name: sourceName, data };
-    await octokit.request(
-      "POST /repos/{owner}/{repo}/labels/{name}",
-      createData
-    );
+  async createLabel(newCreateData) {
+    await octokit.request("POST /repos/{owner}/{repo}/labels", {
+      owner: "yarchiee",
+      repo: "Personal_Project",
+      name: newCreateData.name,
+      description: newCreateData.description,
+      color: newCreateData.selectColorCode,
+    });
   },
 
   async signInWithGithub() {

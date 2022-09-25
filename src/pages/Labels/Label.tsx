@@ -102,7 +102,7 @@ const ThreeDotIcon = styled(KebabHorizontalIcon)`
 `;
 const Label = ({ data, callback }) => {
   const [editModal, setEditModal] = useState(false);
-  const [openReviseBtn, setOpenReviseBtn] = useState(false);
+  const [openReviseBtn, setOpenReviseBtn] = useState(true);
 
   const toggleEditModal = () => {
     setEditModal(!editModal);

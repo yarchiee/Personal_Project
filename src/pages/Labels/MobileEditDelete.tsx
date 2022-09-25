@@ -59,9 +59,9 @@ const ReviseMenuContainer = styled.div`
     }
   }
 `;
-const ReviseMenuBtn = styled.button`
+const ReviseMenuBtn = styled.button<DisplayProps>`
   justify-content: flex-end;
-  display: block;
+  display: ${(props) => props.display};
 
   &:hover {
     background-color: #0969da;
@@ -84,6 +84,7 @@ const ReviseMenuBtn = styled.button`
 const DeleteBtn = styled.button`
   justify-content: flex-end;
   display: block;
+  width: 100%;
 
   &:hover {
     background-color: #0969da;
@@ -114,7 +115,15 @@ const MobileEditDelete = ({
     <>
       <ReviseMenu display={openReviseBtn ? "none" : "block"}>
         <ReviseMenuContainer>
-          <ReviseMenuBtn onClick={toggleEditModal}>Edit</ReviseMenuBtn>
+          <ReviseMenuBtn
+            onClick={() => {
+              setOpenReviseBtn(true);
+              toggleEditModal();
+            }}
+            display={openReviseBtn ? "none" : "block"}
+          >
+            Edit
+          </ReviseMenuBtn>
           <DeleteBtn>Delete</DeleteBtn>
         </ReviseMenuContainer>
       </ReviseMenu>

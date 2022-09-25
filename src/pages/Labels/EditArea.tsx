@@ -127,17 +127,25 @@ const CheckoutEdit = styled.div`
   margin-top: auto;
   margin-left: auto;
   display: flex;
+  @media screen and (max-width: 768px) {
+    margin-top: 3px;
+    margin-left: 0;
+    margin-right: auto;
+  }
 `;
 const EditLabelCancel = styled.div`
   height: 32px;
   background-color: #f6f8fa;
   border: 1px solid rgba(27, 36, 31, 0.15);
-
   border-radius: 6px;
   padding: 5px 16px;
   line-height: 22px;
   margin-bottom: 16px;
   margin-left: 8px;
+  @media screen and (max-width: 768px) {
+    margin-left: 0;
+    margin-right: 8px;
+  }
 `;
 const EditLabelSave = styled(EditLabelCancel)`
   background-color: #2da44e;
@@ -154,7 +162,7 @@ const ColorSelectBtn = styled.button<PropsTypes>`
   line-height: 22px;
   margin-bottom: 16px;
   margin-right: 8px;
-  background-color: ${(props) => `${props.isChange}`};
+  background-color: ${(props) => `#${props.isChange}`};
   color: ${(props) => props.lightordark};
 `;
 
@@ -295,9 +303,9 @@ const EditArea = ({ data, onCancel, callback }) => {
   };
 
   function lightOrDark(bgcolor) {
-    const r = parseInt(bgcolor.slice(1, 3), 16);
-    const g = parseInt(bgcolor.slice(3, 5), 16);
-    const b = parseInt(bgcolor.slice(5, 7), 16);
+    const r = parseInt(bgcolor.slice(0, 2), 16);
+    const g = parseInt(bgcolor.slice(2, 4), 16);
+    const b = parseInt(bgcolor.slice(4, 6), 16);
     const hsp = r * 0.3 + g * 0.6 + b * 0.1;
     if (hsp > 127.5) {
       return "black";
@@ -360,12 +368,20 @@ const EditArea = ({ data, onCancel, callback }) => {
                 <SyncIcon size={16} />
               </ColorSelectBtn>
               <EditLabelInput
+                maxLength={7}
+                pattern="#?([a-fA-F0-9]{6})"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                value={editData?.color}
+                value={`#${editData?.color}`}
                 id="colorcode"
                 name="colorcode"
-                onChange={(e) => updateData({ color: e.target.value })}
+                onChange={(e) => {
+                  if (e.target.value.length === 0) {
+                    e.target.value = "#";
+                    return;
+                  }
+                  updateData({ color: e.target.value.split("#")[1] });
+                }}
               />
               <RectangleColorGroup colorBoard={fieldValue}>
                 <ChooseColorText>Choose from default colors:</ChooseColorText>
@@ -373,7 +389,7 @@ const EditArea = ({ data, onCancel, callback }) => {
                   {ButtonColor.darkColors.map((item) => (
                     <EachColor
                       isBackgroundColor={item}
-                      onMouseDown={() => updateData({ color: `#${item}` })}
+                      onMouseDown={() => updateData({ color: item })}
                     />
                   ))}
                 </ColorChoose>
@@ -381,7 +397,7 @@ const EditArea = ({ data, onCancel, callback }) => {
                   {ButtonColor.lightColors.map((item) => (
                     <EachOpacityColor
                       isBackgroundColor={item}
-                      onMouseDown={() => updateData({ color: `#${item}` })}
+                      onMouseDown={() => updateData({ color: item })}
                     />
                   ))}
                 </ColorOpcity>

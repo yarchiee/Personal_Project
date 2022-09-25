@@ -14,6 +14,7 @@ type PropsTypes = {
   lightordark?: string;
   isBackgroundColor?: string;
   colorBoard?: boolean;
+  $disabled?: string;
 };
 const EachLabelContainer = styled.div`
   height: 80px;
@@ -113,7 +114,7 @@ const EditLabelGroup2 = styled(EditLabelGroup)`
 const EditLabelTitle = styled.div`
   margin-bottom: auto;
 `;
-const EditLabelInput = styled.input`
+const EditLabelInput = styled.input<PropsTypes>`
   background-color: #f6f8fa;
   border: 1px solid rgba(27, 36, 31, 0.15);
   border-radius: 6px;
@@ -132,8 +133,13 @@ const CheckoutEdit = styled.div`
   margin-top: auto;
   margin-left: auto;
   display: flex;
+  @media screen and (max-width: 768px) {
+    margin-top: 3px;
+    margin-left: 0;
+    margin-right: auto;
+  }
 `;
-const EditLabelCancel = styled.div`
+const EditLabelCancel = styled.button`
   height: 32px;
   background-color: #f6f8fa;
   border: 1px solid rgba(27, 36, 31, 0.15);
@@ -142,10 +148,15 @@ const EditLabelCancel = styled.div`
   line-height: 22px;
   margin-bottom: 16px;
   margin-left: 8px;
+  @media screen and (max-width: 768px) {
+    margin-left: 0;
+    margin-right: 8px;
+  }
 `;
-const EditLabelSave = styled(EditLabelCancel)`
+const EditLabelSave = styled(EditLabelCancel)<PropsTypes>`
   background-color: #2da44e;
   color: #fff;
+  opacity: ${(props) => props.$disabled};
 `;
 const ColorFlex = styled.div`
   display: flex;
@@ -158,7 +169,7 @@ const ColorSelectBtn = styled.button<PropsTypes>`
   line-height: 22px;
   margin-bottom: 16px;
   margin-right: 8px;
-  background-color: ${(props) => `${props.isChange}`};
+  background-color: ${(props) => `#${props.isChange}`};
   color: ${(props) => props.lightordark};
 `;
 const RectangleColorGroup = styled.div<PropsTypes>`
@@ -251,7 +262,7 @@ const NewLabel = ({ onCancel, callback }) => {
   const [createLabelData, setCreateLabelData] = useState<CreateLabelData>(
     [] as unknown as CreateLabelData
   );
-  const [selectColorCode, setSelectColorCode] = useState("#c2e0c6");
+  const [selectColorCode, setSelectColorCode] = useState("c2e0c6");
   const [typeDescription, setTypeDescription] = useState("");
   const [typeLabelName, setTypeLabelName] = useState("Label preview");
   const newCreateData = {
@@ -272,17 +283,14 @@ const NewLabel = ({ onCancel, callback }) => {
     setCreateLabelData(newData);
     setSelectColorCode(newData.color);
   };
-  const createLabel = async () => {
-    //   const sourceName = newCreateData.name;
-    //   const description = newCreateData.description;
-    //   const color = newCreateData.color;
-    //   await api.createLabel(sourceName, newCreateData);
-    //   callback();
+  const createLabel = async (newCreateData) => {
+    // await api.createLabel(newCreateData);
+    // callback();
   };
   function lightOrDark(bgcolor) {
-    const r = parseInt(bgcolor.slice(1, 3), 16);
-    const g = parseInt(bgcolor.slice(3, 5), 16);
-    const b = parseInt(bgcolor.slice(5, 7), 16);
+    const r = parseInt(bgcolor.slice(0, 2), 16);
+    const g = parseInt(bgcolor.slice(2, 4), 16);
+    const b = parseInt(bgcolor.slice(4, 6), 16);
     const hsp = r * 0.3 + g * 0.6 + b * 0.1;
     if (hsp > 127.5) {
       return "black";
@@ -357,7 +365,7 @@ const NewLabel = ({ onCancel, callback }) => {
               <EditLabelInput
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                maxLength={7}
+                maxLength={6}
                 pattern="#?([a-fA-F0-9]{6})"
                 placeholder="#c2e0c"
                 value={selectColorCode}
@@ -371,7 +379,7 @@ const NewLabel = ({ onCancel, callback }) => {
                   {ButtonColor.darkColors.map((item) => (
                     <EachColor
                       isBackgroundColor={item}
-                      onMouseDown={() => updateData({ color: `#${item}` })}
+                      onMouseDown={() => updateData({ color: item })}
                     />
                   ))}
                 </ColorChoose>
@@ -379,7 +387,7 @@ const NewLabel = ({ onCancel, callback }) => {
                   {ButtonColor.lightColors.map((item) => (
                     <EachOpacityColor
                       isBackgroundColor={item}
-                      onMouseDown={() => updateData({ color: `#${item}` })}
+                      onMouseDown={() => updateData({ color: item })}
                     />
                   ))}
                 </ColorOpcity>
@@ -388,7 +396,13 @@ const NewLabel = ({ onCancel, callback }) => {
           </EditLabelGroup2>
           <CheckoutEdit>
             <EditLabelCancel onClick={onCancel}>Cancel</EditLabelCancel>
-            <EditLabelSave onClick={createLabel}>Save changes</EditLabelSave>
+            <EditLabelSave
+              onClick={createLabel}
+              $disabled={typeLabelName === "" ? "0.5" : "1"}
+              disabled={typeLabelName === "" ? true : false}
+            >
+              Save changes
+            </EditLabelSave>
           </CheckoutEdit>
         </EditLabelContainer>
       </Wrapper>
