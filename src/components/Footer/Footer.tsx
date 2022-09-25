@@ -5,21 +5,10 @@ import { MarkGithubIcon } from "@primer/octicons-react";
 
 const FooterWidthFullContainer = styled.div`
   margin-top: 40px;
-  /* width: 100%; */
   height: 114.2px;
   font-size: 12px;
-  /* position: absolute;
-  bottom: 0; */
-  /* @media screen and (max-width: 1248px) {
-    height: 114.2px;
-    margin-top: 40px; */
-  /* margin-left: 32px; */
-  /* margin-right: 32px; */
-  /* width: 100%; */
-  /* } */
 `;
 const FooterItemContainer = styled.div`
-  /* width: 1248px; */
   display: flex;
   align-items: center;
   padding: 40px 0 8px;
