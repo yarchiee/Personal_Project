@@ -1,7 +1,7 @@
 import { supabase } from "../Client";
 import { Octokit } from "octokit";
 const octokit = new Octokit({
-  auth: "",
+  auth: process.env.REACT_APP_PASSWORD,
 });
 const setting = {
   owner: "yarchiee",
@@ -73,23 +73,9 @@ const api = {
       {
         headers: {
           Accept: "application/vnd.github+json",
-          Authorization: "Bearer",
+          Authorization: `Bearer ${process.env.REACT_APP_OOATH}`,
         },
         method: "GET",
-      }
-    );
-    return await response.json();
-  },
-  async createALabel(data) {
-    const response = await fetch(
-      `${this.hostname}/repos/yarchiee/Personal_Project/labels`,
-      {
-        body: JSON.stringify(data),
-        headers: {
-          Accept: "application/vnd.github+json",
-          Authorization: "Bearer",
-        },
-        method: "POST",
       }
     );
     return await response.json();
