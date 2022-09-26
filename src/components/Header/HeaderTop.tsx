@@ -215,11 +215,6 @@ function Header() {
         </HeaderBar>
       </>
     );
-    //   <div>
-    //     <h1>Hello, {user.email}</h1>
-    //     <button onClick={signOut}>Sign out</button>
-    //   </div>
-    // );
   }
   return (
     <>
@@ -249,41 +244,7 @@ function Header() {
         </HeaderToolArea>
       </HeaderBar>
     </>
-    // <div>
-    //   <h1>Hello, please sign in!</h1>
-    //   <button onClick={signInWithGithub}>Sign In</button>
-    //   <button onClick={session}>session</button>
-    // </div>
   );
-  // return (
-  //   <>
-  //     <HeaderBar>
-  //       <ThreeBarsIconControl>
-  //         <ThreeBarsIcon size={24} fill="#fff" />
-  //       </ThreeBarsIconControl>
-  //       <MarkGithubIconControl>
-  //         <MarkGithubIcon size={32} fill="#fff" />
-  //       </MarkGithubIconControl>
-  //       <HeaderItem>
-  //         <HeaderSearch>
-  //           <HeaderSearchInput placeholder="Search or jump to..."></HeaderSearchInput>
-  //         </HeaderSearch>
-  //         <CategoryLinks>
-  //           {categories1.map(({ displayText }) => (
-  //             <CategoryLink1>{displayText}</CategoryLink1>
-  //           ))}
-  //           {categories2.map(({ displayText }) => (
-  //             <CategoryLink2>{displayText}</CategoryLink2>
-  //           ))}
-  //         </CategoryLinks>
-  //       </HeaderItem>
-  //       <HeaderToolArea>
-  //         <SignOut>Sign Out</SignOut>
-  //         <ProfileImg />
-  //       </HeaderToolArea>
-  //     </HeaderBar>
-  //   </>
-  // );
 }
 
 export default Header;
