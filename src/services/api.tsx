@@ -1,7 +1,7 @@
 import { supabase } from "../Client";
 import { Octokit } from "octokit";
 const octokit = new Octokit({
-  auth: "",
+  auth: "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",
 });
 const setting = {
   owner: "yarchiee",
@@ -73,7 +73,7 @@ const api = {
       {
         headers: {
           Accept: "application/vnd.github+json",
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
         },
         method: "GET",
       }

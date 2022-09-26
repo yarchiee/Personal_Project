@@ -1,5 +1,3 @@
-// import { useEffect, useState } from "react";
-// import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { MarkGithubIcon } from "@primer/octicons-react";
 
@@ -18,6 +16,9 @@ const FooterItemContainer = styled.div`
   @media screen and (max-width: 1248px) {
     width: 95%;
     border-top: 1px solid #d8dee4;
+  }
+  @media screen and (max-width: 1015.9px) {
+    flex-direction: column;
   }
 `;
 const FooterItemText = styled.div`
@@ -88,11 +89,11 @@ function Footer() {
         <FooterItemContainer>
           <MarkGithubIcon size={24} fill="#6e7781" />
           <FooterItemText>@ 2022 Github,Inc.</FooterItemText>
-          <AreaLabelLinks>
+          {/* <AreaLabelLinks>
             {footertext.map(({ displayText }) => (
               <AreaLabelLink>{displayText}</AreaLabelLink>
             ))}
-          </AreaLabelLinks>
+          </AreaLabelLinks> */}
         </FooterItemContainer>
       </FooterWidthFullContainer>
     </>
