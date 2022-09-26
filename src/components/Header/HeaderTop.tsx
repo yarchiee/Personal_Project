@@ -244,7 +244,7 @@ function Header() {
           </CategoryLinks>
         </HeaderItem>
         <HeaderToolArea>
-          <SignOut onClick={signInWithGithub}>Sign in</SignOut>
+          <SignOut onClick={signInWithGithub}>Sign out</SignOut>
           <ProfileImg />
         </HeaderToolArea>
       </HeaderBar>
