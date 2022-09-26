@@ -36,6 +36,7 @@ function App() {
         <ResetStyle />
         <GlobalStyle />
         <Header />
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
         <Routes>
           <Route
             path={`/${REPOSITORY}/github-ooath`}
