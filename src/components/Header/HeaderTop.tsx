@@ -89,19 +89,14 @@ const CategoryLink2 = styled.a`
   }
 `;
 const HeaderToolArea = styled.div`
-  /* width: 100%; */
   margin-left: auto;
   display: flex;
   align-items: center;
-
-  /* justify-content: flex-end; */
 `;
 const SignOut = styled.div`
   line-height: 30px;
   font-weight: 400;
   color: #fff;
-  /* background-color: #fff; */
-  /* margin-left: auto; */
   margin-right: 16px;
   @media screen and (max-width: 768px) {
     display: none;

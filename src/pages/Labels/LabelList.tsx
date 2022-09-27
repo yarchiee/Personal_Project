@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import Label from "./Label";
 import NewLabel from "./NewLabel";
 import SearchAllLabels from "./SeachAllLabels";
+import LabelsMilestone from "./LabelsMilestone";
 
 import SelectMenuArea from "./Sort";
-import { TagIcon, MilestoneIcon, SearchIcon } from "@primer/octicons-react";
+import { SearchIcon } from "@primer/octicons-react";
 
 const RepoContentContainer = styled.div`
   margin-top: 24px;
@@ -19,32 +20,6 @@ const SubNavBox = styled.div`
     margin-bottom: 0;
   }
 `;
-const SelectNavItemChoose = styled.div`
-  background-color: #0969da;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  padding: 5px 16px;
-  border-bottom-left-radius: 6px;
-  border-top-left-radius: 6px;
-  color: #fff;
-`;
-const SelectNavItemNormal = styled.div`
-  height: 32px;
-  display: flex;
-  align-items: center;
-  padding: 5px 16px;
-  border: 1px solid #d8dee4;
-  border-bottom-right-radius: 6px;
-  border-top-right-radius: 6px;
-  color: #24292f;
-`;
-const SelectNavItemText = styled.div`
-  height: 23px;
-  line-height: 23px;
-  margin-left: 5px;
-`;
-
 const SearchAllLabelsMobile = styled.div`
   display: none;
   @media screen and (max-width: 768px) {
@@ -116,14 +91,7 @@ function LabelList({ list, callback }) {
     <>
       <RepoContentContainer>
         <SubNavBox>
-          <SelectNavItemChoose>
-            <TagIcon size={16} fill="#fff" />
-            <SelectNavItemText>Labels</SelectNavItemText>
-          </SelectNavItemChoose>
-          <SelectNavItemNormal>
-            <MilestoneIcon size={16} fill="#24292f" />
-            <SelectNavItemText>Milestones</SelectNavItemText>
-          </SelectNavItemNormal>
+          <LabelsMilestone />
 
           <SearchAllLabels />
           <NewLabelBtn onClick={toggleNewLabelBtn}>

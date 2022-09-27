@@ -36,7 +36,7 @@ function App() {
         <ResetStyle />
         <GlobalStyle />
         <Header />
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        {/* <h1 className="text-3xl font-bold underline">Hello world!</h1> */}
         <Routes>
           <Route
             path={`/${REPOSITORY}/github-ooath`}
@@ -44,12 +44,9 @@ function App() {
           ></Route>
           <Route path={`/${REPOSITORY}/ooath`} element={<Oauth />}></Route>
 
-          <Route path={`/${REPOSITORY}`} element={<Labels />}></Route>
+          <Route path={`/${REPOSITORY}/labels`} element={<Labels />}></Route>
 
-          <Route
-            path={`/${REPOSITORY}/issuelist`}
-            element={<IssueList />}
-          ></Route>
+          <Route path={`/${REPOSITORY}`} element={<IssueList />}></Route>
           <Route
             path={`/${REPOSITORY}/issuepage`}
             element={<IssuePage />}
