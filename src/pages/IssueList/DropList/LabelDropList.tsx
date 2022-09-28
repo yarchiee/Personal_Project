@@ -36,7 +36,7 @@ const labelslist = [
   },
 ];
 
-export default function FilterDropList() {
+export default function LabelDropList() {
   return (
     <div className="sm:relative">
       <div className="text-[14px] sm:text-[12px]">

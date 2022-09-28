@@ -1,4 +1,4 @@
-import { CheckIcon, IssueOpenedIcon } from "@primer/octicons-react";
+import { XIcon, CheckIcon, IssueOpenedIcon } from "@primer/octicons-react";
 import LabelMilestone from "./LabelMilestone";
 import styled from "styled-components";
 
@@ -38,6 +38,12 @@ function LabelHeader() {
       </SubNavBox>
       <div className="block my-[24px] md:hidden">
         <FilterInput />
+      </div>
+      <div className="text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px]">
+        <div className=" bg-[#57606a] w-[18px] h-[18px] rounded-[6px] mr-[8px]">
+          <XIcon size={18} fill="#ffffff" />
+        </div>
+        Clear current search query,filters,and sorts
       </div>
       <div className=" my-[18px] lg:hidden">
         <a href="#/">

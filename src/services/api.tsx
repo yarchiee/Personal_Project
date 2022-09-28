@@ -45,7 +45,6 @@ const api = {
       color: newCreateData.color,
     });
   },
-
   async signInWithGithub() {
     /* authenticate with GitHub */
     await supabase.auth.signIn({
@@ -64,12 +63,6 @@ const api = {
   async listLabelPerIssue(owner, issue_number) {
     const response = await fetch(
       `${this.hostname}/${owner}/personal-project/issues/${issue_number}/labels`
-    );
-    return await response.json();
-  },
-  async listLabelPerIssue2(owner, issue_number, sort) {
-    const response = await fetch(
-      `${this.hostname}/${owner}/personal-project/issues/${issue_number}/labels?sort=${sort}`
     );
     return await response.json();
   },
