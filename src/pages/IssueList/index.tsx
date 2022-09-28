@@ -3,14 +3,15 @@ import IssueList from "./IssueList";
 import api from "../../services/api";
 import { ListRepoDataArr } from "../../type";
 function IssueListMain() {
-  const [data, setData] = useState<ListRepoDataArr>();
+  const [issueData, setIssueData] = useState<ListRepoDataArr>();
   const fetchData = () => {
     api.listRepositoryIssue().then((res) => {
       console.log(res);
-      // setData(res);
+      // setIssueData(res);
     });
   };
-  useEffect(() => fetchData(), []);
+  useEffect(fetchData, []);
+
   return (
     <>
       <IssueList />

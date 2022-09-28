@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { MarkGithubIcon, ThreeBarsIcon } from "@primer/octicons-react";
-import api from "../../services/api";
+// import api from "../../services/api";
 import { useEffect, useState } from "react";
-import { supabase } from "../../Client";
+// import { supabase } from "../../Client";
 
-export async function signOut(setUser) {
-  /* sign the user out */
+// export async function signOut(setUser) {
+//   /* sign the user out */
 
-  await supabase.auth.signOut();
-  setUser(null);
-}
+//   await supabase.auth.signOut();
+//   setUser(null);
+// }
 const HeaderBar = styled.header`
   background-color: #24292f;
   height: 62px;
@@ -102,13 +102,13 @@ const SignOut = styled.div`
     display: none;
   }
 `;
-const Hello = styled(SignOut)``;
+// const Hello = styled(SignOut)``;
 const ProfileImg = styled.div`
   background-color: #fff;
   width: 20px;
   height: 20px;
   border-radius: 50px;
-  background-image: url("https://qvtvnktztxmigxjrdmig.supabase.co/auth/v1");
+  /* background-image: url("https://qvtvnktztxmigxjrdmig.supabase.co/auth/v1"); */
 `;
 
 const categories1 = [
@@ -171,13 +171,13 @@ function Header() {
   //   });
   // };
 
-  async function session() {
-    /* authenticate with GitHub */
-    // const session = supabase.auth.session();
-    // console.log("session");
-    // console.log(session.provider_token);
-    // return session.provider_token;
-  }
+  // async function session() {
+  /* authenticate with GitHub */
+  // const session = supabase.auth.session();
+  // console.log("session");
+  // console.log(session.provider_token);
+  // return session.provider_token;
+  // }
   // signOut(setUser);
   // if (user) {
   return (
@@ -204,7 +204,7 @@ function Header() {
         </HeaderItem>
         <HeaderToolArea>
           {/* <Hello>{user.email}</Hello> */}
-          <SignOut onClick={signOut}>Sign Out</SignOut>
+          {/* <SignOut onClick={signOut}>Sign Out</SignOut> */}
           <ProfileImg />
         </HeaderToolArea>
       </HeaderBar>

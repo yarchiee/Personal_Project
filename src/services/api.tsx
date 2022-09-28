@@ -3,6 +3,7 @@ import { Octokit } from "octokit";
 const octokit = new Octokit({
   auth: process.env.REACT_APP_PASSWORD,
 });
+const getOctokit = new Octokit({});
 const setting = {
   owner: "yarchiee",
   repo: "Personal_Project",
@@ -44,12 +45,6 @@ const api = {
       color: newCreateData.color,
     });
   },
-  async listRepositoryIssue() {
-    await octokit.request("GET /repos/{owner}/{repo}/issues", {
-      ...setting,
-    });
-  },
-
   async listLabelPerIssue(owner, issue_number) {
     const response = await fetch(
       `${this.hostname}/${owner}/personal-project/issues/${issue_number}/labels`
@@ -83,6 +78,13 @@ const api = {
   async session() {
     /* sign the user out */
     await supabase.auth.session();
+  },
+
+  ////////////////get data//////////////////////////////////////////
+  async listRepositoryIssue() {
+    await getOctokit.request("GET /repos/{owner}/{repo}/issues", {
+      ...setting,
+    });
   },
 };
 
