@@ -67,6 +67,12 @@ const api = {
     );
     return await response.json();
   },
+  async listLabelPerIssue2(owner, issue_number, sort) {
+    const response = await fetch(
+      `${this.hostname}/${owner}/personal-project/issues/${issue_number}/labels?sort=${sort}`
+    );
+    return await response.json();
+  },
   async listLabelAll() {
     const response = await fetch(
       `${this.hostname}/repos/yarchiee/Personal_Project/labels`,

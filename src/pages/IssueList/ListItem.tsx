@@ -54,7 +54,7 @@ const ListItem = () => {
         <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] ">
           <IssueOpenedIcon className="fill-primary" fill="#127f37" />
           <div className="px-2">
-            <span className="text-[16px] font-semibold leading-[21.6px] mr-[5px] ">
+            <span className="text-[14px] font-semibold leading-[21.6px] mr-[5px] ">
               Sometimes Axios removes the last part of the url and sends a get
               request istead of a post request.
             </span>
