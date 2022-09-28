@@ -1,4 +1,6 @@
-import FilterDropList from "./FilterDropList";
+import FilterDropList from "./LabelDropList";
+import AssigneeDropList from "./AssigneeDropList";
+
 import { CheckIcon, IssueOpenedIcon } from "@primer/octicons-react";
 
 const IssueBox = () => {
@@ -40,10 +42,13 @@ const IssueBox = () => {
               Milestones
               <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
             </div>
-            <div className="px-[16px]">
-              Assignee
-              <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
-            </div>
+            <details className="px-[16px]">
+              <summary className="flex items-center">
+                Assignee
+                <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
+              </summary>
+              <AssigneeDropList />
+            </details>
             <div className="px-[16px]">
               Sort
               <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
