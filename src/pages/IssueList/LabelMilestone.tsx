@@ -15,6 +15,9 @@ const SelectNavItemChoose = styled.div`
   border-right: none;
   font-weight: 600;
   margin-left: 16px;
+  @media screen and (max-width: 768px) {
+    margin-left: 0;
+  }
 `;
 const SelectNavItemNormal = styled.div`
   height: 32px;

@@ -2,7 +2,7 @@ import { SearchIcon } from "@primer/octicons-react";
 const FilterInput = () => {
   return (
     <>
-      <div className="flex w-full my-6 md:order-first md:w-auto md:mt-0 md:grow">
+      <div className="flex w-full  md:order-first md:w-auto md:mt-0 md:grow ">
         <button className="flex items-center  h-[32px] text-primary-text bg-primary-bg border border-solid border-secondary-border shadow-shadow py-5px px-16px  font-medium px-4 rounded-l-md hover:bg-[#f3f4f6] border-r-0">
           Filters
           <span className="inline-block w-0 h-0 ml-1 mt-1 border-transparent border-t-fg-muted border-solid border-4 border-b-0 content-str"></span>
@@ -16,7 +16,7 @@ const FilterInput = () => {
             type="text"
             placeholder="Search all issues"
             value="is:issue is:open"
-            className="bg-primary-bg h-[32px] py-5px pl-8 pr-3 border border-solid border-secondary-border rounded-r-md shadow-input-shadow w-full text-fg-muted"
+            className="bg-primary-bg h-[32px] py-[5px] pl-[32px] pr-3 border border-solid border-secondary-border rounded-r-md shadow-input-shadow w-full text-fg-muted focus:outline-none   "
           ></input>
         </div>
       </div>
