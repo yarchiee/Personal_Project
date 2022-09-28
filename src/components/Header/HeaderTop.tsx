@@ -149,27 +149,27 @@ const categories2 = [
 ];
 
 function Header() {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    /* when the app loads, check to see if the user is signed in */
-    checkUser();
-    /* check user on OAuth redirect */
-    window.addEventListener("hashchange", function () {
-      checkUser();
-    });
-  }, []);
-  async function checkUser() {
-    /* if a user is signed in, update local state */
-    const user = supabase.auth.user();
-    console.log(user);
-    setUser(user);
-  }
+  // const [user, setUser] = useState(null);
+  // useEffect(() => {
+  //   /* when the app loads, check to see if the user is signed in */
+  //   checkUser();
+  //   /* check user on OAuth redirect */
+  //   window.addEventListener("hashchange", function () {
+  //     checkUser();
+  //   });
+  // }, []);
+  // async function checkUser() {
+  //   /* if a user is signed in, update local state */
+  //   const user = supabase.auth.user();
+  //   console.log(user);
+  //   setUser(user);
+  // }
 
-  const signInWithGithub = () => {
-    api.signInWithGithub().then(() => {
-      console.log("123");
-    });
-  };
+  // const signInWithGithub = () => {
+  //   api.signInWithGithub().then(() => {
+  //     console.log("123");
+  //   });
+  // };
 
   async function session() {
     /* authenticate with GitHub */
@@ -178,39 +178,8 @@ function Header() {
     // console.log(session.provider_token);
     // return session.provider_token;
   }
-  signOut(setUser);
-  if (user) {
-    return (
-      <>
-        <HeaderBar>
-          <ThreeBarsIconControl>
-            <ThreeBarsIcon size={24} fill="#fff" />
-          </ThreeBarsIconControl>
-          <MarkGithubIconControl>
-            <MarkGithubIcon size={32} fill="#fff" />
-          </MarkGithubIconControl>
-          <HeaderItem>
-            <HeaderSearch>
-              <HeaderSearchInput placeholder="Search or jump to..."></HeaderSearchInput>
-            </HeaderSearch>
-            <CategoryLinks>
-              {categories1.map(({ displayText }) => (
-                <CategoryLink1>{displayText}</CategoryLink1>
-              ))}
-              {categories2.map(({ displayText }) => (
-                <CategoryLink2>{displayText}</CategoryLink2>
-              ))}
-            </CategoryLinks>
-          </HeaderItem>
-          <HeaderToolArea>
-            <Hello>{user.email}</Hello>
-            <SignOut onClick={signOut}>Sign Out</SignOut>
-            <ProfileImg />
-          </HeaderToolArea>
-        </HeaderBar>
-      </>
-    );
-  }
+  // signOut(setUser);
+  // if (user) {
   return (
     <>
       <HeaderBar>
@@ -234,12 +203,43 @@ function Header() {
           </CategoryLinks>
         </HeaderItem>
         <HeaderToolArea>
-          <SignOut onClick={signInWithGithub}>Sign out</SignOut>
+          {/* <Hello>{user.email}</Hello> */}
+          <SignOut onClick={signOut}>Sign Out</SignOut>
           <ProfileImg />
         </HeaderToolArea>
       </HeaderBar>
     </>
   );
 }
+// return (
+//   <>
+//     <HeaderBar>
+//       <ThreeBarsIconControl>
+//         <ThreeBarsIcon size={24} fill="#fff" />
+//       </ThreeBarsIconControl>
+//       <MarkGithubIconControl>
+//         <MarkGithubIcon size={32} fill="#fff" />
+//       </MarkGithubIconControl>
+//       <HeaderItem>
+//         <HeaderSearch>
+//           <HeaderSearchInput placeholder="Search or jump to..."></HeaderSearchInput>
+//         </HeaderSearch>
+//         <CategoryLinks>
+//           {categories1.map(({ displayText }) => (
+//             <CategoryLink1>{displayText}</CategoryLink1>
+//           ))}
+//           {categories2.map(({ displayText }) => (
+//             <CategoryLink2>{displayText}</CategoryLink2>
+//           ))}
+//         </CategoryLinks>
+//       </HeaderItem>
+//       <HeaderToolArea>
+//         {/* <SignOut onClick={signInWithGithub}>Sign out</SignOut> */}
+//         <ProfileImg />
+//       </HeaderToolArea>
+//     </HeaderBar>
+//   </>
+// );
+// }
 
 export default Header;

@@ -28,11 +28,11 @@ function Oauth() {
     setUser(user);
   }
 
-  const signInWithGithub = () => {
-    api.signInWithGithub().then(() => {
-      console.log("123");
-    });
-  };
+  // const signInWithGithub = () => {
+  //   api.signInWithGithub().then(() => {
+  //     console.log("123");
+  //   });
+  // };
 
   async function session() {
     /* authenticate with GitHub */
@@ -56,7 +56,7 @@ function Oauth() {
   return (
     <div>
       <h1>Hello, please sign in!</h1>
-      <button onClick={signInWithGithub}>Sign In</button>
+      {/* <button onClick={signInWithGithub}>Sign In</button> */}
       <button onClick={session}>session</button>
     </div>
   );

@@ -7,7 +7,6 @@ const setting = {
   owner: "yarchiee",
   repo: "Personal_Project",
 };
-
 const api = {
   hostname: " https://api.github.com",
   async updateALabel(sourceName, data) {
@@ -45,21 +44,12 @@ const api = {
       color: newCreateData.color,
     });
   },
-  async signInWithGithub() {
-    /* authenticate with GitHub */
-    await supabase.auth.signIn({
-      provider: "github",
+  async listRepositoryIssue() {
+    await octokit.request("GET /repos/{owner}/{repo}/issues", {
+      ...setting,
     });
-    console.log("sign in");
   },
-  async signOut() {
-    /* sign the user out */
-    await supabase.auth.signOut();
-  },
-  async session() {
-    /* sign the user out */
-    await supabase.auth.session();
-  },
+
   async listLabelPerIssue(owner, issue_number) {
     const response = await fetch(
       `${this.hostname}/${owner}/personal-project/issues/${issue_number}/labels`
@@ -78,6 +68,21 @@ const api = {
       }
     );
     return await response.json();
+  },
+  async signInWithGithub() {
+    /* authenticate with GitHub */
+    await supabase.auth.signIn({
+      provider: "github",
+    });
+    console.log("sign in");
+  },
+  async signOut() {
+    /* sign the user out */
+    await supabase.auth.signOut();
+  },
+  async session() {
+    /* sign the user out */
+    await supabase.auth.session();
   },
 };
 

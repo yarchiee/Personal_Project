@@ -10,19 +10,15 @@ import { ResetStyle, GlobalStyle } from "./components/globalStyle";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { SelectContext } from "./context/SelectContext";
 import { repoLabelArr } from "../src/type";
-
 import { useState, useEffect } from "react";
 const REPOSITORY = "github-project";
-
 function App() {
   const [repoLabelArr, setRepoLabelArr] = useState<repoLabelArr>(
     [] as unknown as repoLabelArr
   );
   const [selectedEdit, setSelectedEdit] = useState<number>();
-  console.log(repoLabelArr);
-
   const returnContext = () => {
-    console.log(selectedEdit);
+    // console.log(selectedEdit);
   };
   useEffect(returnContext, [selectedEdit]);
   return (
@@ -36,13 +32,13 @@ function App() {
         <ResetStyle />
         <GlobalStyle />
         <Header />
-        {/* <h1 className="text-3xl font-bold underline">Hello world!</h1> */}
+
         <Routes>
           <Route
             path={`/${REPOSITORY}/github-ooath`}
             element={<GithubOauth />}
           ></Route>
-          <Route path={`/${REPOSITORY}/ooath`} element={<Oauth />}></Route>
+          {/* <Route path={`/${REPOSITORY}/ooath`} element={<Oauth />}></Route> */}
 
           <Route path={`/${REPOSITORY}/labels`} element={<Labels />}></Route>
 
