@@ -22,11 +22,11 @@ function IssueList({ isOpenIssue, labelData }) {
       <LabelHeader isOpenIssue={isOpenIssue} labelData={labelData} />
       <IssueContainer>
         <IssueBox isOpenIssue={isOpenIssue} labelData={labelData} />
-        {isOpenIssue.items.map((data) => {
+        {/* {isOpenIssue.items.map((data) => {
           return (
             <ListItem key={data.id} data={data} isOpenIssue={isOpenIssue} />
           );
-        })}
+        })} */}
       </IssueContainer>
       <Pagination />
     </>

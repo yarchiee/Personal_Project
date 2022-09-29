@@ -3,38 +3,9 @@ import { useEffect, useState } from "react";
 import api from "../../../services/api";
 // import styled from "styled-components";
 
-const labelslist = [
+const assigneeList = [
   {
-    name: "123lll26",
-    des: "123",
-    color: "bg-[#acacac]",
-    usercustomname: "elaine",
-  },
-  {
-    name: "123456",
-    des: "123",
-    color: "bg-[#7F1D1D]",
-  },
-  {
-    name: "bug",
-    des: "fixed it",
-    color: "bg-[#f29513]",
-  },
-  {
-    name: "fight",
-    des: "",
-    color: "bg-[#7F1D1D]",
-    usercustomname: "elaine",
-  },
-  {
-    name: "new label1321",
-    des: "123",
-    color: "bg-[#7F1D1D]",
-  },
-  {
-    name: "new",
-    des: "new label",
-    color: "bg-[#7F1D1D]",
+    input: "assignee:yarchiee",
   },
 ];
 
@@ -80,7 +51,7 @@ export default function AssigneeDropList({ isOpenIssue }) {
                   <a
                     href="#/"
                     className={`flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b ${
-                      labelslist.length - 1 !== index
+                      assigneeList.length - 1 !== index
                         ? "border-solid"
                         : "border-none"
                     } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}

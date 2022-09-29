@@ -4,26 +4,32 @@ import api from "../../../services/api";
 const sortlist = [
   {
     state: "Newest",
+    input: "sort:created-desc",
     query: "created-desc",
   },
   {
     state: "Oldest",
-    query: "created",
+    input: "sort:created-asc",
+    query: "created-asc",
   },
   {
     state: "Most commented",
+    input: "sort:comments-desc",
     query: "comment-desc",
   },
   {
     state: "Least comment",
+    input: "sort:comments-asc",
     query: "comment-asc",
   },
   {
     state: "Recently updated",
+    input: "sort:updated-desc",
     query: "updated-desc",
   },
   {
     state: "Least recently updated",
+    input: "sort:updated-asc",
     query: "updated-asc",
   },
 ];
@@ -63,7 +69,6 @@ const SortDropList = () => {
                       } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
                       onClick={() => {
                         console.log(element);
-
                         setQuery(element.query);
                         fetchSortData();
                       }}

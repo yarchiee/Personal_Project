@@ -2,18 +2,23 @@ import { XIcon, CheckIcon } from "@primer/octicons-react";
 const labelslist = [
   {
     state: "Open issues and pull requests",
+    input: "is:open",
   },
   {
     state: "Your Issues",
+    input: "is:open is:issue author:@me",
   },
   {
     state: "Your pull requests",
+    input: "is:open is:pr author:@me ",
   },
   {
     state: "Everything assigned to you",
+    input: "is:open assignee:@me ",
   },
   {
     state: "Everything mentioned you",
+    input: "is:open mentions:@me",
   },
 ];
 const FilterDropList = () => {

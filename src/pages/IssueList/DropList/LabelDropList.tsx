@@ -1,30 +1,5 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
-// const labelslist = [
-//   {
-//     state: "Newest",
-//     query: "created-desc",
-//   },
-//   {
-//     state: "Oldest",
-//     query: "created",
-//   },
-//   {
-//     state: "Most commented",
-//     query: "comment-desc",
-//   },
-//   {
-//     state: "Least comment",
-//     query: "comment-asc",
-//   },
-//   {
-//     state: "Recently updated",
-//     query: "updated-desc",
-//   },
-//   {
-//     state: "Least recently updated",
-//     query: "updated-asc",
-//   },
-// ];
+
 export default function LabelDropList({ labelData }) {
   return (
     <div className="sm:relative">
