@@ -80,7 +80,7 @@ const api = {
     await supabase.auth.session();
   },
 
-  ////////////////get data//////////////////////////////////////////
+  ////////////////////////////get data//////////////////////////////////////////
   async listRepositoryIssue() {
     const res = await octokit.request("GET /repos/{owner}/{repo}/issues", {
       ...setting,
@@ -108,10 +108,25 @@ const api = {
     const result = res.data;
     return result;
   },
-  // async getAssigneeMenber() {
-  //   const res = await octokit.request("GET /repos/{owner}/{repo}/assignees", {
-  //     ...setting,
-  //   });
+  async getSortDirection(query) {
+    const res = await octokit.request(
+      "GET /repos/{owner}/{repo}/issues?sort={query}",
+      {
+        ...setting,
+        query: query,
+      }
+    );
+    const result = res.data;
+    return result;
+  },
+  // async(labelslist) {
+  //   const res = await octokit.request(
+  //     "GET /repos/{owner}/{repo}/issues?sort={query}",
+  //     {
+  //       ...setting,
+  //       query: labelslist.query,
+  //     }
+  //   );
   //   const result = res.data;
   //   return result;
   // },

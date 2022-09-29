@@ -3,6 +3,8 @@ import AssigneeDropList from "./DropList/AssigneeDropList";
 import SortDropList from "./DropList/SortDropList";
 
 import { CheckIcon, IssueOpenedIcon } from "@primer/octicons-react";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 const IssueBox = ({ isOpenIssue, labelData }) => {
   return (

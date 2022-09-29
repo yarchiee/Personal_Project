@@ -42,7 +42,6 @@ export default function AssigneeDropList({ isOpenIssue }) {
   const [isAssignee, setIsAssignee] = useState([]);
   const fetchIsOpenIssue = () => {
     api.getAssigneeMenber().then((res) => {
-      console.log(res);
       setIsAssignee(res);
     });
   };

@@ -13,7 +13,6 @@ function IssueListMain() {
   const [isOpenIssue, setIsOpenIssue] = useState([]);
   const fetchIsOpenIssue = () => {
     api.getOpenIssue().then((res) => {
-      console.log(res);
       setIsOpenIssue(res);
     });
   };
@@ -21,11 +20,11 @@ function IssueListMain() {
   const [labelData, setLabelData] = useState([]);
   const fetchGetLabelData = () => {
     api.listLabelAll().then((res) => {
-      console.log(res);
       setLabelData(res);
     });
   };
   useEffect(fetchGetLabelData, []);
+
   return (
     <>
       <IssueList isOpenIssue={isOpenIssue} labelData={labelData} />

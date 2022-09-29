@@ -1,25 +1,43 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
-const labelslist = [
+import { useEffect, useState } from "react";
+import api from "../../../services/api";
+const sortlist = [
   {
     state: "Newest",
+    query: "created-desc",
   },
   {
     state: "Oldest",
+    query: "created",
   },
   {
     state: "Most commented",
+    query: "comment-desc",
   },
   {
     state: "Least comment",
+    query: "comment-asc",
   },
   {
     state: "Recently updated",
+    query: "updated-desc",
   },
   {
     state: "Least recently updated",
+    query: "updated-asc",
   },
 ];
+
 const SortDropList = () => {
+  const [sortData, setSortData] = useState([]);
+  const [query, setQuery] = useState("");
+  const fetchSortData = () => {
+    api.getSortDirection(query).then((res) => {
+      console.log(res);
+      setSortData(res);
+      console.log(query);
+    });
+  };
   return (
     <>
       <div className="sm:relative">
@@ -34,15 +52,21 @@ const SortDropList = () => {
               </header>
 
               <div className="overflow-y-auto max-h-[calc(100%-126px)] sm:max-h-[calc(485px-82px)]">
-                {labelslist.map((element, index) => {
+                {sortlist.map((element, index) => {
                   return (
                     <a
                       href="#/"
                       className={`flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b ${
-                        labelslist.length - 1 !== index
+                        sortlist.length - 1 !== index
                           ? "border-solid"
                           : "border-none"
                       } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
+                      onClick={() => {
+                        console.log(element);
+
+                        setQuery(element.query);
+                        fetchSortData();
+                      }}
                     >
                       <div className="flex items-start mr-2">
                         <CheckIcon fill={"#000000"} />
