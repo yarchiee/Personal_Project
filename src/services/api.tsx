@@ -3,7 +3,7 @@ import { Octokit } from "octokit";
 const octokit = new Octokit({
   auth: process.env.REACT_APP_PASSWORD,
 });
-const getOctokit = new Octokit({});
+// const getOctokit = new Octokit({});
 const setting = {
   owner: "yarchiee",
   repo: "Personal_Project",
@@ -57,7 +57,7 @@ const api = {
       {
         headers: {
           Accept: "application/vnd.github+json",
-          Authorization: `Bearer ${process.env.REACT_APP_OOATH}`,
+          // Authorization: `Bearer ${process.env.REACT_APP_OOATH}`,
         },
         method: "GET",
       }
@@ -82,10 +82,39 @@ const api = {
 
   ////////////////get data//////////////////////////////////////////
   async listRepositoryIssue() {
-    await getOctokit.request("GET /repos/{owner}/{repo}/issues", {
+    const res = await octokit.request("GET /repos/{owner}/{repo}/issues", {
       ...setting,
     });
+    const result = res.data;
+    return result;
   },
+  async getOpenIssue() {
+    const response = await fetch(
+      `${this.hostname}/search/issues?q=repo:yarchiee/Personal_Project is:issue is:open`,
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+          //  Authorization: `Bearer ${process.env.REACT_APP_OOATH}`,
+        },
+        method: "GET",
+      }
+    );
+    return await response.json();
+  },
+  async getAssigneeMenber() {
+    const res = await octokit.request("GET /repos/{owner}/{repo}/assignees", {
+      ...setting,
+    });
+    const result = res.data;
+    return result;
+  },
+  // async getAssigneeMenber() {
+  //   const res = await octokit.request("GET /repos/{owner}/{repo}/assignees", {
+  //     ...setting,
+  //   });
+  //   const result = res.data;
+  //   return result;
+  // },
 };
 
 export default api;

@@ -16,15 +16,17 @@ const IssueContainer = styled.div`
   }
 `;
 
-function IssueList() {
+function IssueList({ isOpenIssue, labelData }) {
   return (
     <>
-      <LabelHeader />
+      <LabelHeader isOpenIssue={isOpenIssue} labelData={labelData} />
       <IssueContainer>
-        <IssueBox />
-        <ListItem />
-        <ListItem />
-        <ListItem />
+        <IssueBox isOpenIssue={isOpenIssue} labelData={labelData} />
+        {isOpenIssue.items.map((data) => {
+          return (
+            <ListItem key={data.id} data={data} isOpenIssue={isOpenIssue} />
+          );
+        })}
       </IssueContainer>
       <Pagination />
     </>

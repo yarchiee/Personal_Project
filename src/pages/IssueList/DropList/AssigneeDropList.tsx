@@ -1,4 +1,6 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
+import { useEffect, useState } from "react";
+import api from "../../../services/api";
 // import styled from "styled-components";
 
 const labelslist = [
@@ -36,7 +38,15 @@ const labelslist = [
   },
 ];
 
-export default function AssigneeDropList() {
+export default function AssigneeDropList({ isOpenIssue }) {
+  const [isAssignee, setIsAssignee] = useState([]);
+  const fetchIsOpenIssue = () => {
+    api.getAssigneeMenber().then((res) => {
+      console.log(res);
+      setIsAssignee(res);
+    });
+  };
+  useEffect(fetchIsOpenIssue, []);
   return (
     <div className="sm:relative">
       <div className="text-[14px] sm:text-[12px]">
@@ -66,7 +76,7 @@ export default function AssigneeDropList() {
                 </div>
                 <span className="font-semibold">Assigned to nobody</span>
               </a>
-              {labelslist.map((element, index) => {
+              {isAssignee.map((element, index) => {
                 return (
                   <a
                     href="#/"
@@ -79,29 +89,21 @@ export default function AssigneeDropList() {
                     <div className="flex items-start mr-2">
                       <CheckIcon fill={"#000000"} />
                     </div>
-                    <span
-                      className={`${element.color} mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
-                    />
+                    <div>
+                      <span>
+                        <img
+                          alt=""
+                          src={element.avatar_url}
+                          className=" mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]"
+                        />
+                      </span>
+                    </div>
                     <div className="leading-tight min-w-0">
                       <div className="flex items-center">
                         <div className="font-semibold text-[#24292f] truncate sm:pt-[2px]">
-                          {element.name}
+                          {element.login}
                         </div>
-                        {element?.usercustomname !== "" ? (
-                          <div className="font-normal text-[#57606a] ml-2 truncate sm:pt-[2px]">
-                            {element.des}
-                          </div>
-                        ) : (
-                          <></>
-                        )}
                       </div>
-                      {element.des !== "" ? (
-                        <div className="font-medium text-[#57606a] mt-1 truncate">
-                          {element.des}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
                     </div>
                   </a>
                 );

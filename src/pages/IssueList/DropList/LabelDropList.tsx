@@ -1,42 +1,5 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
-// import styled from "styled-components";
-
-const labelslist = [
-  {
-    name: "123lll26",
-    des: "123",
-    color: "bg-[#acacac]",
-    usercustomname: "elaine",
-  },
-  {
-    name: "123456",
-    des: "123",
-    color: "bg-[#7F1D1D]",
-  },
-  {
-    name: "bug",
-    des: "fixed it",
-    color: "bg-[#f29513]",
-  },
-  {
-    name: "fight",
-    des: "",
-    color: "bg-[#7F1D1D]",
-    usercustomname: "elaine",
-  },
-  {
-    name: "new label1321",
-    des: "123",
-    color: "bg-[#7F1D1D]",
-  },
-  {
-    name: "new",
-    des: "new label",
-    color: "bg-[#7F1D1D]",
-  },
-];
-
-export default function LabelDropList() {
+export default function LabelDropList({ labelData }) {
   return (
     <div className="sm:relative">
       <div className="text-[14px] sm:text-[12px]">
@@ -64,12 +27,12 @@ export default function LabelDropList() {
                 </div>
                 <span className="font-semibold">Unlabeled</span>
               </a>
-              {labelslist.map((element, index) => {
+              {labelData.map((element, index) => {
                 return (
                   <a
                     href="#/"
                     className={`flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b ${
-                      labelslist.length - 1 !== index
+                      labelData.length - 1 !== index
                         ? "border-solid"
                         : "border-none"
                     } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
@@ -78,7 +41,8 @@ export default function LabelDropList() {
                       <CheckIcon fill={"#000000"} />
                     </div>
                     <span
-                      className={`${element.color} mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
+                      style={{ background: `#${element.color}` }}
+                      className=" mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]"
                     />
                     <div className="leading-tight min-w-0">
                       <div className="flex items-center">

@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Labels from "./pages/Labels";
-import IssueList from "./pages/IssueList/IssueList";
+import IssueList from "./pages/IssueList";
 import IssuePage from "./pages/IssuePage/IssuePage";
 import NewIssuePage from "./pages/NewIssuePage/NewIssuePage";
 // import Oauth from "./pages/Oauth/Oauth";

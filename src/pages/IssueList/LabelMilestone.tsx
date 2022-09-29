@@ -38,7 +38,7 @@ const SelectNavItemText = styled.div`
 const FlexBox = styled.div`
   display: flex;
 `;
-const LabelsMilestone = () => {
+const LabelsMilestone = ({ labelData }) => {
   return (
     <>
       <FlexBox>
@@ -46,7 +46,7 @@ const LabelsMilestone = () => {
           <TagIcon size={16} fill="#24292f" />
           <SelectNavItemText>Labels</SelectNavItemText>
           <span className="px-1.5 bg-neutral-muted border border-solid border-counter-border rounded-[2em] text-xs font-medium ml-[5px]	leading-18px text-primary-text text-center hidden md:block">
-            7
+            {labelData.length}
           </span>
         </SelectNavItemChoose>
         <SelectNavItemNormal>

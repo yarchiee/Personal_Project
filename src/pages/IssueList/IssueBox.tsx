@@ -4,7 +4,7 @@ import SortDropList from "./DropList/SortDropList";
 
 import { CheckIcon, IssueOpenedIcon } from "@primer/octicons-react";
 
-const IssueBox = () => {
+const IssueBox = ({ isOpenIssue, labelData }) => {
   return (
     <>
       <div className=" rounded-none sm:rounded-md border border-solid border-[#d0d7de] ">
@@ -32,7 +32,7 @@ const IssueBox = () => {
                 Label
                 <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
               </summary>
-              <LabelDropList />
+              <LabelDropList labelData={labelData} />
             </details>
 
             <div className="px-[16px] hidden md:block">
@@ -48,7 +48,7 @@ const IssueBox = () => {
                 Assignee
                 <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
               </summary>
-              <AssigneeDropList />
+              <AssigneeDropList isOpenIssue={isOpenIssue} />
             </details>
             <details className="px-[16px]">
               <summary className="flex items-center">

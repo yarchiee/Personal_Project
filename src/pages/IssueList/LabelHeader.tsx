@@ -24,7 +24,7 @@ const SubNavBox = styled.div`
   }
 `;
 
-function LabelHeader() {
+function LabelHeader({ isOpenIssue, labelData }) {
   return (
     <RepoContentContainer>
       <SubNavBox>
@@ -32,7 +32,7 @@ function LabelHeader() {
           <FilterInput />
         </div>
         <div className="justify-between flex md:ml-auto w-full md:w-auto">
-          <LabelMilestone />
+          <LabelMilestone labelData={labelData} />
           <NewIssueBtn />
         </div>
       </SubNavBox>
@@ -48,7 +48,7 @@ function LabelHeader() {
       <div className=" my-[18px] lg:hidden">
         <a href="#/">
           <IssueOpenedIcon size={16} className="mr-1" />
-          <span className="font-semibold">5 Open</span>
+          <span className="font-semibold">{isOpenIssue.total_count} Open</span>
         </a>
         <a href="#/" className="ml-2.5">
           <CheckIcon size={16} className="fill-fg-muted mr-1" />
