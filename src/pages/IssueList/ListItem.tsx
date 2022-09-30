@@ -36,7 +36,7 @@ const ListItem = ({ data, isOpenIssue }) => {
             </span>
           );
         })}
-        <div className="text-text text-sm mt-2">
+        <div className="text-[10px] text-sm mt-2">
           # {data.number} opened 22 hours ago by {data.user.login}
         </div>
       </div>

@@ -10,6 +10,7 @@ const assigneeList = [
 ];
 
 export default function AssigneeDropList({ isOpenIssue, setQuery, query }) {
+  const [searchLabelInputText, setSearchLabelInputText] = useState("");
   const [isAssignee, setIsAssignee] = useState([]);
   const fetchIsOpenIssue = () => {
     api.getAssigneeMenber().then((res) => {
@@ -32,8 +33,12 @@ export default function AssigneeDropList({ isOpenIssue, setQuery, query }) {
             </header>
             <div className="p-4 m-0 border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:p-2">
               <input
+                onChange={(e) => {
+                  setSearchLabelInputText(e.target.value);
+                }}
                 placeholder="Filter users"
-                className="block w-full py-[5px] px-[12px] text-sm leading-5 rounded-md border border-solid border-[#d0d7de] focus:border focus:border-solid focus:border-[#0969da] focus:outline-none focus:shadow-innerblue"
+                className="block w-full py-[5px] px-[12px] text-sm leading-5 rounded-md border border-solid border-[#d0d7de] focus:border focus:border-solid focus:border-[#0969da] focus:outline-none 
+                focus:shadow-innerblue"
               />
             </div>
             <div className="overflow-y-auto max-h-[calc(100%-126px)] sm:max-h-[calc(485px-82px)]">
@@ -47,6 +52,12 @@ export default function AssigneeDropList({ isOpenIssue, setQuery, query }) {
                 <span className="font-semibold">Assigned to nobody</span>
               </a>
               {isAssignee.map((element, index) => {
+                // if (
+                //   searchLabelInputText &&
+                //   !element.name.includes(searchLabelInputText)
+                // )
+                //   return <></>;
+
                 return (
                   <a
                     href="#/"

@@ -1,11 +1,11 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@primer/octicons-react";
 
 export default function Pagination() {
-  const pagination = {
-    prePages: [1, 2],
-    middle: [3, 4, 5, 6, 7],
-    nextPages: [8, 9],
-  };
+  // const pagination = {
+  //   prePages: [1, 2],
+  //   middle: [3, 4, 5, 6, 7],
+  //   nextPages: [8, 9],
+  // };
   return (
     <div className="flex justify-center items-center text-sm my-4 px-1">
       <a
@@ -15,7 +15,7 @@ export default function Pagination() {
         <ChevronLeftIcon size={16} className="mr-1" />
         <span>Previous</span>
       </a>
-      {pagination.prePages.map((page) => {
+      {/* {pagination.prePages.map((page) => {
         return (
           <a
             href="#/"
@@ -46,7 +46,7 @@ export default function Pagination() {
             {page}
           </a>
         );
-      })}
+      })} */}
       <a
         href="#/"
         className=" place-items-center grid-flow-col text-[#0969da] flex items-center py-5px px-2.5 border border-solid border-transparent hover:border-primary-border hover:rounded-md"

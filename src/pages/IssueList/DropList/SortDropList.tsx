@@ -68,18 +68,17 @@ const SortDropList = ({ setIsOpenIssue, setQuery, query }) => {
                           : "border-none"
                       } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
                       onClick={() => {
-                        console.log(element);
-                        // setQuery(element.query);
-                        // fetchSortData(element.input);
-                        const tmp = [...query];
-                        console.log(tmp);
-
-                        if (query.includes("sort:")) {
-                          console.log("sort");
-
-                          // query.remove
-                        }
+                        let tmp = [...query];
+                        tmp.forEach((element) => {
+                          console.log(element);
+                          if (element.includes("sort")) {
+                            console.log("有sort", element);
+                            tmp = tmp.filter((item) => item !== element);
+                          }
+                        });
+                        console.log("修改過", tmp);
                         setQuery([...tmp, element.input]);
+                        console.log("全部", query);
                       }}
                     >
                       <div className="flex items-start mr-2">
