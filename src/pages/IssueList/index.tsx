@@ -10,13 +10,14 @@ function IssueListMain() {
   //   });
   // };
   // useEffect(fetchData, []);
+  const [query, setQuery] = useState(["is:open", "is:issue"]);
   const [isOpenIssue, setIsOpenIssue] = useState([]);
   const fetchIsOpenIssue = () => {
-    api.getOpenIssue().then((res) => {
-      setIsOpenIssue(res);
+    api.githubSeach(query.join("+")).then((res) => {
+      setIsOpenIssue(res.items);
     });
   };
-  useEffect(fetchIsOpenIssue, []);
+  useEffect(fetchIsOpenIssue, [query]);
   const [labelData, setLabelData] = useState([]);
   const fetchGetLabelData = () => {
     api.listLabelAll().then((res) => {
@@ -27,7 +28,13 @@ function IssueListMain() {
 
   return (
     <>
-      <IssueList isOpenIssue={isOpenIssue} labelData={labelData} />
+      <IssueList
+        isOpenIssue={isOpenIssue}
+        labelData={labelData}
+        setIsOpenIssue={setIsOpenIssue}
+        setQuery={setQuery}
+        query={query}
+      />
     </>
   );
 }

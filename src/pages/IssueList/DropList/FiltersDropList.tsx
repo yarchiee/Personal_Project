@@ -21,7 +21,7 @@ const labelslist = [
     input: "is:open mentions:@me",
   },
 ];
-const FilterDropList = () => {
+const FilterDropList = ({ setQuery, query }) => {
   return (
     <>
       <div className="sm:relative">
@@ -45,6 +45,10 @@ const FilterDropList = () => {
                           ? "border-solid"
                           : "border-none"
                       } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
+                      onClick={() => {
+                        console.log(element);
+                        setQuery([element.input]);
+                      }}
                     >
                       <div className="flex items-start mr-2">
                         <CheckIcon fill={"#000000"} />

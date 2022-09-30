@@ -16,17 +16,34 @@ const IssueContainer = styled.div`
   }
 `;
 
-function IssueList({ isOpenIssue, labelData }) {
+function IssueList({
+  isOpenIssue,
+  labelData,
+  setIsOpenIssue,
+  setQuery,
+  query,
+}) {
   return (
     <>
-      <LabelHeader isOpenIssue={isOpenIssue} labelData={labelData} />
+      <LabelHeader
+        isOpenIssue={isOpenIssue}
+        labelData={labelData}
+        query={query}
+        setQuery={setQuery}
+      />
       <IssueContainer>
-        <IssueBox isOpenIssue={isOpenIssue} labelData={labelData} />
-        {/* {isOpenIssue.items.map((data) => {
+        <IssueBox
+          isOpenIssue={isOpenIssue}
+          labelData={labelData}
+          setIsOpenIssue={setIsOpenIssue}
+          setQuery={setQuery}
+          query={query}
+        />
+        {isOpenIssue.map((data) => {
           return (
             <ListItem key={data.id} data={data} isOpenIssue={isOpenIssue} />
           );
-        })} */}
+        })}
       </IssueContainer>
       <Pagination />
     </>

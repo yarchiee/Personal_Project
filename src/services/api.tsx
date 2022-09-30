@@ -88,9 +88,16 @@ const api = {
     const result = res.data;
     return result;
   },
-  async getOpenIssue() {
+  async githubSeach(query) {
+    const res = await octokit.request("GET /search/issues", {
+      q: `repo:${setting.owner}/${setting.repo} ${query}`,
+    });
+    const result = res.data;
+    return result;
+  },
+  async githubSeachbak(query) {
     const response = await fetch(
-      `${this.hostname}/search/issues?q=repo:yarchiee/Personal_Project is:issue is:open`,
+      `${this.hostname}/search/issues?q=repo:${setting.owner}/${setting.repo} ${query}`,
       {
         headers: {
           Accept: "application/vnd.github+json",

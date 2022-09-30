@@ -6,7 +6,13 @@ import { CheckIcon, IssueOpenedIcon } from "@primer/octicons-react";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
-const IssueBox = ({ isOpenIssue, labelData }) => {
+const IssueBox = ({
+  isOpenIssue,
+  labelData,
+  setIsOpenIssue,
+  setQuery,
+  query,
+}) => {
   return (
     <>
       <div className=" rounded-none sm:rounded-md border border-solid border-[#d0d7de] ">
@@ -34,7 +40,11 @@ const IssueBox = ({ isOpenIssue, labelData }) => {
                 Label
                 <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
               </summary>
-              <LabelDropList labelData={labelData} />
+              <LabelDropList
+                labelData={labelData}
+                setQuery={setQuery}
+                query={query}
+              />
             </details>
 
             <div className="px-[16px] hidden md:block">
@@ -50,14 +60,22 @@ const IssueBox = ({ isOpenIssue, labelData }) => {
                 Assignee
                 <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
               </summary>
-              <AssigneeDropList isOpenIssue={isOpenIssue} />
+              <AssigneeDropList
+                isOpenIssue={isOpenIssue}
+                setQuery={setQuery}
+                query={query}
+              />
             </details>
             <details className="px-[16px]">
               <summary className="flex items-center">
                 Sort
                 <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
               </summary>
-              <SortDropList />
+              <SortDropList
+                setIsOpenIssue={setIsOpenIssue}
+                setQuery={setQuery}
+                query={query}
+              />
             </details>
           </div>
         </div>

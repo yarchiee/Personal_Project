@@ -34,16 +34,16 @@ const sortlist = [
   },
 ];
 
-const SortDropList = () => {
-  const [sortData, setSortData] = useState([]);
-  const [query, setQuery] = useState("");
-  const fetchSortData = () => {
-    api.getSortDirection(query).then((res) => {
-      console.log(res);
-      setSortData(res);
-      console.log(query);
-    });
-  };
+const SortDropList = ({ setIsOpenIssue, setQuery, query }) => {
+  // const [sortData, setSortData] = useState([]);
+  // const [query, setQuery] = useState("");
+  // const fetchSortData = (query) => {
+  //   api.githubSeach(query).then((res) => {
+  //     console.log(res);
+  //     setIsOpenIssue(res.items);
+  //     console.log(query);
+  //   });
+  // };
   return (
     <>
       <div className="sm:relative">
@@ -69,8 +69,17 @@ const SortDropList = () => {
                       } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
                       onClick={() => {
                         console.log(element);
-                        setQuery(element.query);
-                        fetchSortData();
+                        // setQuery(element.query);
+                        // fetchSortData(element.input);
+                        const tmp = [...query];
+                        console.log(tmp);
+
+                        if (query.includes("sort:")) {
+                          console.log("sort");
+
+                          // query.remove
+                        }
+                        setQuery([...tmp, element.input]);
                       }}
                     >
                       <div className="flex items-start mr-2">

@@ -1,6 +1,6 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
 
-export default function LabelDropList({ labelData }) {
+export default function LabelDropList({ labelData, setQuery, query }) {
   return (
     <div className="sm:relative">
       <div className="text-[14px] sm:text-[12px]">
@@ -37,6 +37,20 @@ export default function LabelDropList({ labelData }) {
                         ? "border-solid"
                         : "border-none"
                     } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
+                    onClick={() => {
+                      console.log(element);
+                      // setQuery(element.query);
+                      // fetchSortData(element.input);
+                      const tmp = [...query];
+                      console.log(tmp);
+
+                      if (query.includes("sort:")) {
+                        console.log("sort");
+
+                        // query.remove
+                      }
+                      setQuery([...tmp, `label:${element.name}`]);
+                    }}
                   >
                     <div className="flex items-start mr-2">
                       <CheckIcon fill={"#000000"} />

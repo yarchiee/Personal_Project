@@ -9,7 +9,7 @@ const assigneeList = [
   },
 ];
 
-export default function AssigneeDropList({ isOpenIssue }) {
+export default function AssigneeDropList({ isOpenIssue, setQuery, query }) {
   const [isAssignee, setIsAssignee] = useState([]);
   const fetchIsOpenIssue = () => {
     api.getAssigneeMenber().then((res) => {
@@ -55,6 +55,16 @@ export default function AssigneeDropList({ isOpenIssue }) {
                         ? "border-solid"
                         : "border-none"
                     } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
+                    onClick={() => {
+                      console.log(element);
+                      // setQuery(element.query);
+                      // fetchSortData(element.input);
+                      const tmp = [...query];
+                      // if (query.includes("sort:")) {
+                      // query.remove
+                      // }
+                      setQuery([...tmp, `assignee:${element.login}`]);
+                    }}
                   >
                     <div className="flex items-start mr-2">
                       <CheckIcon fill={"#000000"} />

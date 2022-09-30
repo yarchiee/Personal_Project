@@ -1,7 +1,15 @@
 import { SearchIcon } from "@primer/octicons-react";
+import { useEffect, useState } from "react";
 import FilterDropList from "./DropList/FiltersDropList";
 
-const FilterInput = () => {
+const FilterInput = ({ query, setQuery }) => {
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue(query.join(" "));
+  }, [query]);
+  // console.log(value, query);
+
   return (
     <>
       <div className="flex w-full  md:order-first md:w-auto md:mt-0 md:grow ">
@@ -10,7 +18,7 @@ const FilterInput = () => {
             Filters
             <span className="inline-block w-0 h-0 ml-1 mt-1 border-transparent border-t-fg-muted border-solid border-4 border-b-0 content-str"></span>
           </summary>
-          <FilterDropList />
+          <FilterDropList setQuery={setQuery} query={query} />
         </details>
         <div className="relative w-full">
           <SearchIcon
@@ -20,7 +28,16 @@ const FilterInput = () => {
           <input
             type="text"
             placeholder="Search all issues"
-            value="is:issue is:open"
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setQuery(value.split(" "));
+              }
+              console.log(e.key);
+            }}
             className="bg-primary-bg h-[32px] py-[5px] pl-[32px] pr-3 border border-solid border-secondary-border rounded-r-md shadow-input-shadow w-full text-fg-muted focus:outline-none   "
           ></input>
         </div>

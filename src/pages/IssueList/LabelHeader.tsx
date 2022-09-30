@@ -24,12 +24,12 @@ const SubNavBox = styled.div`
   }
 `;
 
-function LabelHeader({ isOpenIssue, labelData }) {
+function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
   return (
     <RepoContentContainer>
       <SubNavBox>
         <div className="hidden md:block flex-grow">
-          <FilterInput />
+          <FilterInput query={query} setQuery={setQuery} />
         </div>
         <div className="justify-between flex md:ml-auto w-full md:w-auto">
           <LabelMilestone labelData={labelData} />
@@ -37,7 +37,7 @@ function LabelHeader({ isOpenIssue, labelData }) {
         </div>
       </SubNavBox>
       <div className="block my-[24px] md:hidden">
-        <FilterInput />
+        <FilterInput query={query} setQuery={setQuery} />
       </div>
       <div className="text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px]">
         <div className=" bg-[#57606a] w-[18px] h-[18px] rounded-[6px] mr-[8px]">
