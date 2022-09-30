@@ -18,7 +18,7 @@ const ListItem = ({ data, isOpenIssue }) => {
   // }
   // useEffect(lightOrDark, []);
   return (
-    <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] ">
+    <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] hover:bg-[rgba(234,238,242,0.5)] ">
       <IssueOpenedIcon className="fill-primary" fill="#127f37" />
       <div className="px-2">
         <span className="text-[14px] font-semibold leading-[21.6px] mr-[5px] ">

@@ -5,26 +5,35 @@ import api from "../../services/api";
 function IssueListMain() {
   const [query, setQuery] = useState(["is:open", "is:issue"]);
   const [isOpenIssue, setIsOpenIssue] = useState([]);
+  // const [page, setPage] = useState();
   const fetchIsOpenIssue = () => {
     api.githubSeach(query.join("+")).then((res) => {
+      console.log(res.items);
       setIsOpenIssue(res.items);
     });
   };
+
   useEffect(fetchIsOpenIssue, [query]);
   const [labelData, setLabelData] = useState([]);
   const fetchGetLabelData = () => {
     api.listLabelAll().then((res) => {
-      // console.log(res);
-
       setLabelData(res);
     });
   };
   useEffect(fetchGetLabelData, []);
   const calaculateTime = () => {
-    var date1 = new Date(); //開始時間
+    let date1 = new Date(); //開始時間
     // console.log(date1);
   };
   calaculateTime();
+  // const fetchPageData = () => {
+  //   api.pagination().then((res) => {
+  //     // console.log(res);
+  //     // setPage(res);
+  //   });
+  // };
+  // useEffect(fetchPageData, []);
+
   return (
     <>
       <IssueList

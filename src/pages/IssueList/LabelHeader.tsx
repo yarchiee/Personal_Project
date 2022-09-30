@@ -39,10 +39,10 @@ function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
       <div className="block my-[24px] md:hidden">
         <FilterInput query={query} setQuery={setQuery} />
       </div>
+
       <div
         className="text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px]"
         onClick={() => {
-          console.log("123");
           setQuery(["is:open", "is:issue"]);
         }}
       >
@@ -51,10 +51,11 @@ function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
         </div>
         Clear current search query,filters,and sorts
       </div>
+
       <div className=" my-[18px] lg:hidden">
         <a href="#/">
           <IssueOpenedIcon size={16} className="mr-1" />
-          <span className="font-semibold">{isOpenIssue.total_count} Open</span>
+          <span className="font-semibold">{isOpenIssue.length} Open</span>
         </a>
         <a href="#/" className="ml-2.5">
           <CheckIcon size={16} className="fill-fg-muted mr-1" />

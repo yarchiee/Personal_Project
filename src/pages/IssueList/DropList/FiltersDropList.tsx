@@ -46,7 +46,6 @@ const FilterDropList = ({ setQuery, query }) => {
                           : "border-none"
                       } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
                       onClick={() => {
-                        console.log(element);
                         setQuery([element.input]);
                       }}
                     >

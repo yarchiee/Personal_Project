@@ -33,6 +33,14 @@ export default function LabelDropList({ labelData, setQuery, query }) {
                 </div>
                 <span className="font-semibold">Unlabeled</span>
               </a>
+              {/* <button type="button" className="bg-indigo-500 ..." disabled>
+                <svg
+                  className="animate-spin h-5 w-5 mr-3 ..."
+                  viewBox="0 0 24 24"
+                ></svg>
+                Processing...
+              </button> */}
+
               {labelData.map((element, index) => {
                 if (
                   searchLabelInputText &&
@@ -52,11 +60,7 @@ export default function LabelDropList({ labelData, setQuery, query }) {
                       // setQuery(element.query);
                       // fetchSortData(element.input);
                       const tmp = [...query];
-                      console.log(tmp);
-                      if (query.includes("sort:")) {
-                        console.log("sort");
-                        // query.remove
-                      }
+
                       setQuery([...tmp, `label:${element.name}`]);
                     }}
                   >

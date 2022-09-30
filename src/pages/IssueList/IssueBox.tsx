@@ -21,7 +21,7 @@ const IssueBox = ({
             <div className=" text-[14px] text-center lg:block">
               <a href="#/">
                 <IssueOpenedIcon size={16} className="mr-1" />
-                <span className="font-semibold">5 Open</span>
+                <span className="font-semibold">{isOpenIssue.length}Open</span>
               </a>
               <a href="#/" className="ml-2.5">
                 <CheckIcon size={16} className="fill-fg-muted mr-1" />
