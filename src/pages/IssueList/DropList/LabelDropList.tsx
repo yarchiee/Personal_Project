@@ -1,6 +1,8 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
+import { useState } from "react";
 
 export default function LabelDropList({ labelData, setQuery, query }) {
+  const [searchLabelInputText, setSearchLabelInputText] = useState("");
   return (
     <div className="sm:relative">
       <div className="text-[14px] sm:text-[12px]">
@@ -16,6 +18,9 @@ export default function LabelDropList({ labelData, setQuery, query }) {
               <input
                 placeholder="Filter labels"
                 className="block w-full py-[5px] px-[12px] text-sm leading-5 rounded-md border border-solid border-[#d0d7de] focus:border focus:border-solid focus:border-[#0969da] focus:outline-none focus:shadow-innerblue"
+                onChange={(e) => {
+                  setSearchLabelInputText(e.target.value);
+                }}
               />
             </div>
             <div className="overflow-y-auto max-h-[calc(100%-126px)] sm:max-h-[calc(485px-82px)]">
@@ -29,6 +34,11 @@ export default function LabelDropList({ labelData, setQuery, query }) {
                 <span className="font-semibold">Unlabeled</span>
               </a>
               {labelData.map((element, index) => {
+                if (
+                  searchLabelInputText &&
+                  !element.name.includes(searchLabelInputText)
+                )
+                  return <></>;
                 return (
                   <a
                     href="#/"
@@ -43,10 +53,8 @@ export default function LabelDropList({ labelData, setQuery, query }) {
                       // fetchSortData(element.input);
                       const tmp = [...query];
                       console.log(tmp);
-
                       if (query.includes("sort:")) {
                         console.log("sort");
-
                         // query.remove
                       }
                       setQuery([...tmp, `label:${element.name}`]);

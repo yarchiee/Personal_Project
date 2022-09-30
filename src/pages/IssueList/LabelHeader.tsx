@@ -39,7 +39,13 @@ function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
       <div className="block my-[24px] md:hidden">
         <FilterInput query={query} setQuery={setQuery} />
       </div>
-      <div className="text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px]">
+      <div
+        className="text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px]"
+        onClick={() => {
+          console.log("123");
+          setQuery(["is:open", "is:issue"]);
+        }}
+      >
         <div className=" bg-[#57606a] w-[18px] h-[18px] rounded-[6px] mr-[8px]">
           <XIcon size={18} fill="#ffffff" />
         </div>

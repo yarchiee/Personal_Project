@@ -26,7 +26,7 @@ const ListItem = ({ data, isOpenIssue }) => {
         </span>
         {data.labels.map((item) => {
           return (
-            <span className="block lg:inline">
+            <span className="lg:inline">
               <div
                 style={{ backgroundColor: `#${item.color}` }}
                 className="font-semibold inline-block h-[20px]  leading-[20px] px-[7px] rounded-[10px] mr-[5px]  "
