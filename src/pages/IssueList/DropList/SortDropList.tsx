@@ -70,15 +70,15 @@ const SortDropList = ({ setIsOpenIssue, setQuery, query }) => {
                       onClick={() => {
                         let tmp = [...query];
                         tmp.forEach((element) => {
-                          console.log(element);
+                          // console.log(element);
                           if (element.includes("sort")) {
-                            console.log("有sort", element);
+                            // console.log("有sort", element);
                             tmp = tmp.filter((item) => item !== element);
                           }
                         });
-                        console.log("修改過", tmp);
+                        // console.log("修改過", tmp);
                         setQuery([...tmp, element.input]);
-                        console.log("全部", query);
+                        // console.log("全部", query);
                       }}
                     >
                       <div className="flex items-start mr-2">
