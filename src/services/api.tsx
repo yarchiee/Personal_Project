@@ -80,7 +80,7 @@ const api = {
     await supabase.auth.session();
   },
 
-  ////////////////////////////get data//////////////////////////////////////////
+  ///////////////get data///////////////////
   async listRepositoryIssue() {
     const res = await octokit.request(
       "GET /repos/{owner}/{repo}/issues?per_page={perPage}&page={page}",
@@ -96,27 +96,12 @@ const api = {
   async githubSeach(query) {
     const res = await octokit.request("GET /search/issues", {
       q: `repo:${setting.owner}/${setting.repo} ${query}`,
-      // perPage: issueData?.PageList.perpage,
-      // page: issueData?.PageList.pageNumber,
-      // perPage: 5,
-      // page: 1,
+      per_page: 5,
+      page: 1,
     });
     const result = res.data;
     return result;
   },
-  // async pagination() {
-  //   const res = await octokit.request(
-  //     "GET /repos/{owner}/{repo}/issues?per_page={perPage}&page={page}",
-  //     {
-  //       ...setting,
-  //       perPage: 5,
-  //       page: 2,
-  //     }
-  //   );
-  //   const result = res.data;
-  //   return result;
-  // },
-
   async githubSeachbak(query) {
     const response = await fetch(
       `${this.hostname}/search/issues?q=repo:${setting.owner}/${setting.repo} ${query}`,
@@ -137,28 +122,8 @@ const api = {
     const result = res.data;
     return result;
   },
-  // async getSortDirection(query) {
-  //   const res = await octokit.request(
-  //     "GET /repos/{owner}/{repo}/issues?sort={query}",
-  //     {
-  //       ...setting,
-  //       query: query,
-  //     }
-  //   );
-  //   const result = res.data;
-  //   return result;
-  // },
-  // async(labelslist) {
-  //   const res = await octokit.request(
-  //     "GET /repos/{owner}/{repo}/issues?sort={query}",
-  //     {
-  //       ...setting,
-  //       query: labelslist.query,
-  //     }
-  //   );
-  //   const result = res.data;
-  //   return result;
-  // },
 };
 
 export default api;
+// perPage: issueData?.PageList.perpage,
+// page: issueData?.PageList.pageNumber,

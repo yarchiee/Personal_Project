@@ -25,6 +25,7 @@ const SubNavBox = styled.div`
 `;
 
 function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
+  const labelHeaderList = ["is:closed"];
   return (
     <RepoContentContainer>
       <SubNavBox>
@@ -59,7 +60,21 @@ function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
         </a>
         <a href="#/" className="ml-2.5">
           <CheckIcon size={16} className="fill-fg-muted mr-1" />
-          <span> 1 Closed</span>
+          <span
+            onClick={() => {
+              let tmp = [...query];
+              tmp.forEach((element) => {
+                if (element.includes("open")) {
+                  console.log("open", element);
+                  tmp = tmp.filter((item) => item !== element);
+                }
+              });
+
+              setQuery([...tmp, labelHeaderList]);
+            }}
+          >
+            1 Closed
+          </span>
         </a>
       </div>
     </RepoContentContainer>

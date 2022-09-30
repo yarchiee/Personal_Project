@@ -3,6 +3,7 @@ import ListItem from "./ListItem";
 import IssueBox from "./IssueBox";
 import Pagination from "./Pagination";
 import LabelHeader from "./LabelHeader";
+import NoResult from "./NoResult";
 
 const IssueContainer = styled.div`
   padding: 0 32px;
@@ -44,6 +45,7 @@ function IssueList({
             <ListItem key={data.id} data={data} isOpenIssue={isOpenIssue} />
           );
         })}
+        <NoResult />
       </IssueContainer>
       <Pagination />
     </>

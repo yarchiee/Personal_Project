@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react";
 import IssueList from "./IssueList";
 import api from "../../services/api";
-// import { ListRepoDataArr } from "../../type";
 function IssueListMain() {
   const [query, setQuery] = useState(["is:open", "is:issue"]);
   const [isOpenIssue, setIsOpenIssue] = useState([]);
-  // const [page, setPage] = useState();
-  const fetchIsOpenIssue = () => {
+  const fetchAllIssue = () => {
     api.githubSeach(query.join("+")).then((res) => {
       console.log(res.items);
       setIsOpenIssue(res.items);
     });
   };
-
-  useEffect(fetchIsOpenIssue, [query]);
+  useEffect(fetchAllIssue, [query]);
   const [labelData, setLabelData] = useState([]);
   const fetchGetLabelData = () => {
     api.listLabelAll().then((res) => {
@@ -26,14 +23,6 @@ function IssueListMain() {
     // console.log(date1);
   };
   calaculateTime();
-  // const fetchPageData = () => {
-  //   api.pagination().then((res) => {
-  //     // console.log(res);
-  //     // setPage(res);
-  //   });
-  // };
-  // useEffect(fetchPageData, []);
-
   return (
     <>
       <IssueList
