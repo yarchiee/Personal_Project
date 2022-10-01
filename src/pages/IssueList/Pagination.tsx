@@ -1,13 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@primer/octicons-react";
 
 export default function Pagination({ currentpage, setCurrentPage }) {
-  // const pagination = {
-  //   prePages: [1, 2],
-  //   middle: [3, 4, 5, 6, 7],
-  //   nextPages: [8, 9],
-  // };
   const nextPage = () => {
-    console.log("nextPage");
     setCurrentPage(currentpage + 1);
   };
   const previousPage = () => {

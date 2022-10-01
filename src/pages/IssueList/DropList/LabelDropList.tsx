@@ -1,9 +1,8 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
 import { useState } from "react";
-import ListItem from "../ListItem";
 
 export default function LabelDropList({ labelData, setQuery, query }) {
-  // console.log(labelData);
+  console.log(labelData);
   // console.log(query);
   const [check, setCheck] = useState<any>();
   const [searchLabelInputText, setSearchLabelInputText] = useState("");
@@ -62,16 +61,11 @@ export default function LabelDropList({ labelData, setQuery, query }) {
                     } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
                     key={element.name}
                     onClick={() => {
-                      // console.log(element.name);
-                      // setQuery(element.query);
-                      // fetchSortData(element.input);
                       let tmp = [...query];
                       tmp.forEach((element) => {
-                        // console.log(element);
                         if (element.includes("label")) {
                           let removeLabelTag = element.substr(6);
                           console.log(removeLabelTag);
-                          // console.log(check);
 
                           setCheck(removeLabelTag);
 

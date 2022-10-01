@@ -1,5 +1,4 @@
 // import styled from "styled-components";
-import { useState, useEffect } from "react";
 
 import {
   IssueOpenedIcon,
@@ -9,7 +8,7 @@ import {
 import { CommentIcon } from "@primer/octicons-react";
 
 const ListItem = ({ data, isOpenIssue }) => {
-  console.log(data.state_reason);
+  console.log(data);
 
   return (
     <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] hover:bg-[rgba(234,238,242,0.5)] ">
@@ -30,7 +29,7 @@ const ListItem = ({ data, isOpenIssue }) => {
             <span className="lg:inline">
               <div
                 style={{ backgroundColor: `#${item.color}` }}
-                className="font-semibold inline-block h-[20px]  leading-[20px] px-[7px] rounded-[10px] mr-[5px]   "
+                className="font-semibold inline-block h-[20px]  leading-[20px] px-[7px] rounded-[10px] mr-[5px] text-[5px]  "
               >
                 {item.name}
               </div>
@@ -58,7 +57,7 @@ const ListItem = ({ data, isOpenIssue }) => {
         {data.comments > 0 && (
           <span className="ml-[15px] flex-nowrap flex-1 flex justify-center hover:text-[#0969da] ">
             <CommentIcon size={16} />
-            <span className="ml-[3px]">{data.comments}</span>
+            <span className="ml-[3px] text-[3px]">{data.comments}</span>
           </span>
         )}
       </div>
