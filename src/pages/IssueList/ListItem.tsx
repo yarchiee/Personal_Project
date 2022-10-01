@@ -1,27 +1,28 @@
 // import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-import { IssueOpenedIcon } from "@primer/octicons-react";
+import {
+  IssueOpenedIcon,
+  IssueClosedIcon,
+  SkipIcon,
+} from "@primer/octicons-react";
 import { CommentIcon } from "@primer/octicons-react";
 
 const ListItem = ({ data, isOpenIssue }) => {
-  // function lightOrDark(bgcolor) {
-  //   const r = parseInt(bgcolor.slice(0, 2), 16);
-  //   const g = parseInt(bgcolor.slice(2, 4), 16);
-  //   const b = parseInt(bgcolor.slice(4, 6), 16);
-  //   const hsp = r * 0.3 + g * 0.6 + b * 0.1;
-  //   if (hsp > 127.5) {
-  //     return "black";
-  //   } else {
-  //     return "white";
-  //   }
-  // }
-  // useEffect(lightOrDark, []);
+  console.log(data.state_reason);
+
   return (
     <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] hover:bg-[rgba(234,238,242,0.5)] ">
-      <IssueOpenedIcon className="fill-primary" fill="#127f37" />
+      {data.state_reason === "completed" ? (
+        <IssueClosedIcon className="fill-primary" fill="#8250df" />
+      ) : data.state_reason === "not_planned" ? (
+        <SkipIcon className="fill-primary" fill="#57606a" />
+      ) : (
+        <IssueOpenedIcon className="fill-primary" fill="#127f37" />
+      )}
+
       <div className="px-2">
-        <span className="text-[14px] font-semibold leading-[21.6px] mr-[5px] ">
+        <span className="text-[14px] font-semibold leading-[21.6px] mr-[5px] hover:text-[#0969da]">
           {data.title}
         </span>
         {data.labels.map((item) => {
@@ -29,7 +30,7 @@ const ListItem = ({ data, isOpenIssue }) => {
             <span className="lg:inline">
               <div
                 style={{ backgroundColor: `#${item.color}` }}
-                className="font-semibold inline-block h-[20px]  leading-[20px] px-[7px] rounded-[10px] mr-[5px]  "
+                className="font-semibold inline-block h-[20px]  leading-[20px] px-[7px] rounded-[10px] mr-[5px]   "
               >
                 {item.name}
               </div>
@@ -55,7 +56,7 @@ const ListItem = ({ data, isOpenIssue }) => {
           })}
         </span>
         {data.comments > 0 && (
-          <span className="ml-[15px] flex-nowrap flex-1 flex justify-center ">
+          <span className="ml-[15px] flex-nowrap flex-1 flex justify-center hover:text-[#0969da] ">
             <CommentIcon size={16} />
             <span className="ml-[3px]">{data.comments}</span>
           </span>

@@ -23,6 +23,8 @@ function IssueList({
   setIsOpenIssue,
   setQuery,
   query,
+  currentpage,
+  setCurrentPage,
 }) {
   return (
     <>
@@ -45,9 +47,9 @@ function IssueList({
             <ListItem key={data.id} data={data} isOpenIssue={isOpenIssue} />
           );
         })}
-        <NoResult />
+        {/* <NoResult /> */}
       </IssueContainer>
-      <Pagination />
+      <Pagination currentpage={currentpage} setCurrentPage={setCurrentPage} />
     </>
   );
 }

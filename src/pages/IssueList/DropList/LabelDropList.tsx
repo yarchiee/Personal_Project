@@ -1,8 +1,13 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
 import { useState } from "react";
+import ListItem from "../ListItem";
 
 export default function LabelDropList({ labelData, setQuery, query }) {
+  // console.log(labelData);
+  // console.log(query);
+  const [check, setCheck] = useState<any>();
   const [searchLabelInputText, setSearchLabelInputText] = useState("");
+
   return (
     <div className="sm:relative">
       <div className="text-[14px] sm:text-[12px]">
@@ -55,17 +60,44 @@ export default function LabelDropList({ labelData, setQuery, query }) {
                         ? "border-solid"
                         : "border-none"
                     } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
+                    key={element.name}
                     onClick={() => {
-                      console.log(element);
+                      // console.log(element.name);
                       // setQuery(element.query);
                       // fetchSortData(element.input);
-                      const tmp = [...query];
+                      let tmp = [...query];
+                      tmp.forEach((element) => {
+                        // console.log(element);
+                        if (element.includes("label")) {
+                          let removeLabelTag = element.substr(6);
+                          console.log(removeLabelTag);
+                          // console.log(check);
+
+                          setCheck(removeLabelTag);
+
+                          // console.log(check[index], element.name);
+
+                          // let newLabel;
+                          // newLabel = tmp.filter((item) => item === element);
+                          // console.log(newLabel);
+                          // let checkItem = element;
+                          // return checkItem;
+                          // return <CheckIcon fill={"#000000"} />;
+                          // console.log("label", element);
+                          // tmp = tmp.filter((item) => item !== element);
+                        }
+                      });
+                      console.log(check, element.name);
 
                       setQuery([...tmp, `label:${element.name}`]);
                     }}
                   >
                     <div className="flex items-start mr-2">
-                      <CheckIcon fill={"#000000"} />
+                      {check && (
+                        <CheckIcon
+                          fill={check === element.name ? "#000" : "#fff"}
+                        />
+                      )}
                     </div>
                     <span
                       style={{ background: `#${element.color}` }}
@@ -76,21 +108,7 @@ export default function LabelDropList({ labelData, setQuery, query }) {
                         <div className="font-semibold text-[#24292f] truncate sm:pt-[2px]">
                           {element.name}
                         </div>
-                        {element?.usercustomname !== "" ? (
-                          <div className="font-normal text-[#57606a] ml-2 truncate sm:pt-[2px]">
-                            {element.des}
-                          </div>
-                        ) : (
-                          <></>
-                        )}
                       </div>
-                      {element.des !== "" ? (
-                        <div className="font-medium text-[#57606a] mt-1 truncate">
-                          {element.des}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
                     </div>
                   </a>
                 );

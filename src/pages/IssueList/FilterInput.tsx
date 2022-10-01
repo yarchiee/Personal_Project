@@ -36,7 +36,7 @@ const FilterInput = ({ query, setQuery }) => {
               if (e.key === "Enter") {
                 setQuery(value.split(" "));
               }
-              console.log(e.key);
+              // console.log(e.key);
             }}
             className="bg-primary-bg h-[32px] py-[5px] pl-[32px] pr-3 border border-solid border-secondary-border rounded-r-md shadow-input-shadow w-full text-fg-muted focus:outline-none focus:border focus:border-solid focus:border-[#0969da]  focus:shadow-innerblue  "
           ></input>

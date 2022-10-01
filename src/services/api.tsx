@@ -93,11 +93,11 @@ const api = {
     const result = res.data;
     return result;
   },
-  async githubSeach(query) {
+  async githubSeach(query, currentpage) {
     const res = await octokit.request("GET /search/issues", {
       q: `repo:${setting.owner}/${setting.repo} ${query}`,
-      per_page: 5,
-      page: 1,
+      per_page: 10,
+      page: currentpage,
     });
     const result = res.data;
     return result;

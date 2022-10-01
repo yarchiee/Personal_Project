@@ -13,6 +13,7 @@ const IssueBox = ({
   setQuery,
   query,
 }) => {
+  const labelHeaderList = ["is:open", "is:closed"];
   return (
     <>
       <div className=" rounded-none sm:rounded-md border border-solid border-[#d0d7de] ">
@@ -21,21 +22,50 @@ const IssueBox = ({
             <div className=" text-[14px] text-center lg:block">
               <a href="#/">
                 <IssueOpenedIcon size={16} className="mr-1" />
-                <span className="font-semibold">{isOpenIssue.length}Open</span>
+                <span
+                  onClick={() => {
+                    let tmp = [...query];
+                    tmp.forEach((element) => {
+                      if (element.includes("close")) {
+                        console.log("close", element);
+                        tmp = tmp.filter((item) => item !== element);
+                      }
+                    });
+
+                    setQuery([...tmp, labelHeaderList[0]]);
+                  }}
+                  className="font-semibold"
+                >
+                  Open
+                </span>
               </a>
               <a href="#/" className="ml-2.5">
                 <CheckIcon size={16} className="fill-fg-muted mr-1" />
-                <span> 1 Closed</span>
+                <span
+                  onClick={() => {
+                    let tmp = [...query];
+                    tmp.forEach((element) => {
+                      if (element.includes("open")) {
+                        console.log("open", element);
+                        tmp = tmp.filter((item) => item !== element);
+                      }
+                    });
+
+                    setQuery([...tmp, labelHeaderList[1]]);
+                  }}
+                >
+                  Closed
+                </span>
               </a>
             </div>
           </h2>
           <div className="flex justify-between sm:justify-start lg:justify-end grow text-sm text-[#57606a]">
-            <div className="px-[16px]">
+            <div className="px-[16px] cursor-pointer">
               Author
               <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
             </div>
 
-            <details className="px-[16px] flex">
+            <details className="px-[16px] flex cursor-pointer">
               <summary className="flex items-center">
                 Label
                 <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
@@ -47,15 +77,15 @@ const IssueBox = ({
               />
             </details>
 
-            <div className="px-[16px] hidden md:block">
+            <div className="px-[16px] hidden md:block cursor-pointer">
               Projects
               <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
             </div>
-            <div className="px-[16px] hidden md:block">
+            <div className="px-[16px] hidden md:block cursor-pointer">
               Milestones
               <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
             </div>
-            <details className="px-[16px]">
+            <details className="px-[16px] cursor-pointer">
               <summary className="flex items-center">
                 Assignee
                 <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>
@@ -66,7 +96,7 @@ const IssueBox = ({
                 query={query}
               />
             </details>
-            <details className="px-[16px]">
+            <details className="px-[16px] cursor-pointer">
               <summary className="flex items-center">
                 Sort
                 <span className="hidden sm:inline-block align-middle border-solid border-x-4 border-t-4 border-x-transparent border-b-transparent ml-1"></span>

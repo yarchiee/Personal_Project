@@ -25,7 +25,7 @@ const SubNavBox = styled.div`
 `;
 
 function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
-  const labelHeaderList = ["is:closed"];
+  const labelHeaderList = ["is:open", "is:closed"];
   return (
     <RepoContentContainer>
       <SubNavBox>
@@ -42,12 +42,12 @@ function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
       </div>
 
       <div
-        className="text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px]"
+        className="text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px] hover:text-[#0969da]"
         onClick={() => {
           setQuery(["is:open", "is:issue"]);
         }}
       >
-        <div className=" bg-[#57606a] w-[18px] h-[18px] rounded-[6px] mr-[8px]">
+        <div className=" bg-[#57606a] w-[18px] h-[18px] rounded-[6px] mr-[8px] hover:bg-[#0969da]">
           <XIcon size={18} fill="#ffffff" />
         </div>
         Clear current search query,filters,and sorts
@@ -56,7 +56,22 @@ function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
       <div className=" my-[18px] lg:hidden">
         <a href="#/">
           <IssueOpenedIcon size={16} className="mr-1" />
-          <span className="font-semibold">{isOpenIssue.length} Open</span>
+          <span
+            onClick={() => {
+              let tmp = [...query];
+              tmp.forEach((element) => {
+                if (element.includes("close")) {
+                  console.log("close", element);
+                  tmp = tmp.filter((item) => item !== element);
+                }
+              });
+
+              setQuery([...tmp, labelHeaderList[0]]);
+            }}
+            className="font-semibold"
+          >
+            Open
+          </span>
         </a>
         <a href="#/" className="ml-2.5">
           <CheckIcon size={16} className="fill-fg-muted mr-1" />
@@ -70,10 +85,10 @@ function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
                 }
               });
 
-              setQuery([...tmp, labelHeaderList]);
+              setQuery([...tmp, labelHeaderList[1]]);
             }}
           >
-            1 Closed
+            Closed
           </span>
         </a>
       </div>
