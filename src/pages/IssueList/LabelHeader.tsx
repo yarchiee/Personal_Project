@@ -59,21 +59,23 @@ function LabelHeader({
           setClearStatus={setClearStatus}
         />
       </div>
-
-      <div
-        className="group text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px] "
-        onClick={() => {
-          setQuery(["is:open", "is:issue"]);
-          setCheck([]);
-        }}
-      >
-        <div className=" bg-[#57606a] w-[18px] h-[18px] rounded-[6px] mr-[8px] group-hover:bg-[#0969da]">
-          <XIcon size={18} fill="#ffffff" />
+      {clearStatus === true && (
+        <div
+          className="group text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px] "
+          onClick={() => {
+            setQuery(["is:open", "is:issue"]);
+            setCheck([]);
+            setClearStatus(false);
+          }}
+        >
+          <div className=" bg-[#57606a] w-[18px] h-[18px] rounded-[6px] mr-[8px] group-hover:bg-[#0969da]">
+            <XIcon size={18} fill="#ffffff" />
+          </div>
+          <span className="group-hover:text-[#0969da]">
+            Clear current search query,filters,and sorts
+          </span>
         </div>
-        <span className="group-hover:text-[#0969da]">
-          Clear current search query,filters,and sorts
-        </span>
-      </div>
+      )}
 
       <div className=" my-[18px] lg:hidden">
         <a href="#/">
@@ -87,7 +89,6 @@ function LabelHeader({
                   tmp = tmp.filter((item) => item !== element);
                 }
               });
-
               setQuery([...tmp, labelHeaderList[0]]);
             }}
             className="font-semibold"

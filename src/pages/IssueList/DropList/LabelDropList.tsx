@@ -83,7 +83,7 @@ export default function LabelDropList({
                         return;
                       }
                       setCheck(uniq([...check, element.name]));
-
+                      setClearStatus(true);
                       setQuery([...tmp, `label:${element.name}`]);
                     }}
                   >

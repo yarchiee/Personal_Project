@@ -47,6 +47,7 @@ const FilterDropList = ({ setQuery, query, clearStatus, setClearStatus }) => {
                       } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
                       onClick={() => {
                         setQuery([element.input]);
+                        setClearStatus(true);
                       }}
                     >
                       <div className="flex items-start mr-2">

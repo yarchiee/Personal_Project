@@ -67,15 +67,12 @@ const SortDropList = ({
                       onClick={() => {
                         let tmp = [...query];
                         tmp.forEach((element) => {
-                          // console.log(element);
                           if (element.includes("sort")) {
-                            // console.log("有sort", element);
                             tmp = tmp.filter((item) => item !== element);
                           }
                         });
-                        // console.log("修改過", tmp);
                         setQuery([...tmp, element.input]);
-                        // console.log("全部", query);
+                        setClearStatus(true);
                       }}
                     >
                       <div className="flex items-start mr-2">

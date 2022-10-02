@@ -58,11 +58,6 @@ export default function AssigneeDropList({
                 <span className="font-semibold">Assigned to nobody</span>
               </a>
               {isAssignee.map((element, index) => {
-                // if (
-                //   searchLabelInputText &&
-                //   !element.name.includes(searchLabelInputText)
-                // )
-                //   return <></>;
                 return (
                   <a
                     href="#/"
@@ -74,14 +69,12 @@ export default function AssigneeDropList({
                     onClick={() => {
                       let tmp = [...query];
                       tmp.forEach((element) => {
-                        // console.log(element);
                         if (element.includes("assignee")) {
-                          // console.log("有sort", element);
                           tmp = tmp.filter((item) => item !== element);
                         }
                       });
-                      // console.log("修改過", tmp);
                       setQuery([...tmp, `assignee:${element.login}`]);
+                      setClearStatus(true);
                     }}
                   >
                     <div className="flex items-start mr-2">
