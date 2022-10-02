@@ -34,7 +34,6 @@ function calculateTime(createTime: string): string {
 
 const ListItem = ({ data, isOpenIssue }) => {
   const time = calculateTime(data.created_at);
-  console.log(time);
   return (
     <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] hover:bg-[rgba(234,238,242,0.5)] ">
       {data.state_reason === "completed" ? (
@@ -62,7 +61,7 @@ const ListItem = ({ data, isOpenIssue }) => {
           );
         })}
         <div className="text-[10px] text-sm mt-2">
-          # {data.number} opened 22 hours ago by {data.user.login}
+          # {data.number} opened {time} ago by {data.user.login}
         </div>
       </div>
       <div className="min-w-[20%] hidden sm:flex ml-auto ">

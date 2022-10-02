@@ -12,7 +12,7 @@ const IssueBox = ({
   check,
   setCheck,
   clearStatus,
-  setClearState,
+  setClearStatus,
 }) => {
   const labelHeaderList = ["is:open", "is:closed"];
   return (
@@ -78,7 +78,7 @@ const IssueBox = ({
                 check={check}
                 setCheck={setCheck}
                 clearStatus={clearStatus}
-                setClearState={setClearState}
+                setClearStatus={setClearStatus}
               />
             </details>
 
@@ -100,7 +100,7 @@ const IssueBox = ({
                 setQuery={setQuery}
                 query={query}
                 clearStatus={clearStatus}
-                setClearState={setClearState}
+                setClearStatus={setClearStatus}
               />
             </details>
             <details className="px-[16px] cursor-pointer">
@@ -113,7 +113,7 @@ const IssueBox = ({
                 setQuery={setQuery}
                 query={query}
                 clearStatus={clearStatus}
-                setClearState={setClearState}
+                setClearStatus={setClearStatus}
               />
             </details>
           </div>

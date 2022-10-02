@@ -2,7 +2,7 @@ import { SearchIcon } from "@primer/octicons-react";
 import { useEffect, useState } from "react";
 import FilterDropList from "./DropList/FiltersDropList";
 
-const FilterInput = ({ query, setQuery, clearStatus, setClearState }) => {
+const FilterInput = ({ query, setQuery, clearStatus, setClearStatus }) => {
   const [value, setValue] = useState("");
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const FilterInput = ({ query, setQuery, clearStatus, setClearState }) => {
             setQuery={setQuery}
             query={query}
             clearStatus={clearStatus}
-            setClearState={setClearState}
+            setClearStatus={setClearStatus}
           />
         </details>
         <div className="relative w-full">

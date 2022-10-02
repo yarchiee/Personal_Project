@@ -32,7 +32,7 @@ function LabelHeader({
   check,
   setCheck,
   clearStatus,
-  setClearState,
+  setClearStatus,
 }) {
   const labelHeaderList = ["is:open", "is:closed"];
   return (
@@ -43,7 +43,7 @@ function LabelHeader({
             query={query}
             setQuery={setQuery}
             clearStatus={clearStatus}
-            setClearState={setClearState}
+            setClearStatus={setClearStatus}
           />
         </div>
         <div className="justify-between flex md:ml-auto w-full md:w-auto">
@@ -56,7 +56,7 @@ function LabelHeader({
           query={query}
           setQuery={setQuery}
           clearStatus={clearStatus}
-          setClearState={setClearState}
+          setClearStatus={setClearStatus}
         />
       </div>
 

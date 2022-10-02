@@ -27,7 +27,7 @@ function IssueList({
   currentpage,
   setCurrentPage,
   clearStatus,
-  setClearState,
+  setClearStatus,
 }) {
   const [check, setCheck] = useState<string[]>([]);
 
@@ -41,7 +41,7 @@ function IssueList({
         check={check}
         setCheck={setCheck}
         clearStatus={clearStatus}
-        setClearState={setClearState}
+        setClearStatus={setClearStatus}
       />
       <IssueContainer>
         <IssueBox
@@ -53,14 +53,14 @@ function IssueList({
           check={check}
           setCheck={setCheck}
           clearStatus={clearStatus}
-          setClearState={setClearState}
+          setClearStatus={setClearStatus}
         />
         {isOpenIssue.map((data) => {
           return (
             <ListItem key={data.id} data={data} isOpenIssue={isOpenIssue} />
           );
         })}
-        {/* <NoResult /> */}
+        {isOpenIssue.length === 0 && <NoResult />}
       </IssueContainer>
       <Pagination currentpage={currentpage} setCurrentPage={setCurrentPage} />
     </>

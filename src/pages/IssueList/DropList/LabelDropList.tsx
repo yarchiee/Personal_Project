@@ -9,7 +9,7 @@ export default function LabelDropList({
   check,
   setCheck,
   clearStatus,
-  setClearState,
+  setClearStatus,
 }) {
   const [searchLabelInputText, setSearchLabelInputText] = useState("");
   console.log(query);

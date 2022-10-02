@@ -39,7 +39,7 @@ const SortDropList = ({
   setQuery,
   query,
   clearStatus,
-  setClearState,
+  setClearStatus,
 }) => {
   return (
     <>

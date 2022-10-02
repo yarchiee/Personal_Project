@@ -14,7 +14,7 @@ export default function AssigneeDropList({
   setQuery,
   query,
   clearStatus,
-  setClearState,
+  setClearStatus,
 }) {
   const [searchLabelInputText, setSearchLabelInputText] = useState("");
   const [isAssignee, setIsAssignee] = useState([]);

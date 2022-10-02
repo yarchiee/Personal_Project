@@ -3,9 +3,11 @@ import IssueList from "./IssueList";
 import api from "../../services/api";
 function IssueListMain() {
   const [query, setQuery] = useState(["is:open", "is:issue"]);
-  const [clearStatus, setClearState] = useState(false);
+  const [clearStatus, setClearStatus] = useState(false);
   const [currentpage, setCurrentPage] = useState(1);
   const [isOpenIssue, setIsOpenIssue] = useState([]);
+  console.log(isOpenIssue);
+
   const fetchAllIssue = () => {
     api.githubSeach(query.join("+"), currentpage).then((res) => {
       setIsOpenIssue(res.items);
@@ -31,7 +33,7 @@ function IssueListMain() {
         currentpage={currentpage}
         setCurrentPage={setCurrentPage}
         clearStatus={clearStatus}
-        setClearState={setClearState}
+        setClearStatus={setClearStatus}
       />
     </>
   );

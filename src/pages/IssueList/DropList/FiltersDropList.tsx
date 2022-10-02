@@ -21,12 +21,12 @@ const labelslist = [
     input: "is:open mentions:@me",
   },
 ];
-const FilterDropList = ({ setQuery, query, clearStatus, setClearState }) => {
+const FilterDropList = ({ setQuery, query, clearStatus, setClearStatus }) => {
   return (
     <>
       <div className="sm:relative">
         <div className="text-[14px] sm:text-[12px]">
-          <div className="  fixed top-0 left-0 right-0 bottom-0 flex p-4 flex-col z-[100] sm:z-[1] sm:absolute sm:top-auto sm:right-auto sm:left-auto sm:bottom-auto sm:p-0 lg:right-0">
+          <div className="  fixed top-0 left-0 right-0 bottom-0 flex p-4 flex-col z-[100] sm:z-[1] sm:absolute sm:top-auto sm:right-auto sm:left-[-11px] sm:bottom-auto sm:p-0 lg:left-[-11px]">
             <div className="h-4/5 mt-0 bg-[#ffffff] border border-solid border-[rgba(0,0,0,0)] rounded-xl sm:border-[hsla(210,18%,87%,1)] sm:h-auto sm:max-h-[480px] sm:mt-2 sm:w-[300px]">
               <header className="flex p-4 items-center border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pr-[7px] sm:pb-[7px]">
                 <span className="font-semibold flex-1">Filters Issues</span>
