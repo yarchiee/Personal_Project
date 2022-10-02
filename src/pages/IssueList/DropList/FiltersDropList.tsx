@@ -21,7 +21,7 @@ const labelslist = [
     input: "is:open mentions:@me",
   },
 ];
-const FilterDropList = ({ setQuery, query }) => {
+const FilterDropList = ({ setQuery, query, clearStatus, setClearState }) => {
   return (
     <>
       <div className="sm:relative">

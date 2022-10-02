@@ -4,6 +4,7 @@ import IssueBox from "./IssueBox";
 import Pagination from "./Pagination";
 import LabelHeader from "./LabelHeader";
 import NoResult from "./NoResult";
+import { useState } from "react";
 
 const IssueContainer = styled.div`
   padding: 0 32px;
@@ -25,7 +26,11 @@ function IssueList({
   query,
   currentpage,
   setCurrentPage,
+  clearStatus,
+  setClearState,
 }) {
+  const [check, setCheck] = useState<string[]>([]);
+
   return (
     <>
       <LabelHeader
@@ -33,6 +38,10 @@ function IssueList({
         labelData={labelData}
         query={query}
         setQuery={setQuery}
+        check={check}
+        setCheck={setCheck}
+        clearStatus={clearStatus}
+        setClearState={setClearState}
       />
       <IssueContainer>
         <IssueBox
@@ -41,6 +50,10 @@ function IssueList({
           setIsOpenIssue={setIsOpenIssue}
           setQuery={setQuery}
           query={query}
+          check={check}
+          setCheck={setCheck}
+          clearStatus={clearStatus}
+          setClearState={setClearState}
         />
         {isOpenIssue.map((data) => {
           return (

@@ -3,15 +3,16 @@ import AssigneeDropList from "./DropList/AssigneeDropList";
 import SortDropList from "./DropList/SortDropList";
 
 import { CheckIcon, IssueOpenedIcon } from "@primer/octicons-react";
-import { useEffect, useState } from "react";
-import api from "../../services/api";
-
 const IssueBox = ({
   isOpenIssue,
   labelData,
   setIsOpenIssue,
   setQuery,
   query,
+  check,
+  setCheck,
+  clearStatus,
+  setClearState,
 }) => {
   const labelHeaderList = ["is:open", "is:closed"];
   return (
@@ -74,6 +75,10 @@ const IssueBox = ({
                 labelData={labelData}
                 setQuery={setQuery}
                 query={query}
+                check={check}
+                setCheck={setCheck}
+                clearStatus={clearStatus}
+                setClearState={setClearState}
               />
             </details>
 
@@ -94,6 +99,8 @@ const IssueBox = ({
                 isOpenIssue={isOpenIssue}
                 setQuery={setQuery}
                 query={query}
+                clearStatus={clearStatus}
+                setClearState={setClearState}
               />
             </details>
             <details className="px-[16px] cursor-pointer">
@@ -105,6 +112,8 @@ const IssueBox = ({
                 setIsOpenIssue={setIsOpenIssue}
                 setQuery={setQuery}
                 query={query}
+                clearStatus={clearStatus}
+                setClearState={setClearState}
               />
             </details>
           </div>

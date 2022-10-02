@@ -7,9 +7,34 @@ import {
 } from "@primer/octicons-react";
 import { CommentIcon } from "@primer/octicons-react";
 
-const ListItem = ({ data, isOpenIssue }) => {
-  console.log(data);
+function calculateTime(createTime: string): string {
+  const currentTime = Date.now();
+  const inputTime = new Date(createTime);
+  const timeLag = currentTime - inputTime.getTime();
+  if (Math.floor(timeLag / (12 * 30 * 24 * 3600 * 1000)) > 0) {
+    return `${Math.floor(timeLag / (12 * 30 * 24 * 3600 * 1000))} years`;
+  }
+  if (Math.floor(timeLag / (30 * 24 * 3600 * 1000)) > 0) {
+    return `${Math.floor(timeLag / (30 * 24 * 3600 * 1000))} months`;
+  }
+  if (Math.floor(timeLag / (24 * 3600 * 1000)) > 0) {
+    return `${Math.round(timeLag / (24 * 3600 * 1000))} days`;
+  }
+  if (Math.floor(timeLag / (3600 * 1000)) > 0) {
+    return `${Math.floor(timeLag / (3600 * 1000))} hours`;
+  }
+  if (Math.floor(timeLag / (60 * 1000)) > 0) {
+    return `${Math.floor(timeLag / (60 * 1000))} minutes`;
+  }
+  if (Math.floor(timeLag / 1000) > 0) {
+    return `${Math.floor(timeLag / 1000)} seconds`;
+  }
+  return "";
+}
 
+const ListItem = ({ data, isOpenIssue }) => {
+  const time = calculateTime(data.created_at);
+  console.log(time);
   return (
     <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] hover:bg-[rgba(234,238,242,0.5)] ">
       {data.state_reason === "completed" ? (

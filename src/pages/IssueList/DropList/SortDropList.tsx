@@ -34,16 +34,13 @@ const sortlist = [
   },
 ];
 
-const SortDropList = ({ setIsOpenIssue, setQuery, query }) => {
-  // const [sortData, setSortData] = useState([]);
-  // const [query, setQuery] = useState("");
-  // const fetchSortData = (query) => {
-  //   api.githubSeach(query).then((res) => {
-  //     console.log(res);
-  //     setIsOpenIssue(res.items);
-  //     console.log(query);
-  //   });
-  // };
+const SortDropList = ({
+  setIsOpenIssue,
+  setQuery,
+  query,
+  clearStatus,
+  setClearState,
+}) => {
   return (
     <>
       <div className="sm:relative">

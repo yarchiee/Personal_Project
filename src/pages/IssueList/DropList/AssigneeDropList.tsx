@@ -9,7 +9,13 @@ const assigneeList = [
   },
 ];
 
-export default function AssigneeDropList({ isOpenIssue, setQuery, query }) {
+export default function AssigneeDropList({
+  isOpenIssue,
+  setQuery,
+  query,
+  clearStatus,
+  setClearState,
+}) {
   const [searchLabelInputText, setSearchLabelInputText] = useState("");
   const [isAssignee, setIsAssignee] = useState([]);
   const fetchIsOpenIssue = () => {

@@ -1,11 +1,18 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
 import { useState } from "react";
+import { uniq, remove } from "lodash";
 
-export default function LabelDropList({ labelData, setQuery, query }) {
-  console.log(labelData);
-  // console.log(query);
-  const [check, setCheck] = useState<any>();
+export default function LabelDropList({
+  labelData,
+  setQuery,
+  query,
+  check,
+  setCheck,
+  clearStatus,
+  setClearState,
+}) {
   const [searchLabelInputText, setSearchLabelInputText] = useState("");
+  console.log(query);
 
   return (
     <div className="sm:relative">
@@ -62,26 +69,20 @@ export default function LabelDropList({ labelData, setQuery, query }) {
                     key={element.name}
                     onClick={() => {
                       let tmp = [...query];
-                      tmp.forEach((element) => {
-                        if (element.includes("label")) {
-                          let removeLabelTag = element.substr(6);
-                          console.log(removeLabelTag);
-
-                          setCheck(removeLabelTag);
-
-                          // console.log(check[index], element.name);
-
-                          // let newLabel;
-                          // newLabel = tmp.filter((item) => item === element);
-                          // console.log(newLabel);
-                          // let checkItem = element;
-                          // return checkItem;
-                          // return <CheckIcon fill={"#000000"} />;
-                          // console.log("label", element);
-                          // tmp = tmp.filter((item) => item !== element);
-                        }
-                      });
-                      console.log(check, element.name);
+                      if (check.includes(element.name)) {
+                        setCheck(
+                          remove(check, (labelText) => {
+                            return labelText !== element.name;
+                          })
+                        );
+                        setQuery(
+                          remove(query, (queryText) => {
+                            return queryText !== `label:${element.name}`;
+                          })
+                        );
+                        return;
+                      }
+                      setCheck(uniq([...check, element.name]));
 
                       setQuery([...tmp, `label:${element.name}`]);
                     }}
@@ -89,7 +90,7 @@ export default function LabelDropList({ labelData, setQuery, query }) {
                     <div className="flex items-start mr-2">
                       {check && (
                         <CheckIcon
-                          fill={check === element.name ? "#000" : "#fff"}
+                          fill={check.includes(element.name) ? "#000" : "#fff"}
                         />
                       )}
                     </div>

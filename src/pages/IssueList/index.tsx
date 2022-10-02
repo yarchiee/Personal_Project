@@ -3,11 +3,11 @@ import IssueList from "./IssueList";
 import api from "../../services/api";
 function IssueListMain() {
   const [query, setQuery] = useState(["is:open", "is:issue"]);
+  const [clearStatus, setClearState] = useState(false);
   const [currentpage, setCurrentPage] = useState(1);
   const [isOpenIssue, setIsOpenIssue] = useState([]);
   const fetchAllIssue = () => {
     api.githubSeach(query.join("+"), currentpage).then((res) => {
-      // console.log(res.items);
       setIsOpenIssue(res.items);
     });
   };
@@ -19,27 +19,6 @@ function IssueListMain() {
     });
   };
   useEffect(fetchGetLabelData, []);
-  //  function calaculateTime(time) {
-  //     const createdTime = Date.parse(time);
-  //     const remainTime = now - createdTime;
-  //     const convertDay = 24 * 3600 * 1000;
-  //     const convertHour = 3600 * 1000;
-  //     const convertMins = 60 * 1000;
-  //     const days = Math.round(remainTime / convertDay);
-  //     const hours = Math.round((days % convertDay) / convertHour);
-  //     const minutes = Math.floor(
-  //       ((days % convertDay) % convertHour) / convertMins
-  //     );
-  //     const seconds = Math.round(
-  //       (((days % convertDay) % convertHour) % convertMins) / 1000
-  //     );
-  //     return seconds > 0
-  //       ? ${seconds} seconds: minutes > 0
-  //       ? ${minutes} minutes: hours > 0
-  //       ? ${hours} hours: days > 0
-  //       ? ${days} days: null;
-  //   }
-  //   calaculateTime(time);
 
   return (
     <>
@@ -51,6 +30,8 @@ function IssueListMain() {
         query={query}
         currentpage={currentpage}
         setCurrentPage={setCurrentPage}
+        clearStatus={clearStatus}
+        setClearState={setClearState}
       />
     </>
   );

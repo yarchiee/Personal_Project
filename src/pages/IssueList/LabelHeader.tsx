@@ -24,13 +24,27 @@ const SubNavBox = styled.div`
   }
 `;
 
-function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
+function LabelHeader({
+  isOpenIssue,
+  labelData,
+  query,
+  setQuery,
+  check,
+  setCheck,
+  clearStatus,
+  setClearState,
+}) {
   const labelHeaderList = ["is:open", "is:closed"];
   return (
     <RepoContentContainer>
       <SubNavBox>
         <div className="hidden md:block flex-grow">
-          <FilterInput query={query} setQuery={setQuery} />
+          <FilterInput
+            query={query}
+            setQuery={setQuery}
+            clearStatus={clearStatus}
+            setClearState={setClearState}
+          />
         </div>
         <div className="justify-between flex md:ml-auto w-full md:w-auto">
           <LabelMilestone labelData={labelData} />
@@ -38,19 +52,27 @@ function LabelHeader({ isOpenIssue, labelData, query, setQuery }) {
         </div>
       </SubNavBox>
       <div className="block my-[24px] md:hidden">
-        <FilterInput query={query} setQuery={setQuery} />
+        <FilterInput
+          query={query}
+          setQuery={setQuery}
+          clearStatus={clearStatus}
+          setClearState={setClearState}
+        />
       </div>
 
       <div
-        className="text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px] hover:text-[#0969da]"
+        className="group text-[14px] decoration-[#57606a] font-medium flex mt-[16px] leading-[18px] "
         onClick={() => {
           setQuery(["is:open", "is:issue"]);
+          setCheck([]);
         }}
       >
-        <div className=" bg-[#57606a] w-[18px] h-[18px] rounded-[6px] mr-[8px] hover:bg-[#0969da]">
+        <div className=" bg-[#57606a] w-[18px] h-[18px] rounded-[6px] mr-[8px] group-hover:bg-[#0969da]">
           <XIcon size={18} fill="#ffffff" />
         </div>
-        Clear current search query,filters,and sorts
+        <span className="group-hover:text-[#0969da]">
+          Clear current search query,filters,and sorts
+        </span>
       </div>
 
       <div className=" my-[18px] lg:hidden">

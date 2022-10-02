@@ -2,7 +2,7 @@ import { SearchIcon } from "@primer/octicons-react";
 import { useEffect, useState } from "react";
 import FilterDropList from "./DropList/FiltersDropList";
 
-const FilterInput = ({ query, setQuery }) => {
+const FilterInput = ({ query, setQuery, clearStatus, setClearState }) => {
   const [value, setValue] = useState("");
 
   useEffect(() => {
@@ -18,7 +18,12 @@ const FilterInput = ({ query, setQuery }) => {
             Filters
             <span className="inline-block w-0 h-0 ml-1 mt-1 border-transparent border-t-fg-muted border-solid border-4 border-b-0 content-str"></span>
           </summary>
-          <FilterDropList setQuery={setQuery} query={query} />
+          <FilterDropList
+            setQuery={setQuery}
+            query={query}
+            clearStatus={clearStatus}
+            setClearState={setClearState}
+          />
         </details>
         <div className="relative w-full">
           <SearchIcon
