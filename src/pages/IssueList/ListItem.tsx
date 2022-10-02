@@ -45,29 +45,29 @@ const ListItem = ({ data, isOpenIssue }) => {
       )}
 
       <div className="px-2">
-        <span className="text-[14px] font-semibold leading-[21.6px] mr-[5px] hover:text-[#0969da]">
+        <span className="cursor-pointer text-[14px] font-semibold leading-[21.6px] mr-[5px] hover:text-[#0969da]">
           {data.title}
         </span>
         {data.labels.map((item) => {
           return (
-            <span className="lg:inline">
+            <span className="lg:inline cursor-pointer">
               <div
                 style={{ backgroundColor: `#${item.color}` }}
-                className="font-semibold inline-block h-[20px]  leading-[20px] px-[7px] rounded-[10px] mr-[5px] text-[5px]  "
+                className="font-semibold inline-block h-[20px]  leading-[20px] px-[7px] rounded-[10px] mr-[5px] text-[5px]   "
               >
                 {item.name}
               </div>
             </span>
           );
         })}
-        <div className="text-[10px] text-sm mt-2">
+        <div className="text-[10px] text-sm mt-2 cursor-pointer">
           # {data.number} opened {time} ago by {data.user.login}
         </div>
       </div>
       <div className="min-w-[20%] hidden sm:flex ml-auto ">
         <div className="flex-1"></div>
 
-        <span className=" ml-auto flex flex-1 min-w-[30%]  flex-row-reverse">
+        <span className=" ml-auto flex flex-1 min-w-[30%]  flex-row-reverse cursor-pointer">
           {data.assignees.map((item) => {
             return (
               <img
@@ -79,7 +79,7 @@ const ListItem = ({ data, isOpenIssue }) => {
           })}
         </span>
         {data.comments > 0 && (
-          <span className="ml-[15px] flex-nowrap flex-1 flex justify-center hover:text-[#0969da] ">
+          <span className="ml-[15px] flex-nowrap flex-1 flex justify-center hover:text-[#0969da] cursor-pointer ">
             <CommentIcon size={16} />
             <span className="ml-[3px] text-[3px]">{data.comments}</span>
           </span>
