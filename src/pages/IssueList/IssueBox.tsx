@@ -34,6 +34,7 @@ const IssueBox = ({
                     });
 
                     setQuery([...tmp, labelHeaderList[0]]);
+                    setClearStatus(true);
                   }}
                   className="font-semibold"
                 >
@@ -53,6 +54,7 @@ const IssueBox = ({
                     });
 
                     setQuery([...tmp, labelHeaderList[1]]);
+                    setClearStatus(true);
                   }}
                 >
                   Closed

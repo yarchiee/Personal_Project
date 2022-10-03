@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import LabelDropList from "../DropList/LabelDropList";
 
 export default {

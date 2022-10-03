@@ -89,6 +89,7 @@ function LabelHeader({
                 }
               });
               setQuery([...tmp, labelHeaderList[0]]);
+              setClearStatus(true);
             }}
             className="font-semibold"
           >
@@ -108,6 +109,7 @@ function LabelHeader({
               });
 
               setQuery([...tmp, labelHeaderList[1]]);
+              setClearStatus(true);
             }}
           >
             Closed
