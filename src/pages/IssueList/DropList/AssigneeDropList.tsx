@@ -78,7 +78,7 @@ export default function AssigneeDropList({
                     }}
                   >
                     <div className="flex items-start mr-2">
-                      <CheckIcon fill={"#000000"} />
+                      <CheckIcon fill={"#ffffff"} />
                     </div>
                     <div>
                       <span>

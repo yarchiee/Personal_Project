@@ -15,8 +15,8 @@ const Template = (args) => (
   <div
     style={{
       position: "absolute",
-      top: "45%",
-      left: "45%",
+      top: "15%",
+      left: "60%",
     }}
   >
     <LabelDropList {...args} />

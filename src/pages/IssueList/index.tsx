@@ -6,8 +6,6 @@ function IssueListMain() {
   const [clearStatus, setClearStatus] = useState(false);
   const [currentpage, setCurrentPage] = useState(1);
   const [isOpenIssue, setIsOpenIssue] = useState([]);
-  console.log(isOpenIssue);
-
   const fetchAllIssue = () => {
     api.githubSeach(query.join("+"), currentpage).then((res) => {
       setIsOpenIssue(res.items);

@@ -12,8 +12,6 @@ export default function LabelDropList({
   setClearStatus,
 }) {
   const [searchLabelInputText, setSearchLabelInputText] = useState("");
-  console.log(query);
-
   return (
     <div className="sm:relative">
       <div className="text-[14px] sm:text-[12px]">
@@ -44,14 +42,6 @@ export default function LabelDropList({
                 </div>
                 <span className="font-semibold">Unlabeled</span>
               </a>
-              {/* <button type="button" className="bg-indigo-500 ..." disabled>
-                <svg
-                  className="animate-spin h-5 w-5 mr-3 ..."
-                  viewBox="0 0 24 24"
-                ></svg>
-                Processing...
-              </button> */}
-
               {labelData.map((element, index) => {
                 if (
                   searchLabelInputText &&

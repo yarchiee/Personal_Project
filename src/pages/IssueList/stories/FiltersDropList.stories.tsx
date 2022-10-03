@@ -15,8 +15,8 @@ const Template = (args) => (
   <div
     style={{
       position: "absolute",
-      top: "45%",
-      left: "45%",
+      top: "40%",
+      left: "40%",
     }}
   >
     <FiltersDropList {...args} />

@@ -85,7 +85,6 @@ function LabelHeader({
               let tmp = [...query];
               tmp.forEach((element) => {
                 if (element.includes("close")) {
-                  console.log("close", element);
                   tmp = tmp.filter((item) => item !== element);
                 }
               });

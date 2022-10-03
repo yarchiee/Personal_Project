@@ -76,7 +76,7 @@ const SortDropList = ({
                       }}
                     >
                       <div className="flex items-start mr-2">
-                        <CheckIcon fill={"#000000"} />
+                        <CheckIcon fill={"#ffffff"} />
                       </div>
                       <span
                         className={`${element.state} mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
