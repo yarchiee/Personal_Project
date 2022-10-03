@@ -12,7 +12,13 @@ export default {
 };
 
 const Template = (args) => (
-  <div style={{}}>
+  <div
+    style={{
+      position: "absolute",
+      width: "100%",
+      top: "40%",
+    }}
+  >
     <ListItem {...args} />
   </div>
 );

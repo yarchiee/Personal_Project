@@ -15,7 +15,7 @@ const Template = (args) => (
   <div
     style={{
       position: "absolute",
-      top: "15%",
+      top: "20%",
       left: "60%",
     }}
   >
