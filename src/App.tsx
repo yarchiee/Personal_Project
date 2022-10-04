@@ -3,7 +3,7 @@ import Footer from "./components/Footer/Footer";
 import Labels from "./pages/Labels";
 import IssueList from "./pages/IssueList";
 import IssuePage from "./pages/IssuePage/IssuePage";
-import NewIssuePage from "./pages/NewIssuePage/NewIssuePage";
+import NewIssuePage from "./pages/NewIssuePage";
 // import Oauth from "./pages/Oauth/Oauth";
 import GithubOauth from "./pages/Oauth/GithubOAuth";
 import { ResetStyle, GlobalStyle } from "./components/globalStyle";
@@ -42,14 +42,14 @@ function App() {
 
           <Route path={`/${REPOSITORY}/labels`} element={<Labels />}></Route>
 
-          <Route path={`/${REPOSITORY}`} element={<IssueList />}></Route>
+          <Route
+            path={`/${REPOSITORY}/issuelist`}
+            element={<IssueList />}
+          ></Route>
+          <Route path={`/${REPOSITORY}`} element={<NewIssuePage />}></Route>
           <Route
             path={`/${REPOSITORY}/issuepage`}
             element={<IssuePage />}
-          ></Route>
-          <Route
-            path={`/${REPOSITORY}/newissuepage`}
-            element={<NewIssuePage />}
           ></Route>
           <Route
             path={"*"}
