@@ -7,6 +7,7 @@ export default function Pagination({ currentpage, setCurrentPage }) {
   const previousPage = () => {
     setCurrentPage(currentpage - 1);
   };
+
   return (
     <div className="flex justify-center items-center text-sm my-4 px-1">
       <a

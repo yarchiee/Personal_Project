@@ -79,6 +79,15 @@ const api = {
     /* sign the user out */
     await supabase.auth.session();
   },
+  //////////////post data////////////////////
+  async markDown() {
+    await octokit.request("POST /markdown", {
+      Accept: "text/x-markdown",
+      text: "| thead 1 | thrad 444 | thread 3 |\r\n|---------|---------|----------|\r\n| td      | td| td |",
+      mode: "gfm",
+      context: "octo-org/octo-repo",
+    });
+  },
 
   ///////////////get data///////////////////
   async listRepositoryIssue() {

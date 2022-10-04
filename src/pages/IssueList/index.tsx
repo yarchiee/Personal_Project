@@ -19,7 +19,12 @@ function IssueListMain() {
     });
   };
   useEffect(fetchGetLabelData, []);
-
+  const test = () => {
+    api.markDown().then((res) => {
+      console.log(res);
+    });
+  };
+  useEffect(test, []);
   return (
     <>
       <IssueList
