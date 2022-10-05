@@ -1,5 +1,11 @@
 import { XIcon, CheckIcon } from "@primer/octicons-react";
 import Input from "./Input";
+// type PopOverProps = {
+//   label: string;
+//   values: string[];
+//   selected: Set<string>;
+//   setSelected: Dispatch<SetStateAction<Set<string>>>;
+// };
 const labelslist = [
   {
     name: "123lll26",
@@ -35,7 +41,7 @@ const labelslist = [
   },
 ];
 
-export default function PopOverList() {
+export default function PopOverList({ labelData, isAssignee }) {
   return (
     <div className="sm:relative">
       <div className="text-[14px] sm:text-[12px]">

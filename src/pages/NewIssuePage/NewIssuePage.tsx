@@ -2,7 +2,7 @@ import SubmitBtn from "./SubmitBtn";
 import SideBarArea from "./SideBarArea";
 import EditArea from "./EditArea";
 
-function NewIssuePage() {
+function NewIssuePage({ labelData, isAssignee }) {
   return (
     <div className="mt-[24px] px-[16px] md:flex  md:px-[32px] ">
       <img
@@ -12,7 +12,7 @@ function NewIssuePage() {
       />
 
       <EditArea />
-      <SideBarArea />
+      <SideBarArea labelData={labelData} isAssignee={isAssignee} />
       <SubmitBtn />
     </div>
   );
