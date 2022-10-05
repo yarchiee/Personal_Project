@@ -81,9 +81,8 @@ const api = {
   },
   //////////////post data////////////////////
   async markDown() {
-    await octokit.request("POST /markdown", {
-      Accept: "text/x-markdown",
-      text: "| thead 1 | thrad 444 | thread 3 |\r\n|---------|---------|----------|\r\n| td      | td| td |",
+    return await octokit.request("POST /markdown", {
+      text: "**sdf**",
       mode: "gfm",
       context: "octo-org/octo-repo",
     });
@@ -134,5 +133,3 @@ const api = {
 };
 
 export default api;
-// perPage: issueData?.PageList.perpage,
-// page: issueData?.PageList.pageNumber,
