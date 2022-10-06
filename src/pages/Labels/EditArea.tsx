@@ -278,7 +278,7 @@ const EditArea = ({ data, onCancel, callback }) => {
     for (let i in newData) {
       if (oldData[i] !== newData[i]) {
         i !== "name" && (patchData[i] = newData[i]);
-        i == "name" && (patchData["new_name"] = newData[i]);
+        i === "name" && (patchData["new_name"] = newData[i]);
       }
     }
     return patchData;

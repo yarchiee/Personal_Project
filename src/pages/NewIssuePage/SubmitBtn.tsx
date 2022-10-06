@@ -1,8 +1,9 @@
-const SubmitBtn = () => {
+const SubmitBtn = ({ postCreateIssue }) => {
   return (
     <button
+      onClick={postCreateIssue}
       type="submit"
-      className="text-[#ffffff] bg-[#94d3a2] w-full text-center font-semibold h-[32px] mt-[24px] text-[14px] rounded-[6px] border border-solid border-[#d0d7de] md:hidden"
+      className="text-[#ffffff] bg-[#94d3a2] w-full text-center font-semibold h-[32px] mt-[24px] text-[14px] rounded-[6px] border border-solid border-[#d0d7de] md:block md:w-[145px] md:h-[32px] md:mt-auto"
     >
       Submit new issue
     </button>

@@ -7,7 +7,17 @@ function NewIssuePageMain() {
   const [markdown, setMarkdown] = useState("");
   const [labelData, setLabelData] = useState([]);
   const [isAssignee, setIsAssignee] = useState([]);
-
+  const [typeIssuelName, setTypeIssueName] = useState("");
+  const [leaveComment, setLeaveComment] = useState("");
+  const newCreateIssue = {
+    title: typeIssuelName,
+    comment: leaveComment,
+    assignees: [],
+    labels: [],
+  };
+  const postCreateIssue = async () => {
+    await api.createIssue();
+  };
   const getMarkDown = () => {
     api.markDown().then((res) => {
       setMarkdown(res.data);
@@ -32,7 +42,16 @@ function NewIssuePageMain() {
   useEffect(fetchAssigneeData, []);
   return (
     <>
-      <NewIssuePage labelData={labelData} isAssignee={isAssignee} />
+      <NewIssuePage
+        labelData={labelData}
+        isAssignee={isAssignee}
+        typeIssuelName={typeIssuelName}
+        setTypeIssueName={setTypeIssueName}
+        leaveComment={leaveComment}
+        setLeaveComment={setLeaveComment}
+        newCreateIssue={newCreateIssue}
+        postCreateIssue={postCreateIssue}
+      />
 
       {/* <div dangerouslySetInnerHTML={{ __html: markdown }} /> */}
     </>

@@ -88,6 +88,17 @@ const api = {
     });
   },
 
+  async createIssue() {
+    return await octokit.request("POST /repos/{owner}/{repo}/issues", {
+      ...setting,
+      title: "Found a bug",
+      body: "I'm having a problem with this.",
+      assignees: ["octocat"],
+      milestone: 1,
+      labels: ["bug"],
+    });
+  },
+
   ///////////////get data///////////////////
   async listRepositoryIssue() {
     const res = await octokit.request(

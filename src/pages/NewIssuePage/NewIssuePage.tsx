@@ -2,18 +2,36 @@ import SubmitBtn from "./SubmitBtn";
 import SideBarArea from "./SideBarArea";
 import EditArea from "./EditArea";
 
-function NewIssuePage({ labelData, isAssignee }) {
+function NewIssuePage({
+  labelData,
+  isAssignee,
+  typeIssuelName,
+  setTypeIssueName,
+  leaveComment,
+  setLeaveComment,
+  newCreateIssue,
+  postCreateIssue,
+}) {
   return (
-    <div className="mt-[24px] px-[16px] md:flex  md:px-[32px] ">
+    <div className="mt-[24px] px-[16px] md:flex  md:px-[32px] xl:mx-[119.6px]">
       <img
         src="https://avatars.githubusercontent.com/u/105163825?s=80&v=4"
         alt=""
         className=" hidden md:rounded-[50%] md:w-[40px] md:h-[40px] md:block md:mr-[15px] md:border md:border-solid md:border-[#d0d7de]"
       />
 
-      <EditArea />
+      <EditArea
+        typeIssuelName={typeIssuelName}
+        setTypeIssueName={setTypeIssueName}
+        leaveComment={leaveComment}
+        setLeaveComment={setLeaveComment}
+        newCreateIssue={newCreateIssue}
+        postCreateIssue={postCreateIssue}
+      />
       <SideBarArea labelData={labelData} isAssignee={isAssignee} />
-      <SubmitBtn />
+      <div className="block md:hidden">
+        <SubmitBtn postCreateIssue={postCreateIssue} />
+      </div>
     </div>
   );
 }

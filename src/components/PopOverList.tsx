@@ -1,47 +1,73 @@
-import { XIcon, CheckIcon } from "@primer/octicons-react";
+import { XIcon, CheckIcon, PencilIcon } from "@primer/octicons-react";
 import Input from "./Input";
-// type PopOverProps = {
-//   label: string;
-//   values: string[];
-//   selected: Set<string>;
-//   setSelected: Dispatch<SetStateAction<Set<string>>>;
-// };
-const labelslist = [
-  {
-    name: "123lll26",
-    des: "123",
-    color: "bg-[#acacac]",
-    usercustomname: "elaine",
-  },
-  {
-    name: "123456",
-    des: "123",
-    color: "bg-[#7F1D1D]",
-  },
-  {
-    name: "bug",
-    des: "fixed it",
-    color: "bg-[#f29513]",
-  },
-  {
-    name: "fight",
-    des: "",
-    color: "bg-[#7F1D1D]",
-    usercustomname: "elaine",
-  },
-  {
-    name: "new label1321",
-    des: "123",
-    color: "bg-[#7F1D1D]",
-  },
-  {
-    name: "new",
-    des: "new label",
-    color: "bg-[#7F1D1D]",
-  },
-];
 
-export default function PopOverList({ labelData, isAssignee }) {
+export default function PopOverList({ list, type, callback }) {
+  const matchChildAssign = (child) => {
+    return (
+      <>
+        <img
+          className="w-[20px] h-[20px] mr-[5px]"
+          src={child.avatar_url}
+          alt=""
+        />
+        <div className="leading-tight min-w-0">
+          <div className="flex items-center">
+            <div className="font-semibold text-[#24292f] truncate sm:pt-[2px]">
+              {child.login}
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+  const matchChild = (item) => {
+    const matchChildLabel = (child) => {
+      return (
+        <>
+          <span
+            style={{ backgroundColor: `#${child.color}` }}
+            className={`mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
+          />
+          <div className="leading-tight min-w-0">
+            <div className="flex flex-col">
+              <div className="font-medium text-[#24292f] truncate sm:pt-[2px]">
+                {child.name}
+              </div>
+              <div className="font-normal text-[#57606a] mt-1 truncate">
+                {child.description}
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    };
+    switch (type) {
+      case "label":
+        return matchChildLabel(item);
+      case "assignee":
+        return matchChildAssign(item);
+      default:
+        return "";
+    }
+  };
+  const forMapItem = (element, index) => {
+    const child = matchChild(element);
+    return (
+      <a
+        key={element.id}
+        href="#/"
+        className={`flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b ${
+          list.length - 1 !== index ? "border-solid" : "border-none"
+        } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
+      >
+        <div className="flex items-start mr-2">
+          <CheckIcon fill={"#000000"} />
+        </div>
+        {child}
+      </a>
+    );
+  };
+  const child = list.map(forMapItem);
   return (
     <div className="sm:relative">
       <div className="text-[14px] sm:text-[12px]">
@@ -49,67 +75,54 @@ export default function PopOverList({ labelData, isAssignee }) {
           className="
           fixed top-0 left-0 right-0 bottom-0 flex p-4 flex-col z-[100] sm:z-[1] sm:absolute sm:top-auto sm:right-auto sm:left-auto sm:bottom-auto sm:p-0  lg:right-0 lg:top-[-5px]"
         >
-          <div className="h-4/5 mt-0 bg-[#ffffff] border border-solid border-[rgba(0,0,0,0)] rounded-xl sm:border-[hsla(210,18%,87%,1)] sm:h-auto sm:max-h-[480px] sm:mt-2 sm:w-[300px]">
-            <header className="flex p-4 items-center border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pr-[7px] sm:pb-[7px]">
-              <span className="font-semibold flex-1">Filter by Label</span>
-              <button className="cursor-pointer p-4 m-[-16px] leading-none rounded-none">
+          <div className="h-4/5 mt-0 bg-[#ffffff] border border-solid border-[rgba(0,0,0,0)] rounded-xl sm:border-[hsla(210,18%,87%,1)] sm:h-auto sm:max-h-[520px] sm:mt-2 sm:w-[300px]">
+            <header className="flex p-4 items-center border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pr-[7px] sm:pb-[7px] ">
+              {type === "label" && (
+                <span className="font-semibold flex-1 text-[5px]">
+                  Apply labels to this issue
+                </span>
+              )}
+              {type === "assignee" && (
+                <span className="font-semibold flex-1 text-[5px]">
+                  Assign up to 10 people to this issue
+                </span>
+              )}
+              <button
+                className="cursor-pointer p-4 m-[-16px] leading-none rounded-none"
+                onClick={callback}
+              >
                 <XIcon fill={"#57606a"} />
               </button>
             </header>
             <div className="p-4 m-0 border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:p-2">
-              <Input />
+              <Input type={type} />
             </div>
             <div className="overflow-y-auto max-h-[calc(100%-126px)] sm:max-h-[calc(485px-82px)]">
-              <a
-                href="/"
-                className="flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]"
-              >
-                <div className="flex items-start mr-2">
-                  <CheckIcon fill={"#ffffff"} />
+              <div className="bg-[#f6f8fa] flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]">
+                {type === "assignee" && (
+                  <span className="font-semibold ">Suggestions</span>
+                )}
+                {/* {type === "assignee" && (
+                  <>
+                    <XIcon fill={"#57606a"} />
+                    <span className="font-semibold ">Clear assignees</span>
+                  </>
+                )} */}
+              </div>
+              {child}
+            </div>{" "}
+            {type === "label" && (
+              <div className="flex h-[32px] p-[8px] pl-[30px] border border-solid border-t-[#d0d7de] border-r-0 border-l-0 border-b-0">
+                <PencilIcon
+                  size={16}
+                  className={`mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
+                />
+
+                <div className="font-medium text-[#24292f] truncate sm:pt-[2px]">
+                  Edit labels
                 </div>
-                <span className="font-semibold">Unlabeled</span>
-              </a>
-              {labelslist.map((element, index) => {
-                return (
-                  <a
-                    href="/"
-                    className={`flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b ${
-                      labelslist.length - 1 !== index
-                        ? "border-solid"
-                        : "border-none"
-                    } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
-                  >
-                    <div className="flex items-start mr-2">
-                      <CheckIcon fill={"#000000"} />
-                    </div>
-                    <span
-                      className={`${element.color} mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
-                    />
-                    <div className="leading-tight min-w-0">
-                      <div className="flex items-center">
-                        <div className="font-semibold text-[#24292f] truncate sm:pt-[2px]">
-                          {element.name}
-                        </div>
-                        {element?.usercustomname !== "" ? (
-                          <div className="font-normal text-[#57606a] ml-2 truncate sm:pt-[2px]">
-                            {element.des}
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                      {element.des !== "" ? (
-                        <div className="font-medium text-[#57606a] mt-1 truncate">
-                          {element.des}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

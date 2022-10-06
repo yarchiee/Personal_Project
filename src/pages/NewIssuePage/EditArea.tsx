@@ -26,6 +26,7 @@ import {
   MarkdownIcon,
 } from "@primer/octicons-react";
 import { useState } from "react";
+import api from "../../services/api";
 const toolIconList = [
   [<QuoteIcon />, <CodeIcon />, <LinkIcon />],
   [<MentionIcon />, <ImageIcon />, <CrossReferenceIcon />, <ReplyIcon />],
@@ -56,10 +57,27 @@ const toolIconList = [
     <ReplyIcon />,
   ],
 ];
-const EditArea = () => {
+const EditArea = ({
+  typeIssuelName,
+  setTypeIssueName,
+  leaveComment,
+  setLeaveComment,
+  newCreateIssue,
+  postCreateIssue,
+}) => {
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
   const [openWrite, setOpenWrite] = useState(true);
+  // const [typeIssuelName, setTypeIssueName] = useState("");
+  // const [leaveComment, setLeaveComment] = useState("");
+  // const [newCreateIssue, setNewCreateIssue] = useState({
+  //   title: typeIssuelName,
+  //   comment: leaveComment,
+  //   assignees: [],
+  //   labels: [],
+  // });
+
+  // console.log(newCreateIssue);
 
   const toggleEditTool = () => {
     setOpenEditModal(!openEditTool);
@@ -77,9 +95,11 @@ const EditArea = () => {
       <div className="md:border md:border-solid md:border-[#d0d7de] md:rounded-[6px]">
         <div className="md:p-[8px]">
           <input
+            value={typeIssuelName}
             type="text"
             placeholder="Title"
             className="mb-[16px] placeholder:text-[#6E7781] border  border-[#d0d7de] w-full h-[32px] bg-[#f6f8fa]  rounded-[6px] text-[16px] p-[8px] pl-[12px] pt-[12px] focus:border-[2px] focus:border-solid focus:border-[#0969da] focus:outline-none focus:shadow-innerblue md:mb-0"
+            onChange={(e) => setTypeIssueName(e.target.value)}
           />
         </div>
         <div>
@@ -150,7 +170,12 @@ const EditArea = () => {
             </div>
           )}
         </div>
-        {openWrite && <TextArea />}
+        {openWrite && (
+          <TextArea
+            leaveComment={leaveComment}
+            setLeaveComment={setLeaveComment}
+          />
+        )}
         {openMarkDown && <MarkDownArea />}
         <div className="text-[#57606a] mt-[16px] mb-[8px] leading-[20px] block  md:hidden">
           <InfoIcon size={16} className="mr-[4px] align-text-bottom" />
@@ -161,12 +186,13 @@ const EditArea = () => {
           </a>
           .
         </div>
-        <div className="text-[#57606a] hidden mr-[8px] ml-[8px] mb-[8px] leading-[32px] md:flex md:justify-between ">
+        <div className="text-[#57606a] hidden mr-[8px] ml-[8px] mb-[8px] md:leading-[32px] md:flex md:justify-between md:h-[32px] ">
           <div>
             <MarkdownIcon size={16} className="mr-[6px] align-text-bottom" />
             Style with Markdown is supported
           </div>
-          <SubmitBtn />
+
+          <SubmitBtn postCreateIssue={postCreateIssue} />
         </div>
       </div>
       <div className="text-[#57606a] mt-[8px] mb-[8px] leading-[20px] hidden md:block">
