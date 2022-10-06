@@ -115,36 +115,44 @@ const categories1 = [
   {
     name: "request",
     displayText: "Pull requests",
+    index: "c11",
   },
   {
     name: "issues",
     displayText: "Issues",
+    index: "c12",
   },
   {
     name: "marketplace",
     displayText: "Marketplace",
+    index: "c13",
   },
   {
     name: "explore",
     displayText: "Explore",
+    index: "c14",
   },
 ];
 const categories2 = [
   {
     name: "request",
     displayText: "Pulls",
+    index: "c21",
   },
   {
     name: "issues",
     displayText: "Issues",
+    index: "c22",
   },
   {
     name: "marketplace",
     displayText: "Marketplace",
+    index: "c23",
   },
   {
     name: "explore",
     displayText: "Explore",
+    index: "c24",
   },
 ];
 

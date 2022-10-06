@@ -1,19 +1,53 @@
 import { XIcon, CheckIcon, PencilIcon } from "@primer/octicons-react";
 import Input from "./Input";
-
-export default function PopOverList({ list, type, callback }) {
+import { uniq, remove } from "lodash";
+export default function PopOverList({
+  list,
+  type,
+  callback,
+  whoIsAssignee,
+  setWhoIsAssignee,
+  selectdLabel,
+  setSelectedLabel,
+  newCreateIssue,
+  check,
+  setCheck,
+}) {
+  console.log(newCreateIssue);
   const matchChildAssign = (child) => {
     return (
       <>
-        <img
-          className="w-[20px] h-[20px] mr-[5px]"
-          src={child.avatar_url}
-          alt=""
-        />
-        <div className="leading-tight min-w-0">
-          <div className="flex items-center">
-            <div className="font-semibold text-[#24292f] truncate sm:pt-[2px]">
-              {child.login}
+        <div
+          onClick={() => {
+            let tmp = [...whoIsAssignee];
+            if (check.includes(child.login)) {
+              setCheck(
+                remove(check, (loginText) => {
+                  return loginText !== child.login;
+                })
+              );
+              setWhoIsAssignee(
+                remove(whoIsAssignee, (assigneeText) => {
+                  return assigneeText !== child.login;
+                })
+              );
+              return;
+            }
+            setCheck(uniq([...check, child.login]));
+            setWhoIsAssignee([...tmp, child.login]);
+          }}
+          className="flex"
+        >
+          <img
+            className="w-[20px] h-[20px] mr-[5px]"
+            src={child.avatar_url}
+            alt=""
+          />
+          <div className="leading-tight min-w-0">
+            <div className="flex items-center">
+              <div className="font-semibold text-[#24292f] truncate sm:pt-[2px]">
+                {child.login}
+              </div>
             </div>
           </div>
         </div>
@@ -24,17 +58,39 @@ export default function PopOverList({ list, type, callback }) {
     const matchChildLabel = (child) => {
       return (
         <>
-          <span
-            style={{ backgroundColor: `#${child.color}` }}
-            className={`mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
-          />
-          <div className="leading-tight min-w-0">
-            <div className="flex flex-col">
-              <div className="font-medium text-[#24292f] truncate sm:pt-[2px]">
-                {child.name}
-              </div>
-              <div className="font-normal text-[#57606a] mt-1 truncate">
-                {child.description}
+          <div
+            onClick={() => {
+              let tmp = [...selectdLabel];
+              if (check.includes(child.name)) {
+                setCheck(
+                  remove(check, (labelText) => {
+                    return labelText !== child.name;
+                  })
+                );
+                setSelectedLabel(
+                  remove(selectdLabel, (labelText) => {
+                    return labelText !== child.name;
+                  })
+                );
+                return;
+              }
+              setCheck(uniq([...check, child.name]));
+              setSelectedLabel([...tmp, child.name]);
+            }}
+            className="flex"
+          >
+            <span
+              style={{ backgroundColor: `#${child.color}` }}
+              className={`mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
+            />
+            <div className="leading-tight min-w-0">
+              <div className="flex flex-col">
+                <div className="font-medium text-[#24292f] truncate sm:pt-[2px]">
+                  {child.name}
+                </div>
+                <div className="font-normal text-[#57606a] mt-1 truncate">
+                  {child.description}
+                </div>
               </div>
             </div>
           </div>
@@ -52,6 +108,7 @@ export default function PopOverList({ list, type, callback }) {
   };
   const forMapItem = (element, index) => {
     const child = matchChild(element);
+
     return (
       <a
         key={element.id}
@@ -61,7 +118,13 @@ export default function PopOverList({ list, type, callback }) {
         } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
       >
         <div className="flex items-start mr-2">
-          <CheckIcon fill={"#000000"} />
+          {check && (
+            <CheckIcon
+              fill={
+                check.includes(element.login || element.name) ? "#000" : "#fff"
+              }
+            />
+          )}
         </div>
         {child}
       </a>

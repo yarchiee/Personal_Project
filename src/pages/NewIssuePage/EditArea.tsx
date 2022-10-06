@@ -26,7 +26,6 @@ import {
   MarkdownIcon,
 } from "@primer/octicons-react";
 import { useState } from "react";
-import api from "../../services/api";
 const toolIconList = [
   [<QuoteIcon />, <CodeIcon />, <LinkIcon />],
   [<MentionIcon />, <ImageIcon />, <CrossReferenceIcon />, <ReplyIcon />],
@@ -68,16 +67,6 @@ const EditArea = ({
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
   const [openWrite, setOpenWrite] = useState(true);
-  // const [typeIssuelName, setTypeIssueName] = useState("");
-  // const [leaveComment, setLeaveComment] = useState("");
-  // const [newCreateIssue, setNewCreateIssue] = useState({
-  //   title: typeIssuelName,
-  //   comment: leaveComment,
-  //   assignees: [],
-  //   labels: [],
-  // });
-
-  // console.log(newCreateIssue);
 
   const toggleEditTool = () => {
     setOpenEditModal(!openEditTool);
@@ -118,8 +107,11 @@ const EditArea = ({
             </button>
             {openWrite && (
               <div className="hidden  md:hidden lg:flex lg:items-center lg:ml-auto">
-                {toolIconList[5].map((item) => (
-                  <div className="md:w-[24px] md:h-[24px] md:p-[4px] md:mx-[4px] md:text-[#57606a] ">
+                {toolIconList[5].map((item, index) => (
+                  <div
+                    key={index}
+                    className="md:w-[24px] md:h-[24px] md:p-[4px] md:mx-[4px] md:text-[#57606a] "
+                  >
                     {item}
                   </div>
                 ))}
@@ -137,23 +129,32 @@ const EditArea = ({
                 {openEditTool && <ChevronUpIcon className="" />}
               </div>
               <div className=" flex md:hidden">
-                {toolIconList[0].map((item) => (
-                  <div className="w-[32px] h-[32px] p-[8px] mx-[4px] text-[#57606a] ">
+                {toolIconList[0].map((item, index) => (
+                  <div
+                    key={index}
+                    className="w-[32px] h-[32px] p-[8px] mx-[4px] text-[#57606a] "
+                  >
                     {item}
                   </div>
                 ))}
               </div>
               <div className=" flex md:hidden">
-                {toolIconList[1].map((item) => (
-                  <div className="w-[32px] h-[32px] p-[8px] mx-[4px] text-[#57606a] ">
+                {toolIconList[1].map((item, index) => (
+                  <div
+                    key={index}
+                    className="w-[32px] h-[32px] p-[8px] mx-[4px] text-[#57606a] "
+                  >
                     {item}
                   </div>
                 ))}
               </div>
 
               <div className="hidden  md:flex  lg:hidden ">
-                {toolIconList[5].map((item) => (
-                  <div className="md:w-[24px] md:h-[24px] md:p-[4px] md:mx-[4px] md:text-[#57606a] ">
+                {toolIconList[5].map((item, index) => (
+                  <div
+                    key={index}
+                    className="md:w-[24px] md:h-[24px] md:p-[4px] md:mx-[4px] md:text-[#57606a] "
+                  >
                     {item}
                   </div>
                 ))}
@@ -162,8 +163,11 @@ const EditArea = ({
           )}
           {openEditTool && (
             <div className="flex pl-[8px]">
-              {toolIconList[4].map((item) => (
-                <div className="w-[32px] h-[32px] p-[8px] mx-[4px] text-[#57606a] ">
+              {toolIconList[4].map((item, index) => (
+                <div
+                  key={index}
+                  className="w-[32px] h-[32px] p-[8px] mx-[4px] text-[#57606a] "
+                >
                   {item}
                 </div>
               ))}
@@ -192,7 +196,10 @@ const EditArea = ({
             Style with Markdown is supported
           </div>
 
-          <SubmitBtn postCreateIssue={postCreateIssue} />
+          <SubmitBtn
+            postCreateIssue={postCreateIssue}
+            typeIssuelName={typeIssuelName}
+          />
         </div>
       </div>
       <div className="text-[#57606a] mt-[8px] mb-[8px] leading-[20px] hidden md:block">

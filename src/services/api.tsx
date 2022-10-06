@@ -88,14 +88,15 @@ const api = {
     });
   },
 
-  async createIssue() {
+  async createIssue(data) {
+    console.log(data);
+
     return await octokit.request("POST /repos/{owner}/{repo}/issues", {
       ...setting,
-      title: "Found a bug",
-      body: "I'm having a problem with this.",
-      assignees: ["octocat"],
-      milestone: 1,
-      labels: ["bug"],
+      title: data.title,
+      body: data.body,
+      assignees: data.assignees,
+      labels: data.labels,
     });
   },
 

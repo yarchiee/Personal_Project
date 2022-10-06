@@ -11,6 +11,12 @@ function NewIssuePage({
   setLeaveComment,
   newCreateIssue,
   postCreateIssue,
+  whoIsAssignee,
+  setWhoIsAssignee,
+  selectdLabel,
+  setSelectedLabel,
+  check,
+  setCheck,
 }) {
   return (
     <div className="mt-[24px] px-[16px] md:flex  md:px-[32px] xl:mx-[119.6px]">
@@ -28,9 +34,22 @@ function NewIssuePage({
         newCreateIssue={newCreateIssue}
         postCreateIssue={postCreateIssue}
       />
-      <SideBarArea labelData={labelData} isAssignee={isAssignee} />
+      <SideBarArea
+        labelData={labelData}
+        isAssignee={isAssignee}
+        whoIsAssignee={whoIsAssignee}
+        setWhoIsAssignee={setWhoIsAssignee}
+        selectdLabel={selectdLabel}
+        setSelectedLabel={setSelectedLabel}
+        newCreateIssue={newCreateIssue}
+        check={check}
+        setCheck={setCheck}
+      />
       <div className="block md:hidden">
-        <SubmitBtn postCreateIssue={postCreateIssue} />
+        <SubmitBtn
+          postCreateIssue={postCreateIssue}
+          typeIssuelName={typeIssuelName}
+        />
       </div>
     </div>
   );

@@ -2,9 +2,18 @@ import { GearIcon } from "@primer/octicons-react";
 import { useState } from "react";
 import PopOverList from "./PopOverList";
 
-export default function DiscussionItem({ title, type, list }) {
-  console.log(title);
-
+export default function DiscussionItem({
+  title,
+  type,
+  list,
+  whoIsAssignee,
+  setWhoIsAssignee,
+  selectdLabel,
+  setSelectedLabel,
+  newCreateIssue,
+  check,
+  setCheck,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDetail = () => {
     setIsOpen(!isOpen);
@@ -19,7 +28,18 @@ export default function DiscussionItem({ title, type, list }) {
             className="text-[#57606a] group-hover:text-[#0969da] cursor-pointer"
           />
         </summary>
-        <PopOverList callback={toggleDetail} list={list} type={type} />
+        <PopOverList
+          callback={toggleDetail}
+          list={list}
+          type={type}
+          whoIsAssignee={whoIsAssignee}
+          setWhoIsAssignee={setWhoIsAssignee}
+          selectdLabel={selectdLabel}
+          setSelectedLabel={setSelectedLabel}
+          newCreateIssue={newCreateIssue}
+          check={check}
+          setCheck={setCheck}
+        />
       </details>
       {title === "Assignees" && (
         <div>
