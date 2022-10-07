@@ -11,12 +11,16 @@ function NewIssuePageMain() {
   const [leaveComment, setLeaveComment] = useState("");
   const [whoIsAssignee, setWhoIsAssignee] = useState("");
   const [selectdLabel, setSelectedLabel] = useState("");
+  const [selectedAvatarUrl, setSelectedAvatarUrl] = useState("");
+  const [selectedLabelColor, setSelectedLabelColor] = useState("");
   const [check, setCheck] = useState<string[]>([]);
   const newCreateIssue = {
     title: typeIssuelName,
     body: leaveComment,
     assignees: [...whoIsAssignee],
     labels: [...selectdLabel],
+    avatarUrl: [...selectedAvatarUrl],
+    labelColor: [...selectedLabelColor],
   };
   const postCreateIssue = async () => {
     await api.createIssue(newCreateIssue);
@@ -60,6 +64,10 @@ function NewIssuePageMain() {
         setSelectedLabel={setSelectedLabel}
         check={check}
         setCheck={setCheck}
+        selectedAvatarUrl={selectedAvatarUrl}
+        setSelectedAvatarUrl={setSelectedAvatarUrl}
+        selectedLabelColor={selectedLabelColor}
+        setSelectedLabelColor={setSelectedLabelColor}
       />
 
       {/* <div dangerouslySetInnerHTML={{ __html: markdown }} /> */}

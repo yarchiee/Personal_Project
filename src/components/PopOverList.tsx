@@ -12,6 +12,10 @@ export default function PopOverList({
   newCreateIssue,
   check,
   setCheck,
+  selectedAvatarUrl,
+  setSelectedAvatarUrl,
+  selectedLabelColor,
+  setSelectedLabelColor,
 }) {
   console.log(newCreateIssue);
   const matchChildAssign = (child) => {
@@ -20,6 +24,7 @@ export default function PopOverList({
         <div
           onClick={() => {
             let tmp = [...whoIsAssignee];
+            let url = [...selectedAvatarUrl];
             if (check.includes(child.login)) {
               setCheck(
                 remove(check, (loginText) => {
@@ -31,10 +36,16 @@ export default function PopOverList({
                   return assigneeText !== child.login;
                 })
               );
+              setSelectedAvatarUrl(
+                remove(selectedAvatarUrl, (urlText) => {
+                  return urlText !== child.avatar_url;
+                })
+              );
               return;
             }
             setCheck(uniq([...check, child.login]));
             setWhoIsAssignee([...tmp, child.login]);
+            setSelectedAvatarUrl([...url, child.avatar_url]);
           }}
           className="flex"
         >
@@ -61,6 +72,7 @@ export default function PopOverList({
           <div
             onClick={() => {
               let tmp = [...selectdLabel];
+              let color = [...selectedLabelColor];
               if (check.includes(child.name)) {
                 setCheck(
                   remove(check, (labelText) => {
@@ -72,10 +84,16 @@ export default function PopOverList({
                     return labelText !== child.name;
                   })
                 );
+                setSelectedLabelColor(
+                  remove(selectedLabelColor, (colorText) => {
+                    return colorText !== child.color;
+                  })
+                );
                 return;
               }
               setCheck(uniq([...check, child.name]));
               setSelectedLabel([...tmp, child.name]);
+              setSelectedLabelColor([...color, child.color]);
             }}
             className="flex"
           >

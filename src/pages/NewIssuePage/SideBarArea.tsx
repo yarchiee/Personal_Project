@@ -10,6 +10,10 @@ const SideBarArea = ({
   newCreateIssue,
   check,
   setCheck,
+  selectedAvatarUrl,
+  setSelectedAvatarUrl,
+  selectedLabelColor,
+  setSelectedLabelColor,
 }) => {
   return (
     <div className=" md:w-[390px] md:mt-[16px] lg:w-[340px]">
@@ -24,6 +28,10 @@ const SideBarArea = ({
         newCreateIssue={newCreateIssue}
         check={check}
         setCheck={setCheck}
+        selectedAvatarUrl={selectedAvatarUrl}
+        setSelectedAvatarUrl={setSelectedAvatarUrl}
+        selectedLabelColor={selectedLabelColor}
+        setSelectedLabelColor={setSelectedLabelColor}
       />
       <DiscussionItem
         list={labelData}
@@ -36,6 +44,10 @@ const SideBarArea = ({
         newCreateIssue={newCreateIssue}
         check={check}
         setCheck={setCheck}
+        selectedAvatarUrl={selectedAvatarUrl}
+        setSelectedAvatarUrl={setSelectedAvatarUrl}
+        selectedLabelColor={selectedLabelColor}
+        setSelectedLabelColor={setSelectedLabelColor}
       />
       <div className=" border border-solid border-t-[hsla(210,18%,87%,1)] border-l-0 border-r-0 border-b-0 border-t-0">
         <details className="group">

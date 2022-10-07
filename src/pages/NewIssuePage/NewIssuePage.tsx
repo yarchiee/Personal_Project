@@ -17,6 +17,10 @@ function NewIssuePage({
   setSelectedLabel,
   check,
   setCheck,
+  selectedAvatarUrl,
+  setSelectedAvatarUrl,
+  selectedLabelColor,
+  setSelectedLabelColor,
 }) {
   return (
     <div className="mt-[24px] px-[16px] md:flex  md:px-[32px] xl:mx-[119.6px]">
@@ -44,6 +48,10 @@ function NewIssuePage({
         newCreateIssue={newCreateIssue}
         check={check}
         setCheck={setCheck}
+        selectedAvatarUrl={selectedAvatarUrl}
+        setSelectedAvatarUrl={setSelectedAvatarUrl}
+        selectedLabelColor={selectedLabelColor}
+        setSelectedLabelColor={setSelectedLabelColor}
       />
       <div className="block md:hidden">
         <SubmitBtn

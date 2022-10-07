@@ -1,6 +1,7 @@
 import { GearIcon } from "@primer/octicons-react";
 import { useState } from "react";
 import PopOverList from "./PopOverList";
+import LabelItem from "./LabelItem";
 
 export default function DiscussionItem({
   title,
@@ -13,7 +14,13 @@ export default function DiscussionItem({
   newCreateIssue,
   check,
   setCheck,
+  selectedAvatarUrl,
+  setSelectedAvatarUrl,
+  selectedLabelColor,
+  setSelectedLabelColor,
 }) {
+  console.log(selectdLabel);
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleDetail = () => {
     setIsOpen(!isOpen);
@@ -39,6 +46,10 @@ export default function DiscussionItem({
           newCreateIssue={newCreateIssue}
           check={check}
           setCheck={setCheck}
+          selectedAvatarUrl={selectedAvatarUrl}
+          setSelectedAvatarUrl={setSelectedAvatarUrl}
+          selectedLabelColor={selectedLabelColor}
+          setSelectedLabelColor={setSelectedLabelColor}
         />
       </details>
       {title === "Assignees" && (
@@ -48,6 +59,15 @@ export default function DiscussionItem({
         </div>
       )}
       {title === "Labels" && <div>None yet</div>}
+      {title === "Labels" &&
+        newCreateIssue.labelColor.map((item, index) => {
+          return (
+            <LabelItem
+              selectdLabel={selectdLabel[index]}
+              selectedLabelColor={selectedLabelColor[index]}
+            />
+          );
+        })}
     </div>
   );
 }
