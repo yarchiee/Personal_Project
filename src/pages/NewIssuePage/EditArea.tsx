@@ -80,8 +80,8 @@ const EditArea = ({
     setOpenMarkDown(false);
   };
   return (
-    <div className="md:w-full  md:mr-[16px]">
-      <div className="md:border md:border-solid md:border-[#d0d7de] md:rounded-[6px]">
+    <div className="md:w-full  md:mr-[16px] mb-[100px]">
+      <div className="md:border md:border-solid md:border-[#d0d7de] md:rounded-[6px] ">
         <div className="md:p-[8px]">
           <input
             value={typeIssuelName}

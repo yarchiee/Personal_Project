@@ -21,6 +21,7 @@ function NewIssuePageMain() {
     labels: [...selectdLabel],
     avatarUrl: [...selectedAvatarUrl],
     labelColor: [...selectedLabelColor],
+    checkone: [...check],
   };
   const postCreateIssue = async () => {
     await api.createIssue(newCreateIssue);

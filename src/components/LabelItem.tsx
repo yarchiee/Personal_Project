@@ -10,6 +10,9 @@ const IssueLabel = styled.div`
   height: 18px;
   margin: auto 0;
   display: inline-block;
+  margin-right: 6px;
+  margin-top: 3px;
+  margin-bottom: 3px;
 `;
 const IssueLabelP = styled.p<PropsTypes>`
   padding: 0 10px;

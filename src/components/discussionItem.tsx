@@ -25,6 +25,13 @@ export default function DiscussionItem({
   const toggleDetail = () => {
     setIsOpen(!isOpen);
   };
+  const assignYourself = () => {
+    setSelectedAvatarUrl([
+      "https://avatars.githubusercontent.com/u/105163825?v=4",
+    ]);
+    setWhoIsAssignee(["yarchiee"]);
+    setCheck(["yarchiee"]);
+  };
   return (
     <div className=" mb-[14px] pb-[14px] border border-solid border-b-[hsla(210,18%,87%,1)] border-l-0 border-r-0 border-t-0">
       <details className="group" open={isOpen}>
@@ -76,7 +83,9 @@ export default function DiscussionItem({
       ) : title === "Assignees" ? (
         <div>
           No one -
-          <button className="hover:text-[#0969da]">assign yourself</button>
+          <button onClick={assignYourself} className="hover:text-[#0969da]">
+            assign yourself
+          </button>
         </div>
       ) : (
         <div>None yet</div>

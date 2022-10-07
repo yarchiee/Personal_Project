@@ -1,4 +1,4 @@
-import DiscussionItem from "../../components/discussionItem";
+import DiscussionItem from "../../components/DiscussionItem";
 
 const SideBarArea = ({
   labelData,

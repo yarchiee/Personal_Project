@@ -24,6 +24,7 @@ export default function PopOverList({
         <div
           onClick={() => {
             let tmp = [...whoIsAssignee];
+            let che = [...check];
             let url = [...selectedAvatarUrl];
             if (check.includes(child.login)) {
               setCheck(
@@ -43,20 +44,20 @@ export default function PopOverList({
               );
               return;
             }
-            setCheck(uniq([...check, child.login]));
-            setWhoIsAssignee([...tmp, child.login]);
-            setSelectedAvatarUrl([...url, child.avatar_url]);
+            setCheck(uniq([...che, child.login]));
+            setWhoIsAssignee(uniq([...tmp, child.login]));
+            setSelectedAvatarUrl(uniq([...url, child.avatar_url]));
           }}
-          className="flex"
+          className="flex grow"
         >
           <img
-            className="w-[20px] h-[20px] mr-[5px]"
+            className="w-[20px] h-[20px] mr-[5px] rounded-[50%]"
             src={child.avatar_url}
             alt=""
           />
-          <div className="leading-tight min-w-0">
+          <div className="w-full leading-tight min-w-0">
             <div className="flex items-center">
-              <div className="font-semibold text-[#24292f] truncate sm:pt-[2px]">
+              <div className={`w-full font-semibold truncate md:pt-[2px]`}>
                 {child.login}
               </div>
             </div>
@@ -103,7 +104,7 @@ export default function PopOverList({
             />
             <div className="leading-tight min-w-0">
               <div className="flex flex-col">
-                <div className="font-medium text-[#24292f] truncate sm:pt-[2px]">
+                <div className="font-medium text-[#24292f] truncate md:pt-[2px]">
                   {child.name}
                 </div>
                 <div className="font-normal text-[#57606a] mt-1 truncate">
@@ -131,17 +132,28 @@ export default function PopOverList({
       <a
         key={element.id}
         href="#/"
-        className={`flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b ${
+        className={`flex items-start w-full p-4 overflow-hidden text-left cursor-pointer border-b ${
           list.length - 1 !== index ? "border-solid" : "border-none"
-        } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
+        } 
+      ${
+        type === "assignee"
+          ? "hover:bg-[#0969DA] hover:text-[#ffffff] "
+          : "hover:bg-[rgba(234,238,242,0.5)] hover:text-[#24292f]"
+      }
+      ${type === "assignee" ? "hover:text-[#ffffff]" : "hover:text-[#24292f]"}
+        border-b-[hsla(210,18%,87%,1)] md:pt-[7px] md:pb-[7px]`}
       >
         <div className="flex items-start mr-2">
           {check && (
-            <CheckIcon
-              fill={
-                check.includes(element.login || element.name) ? "#000" : "#fff"
-              }
-            />
+            <div
+              className={`${
+                check.includes(element.login || element.name)
+                  ? "opacity-100"
+                  : "opacity-0"
+              }`}
+            >
+              <CheckIcon />
+            </div>
           )}
         </div>
         {child}
@@ -149,15 +161,17 @@ export default function PopOverList({
     );
   };
   const child = list.map(forMapItem);
+  const clearAll = () => {
+    setSelectedAvatarUrl([]);
+    setWhoIsAssignee([]);
+    setCheck([]);
+  };
   return (
-    <div className="sm:relative">
-      <div className="text-[14px] sm:text-[12px]">
-        <div
-          className="
-          fixed top-0 left-0 right-0 bottom-0 flex p-4 flex-col z-[100] sm:z-[1] sm:absolute sm:top-auto sm:right-auto sm:left-auto sm:bottom-auto sm:p-0  lg:right-0 lg:top-[-5px]"
-        >
-          <div className="h-4/5 mt-0 bg-[#ffffff] border border-solid border-[rgba(0,0,0,0)] rounded-xl sm:border-[hsla(210,18%,87%,1)] sm:h-auto sm:max-h-[520px] sm:mt-2 sm:w-[300px]">
-            <header className="flex p-4 items-center border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pr-[7px] sm:pb-[7px] ">
+    <div className="md:relative">
+      <div className="text-[14px] md:text-[12px]">
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex p-4 flex-col z-[100] md:z-[1] md:absolute  md:left-auto md:bottom-auto md:p-0  md:right-0 md:top-[-5px]">
+          <div className="h-4/5 mt-0 bg-[#ffffff] border border-solid border-[rgba(0,0,0,0)] rounded-xl md:border-[hsla(210,18%,87%,1)] md:h-auto md:max-h-[520px] md:mt-2 md:w-[300px]">
+            <header className="flex p-4 items-center border-b border-solid border-b-[hsla(210,18%,87%,1)] md:pt-[7px] md:pr-[7px] md:pb-[7px] ">
               {type === "label" && (
                 <span className="font-semibold flex-1 text-[5px]">
                   Apply labels to this issue
@@ -175,23 +189,30 @@ export default function PopOverList({
                 <XIcon fill={"#57606a"} />
               </button>
             </header>
-            <div className="p-4 m-0 border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:p-2">
+            <div className="p-4 m-0 border-b border-solid border-b-[hsla(210,18%,87%,1)] md:p-2">
               <Input type={type} />
             </div>
-            <div className="overflow-y-auto max-h-[calc(100%-126px)] sm:max-h-[calc(485px-82px)]">
-              <div className="bg-[#f6f8fa] flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]">
+            <div className="overflow-y-auto max-h-[calc(100%-126px)] md:max-h-[calc(485px-82px)]">
+              {newCreateIssue.assignees.length > 0 && (
+                <a
+                  onClick={clearAll}
+                  href="#/"
+                  className="flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b border-solid border-b-[hsla(210,18%,87%,1)] md:pt-[7px] md:pb-[7px] hover:bg-[#0969DA] hover:text-[#fff]"
+                >
+                  <div className="flex items-start mr-2 ">
+                    <XIcon />
+                  </div>
+                  <span className="font-semibold">Clear assignees</span>
+                </a>
+              )}
+
+              <div className="bg-[#f6f8fa] flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b border-solid border-b-[hsla(210,18%,87%,1)] md:pt-[7px] md:pb-[7px]">
                 {type === "assignee" && (
                   <span className="font-semibold ">Suggestions</span>
                 )}
-                {/* {type === "assignee" && (
-                  <>
-                    <XIcon fill={"#57606a"} />
-                    <span className="font-semibold ">Clear assignees</span>
-                  </>
-                )} */}
               </div>
               {child}
-            </div>{" "}
+            </div>
             {type === "label" && (
               <div className="flex h-[32px] p-[8px] pl-[30px] border border-solid border-t-[#d0d7de] border-r-0 border-l-0 border-b-0">
                 <PencilIcon
@@ -199,7 +220,7 @@ export default function PopOverList({
                   className={`mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
                 />
 
-                <div className="font-medium text-[#24292f] truncate sm:pt-[2px]">
+                <div className="font-medium text-[#24292f] truncate md:pt-[2px]">
                   Edit labels
                 </div>
               </div>
