@@ -180,7 +180,12 @@ const EditArea = ({
             setLeaveComment={setLeaveComment}
           />
         )}
-        {openMarkDown && <MarkDownArea />}
+        {openMarkDown && (
+          <MarkDownArea
+            leaveComment={leaveComment}
+            setLeaveComment={setLeaveComment}
+          />
+        )}
         <div className="text-[#57606a] mt-[16px] mb-[8px] leading-[20px] block  md:hidden">
           <InfoIcon size={16} className="mr-[4px] align-text-bottom" />
           Remember, contributions to this repository should follow our

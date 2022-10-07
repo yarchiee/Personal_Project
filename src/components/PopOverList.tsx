@@ -96,18 +96,18 @@ export default function PopOverList({
               setSelectedLabel([...tmp, child.name]);
               setSelectedLabelColor([...color, child.color]);
             }}
-            className="flex"
+            className="flex w-full"
           >
             <span
               style={{ backgroundColor: `#${child.color}` }}
               className={`mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
             />
-            <div className="leading-tight min-w-0">
-              <div className="flex flex-col">
-                <div className="font-medium text-[#24292f] truncate md:pt-[2px]">
+            <div className="leading-tight min-w-0 grow">
+              <div className="flex flex-col grow">
+                <div className="font-medium text-[#24292f] truncate md:pt-[2px] grow">
                   {child.name}
                 </div>
-                <div className="font-normal text-[#57606a] mt-1 truncate">
+                <div className="font-normal text-[#57606a] mt-1 truncate grow ">
                   {child.description}
                 </div>
               </div>
@@ -143,7 +143,7 @@ export default function PopOverList({
       ${type === "assignee" ? "hover:text-[#ffffff]" : "hover:text-[#24292f]"}
         border-b-[hsla(210,18%,87%,1)] md:pt-[7px] md:pb-[7px]`}
       >
-        <div className="flex items-start mr-2">
+        <div className="flex items-start mr-2  ">
           {check && (
             <div
               className={`${
