@@ -26,7 +26,7 @@ export default function DiscussionItem({
     setIsOpen(!isOpen);
   };
   return (
-    <div className=" mb-[16px] pb-[16px] border border-solid border-b-[hsla(210,18%,87%,1)] border-l-0 border-r-0 border-t-0">
+    <div className=" mb-[14px] pb-[14px] border border-solid border-b-[hsla(210,18%,87%,1)] border-l-0 border-r-0 border-t-0">
       <details className="group" open={isOpen}>
         <summary className="flex text-[#57606a] hover:text-[#0969da] list-none font-semibold justify-between py-[4px] mb-[4px] group-hover:text-[#0969da] ">
           {title}
@@ -52,22 +52,35 @@ export default function DiscussionItem({
           setSelectedLabelColor={setSelectedLabelColor}
         />
       </details>
-      {title === "Assignees" && (
+
+      {title === "Labels" && newCreateIssue.labelColor.length > 0 ? (
+        newCreateIssue.labelColor.map((item, index) => (
+          <LabelItem
+            selectdLabel={selectdLabel[index]}
+            selectedLabelColor={selectedLabelColor[index]}
+          />
+        ))
+      ) : title === "Assignees" && newCreateIssue.avatarUrl.length > 0 ? (
+        newCreateIssue.avatarUrl.map((item, index) => (
+          <div className="flex mt-[8px] mb-[8px]">
+            <img className="w-[20px] h-[20px] mr-[12px]" src={item} alt="" />
+            <div className="leading-tight min-w-0">
+              <div className="flex items-center">
+                <div className="font-semibold text-[#24292f] truncate sm:pt-[2px]">
+                  {whoIsAssignee[index]}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      ) : title === "Assignees" ? (
         <div>
           No one -
           <button className="hover:text-[#0969da]">assign yourself</button>
         </div>
+      ) : (
+        <div>None yet</div>
       )}
-      {title === "Labels" && <div>None yet</div>}
-      {title === "Labels" &&
-        newCreateIssue.labelColor.map((item, index) => {
-          return (
-            <LabelItem
-              selectdLabel={selectdLabel[index]}
-              selectedLabelColor={selectedLabelColor[index]}
-            />
-          );
-        })}
     </div>
   );
 }
