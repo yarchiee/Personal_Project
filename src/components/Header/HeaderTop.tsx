@@ -25,7 +25,6 @@ const ThreeBarsIconControl = styled.div`
   }
 `;
 const MarkGithubIconControl = styled.div`
-  /* display: none; */
   @media screen and (max-width: 768px) {
     position: absolute;
     right: 48%;
@@ -202,11 +201,11 @@ function Header() {
             <HeaderSearchInput placeholder="Search or jump to..."></HeaderSearchInput>
           </HeaderSearch>
           <CategoryLinks>
-            {categories1.map(({ displayText }) => (
-              <CategoryLink1>{displayText}</CategoryLink1>
+            {categories1.map(({ displayText, index }) => (
+              <CategoryLink1 key={index}>{displayText}</CategoryLink1>
             ))}
-            {categories2.map(({ displayText }) => (
-              <CategoryLink2>{displayText}</CategoryLink2>
+            {categories2.map(({ displayText, index }) => (
+              <CategoryLink2 key={index}>{displayText}</CategoryLink2>
             ))}
           </CategoryLinks>
         </HeaderItem>

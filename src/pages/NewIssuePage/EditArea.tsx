@@ -2,7 +2,10 @@ import { useNavigate } from "react-router-dom";
 import SubmitBtn from "./SubmitBtn";
 import TextArea from "./TextArea";
 import MarkDownArea from "./MarkDownArea";
-
+import { useRef, useState } from "react";
+import TextareaMarkdown, {
+  TextareaMarkdownRef,
+} from "textarea-markdown-editor";
 import {
   TypographyIcon,
   ChevronUpIcon,
@@ -23,31 +26,48 @@ import {
   InfoIcon,
   MarkdownIcon,
 } from "@primer/octicons-react";
-import { useState } from "react";
+
 const toolIconList = [
-  [<QuoteIcon />, <CodeIcon />, <LinkIcon />],
-  [<MentionIcon />, <ImageIcon />, <CrossReferenceIcon />, <ReplyIcon />],
-  [<HeadingIcon />, <BoldIcon />, <ItalicIcon />],
-  [<BoldIcon />, <ListOrderedIcon />, <TasklistIcon />],
   [
-    <HeadingIcon />,
-    <BoldIcon />,
-    <ItalicIcon />,
-    <ListUnorderedIcon />,
-    <ListOrderedIcon />,
-    <TasklistIcon />,
+    <QuoteIcon className="block-quotes" />,
+    <CodeIcon className="code" />,
+    <LinkIcon className="link" />,
   ],
   [
-    <HeadingIcon />,
-    <BoldIcon />,
-    <ItalicIcon />,
-    <QuoteIcon />,
-    <CodeIcon />,
-    <LinkIcon />,
+    <MentionIcon />,
+    <ImageIcon className="image" />,
+    <CrossReferenceIcon />,
+    <ReplyIcon />,
+  ],
+  [
+    <HeadingIcon className="h3" />,
+    <BoldIcon className="bold" />,
+    <ItalicIcon className="italic" />,
+  ],
+  [
+    <BoldIcon className="bold" />,
+    <ListOrderedIcon className="ordered-list" />,
+    <TasklistIcon className="tasklist" />,
+  ],
+  [
+    <HeadingIcon className="h3" />,
+    <BoldIcon className="bold" />,
+    <ItalicIcon className="italic" />,
+    <ListUnorderedIcon className="unordered-list" />,
+    <ListOrderedIcon className="ordered-list" />,
+    <TasklistIcon className="tasklist" />,
+  ],
+  [
+    <HeadingIcon className="h3" />,
+    <BoldIcon className="bold" />,
+    <ItalicIcon className="italic" />,
+    <QuoteIcon className="block-quotes" />,
+    <CodeIcon className="code" />,
+    <LinkIcon className="link" />,
 
-    <ListUnorderedIcon />,
-    <ListOrderedIcon />,
-    <TasklistIcon />,
+    <ListUnorderedIcon className="unordered-list" />,
+    <ListOrderedIcon className="ordered-list" />,
+    <TasklistIcon className="tasklist" />,
     <MentionIcon />,
 
     <CrossReferenceIcon />,
@@ -67,6 +87,7 @@ const EditArea = ({
   const [openWrite, setOpenWrite] = useState(true);
   const navigate = useNavigate();
   const REPOSITORY = "github-project";
+  const markdownref = useRef<TextareaMarkdownRef>(null);
 
   const toggleEditTool = () => {
     setOpenEditModal(!openEditTool);
@@ -109,8 +130,11 @@ const EditArea = ({
               <div className="hidden  md:hidden lg:flex lg:items-center lg:ml-auto">
                 {toolIconList[5].map((item, index) => (
                   <div
+                    onClick={() =>
+                      markdownref.current?.trigger(item.props.className)
+                    }
                     key={index}
-                    className="md:w-[24px] md:h-[24px] md:p-[4px] md:mx-[4px] md:text-[#57606a] "
+                    className="md:w-[24px] md:h-[24px] md:p-[4px] md:mx-[4px] md:text-[#57606a] hover:text-[#218bff] cursor-pointer"
                   >
                     {item}
                   </div>
@@ -131,6 +155,9 @@ const EditArea = ({
               <div className=" flex md:hidden">
                 {toolIconList[0].map((item, index) => (
                   <div
+                    onClick={() =>
+                      markdownref.current?.trigger(item.props.className)
+                    }
                     key={index}
                     className="w-[32px] h-[32px] p-[8px] mx-[4px] text-[#57606a] "
                   >
@@ -141,6 +168,9 @@ const EditArea = ({
               <div className=" flex md:hidden">
                 {toolIconList[1].map((item, index) => (
                   <div
+                    onClick={() =>
+                      markdownref.current?.trigger(item.props.className)
+                    }
                     key={index}
                     className="w-[32px] h-[32px] p-[8px] mx-[4px] text-[#57606a] "
                   >
@@ -152,6 +182,9 @@ const EditArea = ({
               <div className="hidden  md:flex  lg:hidden ">
                 {toolIconList[5].map((item, index) => (
                   <div
+                    onClick={() =>
+                      markdownref.current?.trigger(item.props.className)
+                    }
                     key={index}
                     className="md:w-[24px] md:h-[24px] md:p-[4px] md:mx-[4px] md:text-[#57606a] "
                   >
@@ -165,6 +198,9 @@ const EditArea = ({
             <div className="flex pl-[8px]">
               {toolIconList[4].map((item, index) => (
                 <div
+                  onClick={() =>
+                    markdownref.current?.trigger(item.props.className)
+                  }
                   key={index}
                   className="w-[32px] h-[32px] p-[8px] mx-[4px] text-[#57606a] "
                 >
@@ -176,6 +212,7 @@ const EditArea = ({
         </div>
         {openWrite && (
           <TextArea
+            ref={markdownref}
             leaveComment={leaveComment}
             setLeaveComment={setLeaveComment}
           />
