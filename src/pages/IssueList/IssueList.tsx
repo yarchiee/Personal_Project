@@ -7,9 +7,11 @@ import NoResult from "./NoResult";
 import { useState } from "react";
 
 const IssueContainer = styled.div`
-  padding: 0 32px;
+  padding: 0 119.6px;
   margin-top: 24px;
-  @media screen and (max-width: 1010px) {
+
+  @media screen and (max-width: 1380px) {
+    padding: 0 32px;
     margin-top: 16px;
   }
   @media screen and (max-width: 543px) {

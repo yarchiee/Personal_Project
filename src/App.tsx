@@ -42,11 +42,11 @@ function App() {
 
           <Route path={`/${REPOSITORY}/labels`} element={<Labels />}></Route>
 
+          <Route path={`/${REPOSITORY}`} element={<IssueList />}></Route>
           <Route
-            path={`/${REPOSITORY}/issuelist`}
-            element={<IssueList />}
+            path={`/${REPOSITORY}/newissuepage`}
+            element={<NewIssuePage />}
           ></Route>
-          <Route path={`/${REPOSITORY}`} element={<NewIssuePage />}></Route>
           <Route
             path={`/${REPOSITORY}/issuepage`}
             element={<IssuePage />}

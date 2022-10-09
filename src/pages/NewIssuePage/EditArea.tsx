@@ -1,6 +1,4 @@
-// import { useEffect, useState } from "react";
-// import { Link, useNavigate, useSearchParams } from "react-router-dom";
-// import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import SubmitBtn from "./SubmitBtn";
 import TextArea from "./TextArea";
 import MarkDownArea from "./MarkDownArea";
@@ -67,6 +65,8 @@ const EditArea = ({
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
   const [openWrite, setOpenWrite] = useState(true);
+  const navigate = useNavigate();
+  const REPOSITORY = "github-project";
 
   const toggleEditTool = () => {
     setOpenEditModal(!openEditTool);
@@ -202,8 +202,10 @@ const EditArea = ({
           </div>
 
           <SubmitBtn
+            onClick={() => navigate(`/${REPOSITORY}`)}
             postCreateIssue={postCreateIssue}
             typeIssuelName={typeIssuelName}
+            disabled={true}
           />
         </div>
       </div>

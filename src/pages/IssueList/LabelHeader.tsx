@@ -1,18 +1,20 @@
 import { XIcon, CheckIcon, IssueOpenedIcon } from "@primer/octicons-react";
+import { useNavigate } from "react-router-dom";
 import LabelMilestone from "./LabelMilestone";
 import styled from "styled-components";
-
 import NewIssueBtn from "./NewIssueBtn";
 import FilterInput from "./FilterInput";
 
 const RepoContentContainer = styled.div`
   margin-top: 24px;
-  padding: 0 32px;
+  padding: 0 119.6px;
   font-size: 14px;
+  @media screen and (max-width: 1380px) {
+    padding: 0 32px;
+  }
 `;
 const SubNavBox = styled.div`
   display: flex;
-  /* margin-bottom: 24px; */
   width: 100%;
 
   @media screen and (max-width: 1010px) {
@@ -35,6 +37,8 @@ function LabelHeader({
   setClearStatus,
 }) {
   const labelHeaderList = ["is:open", "is:closed"];
+  const navigate = useNavigate();
+  const REPOSITORY = "github-project";
   return (
     <RepoContentContainer>
       <SubNavBox>
@@ -48,7 +52,9 @@ function LabelHeader({
         </div>
         <div className="justify-between flex md:ml-auto w-full md:w-auto">
           <LabelMilestone labelData={labelData} />
-          <NewIssueBtn />
+          <NewIssueBtn
+            onClick={() => navigate(`/${REPOSITORY}/newissuepage`)}
+          />
         </div>
       </SubNavBox>
       <div className="block my-[24px] md:hidden">
@@ -103,7 +109,6 @@ function LabelHeader({
               let tmp = [...query];
               tmp.forEach((element) => {
                 if (element.includes("open")) {
-                  console.log("open", element);
                   tmp = tmp.filter((item) => item !== element);
                 }
               });

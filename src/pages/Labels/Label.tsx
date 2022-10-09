@@ -159,7 +159,6 @@ const Label = ({ data, callback }) => {
             <ThreeDotBotton
               onClick={() => {
                 setOpenReviseBtn(!openReviseBtn);
-                console.log(openReviseBtn);
               }}
             >
               <ThreeDotIcon size={16} />

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import SubmitBtn from "./SubmitBtn";
 import SideBarArea from "./SideBarArea";
 import EditArea from "./EditArea";
@@ -22,6 +23,8 @@ function NewIssuePage({
   selectedLabelColor,
   setSelectedLabelColor,
 }) {
+  const navigate = useNavigate();
+  const REPOSITORY = "github-project";
   return (
     <div className="mt-[24px] px-[16px] md:flex  md:px-[32px] xl:mx-[119.6px]">
       <img
@@ -55,6 +58,8 @@ function NewIssuePage({
       />
       <div className="block md:hidden">
         <SubmitBtn
+          disabled={true}
+          onClick={() => navigate(`/${REPOSITORY}`)}
           postCreateIssue={postCreateIssue}
           typeIssuelName={typeIssuelName}
         />

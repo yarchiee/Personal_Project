@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Label from "./Label";
 import NewLabel from "./NewLabel";
 import SearchAllLabels from "./SeachAllLabels";
