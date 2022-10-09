@@ -54,7 +54,6 @@ const HeaderSearchInput = styled.input`
   border: none;
   line-height: 30px;
   padding: 0 12px;
-  /* color: #ffffffb3; */
   @media screen and (max-width: 768px) {
     display: none;
   }
