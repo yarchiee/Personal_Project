@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import SubmitBtn from "./SubmitBtn";
 import SideBarArea from "./SideBarArea";
-import EditArea from "./EditArea";
+import EditArea from "./CreateArea";
 
 function NewIssuePage({
   labelData,

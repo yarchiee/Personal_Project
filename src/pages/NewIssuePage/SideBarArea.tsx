@@ -15,6 +15,7 @@ const SideBarArea = ({
   selectedLabelColor,
   setSelectedLabelColor,
 }) => {
+  console.log(labelData);
   return (
     <div className=" md:w-[390px] md:mt-[16px] lg:w-[340px]">
       <DiscussionItem

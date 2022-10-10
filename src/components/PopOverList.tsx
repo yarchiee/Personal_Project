@@ -161,6 +161,8 @@ export default function PopOverList({
     );
   };
   const child = list.map(forMapItem);
+  console.log(list);
+
   const clearAll = () => {
     setSelectedAvatarUrl([]);
     setWhoIsAssignee([]);

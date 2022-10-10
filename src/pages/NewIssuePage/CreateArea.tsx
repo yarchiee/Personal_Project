@@ -74,7 +74,7 @@ const toolIconList = [
     <ReplyIcon />,
   ],
 ];
-const EditArea = ({
+const CreateArea = ({
   typeIssuelName,
   setTypeIssueName,
   leaveComment,
@@ -259,4 +259,4 @@ const EditArea = ({
   );
 };
 
-export default EditArea;
+export default CreateArea;

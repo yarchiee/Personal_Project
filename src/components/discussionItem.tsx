@@ -19,7 +19,7 @@ export default function DiscussionItem({
   selectedLabelColor,
   setSelectedLabelColor,
 }) {
-  console.log(selectdLabel);
+  console.log(list);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleDetail = () => {
