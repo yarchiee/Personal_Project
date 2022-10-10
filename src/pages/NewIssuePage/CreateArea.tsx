@@ -101,7 +101,7 @@ const CreateArea = ({
     setOpenMarkDown(false);
   };
   return (
-    <div className="md:w-full  md:mr-[16px] mb-[100px]">
+    <div className="md:w-full  md:mr-[16px] md:mb-[100px] mb-[30px] ">
       <div className="md:border md:border-solid md:border-[#d0d7de] md:rounded-[6px] ">
         <div className="md:p-[8px]">
           <input
@@ -232,7 +232,7 @@ const CreateArea = ({
           </a>
           .
         </div>
-        <div className="text-[#57606a] hidden mr-[8px] ml-[8px] mb-[8px] md:leading-[32px] md:flex md:justify-between md:h-[32px] ">
+        <div className="text-[#57606a] hidden mr-[8px] ml-[8px] mb-[8px] md:leading-[32px] md:flex md:justify-between md:h-[32px] mt-[10px] ">
           <div>
             <MarkdownIcon size={16} className="mr-[6px] align-text-bottom" />
             Style with Markdown is supported

@@ -1,6 +1,7 @@
 import { XIcon, CheckIcon, PencilIcon } from "@primer/octicons-react";
 import Input from "./Input";
 import { uniq, remove } from "lodash";
+import { useState } from "react";
 export default function PopOverList({
   list,
   type,
@@ -17,8 +18,10 @@ export default function PopOverList({
   selectedLabelColor,
   setSelectedLabelColor,
 }) {
-  console.log(newCreateIssue);
+  const [searchLabelInputText, setSearchLabelInputText] = useState("");
   const matchChildAssign = (child) => {
+    if (searchLabelInputText && !child.name.includes(searchLabelInputText))
+      return <></>;
     return (
       <>
         <div
@@ -68,6 +71,8 @@ export default function PopOverList({
   };
   const matchChild = (item) => {
     const matchChildLabel = (child) => {
+      if (searchLabelInputText && !child.name.includes(searchLabelInputText))
+        return <></>;
       return (
         <>
           <div
@@ -161,7 +166,6 @@ export default function PopOverList({
     );
   };
   const child = list.map(forMapItem);
-  console.log(list);
 
   const clearAll = () => {
     setSelectedAvatarUrl([]);
@@ -192,7 +196,11 @@ export default function PopOverList({
               </button>
             </header>
             <div className="p-4 m-0 border-b border-solid border-b-[hsla(210,18%,87%,1)] md:p-2">
-              <Input type={type} />
+              <Input
+                type={type}
+                searchLabelInputText={searchLabelInputText}
+                setSearchLabelInputText={setSearchLabelInputText}
+              />
             </div>
             <div className="overflow-y-auto max-h-[calc(100%-126px)] md:max-h-[calc(485px-82px)]">
               {newCreateIssue.assignees.length > 0 && (
@@ -216,13 +224,13 @@ export default function PopOverList({
               {child}
             </div>
             {type === "label" && (
-              <div className="flex h-[32px] p-[8px] pl-[30px] border border-solid border-t-[#d0d7de] border-r-0 border-l-0 border-b-0">
+              <div className="hover:bg-[rgba(234,238,242,0.5)] cursor-pointer flex h-[32px] p-[8px] pl-[30px] border border-solid border-t-[#d0d7de] border-r-0 border-l-0 border-b-0">
                 <PencilIcon
                   size={16}
                   className={`mt-px rounded-[2em] w-[1em] h-[1em] mr-2 text-[14px]`}
                 />
 
-                <div className="font-medium text-[#24292f] truncate md:pt-[2px]">
+                <div className="font-medium text-[#24292f] truncate md:pt-[2px]  ">
                   Edit labels
                 </div>
               </div>

@@ -15,7 +15,6 @@ const SideBarArea = ({
   selectedLabelColor,
   setSelectedLabelColor,
 }) => {
-  console.log(labelData);
   return (
     <div className=" md:w-[390px] md:mt-[16px] lg:w-[340px]">
       <DiscussionItem
@@ -52,7 +51,7 @@ const SideBarArea = ({
       />
       <div className=" border border-solid border-t-[hsla(210,18%,87%,1)] border-l-0 border-r-0 border-b-0 border-t-0">
         <details className="group">
-          <summary className="flex text-[#57606a]  list-none font-semibold justify-between py-[4px] mb-[4px] group-hover:text-[#0969da]">
+          <summary className="flex text-[#57606a]  list-none font-semibold justify-between py-[4px] mb-[4px] group-hover:text-[#0969da] cursor-pointer">
             Helpful resources
           </summary>
         </details>

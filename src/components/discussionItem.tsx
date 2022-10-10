@@ -19,8 +19,6 @@ export default function DiscussionItem({
   selectedLabelColor,
   setSelectedLabelColor,
 }) {
-  console.log(list);
-
   const [isOpen, setIsOpen] = useState(false);
   const toggleDetail = () => {
     setIsOpen(!isOpen);
@@ -35,7 +33,7 @@ export default function DiscussionItem({
   return (
     <div className=" mb-[14px] pb-[14px] border border-solid border-b-[hsla(210,18%,87%,1)] border-l-0 border-r-0 border-t-0">
       <details className="group" open={isOpen}>
-        <summary className="flex text-[#57606a] hover:text-[#0969da] list-none font-semibold justify-between py-[4px] mb-[4px] group-hover:text-[#0969da] ">
+        <summary className="flex text-[#57606a] hover:text-[#0969da] list-none font-semibold justify-between py-[4px] mb-[4px] group-hover:text-[#0969da] cursor-pointer">
           {title}
           <GearIcon
             size={16}
