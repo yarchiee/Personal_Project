@@ -76,6 +76,7 @@ const CategoryLink1 = styled.a`
   }
 `;
 const CategoryLink2 = styled.a`
+  display: none;
   @media screen and (max-width: 1011.9px) {
     font-size: 14px;
     color: #fff;
