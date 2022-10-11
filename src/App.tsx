@@ -17,9 +17,7 @@ function App() {
     [] as unknown as repoLabelArr
   );
   const [selectedEdit, setSelectedEdit] = useState<number>();
-  const returnContext = () => {
-    // console.log(selectedEdit);
-  };
+  const returnContext = () => {};
   useEffect(returnContext, [selectedEdit]);
   return (
     <>
@@ -48,7 +46,7 @@ function App() {
             element={<NewIssuePage />}
           ></Route>
           <Route
-            path={`/${REPOSITORY}/issuepage`}
+            path={`/${REPOSITORY}/issuepage/:issueNumber`}
             element={<IssuePage />}
           ></Route>
           <Route

@@ -6,6 +6,7 @@ import {
   SkipIcon,
 } from "@primer/octicons-react";
 import { CommentIcon } from "@primer/octicons-react";
+import { useNavigate } from "react-router-dom";
 
 function calculateTime(createTime: string): string {
   const currentTime = Date.now();
@@ -34,6 +35,7 @@ function calculateTime(createTime: string): string {
 
 const ListItem = ({ data, isOpenIssue }) => {
   const time = calculateTime(data.created_at);
+  const navigate = useNavigate();
   return (
     <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] hover:bg-[rgba(234,238,242,0.5)] ">
       {data.state_reason === "completed" ? (
@@ -45,7 +47,14 @@ const ListItem = ({ data, isOpenIssue }) => {
       )}
 
       <div className="px-2">
-        <span className="cursor-pointer text-[14px] font-semibold leading-[21.6px] mr-[5px] hover:text-[#0969da]">
+        <span
+          className="cursor-pointer text-[14px] font-semibold leading-[21.6px] mr-[5px] hover:text-[#0969da]"
+          onClick={(e) => {
+            console.log("i am hereeeeeee");
+            navigate(`/github-project/issuepage/${data.number}`);
+            e.stopPropagation();
+          }}
+        >
           {data.title}
         </span>
         {data.labels.map((item) => {

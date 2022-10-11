@@ -142,6 +142,39 @@ const api = {
     const result = res.data;
     return result;
   },
+  async getIssueCommentsPer() {
+    const res = await octokit.request(
+      "GET /repos/{owner}/{repo}/issues/comments/{comment_id}",
+      {
+        ...setting,
+        comment_id: 1260647455,
+      }
+    );
+    const result = res.data;
+    return result;
+  },
+  async getTimeLineEvent() {
+    const res = await octokit.request(
+      "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline",
+      {
+        ...setting,
+        issue_number: 7,
+      }
+    );
+    const result = res.data;
+    return result;
+  },
+  async getAnIssue() {
+    const res = await octokit.request(
+      "GET /repos/{owner}/{repo}/issues/{issue_number}",
+      {
+        ...setting,
+        issue_number: 7,
+      }
+    );
+    const result = res.data;
+    return result;
+  },
 };
 
 export default api;
