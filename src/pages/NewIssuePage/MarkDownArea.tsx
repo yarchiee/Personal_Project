@@ -27,7 +27,7 @@ const MarkDownArea = ({ leaveComment, setLeaveComment }) => {
 
       <div
         className="hidde h-[231px] ml-[10px] md:block lg:mt-[10px] prose"
-        dangerouslySetInnerHTML={{ __html: marked(leaveComment) }}
+        dangerouslySetInnerHTML={{ __html: marked(leaveComment ?? "") }}
       ></div>
     </div>
   );

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { BrowserRouter } from "react-router-dom";
 
 import CreateArea from "../CreateArea";
 // import DiscussionItem from "../../../components/DiscussionItem";
@@ -13,16 +14,18 @@ export default {
 };
 
 const Template = (args) => (
-  <div
-    style={{
-      position: "absolute",
-      width: "100%",
-      top: "20%",
-      left: "30%",
-    }}
-  >
-    <CreateArea {...args} />
-  </div>
+  <BrowserRouter>
+    <div
+      style={{
+        position: "absolute",
+        width: "80%",
+        top: "10%",
+        left: "10%",
+      }}
+    >
+      <CreateArea {...args} />
+    </div>
+  </BrowserRouter>
 );
 export const Default = Template.bind({});
 Default.args = {
