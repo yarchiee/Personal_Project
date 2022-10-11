@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import SubmitBtn from "./SubmitBtn";
 import SideBarArea from "./SideBarArea";
-import EditArea from "./CreateArea";
+import CreateArea from "./CreateArea";
 
 function NewIssuePage({
   labelData,
@@ -33,7 +33,7 @@ function NewIssuePage({
         className=" hidden md:rounded-[50%] md:w-[40px] md:h-[40px] md:block md:mr-[15px] md:border md:border-solid md:border-[#d0d7de]"
       />
 
-      <EditArea
+      <CreateArea
         typeIssuelName={typeIssuelName}
         setTypeIssueName={setTypeIssueName}
         leaveComment={leaveComment}

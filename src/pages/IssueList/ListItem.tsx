@@ -35,6 +35,7 @@ function calculateTime(createTime: string): string {
 
 const ListItem = ({ data, isOpenIssue }) => {
   const time = calculateTime(data.created_at);
+  const REPOSITORY = "github-project";
   const navigate = useNavigate();
   return (
     <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] hover:bg-[rgba(234,238,242,0.5)] ">
@@ -51,7 +52,7 @@ const ListItem = ({ data, isOpenIssue }) => {
           className="cursor-pointer text-[14px] font-semibold leading-[21.6px] mr-[5px] hover:text-[#0969da]"
           onClick={(e) => {
             console.log("i am hereeeeeee");
-            navigate(`/github-project/issuepage/${data.number}`);
+            navigate(`/${REPOSITORY}/issuepage/${data.number}`);
             e.stopPropagation();
           }}
         >

@@ -1,9 +1,9 @@
-// import { useEffect, useState } from "react";
-// import { Link, useNavigate, useSearchParams } from "react-router-dom";
-// import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-function IssuePage() {
-  return <>IssuePage</>;
+function IssuePage({}) {
+  let { userId } = useParams();
+  return <></>;
 }
 
 export default IssuePage;
