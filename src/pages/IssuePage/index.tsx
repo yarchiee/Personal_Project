@@ -26,9 +26,6 @@ function IssuePageMain() {
     issueNumber: issueNumber,
   };
 
-  // console.log(newCreateIssue);
-  // console.log(perIssueData.author_association);
-
   const postCreateIssue = async () => {
     await api.createIssue(newCreateIssue);
   };
@@ -71,7 +68,6 @@ function IssuePageMain() {
         setSelectedAvatarUrl={setSelectedAvatarUrl}
         selectedLabelColor={selectedLabelColor}
         setSelectedLabelColor={setSelectedLabelColor}
-        typeIssuelName={typeIssuelName}
         setTypeIssueName={setTypeIssueName}
         leaveComment={leaveComment}
         setLeaveComment={setLeaveComment}

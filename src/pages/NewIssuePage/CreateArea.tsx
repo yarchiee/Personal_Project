@@ -242,8 +242,13 @@ const CreateArea = ({
           </div>
 
           <SubmitBtn
-            onClick={() => navigate(`/${REPOSITORY}`)}
-            postCreateIssue={postCreateIssue}
+            onClick={() => {
+              postCreateIssue().then(() => {
+                setTimeout(() => {
+                  navigate(`/${REPOSITORY}`);
+                }, 1000);
+              });
+            }}
             typeIssuelName={typeIssuelName}
             disabled={true}
           />

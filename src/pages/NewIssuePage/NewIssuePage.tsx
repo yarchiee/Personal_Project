@@ -61,7 +61,6 @@ function NewIssuePage({
         <SubmitBtn
           disabled={true}
           onClick={() => navigate(`/${REPOSITORY}`)}
-          postCreateIssue={postCreateIssue}
           typeIssuelName={typeIssuelName}
         />
       </div>

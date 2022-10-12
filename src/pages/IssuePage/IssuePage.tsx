@@ -7,6 +7,31 @@ import MobileAssignLabel from "./MobileAssignLabel";
 import HeaderEdit from "./HeaderEdit";
 import CommentItem from "./CommentItem";
 
+type Props = {
+  labelData: any;
+  isAssignee: any;
+  whoIsAssignee: any;
+  setWhoIsAssignee: any;
+  selectdLabel: any;
+  setSelectedLabel: any;
+  newCreateIssue: any;
+  check: any;
+  setCheck: any;
+  selectedAvatarUrl: any;
+  setSelectedAvatarUrl: any;
+  selectedLabelColor: any;
+  setSelectedLabelColor: any;
+  typeIssuelName?: string;
+  setTypeIssueName: any;
+  leaveComment: any;
+  setLeaveComment: any;
+  postCreateIssue: any;
+  timeLineEvent: any;
+  setTimeLineEvent: any;
+  perIssueData: any;
+  setPerIssueData: any;
+};
+
 function IssuePage({
   labelData,
   isAssignee,
@@ -30,7 +55,7 @@ function IssuePage({
   setTimeLineEvent,
   perIssueData,
   setPerIssueData,
-}) {
+}: Props) {
   return (
     <>
       <div className="mt-[24px] mb-[16px]  px-[16px] md:mx-[32px] xl:mx-[119.6px] ">
@@ -46,8 +71,6 @@ function IssuePage({
             <CommentItem data={perIssueData} />
 
             {timeLineEvent?.map((item, index) => {
-              console.log(item.event);
-
               if (item?.event !== "commented" && "mentioned") return <></>;
               return <CommentItem data={item} />;
             })}
@@ -86,12 +109,7 @@ function IssuePage({
           setSelectedLabelColor={setSelectedLabelColor}
         />
         <div className="block md:hidden">
-          <SubmitBtn
-            disabled={true}
-            onClick
-            postCreateIssue={postCreateIssue}
-            typeIssuelName={typeIssuelName}
-          />
+          <SubmitBtn disabled={true} onClick typeIssuelName={typeIssuelName} />
         </div>
       </div>
     </>
