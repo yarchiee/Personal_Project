@@ -81,6 +81,7 @@ const CreateArea = ({
   setLeaveComment,
   newCreateIssue,
   postCreateIssue,
+  displayTitle,
 }) => {
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
@@ -103,15 +104,17 @@ const CreateArea = ({
   return (
     <div className="md:w-full  md:mr-[16px] md:mb-[100px] mb-[30px] ">
       <div className="md:border md:border-solid md:border-[#d0d7de] md:rounded-[6px] ">
-        <div className="md:p-[8px]">
-          <input
-            value={typeIssuelName}
-            type="text"
-            placeholder="Title"
-            className="mb-[16px] placeholder:text-[#6E7781] border  border-[#d0d7de] w-full h-[32px] bg-[#f6f8fa]  rounded-[6px] text-[16px] p-[8px] pl-[12px] pt-[12px] focus:border-[2px] focus:border-solid focus:border-[#0969da] focus:outline-none focus:shadow-innerblue md:mb-0"
-            onChange={(e) => setTypeIssueName(e.target.value)}
-          />
-        </div>
+        {displayTitle && (
+          <div className="md:p-[8px]">
+            <input
+              value={typeIssuelName}
+              type="text"
+              placeholder="Title"
+              className="mb-[16px] placeholder:text-[#6E7781] border  border-[#d0d7de] w-full h-[32px] bg-[#f6f8fa]  rounded-[6px] text-[16px] p-[8px] pl-[12px] pt-[12px] focus:border-[2px] focus:border-solid focus:border-[#0969da] focus:outline-none focus:shadow-innerblue md:mb-0"
+              onChange={(e) => setTypeIssueName(e.target.value)}
+            />
+          </div>
+        )}
         <div>
           <div className="w-full h-[49px] mb-[8px] text-[#24292f] text-[14px]  md:border-b-[#d0d7de] md:pl-[8px] md:pr-[8px] md:pt-[8px] md:border-l-0 md:border-r-0 md:border-t-0 md:mb-[-1px] lg:flex ">
             <button

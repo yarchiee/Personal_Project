@@ -40,6 +40,7 @@ function NewIssuePage({
         setLeaveComment={setLeaveComment}
         newCreateIssue={newCreateIssue}
         postCreateIssue={postCreateIssue}
+        displayTitle={true}
       />
       <SideBarArea
         labelData={labelData}

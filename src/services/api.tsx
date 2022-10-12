@@ -153,23 +153,23 @@ const api = {
     const result = res.data;
     return result;
   },
-  async getTimeLineEvent() {
+  async getTimeLineEvent(newCreateIssue) {
     const res = await octokit.request(
       "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline",
       {
         ...setting,
-        issue_number: 7,
+        issue_number: newCreateIssue.issueNumber,
       }
     );
     const result = res.data;
     return result;
   },
-  async getAnIssue() {
+  async getAnIssue(newCreateIssue) {
     const res = await octokit.request(
       "GET /repos/{owner}/{repo}/issues/{issue_number}",
       {
         ...setting,
-        issue_number: 7,
+        issue_number: newCreateIssue.issueNumber,
       }
     );
     const result = res.data;
