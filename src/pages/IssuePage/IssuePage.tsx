@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import PopOver from "./PopOver";
 import SideBarArea from "../NewIssuePage/SideBarArea";
 import CreateArea from "../NewIssuePage/CreateArea";
 import SubmitBtn from "../NewIssuePage/SubmitBtn";
@@ -112,6 +112,7 @@ function IssuePage({
           <SubmitBtn disabled={true} onClick typeIssuelName={typeIssuelName} />
         </div>
       </div>
+      {/* <PopOver /> */}
     </>
   );
 }

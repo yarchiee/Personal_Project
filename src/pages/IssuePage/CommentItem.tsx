@@ -1,7 +1,16 @@
 import { KebabHorizontalIcon, SmileyIcon } from "@primer/octicons-react";
+import { useState } from "react";
 import AuthorTag from "../../components/AuthorTag";
+import PopOver from "./PopOver";
+
 const CommentItem = ({ data }) => {
   console.log(data);
+  // const [openReviseBtn, setOpenReviseBtn] = useState(true);
+  // const [editModal, setEditModal] = useState(false);
+
+  // const toggleEditModal = () => {
+  //   setEditModal(!editModal);
+  // };
 
   return (
     <>
@@ -37,17 +46,26 @@ const CommentItem = ({ data }) => {
               </div>
               <div className="flex">
                 <AuthorTag data={data} />
-                <div className="ml-[8px] ">
-                  <SmileyIcon
-                    size={16}
-                    fill="#57606a"
-                    className="hidden md:block h-[20px]"
-                  />
-                  <KebabHorizontalIcon
-                    size={16}
-                    fill="#57606a"
-                    className="ml-[8px] h-[20px]"
-                  />
+                <div className="ml-[8px] flex ">
+                  <details>
+                    <summary className="list-none">
+                      <SmileyIcon
+                        size={16}
+                        fill="#57606a"
+                        className="hidden md:block h-[20px]"
+                      />
+                    </summary>
+                  </details>
+                  <details>
+                    <summary className="list-none">
+                      <KebabHorizontalIcon
+                        size={16}
+                        fill="#57606a"
+                        className="ml-[8px] h-[20px]"
+                      />
+                    </summary>
+                    <PopOver />
+                  </details>
                 </div>
               </div>
             </div>
