@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SubmitBtn from "./SubmitBtn";
 import TextArea from "./TextArea";
 import MarkDownArea from "./MarkDownArea";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import CommentBtn from "../../components/CommentBtn";
 import TextareaMarkdown, {
   TextareaMarkdownRef,
 } from "textarea-markdown-editor";
@@ -26,6 +27,7 @@ import {
   InfoIcon,
   MarkdownIcon,
 } from "@primer/octicons-react";
+import api from "../../services/api";
 
 const toolIconList = [
   [
@@ -83,6 +85,10 @@ const CreateArea = ({
   postCreateIssue,
   displayTitle,
   displayMargin,
+  displaySubmit,
+  createData,
+  setcreateData,
+  setTimeLineEvent,
 }) => {
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
@@ -102,9 +108,25 @@ const CreateArea = ({
     setOpenWrite(true);
     setOpenMarkDown(false);
   };
+  const updateData = (obj) => {
+    // const newData = { ...createData, ...obj };
+    // setcreateData(newData);
+    // console.log(newData);
+
+    postCreateComment();
+  };
+  console.log(createData);
+
+  const postCreateComment = () => {
+    api.createComment(createData).then((res) => {
+      api.getTimeLineEvent(createData).then((res) => {
+        setTimeLineEvent(res);
+      });
+    });
+  };
   return (
     <div
-      className={`md:w-full ${
+      className={`w-full ${
         displayMargin ? "md:mr-[16px]" : "md:mr-0"
       }  md:mb-[100px] mb-[30px]`}
     >
@@ -223,6 +245,8 @@ const CreateArea = ({
             ref={markdownref}
             leaveComment={leaveComment}
             setLeaveComment={setLeaveComment}
+            createData={createData}
+            setcreateData={setcreateData}
           />
         )}
         {openMarkDown && (
@@ -245,18 +269,32 @@ const CreateArea = ({
             <MarkdownIcon size={16} className="mr-[6px] align-text-bottom" />
             Style with Markdown is supported
           </div>
+          {!displaySubmit && (
+            <CommentBtn
+              onClick={() => {
+                updateData(createData);
+                setcreateData({
+                  ...createData,
+                  body: "",
+                });
+              }}
+              disabled={false}
+            />
+          )}
 
-          <SubmitBtn
-            onClick={() => {
-              postCreateIssue().then(() => {
-                setTimeout(() => {
-                  navigate(`/${REPOSITORY}`);
-                }, 1000);
-              });
-            }}
-            typeIssuelName={typeIssuelName}
-            disabled={true}
-          />
+          {displaySubmit && (
+            <SubmitBtn
+              onClick={() => {
+                postCreateIssue().then(() => {
+                  setTimeout(() => {
+                    navigate(`/${REPOSITORY}`);
+                  }, 1000);
+                });
+              }}
+              typeIssuelName={typeIssuelName}
+              disabled={true}
+            />
+          )}
         </div>
       </div>
       <div className="text-[#57606a] mt-[8px] mb-[8px] leading-[20px] hidden md:block">

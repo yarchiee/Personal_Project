@@ -4,7 +4,7 @@ import TextArea from "../NewIssuePage/TextArea";
 import MarkDownArea from "../NewIssuePage/MarkDownArea";
 import UpdateBtn from "../../components/UpdateBtn";
 import CancelBtn from "../../components/CancelBtn";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TextareaMarkdown, {
   TextareaMarkdownRef,
 } from "textarea-markdown-editor";
@@ -28,6 +28,7 @@ import {
   InfoIcon,
   MarkdownIcon,
 } from "@primer/octicons-react";
+import api from "../../services/api";
 
 const toolIconList = [
   [
@@ -82,14 +83,28 @@ const EditCommentArea = ({
   toggleEditModal,
   editModal,
   setEditModal,
+  data,
 }) => {
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
   const [openWrite, setOpenWrite] = useState(true);
+  const [editData, setEditData] = useState({
+    comment_id: data.id,
+    body: leaveComment,
+  });
+  const isNewComment = (obj) => {
+    const newComment = { ...editData, ...obj };
+    setEditData(newComment);
+  };
+  const updateComment = () => {
+    api.updateComment().then((res) => {
+      // setPerIssueData(res);
+    });
+  };
+  useEffect(updateComment, []);
   //   const navigate = useNavigate();
   //   const REPOSITORY = "github-project";
   const markdownref = useRef<TextareaMarkdownRef>(null);
-
   const toggleEditTool = () => {
     setOpenEditModal(!openEditTool);
   };
@@ -104,11 +119,24 @@ const EditCommentArea = ({
 
   return (
     <div className={`md:w-full    mb-[30px]`}>
-      <div className="md:border md:border-solid md:border-[#d0d7de] md:rounded-[6px] ">
+      <div
+        className={`md:border md:border-solid md:border-[#d0d7de] md:rounded-[6px]
+        ${
+          data?.author_association === "OWNER"
+            ? " md:border-[#54AEFF66]"
+            : " md:border-[#d0d7de]"
+        }`}
+      >
         <div>
-          <div className="w-full h-[49px] mb-[8px] text-[#24292f] text-[14px]  md:border-b-[#d0d7de] md:pl-[8px] md:pr-[8px] md:pt-[8px] md:border-l-0 md:border-r-0 md:border-t-0 md:mb-[-1px] lg:flex ">
+          <div
+            className={` ${
+              data?.author_association === "OWNER"
+                ? "bg-[#ddf4ff] border-b-[#54AEFF66]"
+                : "bg-[#f6f8fa] border-b-[#d0d7de]"
+            } w-full h-[49px] mb-[8px] text-[#24292f] text-[14px]  md:border-b-[#d0d7de] md:pl-[8px] md:pr-[8px] md:pt-[8px] md:border-l-0 md:border-r-0 md:border-t-0 md:mb-[-1px] lg:flex  `}
+          >
             <button
-              className="border border-solid border-[#d0d7de] border-b-[#ffffff] w-[50%] h-full tracking-wide md:w-[70px] md:rounded-t-[6px]"
+              className="border border-solid border-[#d0d7de] border-b-[#ffffff] bg-[#fff] w-[50%] h-full tracking-wide md:w-[70px] md:rounded-t-[6px]"
               onClick={toggleWrite}
             >
               Write
@@ -208,6 +236,8 @@ const EditCommentArea = ({
             ref={markdownref}
             leaveComment={leaveComment}
             setLeaveComment={setLeaveComment}
+            createData={""}
+            setcreateData={""}
           />
         )}
         {openMarkDown && (
@@ -221,11 +251,15 @@ const EditCommentArea = ({
           <CancelBtn
             onClick={() => {
               toggleEditModal();
-              console.log("123");
             }}
             disabled={false}
           />
-          <UpdateBtn onClick={() => {}} disabled={false} />
+          <UpdateBtn
+            onClick={() => {
+              // isNewComment();
+            }}
+            disabled={false}
+          />
         </div>
       </div>
     </div>

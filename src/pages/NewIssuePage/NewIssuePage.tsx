@@ -42,6 +42,10 @@ function NewIssuePage({
         postCreateIssue={postCreateIssue}
         displayTitle={true}
         displayMargin={true}
+        displaySubmit={true}
+        createData={""}
+        setcreateData={""}
+        setTimeLineEvent={""}
       />
       <SideBarArea
         labelData={labelData}

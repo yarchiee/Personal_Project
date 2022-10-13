@@ -51,12 +51,8 @@ const CommentItem = ({ data }) => {
                   <AuthorTag data={data} />
                   <div className="ml-[8px] flex ">
                     <details>
-                      <summary className="list-none">
-                        <SmileyIcon
-                          size={16}
-                          fill="#57606a"
-                          className="hidden md:block h-[20px]"
-                        />
+                      <summary className="list-none hidden md:block h-[20px]">
+                        <SmileyIcon size={16} fill="#57606a" />
                       </summary>
                     </details>
                     <details>
@@ -89,6 +85,7 @@ const CommentItem = ({ data }) => {
             toggleEditModal={toggleEditModal}
             editModal={editModal}
             setEditModal={setEditModal}
+            data={data}
           />
         )}
       </div>

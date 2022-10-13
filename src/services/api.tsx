@@ -173,7 +173,19 @@ const api = {
     const result = res.data;
     return result;
   },
+  async createComment(createData) {
+    console.log(createData);
 
+    const result = await octokit.request(
+      "POST /repos/{owner}/{repo}/issues/{issue_number}/comments",
+      {
+        ...setting,
+        issue_number: createData.issueNumber,
+        body: createData.body,
+      }
+    );
+    return result;
+  },
   async updateComment() {
     const result = await octokit.request(
       "PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}",
@@ -187,11 +199,26 @@ const api = {
   },
   async deleteComment() {
     const result = await octokit.request(
-      "PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}",
+      "DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}",
       {
         ...setting,
         comment_id: 10,
         body: "Me too",
+      }
+    );
+    return result;
+  },
+  async updateIssue() {
+    const result = await octokit.request(
+      "PATCH /repos/{owner}/{repo}/issues/{issue_number}",
+      {
+        ...setting,
+        issue_number: 10,
+        title: "Found a bug",
+        body: "I'm having a problem with this.",
+        assignees: ["octocat"],
+        state: "open",
+        labels: ["bug"],
       }
     );
     return result;

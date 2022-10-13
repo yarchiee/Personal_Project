@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import PopOver from "./PopOver";
 import SideBarArea from "../NewIssuePage/SideBarArea";
 import CreateArea from "../NewIssuePage/CreateArea";
 import SubmitBtn from "../NewIssuePage/SubmitBtn";
 import MobileAssignLabel from "./MobileAssignLabel";
 import HeaderEdit from "./HeaderEdit";
 import CommentItem from "./CommentItem";
+import api from "../../services/api";
+import { useParams } from "react-router-dom";
 
 type Props = {
   labelData: any;
@@ -56,6 +57,12 @@ function IssuePage({
   perIssueData,
   setPerIssueData,
 }: Props) {
+  let { issueNumber } = useParams();
+  const [createData, setcreateData] = useState({
+    issueNumber: Number(issueNumber),
+    body: leaveComment,
+  });
+
   return (
     <>
       <div className="mt-[24px] mb-[16px]  px-[16px] md:mx-[32px] xl:mx-[119.6px] md:px-0 ">
@@ -90,6 +97,10 @@ function IssuePage({
               postCreateIssue={postCreateIssue}
               displayTitle={false}
               displayMargin={false}
+              displaySubmit={false}
+              createData={createData}
+              setcreateData={setcreateData}
+              setTimeLineEvent={setTimeLineEvent}
             />
           </div>
         </div>
