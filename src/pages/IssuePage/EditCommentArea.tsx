@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import SubmitBtn from "./SubmitBtn";
-import TextArea from "./TextArea";
-import MarkDownArea from "./MarkDownArea";
+// import SubmitBtn from "../NewIssuePage/SubmitBtn";
+import TextArea from "../NewIssuePage/TextArea";
+import MarkDownArea from "../NewIssuePage/MarkDownArea";
+import UpdateBtn from "../../components/UpdateBtn";
+import CancelBtn from "../../components/CancelBtn";
 import { useRef, useState } from "react";
 import TextareaMarkdown, {
   TextareaMarkdownRef,
@@ -74,21 +76,18 @@ const toolIconList = [
     <ReplyIcon />,
   ],
 ];
-const CreateArea = ({
-  typeIssuelName,
-  setTypeIssueName,
+const EditCommentArea = ({
   leaveComment,
   setLeaveComment,
-  newCreateIssue,
-  postCreateIssue,
-  displayTitle,
-  displayMargin,
+  toggleEditModal,
+  editModal,
+  setEditModal,
 }) => {
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
   const [openWrite, setOpenWrite] = useState(true);
-  const navigate = useNavigate();
-  const REPOSITORY = "github-project";
+  //   const navigate = useNavigate();
+  //   const REPOSITORY = "github-project";
   const markdownref = useRef<TextareaMarkdownRef>(null);
 
   const toggleEditTool = () => {
@@ -102,24 +101,10 @@ const CreateArea = ({
     setOpenWrite(true);
     setOpenMarkDown(false);
   };
+
   return (
-    <div
-      className={`md:w-full ${
-        displayMargin ? "md:mr-[16px]" : "md:mr-0"
-      }  md:mb-[100px] mb-[30px]`}
-    >
+    <div className={`md:w-full    mb-[30px]`}>
       <div className="md:border md:border-solid md:border-[#d0d7de] md:rounded-[6px] ">
-        {displayTitle && (
-          <div className="md:p-[8px]">
-            <input
-              value={typeIssuelName}
-              type="text"
-              placeholder="Title"
-              className="mb-[16px] placeholder:text-[#6E7781] border  border-[#d0d7de] w-full h-[32px] bg-[#f6f8fa]  rounded-[6px] text-[16px] p-[8px] pl-[12px] pt-[12px] focus:border-[2px] focus:border-solid focus:border-[#0969da] focus:outline-none focus:shadow-innerblue md:mb-0"
-              onChange={(e) => setTypeIssueName(e.target.value)}
-            />
-          </div>
-        )}
         <div>
           <div className="w-full h-[49px] mb-[8px] text-[#24292f] text-[14px]  md:border-b-[#d0d7de] md:pl-[8px] md:pr-[8px] md:pt-[8px] md:border-l-0 md:border-r-0 md:border-t-0 md:mb-[-1px] lg:flex ">
             <button
@@ -231,45 +216,20 @@ const CreateArea = ({
             setLeaveComment={setLeaveComment}
           />
         )}
-        <div className="text-[#57606a] mt-[16px] mb-[8px] leading-[20px] block  md:hidden">
-          <InfoIcon size={16} className="mr-[4px] align-text-bottom" />
-          Remember, contributions to this repository should follow our
-          <a href="/" className="text-[#0969da]">
-            {" "}
-            GitHub Community Guidelines
-          </a>
-          .
-        </div>
-        <div className="text-[#57606a] hidden mr-[8px] ml-[8px] mb-[8px] md:leading-[32px] md:flex md:justify-between md:h-[32px] mt-[10px] ">
-          <div>
-            <MarkdownIcon size={16} className="mr-[6px] align-text-bottom" />
-            Style with Markdown is supported
-          </div>
 
-          <SubmitBtn
+        <div className="text-[#57606a]  md:mr-[8px] mr-0 md:ml-[8px] ml-0  mb-[8px] md:leading-[32px] flex justify-end md:h-[32px] mt-0 ">
+          <CancelBtn
             onClick={() => {
-              postCreateIssue().then(() => {
-                setTimeout(() => {
-                  navigate(`/${REPOSITORY}`);
-                }, 1000);
-              });
+              toggleEditModal();
+              console.log("123");
             }}
-            typeIssuelName={typeIssuelName}
-            disabled={true}
+            disabled={false}
           />
+          <UpdateBtn onClick={() => {}} disabled={false} />
         </div>
-      </div>
-      <div className="text-[#57606a] mt-[8px] mb-[8px] leading-[20px] hidden md:block">
-        <InfoIcon size={16} className="mr-[4px] align-text-bottom" />
-        Remember, contributions to this repository should follow our
-        <a href="/" className="text-[#0969da]">
-          {" "}
-          GitHub Community Guidelines
-        </a>
-        .
       </div>
     </div>
   );
 };
 
-export default CreateArea;
+export default EditCommentArea;

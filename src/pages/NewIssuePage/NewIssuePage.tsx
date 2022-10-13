@@ -41,6 +41,7 @@ function NewIssuePage({
         newCreateIssue={newCreateIssue}
         postCreateIssue={postCreateIssue}
         displayTitle={true}
+        displayMargin={true}
       />
       <SideBarArea
         labelData={labelData}

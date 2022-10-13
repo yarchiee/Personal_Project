@@ -89,8 +89,6 @@ const api = {
   },
 
   async createIssue(data) {
-    console.log(data);
-
     return await octokit.request("POST /repos/{owner}/{repo}/issues", {
       ...setting,
       title: data.title,
@@ -173,6 +171,29 @@ const api = {
       }
     );
     const result = res.data;
+    return result;
+  },
+
+  async updateComment() {
+    const result = await octokit.request(
+      "PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}",
+      {
+        ...setting,
+        comment_id: 1260647762,
+        body: "Me too",
+      }
+    );
+    return result;
+  },
+  async deleteComment() {
+    const result = await octokit.request(
+      "PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}",
+      {
+        ...setting,
+        comment_id: 10,
+        body: "Me too",
+      }
+    );
     return result;
   },
 };

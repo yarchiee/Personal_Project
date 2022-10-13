@@ -51,7 +51,12 @@ function IssuePageMain() {
     });
   };
   useEffect(getAnIssue, []);
-
+  const updateComment = () => {
+    api.updateComment().then((res) => {
+      // setPerIssueData(res);
+    });
+  };
+  useEffect(updateComment, []);
   return (
     <>
       <IssuePage

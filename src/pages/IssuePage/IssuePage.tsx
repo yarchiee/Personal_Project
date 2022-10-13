@@ -89,6 +89,7 @@ function IssuePage({
               newCreateIssue={newCreateIssue}
               postCreateIssue={postCreateIssue}
               displayTitle={false}
+              displayMargin={false}
             />
           </div>
         </div>
@@ -112,7 +113,6 @@ function IssuePage({
           <SubmitBtn disabled={true} onClick typeIssuelName={typeIssuelName} />
         </div>
       </div>
-      {/* <PopOver /> */}
     </>
   );
 }

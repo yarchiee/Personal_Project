@@ -262,7 +262,7 @@ const EditArea = ({ data, onCancel, callback }) => {
   });
   const handleBlur = () => setFieldValue(false);
   const handleFocus = () => setFieldValue(true);
-  console.log(fieldValue);
+
   const randomColor = () => {
     const newColor = {
       color: randomBase16(6),
