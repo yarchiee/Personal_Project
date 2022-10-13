@@ -58,7 +58,7 @@ function IssuePage({
 }: Props) {
   return (
     <>
-      <div className="mt-[24px] mb-[16px]  px-[16px] md:mx-[32px] xl:mx-[119.6px] ">
+      <div className="mt-[24px] mb-[16px]  px-[16px] md:mx-[32px] xl:mx-[119.6px] md:px-0 ">
         <HeaderEdit onClick perIssueData={perIssueData} />
         <div className="block md:hidden">
           <MobileAssignLabel perIssueData={perIssueData} />
