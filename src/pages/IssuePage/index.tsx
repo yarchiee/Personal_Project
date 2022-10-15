@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import IssuePage from "./IssuePage";
 import api from "../../services/api";
 function IssuePageMain() {
+  const navigate = useNavigate();
   const [timeLineEvent, setTimeLineEvent] = useState([]);
   const [perIssueData, setPerIssueData] = useState<any>();
   const [labelData, setLabelData] = useState([]);
@@ -25,7 +26,6 @@ function IssuePageMain() {
     checkone: [...check],
     issueNumber: issueNumber,
   };
-
   const postCreateIssue = async () => {
     await api.createIssue(newCreateIssue);
   };
@@ -41,14 +41,17 @@ function IssuePageMain() {
       console.log("TimeLine", res);
     });
   };
-  useEffect(getTimeLineEvent, []);
-
   const getAnIssue = () => {
-    api.getAnIssue(newCreateIssue).then((res) => {
-      setPerIssueData(res);
-      console.dir("PER", res);
-      // console.log(perIssueData);
-    });
+    api
+      .getAnIssue(newCreateIssue)
+      .then((res) => {
+        setPerIssueData(res);
+        console.dir("PER", res);
+        getTimeLineEvent();
+      })
+      .catch(() => {
+        navigate("/issues");
+      });
   };
   useEffect(getAnIssue, []);
 

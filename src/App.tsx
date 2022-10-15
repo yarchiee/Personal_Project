@@ -1,65 +1,34 @@
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home";
 import Labels from "./pages/Labels";
 import IssueList from "./pages/IssueList";
 import IssuePage from "./pages/IssuePage";
 import NewIssuePage from "./pages/NewIssuePage";
 // import Oauth from "./pages/Oauth/Oauth";
 import GithubOauth from "./pages/Oauth/GithubOAuth";
-import { ResetStyle, GlobalStyle } from "./components/globalStyle";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { SelectContext } from "./context/SelectContext";
-import { repoLabelArr } from "../src/type";
-import { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+
 const REPOSITORY = "github-project";
 function App() {
-  const [repoLabelArr, setRepoLabelArr] = useState<repoLabelArr>(
-    [] as unknown as repoLabelArr
-  );
-  const [selectedEdit, setSelectedEdit] = useState<number>();
-  const returnContext = () => {};
-  useEffect(returnContext, [selectedEdit]);
   return (
     <>
-      <SelectContext.Provider
-        value={{
-          repoLabelArr: [repoLabelArr, setRepoLabelArr],
-          selectedEdit: [selectedEdit, setSelectedEdit],
-        }}
-      >
-        <ResetStyle />
-        <GlobalStyle />
-        <Header />
-
-        <Routes>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="issues">
+            <Route index element={<IssueList />} />
+            <Route path=":issueNumber" element={<IssuePage />} />
+            <Route path="new" element={<NewIssuePage />}></Route>
+          </Route>
+          <Route path="labels" element={<Labels />}></Route>
+        </Route>
+      </Routes>
+      {/* <Routes>
+          <Route path="/" element={<IssueList />}></Route>
           <Route
-            path={`/${REPOSITORY}/github-ooath`}
+            path="github-ooath"
             element={<GithubOauth />}
-          ></Route>
-          {/* <Route path={`/${REPOSITORY}/ooath`} element={<Oauth />}></Route> */}
-
-          <Route path={`/${REPOSITORY}/labels`} element={<Labels />}></Route>
-
-          <Route path={`/${REPOSITORY}`} element={<IssueList />}></Route>
-          <Route
-            path={`/${REPOSITORY}/newissuepage`}
-            element={<NewIssuePage />}
-          ></Route>
-          <Route
-            path={`/${REPOSITORY}/issuepage`}
-            element={<IssuePage />}
-          ></Route>
-          <Route
-            path={`/${REPOSITORY}/issuepage/:issueNumber`}
-            element={<IssuePage />}
-          ></Route>
-          <Route
-            path={"*"}
-            element={<Navigate to={`/${REPOSITORY}`} replace />}
-          ></Route>
-        </Routes>
-        <Footer />
-      </SelectContext.Provider>
+          ></Route> */}
+      {/* <Route path={`ooath`} element={<Oauth />}></Route> */}
+      {/* </Routes> */}
     </>
   );
 }

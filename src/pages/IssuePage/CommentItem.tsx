@@ -4,7 +4,7 @@ import AuthorTag from "../../components/AuthorTag";
 import PopOver from "./PopOver";
 import EditCommentArea from "./EditCommentArea";
 
-const CommentItem = ({ data }) => {
+const CommentItem = ({ data, type, issueNumber }) => {
   console.log(data);
   const [openReviseBtn, setOpenReviseBtn] = useState(true);
   const [editModal, setEditModal] = useState(false);

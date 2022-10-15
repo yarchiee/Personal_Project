@@ -38,7 +38,7 @@ function LabelHeader({
 }) {
   const labelHeaderList = ["is:open", "is:closed"];
   const navigate = useNavigate();
-  const REPOSITORY = "github-project";
+
   return (
     <RepoContentContainer>
       <SubNavBox>
@@ -52,9 +52,7 @@ function LabelHeader({
         </div>
         <div className="justify-between flex md:ml-auto w-full md:w-auto">
           <LabelMilestone labelData={labelData} />
-          <NewIssueBtn
-            onClick={() => navigate(`/${REPOSITORY}/newissuepage`)}
-          />
+          <NewIssueBtn onClick={() => navigate("new")} />
         </div>
       </SubNavBox>
       <div className="block my-[24px] md:hidden">

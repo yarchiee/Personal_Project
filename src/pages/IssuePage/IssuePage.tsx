@@ -75,11 +75,21 @@ function IssuePage({
       <div className=" px-[16px] md:flex  md:px-[32px] xl:mx-[119.6px]">
         <div className="md:flex md:flex-col md:w-full md:mr-[20px]">
           <div className="md:w-full">
-            <CommentItem data={perIssueData} />
+            <CommentItem
+              type="issue"
+              issueNumber={createData.issueNumber}
+              data={perIssueData}
+            />
 
             {timeLineEvent?.map((item, index) => {
               if (item?.event !== "commented" && "mentioned") return <></>;
-              return <CommentItem data={item} />;
+              return (
+                <CommentItem
+                  type="comments"
+                  issueNumber={createData.issueNumber}
+                  data={item}
+                />
+              );
             })}
           </div>
           <div className="flex">

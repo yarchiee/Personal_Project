@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { KebabHorizontalIcon } from "@primer/octicons-react";
+import { useNavigate } from "react-router-dom";
 
+import { KebabHorizontalIcon } from "@primer/octicons-react";
 import {
   RepoIcon,
   CodeIcon,
@@ -60,6 +61,7 @@ const UnderLineNavItemPerEach = styled.div`
   display: flex;
   align-items: center;
   margin-right: 8px;
+  cursor: pointer;
 `;
 const UnderLineNavItemPerEach2 = styled(UnderLineNavItemPerEach)`
   line-height: 30px;
@@ -107,6 +109,8 @@ const ThreeDotBotton = styled.button`
   }
 `;
 const RepoHeaderContainer = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <RepoContainerHeader>
@@ -121,7 +125,7 @@ const RepoHeaderContainer = () => {
             <CodeIcon size={16} fill="#57606a" />
             <UnderLineNavItemText>Code</UnderLineNavItemText>
           </UnderLineNavItemPerEach>
-          <UnderLineNavItemChoose>
+          <UnderLineNavItemChoose onClick={() => navigate("/issues")}>
             <IssueOpenedIcon size={16} fill="#57606a" />
             <UnderLineNavItemText>Issues</UnderLineNavItemText>
           </UnderLineNavItemChoose>
