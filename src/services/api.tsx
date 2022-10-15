@@ -152,6 +152,8 @@ const api = {
     return result;
   },
   async getTimeLineEvent(newCreateIssue) {
+    console.log("k");
+    console.log(newCreateIssue);
     const res = await octokit.request(
       "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline",
       {
@@ -174,8 +176,6 @@ const api = {
     return result;
   },
   async createComment(createData) {
-    console.log(createData);
-
     const result = await octokit.request(
       "POST /repos/{owner}/{repo}/issues/{issue_number}/comments",
       {
@@ -186,24 +186,22 @@ const api = {
     );
     return result;
   },
-  async updateComment() {
+  async updateComment(obj) {
     const result = await octokit.request(
       "PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}",
       {
         ...setting,
-        comment_id: 1260647762,
-        body: "Me too",
+        ...obj,
       }
     );
     return result;
   },
-  async deleteComment() {
+  async deleteComment(id) {
     const result = await octokit.request(
       "DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}",
       {
         ...setting,
-        comment_id: 10,
-        body: "Me too",
+        comment_id: id,
       }
     );
     return result;

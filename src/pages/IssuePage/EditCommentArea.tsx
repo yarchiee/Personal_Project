@@ -83,6 +83,8 @@ const EditCommentArea = ({
   toggleEditModal,
   editModal,
   setEditModal,
+  setTimeLineEvent,
+  setPerIssueData,
   data,
 }) => {
   const [openEditTool, setOpenEditModal] = useState(false);
@@ -90,20 +92,32 @@ const EditCommentArea = ({
   const [openWrite, setOpenWrite] = useState(true);
   const [editData, setEditData] = useState({
     comment_id: data.id,
-    body: leaveComment,
+    body: data.body,
   });
-  const isNewComment = (obj) => {
-    const newComment = { ...editData, ...obj };
-    setEditData(newComment);
+
+  const updateEditData = (obj) => {
+    const newData = { ...editData, ...obj };
+    setEditData(newData);
   };
   const updateComment = () => {
-    api.updateComment().then((res) => {
-      // setPerIssueData(res);
-    });
+    const patchData = {
+      comment_id: editData.comment_id,
+      body: editData.body,
+    };
+    api
+      .updateComment(patchData)
+      .then(() => {
+        setTimeout(() => {
+          api.getTimeLineEvent(editData).then((res) => {
+            setTimeLineEvent(res);
+          });
+        }, 1000);
+      })
+      .finally(() => {
+        toggleEditModal();
+      });
   };
-  useEffect(updateComment, []);
-  //   const navigate = useNavigate();
-  //   const REPOSITORY = "github-project";
+
   const markdownref = useRef<TextareaMarkdownRef>(null);
   const toggleEditTool = () => {
     setOpenEditModal(!openEditTool);
@@ -118,7 +132,9 @@ const EditCommentArea = ({
   };
 
   return (
-    <div className={`md:w-full    mb-[30px]`}>
+    <div
+      className={`md:w-full mb-[30px] relative pb-[16px] before:bg-[#d8dee4] before:w-[2px] before:absolute before:top-0 before:right-0 before:left-[16px] before:z-[-100] before:bottom-0`}
+    >
       <div
         className={`md:border md:border-solid md:border-[#d0d7de] md:rounded-[6px]
         ${
@@ -164,7 +180,7 @@ const EditCommentArea = ({
             )}
           </div>
           {openWrite && (
-            <div className="flex p-[8px] pb-0 h-[40px] text-[#57606a] md:h-[33px] md:border md:border-solid md:border-t-[#d0d7de] md:border-r-0 md:border-l-0 md:border-b-0 lg:hidden">
+            <div className="bg-[#fff] flex p-[8px] pb-0 h-[40px] text-[#57606a] md:h-[33px] md:border md:border-solid md:border-t-[#d0d7de] md:border-r-0 md:border-l-0 md:border-b-0 lg:hidden">
               <div
                 className="block mr-auto w-[60px] h-[32px] p-[8px] mx-[4px] text-[#57606a] md:hidden "
                 onClick={toggleEditTool}
@@ -234,32 +250,20 @@ const EditCommentArea = ({
         {openWrite && (
           <TextArea
             ref={markdownref}
-            leaveComment={leaveComment}
-            setLeaveComment={setLeaveComment}
-            createData={""}
-            setcreateData={""}
+            data={editData}
+            updateData={updateEditData}
           />
         )}
-        {openMarkDown && (
-          <MarkDownArea
-            leaveComment={leaveComment}
-            setLeaveComment={setLeaveComment}
-          />
-        )}
+        {openMarkDown && <MarkDownArea leaveComment={editData.body} />}
 
-        <div className="text-[#57606a]  md:mr-[8px] mr-0 md:ml-[8px] ml-0  mb-[8px] md:leading-[32px] flex justify-end md:h-[32px] mt-0 ">
+        <div className=" rounded-bl-[6px] rounded-br-[6px] bg-[#fff] text-[#57606a]  md:pr-[8px] pr-0 md:pl-[8px] pl-0  pb-[8px] md:leading-[32px] flex justify-end md:h-[52px] pt-[8px] ">
           <CancelBtn
             onClick={() => {
               toggleEditModal();
             }}
             disabled={false}
           />
-          <UpdateBtn
-            onClick={() => {
-              // isNewComment();
-            }}
-            disabled={false}
-          />
+          <UpdateBtn onClick={updateComment} disabled={false} />
         </div>
       </div>
     </div>

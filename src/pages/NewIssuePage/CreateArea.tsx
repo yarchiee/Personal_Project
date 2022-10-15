@@ -109,13 +109,8 @@ const CreateArea = ({
     setOpenMarkDown(false);
   };
   const updateData = (obj) => {
-    // const newData = { ...createData, ...obj };
-    // setcreateData(newData);
-    // console.log(newData);
-
     postCreateComment();
   };
-  console.log(createData);
 
   const postCreateComment = () => {
     api.createComment(createData).then((res) => {
@@ -243,18 +238,25 @@ const CreateArea = ({
         {openWrite && (
           <TextArea
             ref={markdownref}
-            leaveComment={leaveComment}
-            setLeaveComment={setLeaveComment}
-            createData={createData}
-            setcreateData={setcreateData}
+            data={createData}
+            updateData={setcreateData}
           />
         )}
-        {openMarkDown && (
-          <MarkDownArea
-            leaveComment={leaveComment}
-            setLeaveComment={setLeaveComment}
-          />
+        {!displaySubmit && (
+          <div className="flex justify-end md:hidden ">
+            <CommentBtn
+              onClick={() => {
+                updateData(createData);
+                setcreateData({
+                  ...createData,
+                  body: "",
+                });
+              }}
+              disabled={false}
+            />
+          </div>
         )}
+        {openMarkDown && <MarkDownArea leaveComment={createData.body} />}
         <div className="text-[#57606a] mt-[16px] mb-[8px] leading-[20px] block  md:hidden">
           <InfoIcon size={16} className="mr-[4px] align-text-bottom" />
           Remember, contributions to this repository should follow our
@@ -265,10 +267,12 @@ const CreateArea = ({
           .
         </div>
         <div className="text-[#57606a] hidden mr-[8px] ml-[8px] mb-[8px] md:leading-[32px] md:flex md:justify-between md:h-[32px] mt-[10px] ">
-          <div>
-            <MarkdownIcon size={16} className="mr-[6px] align-text-bottom" />
-            Style with Markdown is supported
-          </div>
+          {displaySubmit && (
+            <div>
+              <MarkdownIcon size={16} className="mr-[6px] align-text-bottom" />
+              Style with Markdown is supported
+            </div>
+          )}
           {!displaySubmit && (
             <CommentBtn
               onClick={() => {
@@ -287,7 +291,7 @@ const CreateArea = ({
               onClick={() => {
                 postCreateIssue().then(() => {
                   setTimeout(() => {
-                    navigate(`/${REPOSITORY}`);
+                    navigate("/issues");
                   }, 1000);
                 });
               }}

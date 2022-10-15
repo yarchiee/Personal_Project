@@ -24,7 +24,7 @@ function NewIssuePage({
   setSelectedLabelColor,
 }) {
   const navigate = useNavigate();
-  const REPOSITORY = "github-project";
+
   return (
     <div className="mt-[24px] px-[16px] md:flex  md:px-[32px] xl:mx-[119.6px]">
       <img
@@ -64,9 +64,15 @@ function NewIssuePage({
       />
       <div className="block md:hidden">
         <SubmitBtn
-          disabled={true}
-          onClick={() => navigate(`/${REPOSITORY}`)}
+          onClick={() => {
+            postCreateIssue().then(() => {
+              setTimeout(() => {
+                navigate("/issues");
+              }, 1000);
+            });
+          }}
           typeIssuelName={typeIssuelName}
+          disabled={true}
         />
       </div>
     </div>

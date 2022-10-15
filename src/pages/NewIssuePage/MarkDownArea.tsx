@@ -1,6 +1,6 @@
 import { marked } from "marked";
 import "../../prose.css";
-const MarkDownArea = ({ leaveComment, setLeaveComment }) => {
+const MarkDownArea = ({ leaveComment }) => {
   const renderer = {
     listitem(text: string, booleantask: boolean, checked: boolean) {
       if (checked !== undefined) {
@@ -20,7 +20,7 @@ const MarkDownArea = ({ leaveComment, setLeaveComment }) => {
   marked.use({ renderer });
 
   return (
-    <div className="w-[98%] h-full md:m-[8px] border border-solid border-r-0 border-l-0 border-b-[2px] border-t-0 border-[#d0d7de] lg:border-t-[1px] lg:m-0">
+    <div className="bg-[#fff] w-[98%] h-full md:p-[8px] border border-solid border-r-0 border-l-0 border-b-[2px] border-t-0 border-[#d0d7de] lg:border-t-[1px] lg:m-0">
       {!leaveComment && (
         <div className="mt-[20px] ml-[5px] text-[14px]">Nothing to preview</div>
       )}

@@ -3,16 +3,47 @@ import { useState } from "react";
 import AuthorTag from "../../components/AuthorTag";
 import PopOver from "./PopOver";
 import EditCommentArea from "./EditCommentArea";
+import api from "../../services/api";
 
-const CommentItem = ({ data, type, issueNumber }) => {
-  console.log(data);
-  const [openReviseBtn, setOpenReviseBtn] = useState(true);
+const CommentItem = ({
+  data,
+  type,
+  issueNumber,
+  setTimeLineEvent,
+  setPerIssueData,
+}) => {
   const [editModal, setEditModal] = useState(false);
-
   const toggleEditModal = () => {
     setEditModal(!editModal);
   };
-
+  const closeDetails = () => {
+    const targetId = data?.id;
+    if (targetId) {
+      const target = document.getElementById(targetId);
+      target.removeAttribute("open");
+    }
+  };
+  const handleDelete = () => {
+    const yes = window.confirm("確定要刪除嗎？");
+    if (yes) {
+      const timelineObj = {
+        issueNumber: issueNumber,
+      };
+      const id = data?.id;
+      api
+        .deleteComment(id)
+        .then(() => {
+          api.getTimeLineEvent(timelineObj).then((res) => {
+            setTimeLineEvent(res);
+          });
+        })
+        .finally(() => {
+          closeDetails();
+        });
+    } else {
+      closeDetails();
+    }
+  };
   return (
     <>
       <div className="md:flex md:flex-auto">
@@ -55,7 +86,7 @@ const CommentItem = ({ data, type, issueNumber }) => {
                         <SmileyIcon size={16} fill="#57606a" />
                       </summary>
                     </details>
-                    <details>
+                    <details id={data?.id}>
                       <summary className="list-none">
                         <KebabHorizontalIcon
                           size={16}
@@ -65,8 +96,8 @@ const CommentItem = ({ data, type, issueNumber }) => {
                       </summary>
                       <PopOver
                         toggleEditModal={toggleEditModal}
-                        editModal={editModal}
-                        setEditModal={setEditModal}
+                        handleDelete={handleDelete}
+                        type={type}
                       />
                     </details>
                   </div>
@@ -86,6 +117,8 @@ const CommentItem = ({ data, type, issueNumber }) => {
             editModal={editModal}
             setEditModal={setEditModal}
             data={data}
+            setTimeLineEvent={setTimeLineEvent}
+            setPerIssueData={setPerIssueData}
           />
         )}
       </div>

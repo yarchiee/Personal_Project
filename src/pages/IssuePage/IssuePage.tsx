@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SideBarArea from "../NewIssuePage/SideBarArea";
 import CreateArea from "../NewIssuePage/CreateArea";
 import SubmitBtn from "../NewIssuePage/SubmitBtn";
+import CommentBtn from "../../components/CommentBtn";
 import MobileAssignLabel from "./MobileAssignLabel";
 import HeaderEdit from "./HeaderEdit";
 import CommentItem from "./CommentItem";
-import api from "../../services/api";
 import { useParams } from "react-router-dom";
 
 type Props = {
@@ -79,6 +79,8 @@ function IssuePage({
               type="issue"
               issueNumber={createData.issueNumber}
               data={perIssueData}
+              setTimeLineEvent={setTimeLineEvent}
+              setPerIssueData={setPerIssueData}
             />
 
             {timeLineEvent?.map((item, index) => {
@@ -88,11 +90,13 @@ function IssuePage({
                   type="comments"
                   issueNumber={createData.issueNumber}
                   data={item}
+                  setTimeLineEvent={setTimeLineEvent}
+                  setPerIssueData={setPerIssueData}
                 />
               );
             })}
           </div>
-          <div className="flex">
+          <div className="flex pt-[16px] bordre border-solid border-t-[2px] border-r-0 border-l-0 border-b-0 border-[#d0d7de]">
             <img
               src="https://avatars.githubusercontent.com/u/105163825?s=80&v=4"
               alt=""
@@ -130,9 +134,6 @@ function IssuePage({
           selectedLabelColor={selectedLabelColor}
           setSelectedLabelColor={setSelectedLabelColor}
         />
-        <div className="block md:hidden">
-          <SubmitBtn disabled={true} onClick typeIssuelName={typeIssuelName} />
-        </div>
       </div>
     </>
   );

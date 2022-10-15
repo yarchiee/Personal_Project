@@ -1,4 +1,5 @@
 import { IssueOpenedIcon } from "@primer/octicons-react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import NewIssueBtn from "../IssueList/NewIssueBtn";
 import EditBtn from "../../components/EditBtn";
@@ -6,12 +7,14 @@ import SaveBtn from "../../components/SaveBtn";
 import { useState } from "react";
 
 const HeaderEdit = ({ onClick, perIssueData }) => {
+  const navigate = useNavigate();
   console.log(perIssueData);
   const [searchLabelInputText, setSearchLabelInputText] = useState("");
   const [openInput, setOpenInput] = useState(false);
   const toggleEdit = () => {
     setOpenInput(!openInput);
   };
+
   return (
     <>
       <div className="mb-[16px] sm:h-[150px] h-[180px] md:h-[114px]">
@@ -19,7 +22,7 @@ const HeaderEdit = ({ onClick, perIssueData }) => {
           <div className="md:hidden block">
             <Input
               type={"fetch"}
-              searchLabelInputText={searchLabelInputText}
+              searchLabelInputText={perIssueData.title}
               setSearchLabelInputText={setSearchLabelInputText}
             />
           </div>
@@ -29,14 +32,20 @@ const HeaderEdit = ({ onClick, perIssueData }) => {
             {!openInput && (
               <div className="md:hidden block">
                 <EditBtn onClick={toggleEdit} />
-                <NewIssueBtn onClick />
+                <NewIssueBtn
+                  onClick={() => {
+                    setTimeout(() => {
+                      navigate("/issues/new");
+                    }, 1000);
+                  }}
+                />
               </div>
             )}
             {openInput && (
               <div className="mt-[12px] md:hidden block">
                 <SaveBtn onClick={toggleEdit} />
                 <button
-                  className="text-[#0969da] ml-[10px]"
+                  className="text-[#0969da] ml-[10px] "
                   onClick={toggleEdit}
                 >
                   Cancel
@@ -78,7 +87,13 @@ const HeaderEdit = ({ onClick, perIssueData }) => {
               {!openInput && (
                 <div className="md:block hidden">
                   <EditBtn onClick={toggleEdit} />
-                  <NewIssueBtn onClick />
+                  <NewIssueBtn
+                    onClick={() => {
+                      setTimeout(() => {
+                        navigate("/issues/new");
+                      }, 1000);
+                    }}
+                  />
                 </div>
               )}
               {openInput && (
