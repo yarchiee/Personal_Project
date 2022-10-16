@@ -71,6 +71,8 @@ function IssuePage({
     assignees: perIssueData?.assignees,
     labels: perIssueData?.labels,
   });
+  const assignMenber = perIssueData?.assignees.login;
+  console.log(assignMenber);
 
   return (
     <>

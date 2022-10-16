@@ -38,7 +38,7 @@ const HeaderEdit = ({
         api.getAnIssue(updateIssue).then((res) => {
           setPerIssueData(res);
         });
-      }, 2000);
+      }, 1000);
     });
   };
 

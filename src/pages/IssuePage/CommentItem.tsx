@@ -26,7 +26,7 @@ const CommentItem = ({
     }
   };
   const handleDelete = () => {
-    const yes = window.confirm("確定要刪除嗎？");
+    const yes = window.confirm("Are you sure you want to delete this？");
     if (yes) {
       const timelineObj = {
         issueNumber: issueNumber,
@@ -121,6 +121,8 @@ const CommentItem = ({
             data={data}
             setTimeLineEvent={setTimeLineEvent}
             setPerIssueData={setPerIssueData}
+            updateIssue={updateIssue}
+            setUpdateIssue={setUpdateIssue}
           />
         )}
       </div>

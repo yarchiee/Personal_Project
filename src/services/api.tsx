@@ -205,6 +205,8 @@ const api = {
     return result;
   },
   async updateIssue(updateIssue) {
+    console.log(updateIssue);
+
     const result = await octokit.request(
       "PATCH /repos/{owner}/{repo}/issues/{issue_number}",
       {
@@ -212,9 +214,9 @@ const api = {
         issue_number: updateIssue.issueNumber,
         title: updateIssue.title,
         body: updateIssue.body,
-        assignees: updateIssue.assignees,
+        assignees: updateIssue.assignees.login,
         state: updateIssue.state,
-        labels: updateIssue.labels,
+        labels: updateIssue.labels.name,
       }
     );
     return result;

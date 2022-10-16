@@ -240,6 +240,8 @@ const CreateArea = ({
             ref={markdownref}
             data={createData}
             updateData={setcreateData}
+            updateIssue={""}
+            setUpdateIssue={""}
           />
         )}
         {!displaySubmit && (
