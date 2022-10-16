@@ -1,12 +1,12 @@
 import * as React from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import CommentItem from "../CommentItem";
+import HeaderEdit from "../HeaderEdit";
 // import DiscussionItem from "../../../components/DiscussionItem";
 
 export default {
-  title: "Example/CommentItem",
-  component: CommentItem,
+  title: "Example/HeaderEdit",
+  component: HeaderEdit,
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: "fullscreen",
@@ -23,7 +23,7 @@ const Template = (args) => (
         left: "10%",
       }}
     >
-      <CommentItem {...args} />
+      <HeaderEdit {...args} />
     </div>
   </BrowserRouter>
 );

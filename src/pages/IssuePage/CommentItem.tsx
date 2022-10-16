@@ -46,6 +46,8 @@ const CommentItem = ({
       closeDetails();
     }
   };
+  console.log(data);
+
   return (
     <>
       <div className="md:flex md:flex-auto">
