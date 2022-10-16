@@ -5,7 +5,9 @@ import CreateArea from "./CreateArea";
 
 function NewIssuePage({
   labelData,
+  setLabelData,
   isAssignee,
+  setIsAssignee,
   typeIssuelName,
   setTypeIssueName,
   leaveComment,
@@ -49,6 +51,8 @@ function NewIssuePage({
       />
       <SideBarArea
         labelData={labelData}
+        setLabelData={setLabelData}
+        setIsAssignee={setIsAssignee}
         isAssignee={isAssignee}
         whoIsAssignee={whoIsAssignee}
         setWhoIsAssignee={setWhoIsAssignee}
@@ -61,6 +65,7 @@ function NewIssuePage({
         setSelectedAvatarUrl={setSelectedAvatarUrl}
         selectedLabelColor={selectedLabelColor}
         setSelectedLabelColor={setSelectedLabelColor}
+        updateIssue={newCreateIssue}
       />
       <div className="block md:hidden">
         <SubmitBtn

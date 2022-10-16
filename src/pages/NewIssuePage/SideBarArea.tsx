@@ -2,7 +2,9 @@ import DiscussionItem from "../../components/DiscussionItem";
 
 const SideBarArea = ({
   labelData,
+  setLabelData,
   isAssignee,
+  setIsAssignee,
   whoIsAssignee,
   setWhoIsAssignee,
   selectdLabel,
@@ -14,18 +16,23 @@ const SideBarArea = ({
   setSelectedAvatarUrl,
   selectedLabelColor,
   setSelectedLabelColor,
+  updateIssue,
 }) => {
+  console.log(newCreateIssue);
+
   return (
     <div className=" md:w-[390px] md:mt-[16px] lg:w-[340px]">
       <DiscussionItem
         list={isAssignee}
         type="assignee"
         title="Assignees"
+        setLabelData={setLabelData}
+        setIsAssignee={setIsAssignee}
         whoIsAssignee={whoIsAssignee}
         setWhoIsAssignee={setWhoIsAssignee}
         selectdLabel={selectdLabel}
         setSelectedLabel={setSelectedLabel}
-        newCreateIssue={newCreateIssue}
+        newCreateIssue={updateIssue}
         check={check}
         setCheck={setCheck}
         selectedAvatarUrl={selectedAvatarUrl}
@@ -37,11 +44,13 @@ const SideBarArea = ({
         list={labelData}
         type="label"
         title="Labels"
+        setLabelData={setLabelData}
+        setIsAssignee={setIsAssignee}
         whoIsAssignee={whoIsAssignee}
         setWhoIsAssignee={setWhoIsAssignee}
         selectdLabel={selectdLabel}
         setSelectedLabel={setSelectedLabel}
-        newCreateIssue={newCreateIssue}
+        newCreateIssue={updateIssue}
         check={check}
         setCheck={setCheck}
         selectedAvatarUrl={selectedAvatarUrl}

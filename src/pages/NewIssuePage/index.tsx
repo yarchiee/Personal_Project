@@ -48,10 +48,15 @@ function NewIssuePageMain() {
     });
   };
   useEffect(fetchAssigneeData, []);
+  if (newCreateIssue === undefined) {
+    return <></>;
+  }
   return (
     <>
       <NewIssuePage
         labelData={labelData}
+        setLabelData={setLabelData}
+        setIsAssignee={setIsAssignee}
         isAssignee={isAssignee}
         typeIssuelName={typeIssuelName}
         setTypeIssueName={setTypeIssueName}

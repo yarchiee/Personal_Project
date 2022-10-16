@@ -67,7 +67,9 @@ function IssuePageMain() {
     <>
       <IssuePage
         labelData={labelData}
+        setLabelData={setLabelData}
         isAssignee={isAssignee}
+        setIsAssignee={setIsAssignee}
         whoIsAssignee={whoIsAssignee}
         setWhoIsAssignee={setWhoIsAssignee}
         selectdLabel={selectdLabel}

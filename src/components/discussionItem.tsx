@@ -1,7 +1,8 @@
 import { GearIcon } from "@primer/octicons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PopOverList from "./PopOverList";
 import LabelItem from "./LabelItem";
+import api from "../services/api";
 
 export default function DiscussionItem({
   title,
@@ -18,6 +19,8 @@ export default function DiscussionItem({
   setSelectedAvatarUrl,
   selectedLabelColor,
   setSelectedLabelColor,
+  setLabelData,
+  setIsAssignee,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDetail = () => {
@@ -30,6 +33,26 @@ export default function DiscussionItem({
     setWhoIsAssignee(["yarchiee"]);
     setCheck(["yarchiee"]);
   };
+  console.log(newCreateIssue);
+
+  const fetchLabelData = () => {
+    api.listLabelAll().then((res) => {
+      // console.log(res);
+      setLabelData(res);
+    });
+  };
+  useEffect(fetchLabelData, []);
+
+  const fetchAssigneeData = () => {
+    api.getAssigneeMenber().then((res) => {
+      // console.log(res);
+      setIsAssignee(res);
+    });
+  };
+  useEffect(fetchAssigneeData, []);
+  if (newCreateIssue === undefined) {
+    return <></>;
+  }
   return (
     <div className=" mb-[14px] pb-[14px] border border-solid border-b-[hsla(210,18%,87%,1)] border-l-0 border-r-0 border-t-0">
       <details className="group" open={isOpen}>
@@ -58,21 +81,25 @@ export default function DiscussionItem({
         />
       </details>
 
-      {title === "Labels" && newCreateIssue.labelColor.length > 0 ? (
-        newCreateIssue.labelColor.map((item, index) => (
+      {title === "Labels" && newCreateIssue?.labels.length > 0 ? (
+        newCreateIssue?.labels.map((item, index) => (
           <LabelItem
-            selectdLabel={selectdLabel[index]}
-            selectedLabelColor={selectedLabelColor[index]}
+            selectdLabel={item?.name}
+            selectedLabelColor={item?.color}
           />
         ))
-      ) : title === "Assignees" && newCreateIssue.avatarUrl.length > 0 ? (
-        newCreateIssue.avatarUrl.map((item, index) => (
+      ) : title === "Assignees" && newCreateIssue?.assignees.length > 0 ? (
+        newCreateIssue?.assignees.map((item, index) => (
           <div className="flex mt-[8px] mb-[8px]">
-            <img className="w-[20px] h-[20px] mr-[12px]" src={item} alt="" />
+            <img
+              className="w-[20px] h-[20px] mr-[12px]"
+              src={item?.avatar_url}
+              alt=""
+            />
             <div className="leading-tight min-w-0">
               <div className="flex items-center">
                 <div className="font-semibold text-[#24292f] truncate sm:pt-[2px]">
-                  {whoIsAssignee[index]}
+                  {item?.login}
                 </div>
               </div>
             </div>
@@ -82,7 +109,7 @@ export default function DiscussionItem({
         <div>
           No one -
           <button onClick={assignYourself} className="hover:text-[#0969da]">
-            assign yourself
+            {""}assign yourself
           </button>
         </div>
       ) : (

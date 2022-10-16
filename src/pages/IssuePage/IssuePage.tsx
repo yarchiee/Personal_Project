@@ -11,7 +11,9 @@ import api from "../../services/api";
 
 type Props = {
   labelData: any;
+  setLabelData: any;
   isAssignee: any;
+  setIsAssignee: any;
   whoIsAssignee: any;
   setWhoIsAssignee: any;
   selectdLabel: any;
@@ -36,7 +38,9 @@ type Props = {
 
 function IssuePage({
   labelData,
+  setLabelData,
   isAssignee,
+  setIsAssignee,
   whoIsAssignee,
   setWhoIsAssignee,
   selectdLabel,
@@ -144,7 +148,9 @@ function IssuePage({
 
         <SideBarArea
           labelData={labelData}
+          setLabelData={setLabelData}
           isAssignee={isAssignee}
+          setIsAssignee={setIsAssignee}
           whoIsAssignee={whoIsAssignee}
           setWhoIsAssignee={setWhoIsAssignee}
           selectdLabel={selectdLabel}
@@ -156,6 +162,7 @@ function IssuePage({
           setSelectedAvatarUrl={setSelectedAvatarUrl}
           selectedLabelColor={selectedLabelColor}
           setSelectedLabelColor={setSelectedLabelColor}
+          updateIssue={updateIssue}
         />
       </div>
     </>

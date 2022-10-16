@@ -56,7 +56,7 @@ const CommentItem = ({
         />
 
         {!editModal && (
-          <div className="rounded-[6px] relative pb-[16px] before:bg-[#d8dee4] before:w-[2px] before:absolute before:top-0 before:right-0 before:left-[16px] before:z-[-100] before:bottom-0 md:w-full">
+          <div className="rounded-[6px] relative pb-[32px] before:bg-[#d8dee4] before:w-[2px] before:absolute before:top-0 before:right-0 before:left-[16px] before:z-[-100] before:bottom-0 md:w-full">
             <div
               className={`${
                 data?.author_association === "OWNER"
