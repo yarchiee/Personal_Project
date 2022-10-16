@@ -37,7 +37,7 @@ Default.args = {
     assignees: [],
     labels: [],
   },
-  data: {
+  perIssueData: {
     user: {
       avatar_url: "https://avatars.githubusercontent.com/u/70333832?v=4",
       login: "elaine011",
@@ -55,11 +55,14 @@ Default.args = {
         name: "completed",
       },
     ],
+    title: "Hello",
+    number: 7,
+    comments: 1,
   },
-  toLowerCase: () => {},
-  type: "mentions",
+
+  onClick: () => {},
   issueNumber: 10,
-  setTimeLineEvent: () => {},
+
   setPerIssueData: {},
   setUpdateIssue: {},
 };
