@@ -54,7 +54,15 @@ function IssuePageMain() {
       });
   };
   useEffect(getAnIssue, []);
-
+  const fetchAssigneeData = () => {
+    api.getAssigneeMenber().then((res) => {
+      setIsAssignee(res);
+    });
+  };
+  useEffect(fetchAssigneeData, []);
+  if (perIssueData === undefined) {
+    return <></>;
+  }
   return (
     <>
       <IssuePage

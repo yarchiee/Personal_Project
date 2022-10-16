@@ -5,14 +5,41 @@ import NewIssueBtn from "../IssueList/NewIssueBtn";
 import EditBtn from "../../components/EditBtn";
 import SaveBtn from "../../components/SaveBtn";
 import { useState } from "react";
+import api from "../../services/api";
 
-const HeaderEdit = ({ onClick, perIssueData }) => {
+const HeaderEdit = ({
+  onClick,
+  perIssueData,
+  updateIssue,
+  setUpdateIssue,
+  issueNumber,
+  setPerIssueData,
+}) => {
   const navigate = useNavigate();
   console.log(perIssueData);
-  const [searchLabelInputText, setSearchLabelInputText] = useState("");
+  const [searchLabelInputText, setSearchLabelInputText] = useState(
+    `${perIssueData?.title ?? ""}`
+  );
   const [openInput, setOpenInput] = useState(false);
   const toggleEdit = () => {
     setOpenInput(!openInput);
+  };
+
+  const updateData = (obj) => {
+    const newData = { ...updateIssue, ...obj };
+    setUpdateIssue(newData);
+    patchIssueData();
+  };
+  console.log(updateIssue);
+  const patchIssueData = () => {
+    api.updateIssue(updateIssue).then(() => {
+      console.log("update");
+      setTimeout(() => {
+        api.getAnIssue(updateIssue).then((res) => {
+          setPerIssueData(res);
+        });
+      }, 2000);
+    });
   };
 
   return (
@@ -20,10 +47,12 @@ const HeaderEdit = ({ onClick, perIssueData }) => {
       <div className="mb-[16px] sm:h-[150px] h-[180px] md:h-[114px]">
         {openInput && (
           <div className="md:hidden block">
-            <Input
-              type={"fetch"}
-              searchLabelInputText={perIssueData.title}
-              setSearchLabelInputText={setSearchLabelInputText}
+            <input
+              value={perIssueData?.title}
+              className=" h-[32px] block w-full py-[5px] px-[12px] text-sm leading-5 rounded-md border border-solid border-[#d0d7de] focus:border-[2px] focus:border-solid focus:border-[#0969da] focus:outline-none focus:shadow-innerblue"
+              onChange={(e) => {
+                setSearchLabelInputText(e.target.value);
+              }}
             />
           </div>
         )}
@@ -76,10 +105,12 @@ const HeaderEdit = ({ onClick, perIssueData }) => {
             )}
             {openInput && (
               <div className="md:block hidden md:flex-auto md:mr-[16px]">
-                <Input
-                  type={"fetch"}
-                  searchLabelInputText={searchLabelInputText}
-                  setSearchLabelInputText={setSearchLabelInputText}
+                <input
+                  value={searchLabelInputText}
+                  className=" h-[32px] block w-full py-[5px] px-[12px] text-sm leading-5 rounded-md border border-solid border-[#d0d7de] focus:border-[2px] focus:border-solid focus:border-[#0969da] focus:outline-none focus:shadow-innerblue"
+                  onChange={(e) => {
+                    setSearchLabelInputText(e.target.value);
+                  }}
                 />
               </div>
             )}
@@ -98,7 +129,12 @@ const HeaderEdit = ({ onClick, perIssueData }) => {
               )}
               {openInput && (
                 <div className="hidden mt-[12px] md:block md:mt-0">
-                  <SaveBtn onClick={toggleEdit} />
+                  <SaveBtn
+                    onClick={() => {
+                      toggleEdit();
+                      updateData({ title: searchLabelInputText });
+                    }}
+                  />
                   <button
                     className="text-[#0969da] ml-[10px]"
                     onClick={toggleEdit}

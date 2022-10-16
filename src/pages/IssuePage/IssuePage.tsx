@@ -7,6 +7,7 @@ import MobileAssignLabel from "./MobileAssignLabel";
 import HeaderEdit from "./HeaderEdit";
 import CommentItem from "./CommentItem";
 import { useParams } from "react-router-dom";
+import api from "../../services/api";
 
 type Props = {
   labelData: any;
@@ -62,11 +63,26 @@ function IssuePage({
     issueNumber: Number(issueNumber),
     body: leaveComment,
   });
+  const [updateIssue, setUpdateIssue] = useState({
+    issueNumber: issueNumber,
+    title: perIssueData?.title,
+    body: perIssueData?.body,
+    state: perIssueData?.state,
+    assignees: perIssueData?.assignees,
+    labels: perIssueData?.labels,
+  });
 
   return (
     <>
       <div className="mt-[24px] mb-[16px]  px-[16px] md:mx-[32px] xl:mx-[119.6px] md:px-0 ">
-        <HeaderEdit onClick perIssueData={perIssueData} />
+        <HeaderEdit
+          onClick
+          perIssueData={perIssueData}
+          updateIssue={updateIssue}
+          setUpdateIssue={setUpdateIssue}
+          issueNumber={issueNumber}
+          setPerIssueData={setPerIssueData}
+        />
         <div className="block md:hidden">
           <MobileAssignLabel perIssueData={perIssueData} />
         </div>
@@ -81,17 +97,22 @@ function IssuePage({
               data={perIssueData}
               setTimeLineEvent={setTimeLineEvent}
               setPerIssueData={setPerIssueData}
+              updateIssue={updateIssue}
+              setUpdateIssue={setUpdateIssue}
             />
 
             {timeLineEvent?.map((item, index) => {
               if (item?.event !== "commented" && "mentioned") return <></>;
               return (
                 <CommentItem
+                  key={item.id}
                   type="comments"
                   issueNumber={createData.issueNumber}
                   data={item}
                   setTimeLineEvent={setTimeLineEvent}
                   setPerIssueData={setPerIssueData}
+                  updateIssue={updateIssue}
+                  setUpdateIssue={setUpdateIssue}
                 />
               );
             })}

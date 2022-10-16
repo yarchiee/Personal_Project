@@ -9,6 +9,7 @@ const MobileAssignLabel = ({ perIssueData }) => {
             {perIssueData?.assignees.map((item) => (
               <a href="#/">
                 <img
+                  key={item?.avatar_url}
                   src={`${item?.avatar_url}`}
                   alt=""
                   className="w-[20px] h-[20px] rounded-[50%] mr-[5px] border border-solid border-[#d0d7de]"
@@ -22,6 +23,7 @@ const MobileAssignLabel = ({ perIssueData }) => {
           <div className="flex">
             {perIssueData?.labels.map((item) => (
               <LabelTag
+                key={item.name}
                 selectdLabel={item.name}
                 selectedLabelColor={item.color}
               />

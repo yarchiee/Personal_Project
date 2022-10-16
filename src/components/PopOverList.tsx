@@ -203,7 +203,7 @@ export default function PopOverList({
               />
             </div>
             <div className="overflow-y-auto max-h-[calc(100%-126px)] md:max-h-[calc(485px-82px)]">
-              {newCreateIssue.assignees.length > 0 && (
+              {type === "assignee" && newCreateIssue.assignees.length > 0 && (
                 <a
                   onClick={clearAll}
                   href="#/"

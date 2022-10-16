@@ -152,8 +152,6 @@ const api = {
     return result;
   },
   async getTimeLineEvent(newCreateIssue) {
-    console.log("k");
-    console.log(newCreateIssue);
     const res = await octokit.request(
       "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline",
       {
@@ -206,17 +204,17 @@ const api = {
     );
     return result;
   },
-  async updateIssue() {
+  async updateIssue(updateIssue) {
     const result = await octokit.request(
       "PATCH /repos/{owner}/{repo}/issues/{issue_number}",
       {
         ...setting,
-        issue_number: 10,
-        title: "Found a bug",
-        body: "I'm having a problem with this.",
-        assignees: ["octocat"],
-        state: "open",
-        labels: ["bug"],
+        issue_number: updateIssue.issueNumber,
+        title: updateIssue.title,
+        body: updateIssue.body,
+        assignees: updateIssue.assignees,
+        state: updateIssue.state,
+        labels: updateIssue.labels,
       }
     );
     return result;

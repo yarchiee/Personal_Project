@@ -11,6 +11,8 @@ const CommentItem = ({
   issueNumber,
   setTimeLineEvent,
   setPerIssueData,
+  updateIssue,
+  setUpdateIssue,
 }) => {
   const [editModal, setEditModal] = useState(false);
   const toggleEditModal = () => {
