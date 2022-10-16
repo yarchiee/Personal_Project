@@ -7,12 +7,11 @@ import NewIssuePage from "./pages/NewIssuePage";
 import GithubOauth from "./pages/Oauth/GithubOAuth";
 import { Route, Routes } from "react-router-dom";
 
-const REPOSITORY = "github-project";
 function App() {
   return (
     <>
       <Routes>
-        <Route path="issues" element={<Home />}>
+        <Route path="/" element={<Home />}>
           <Route path="issues">
             <Route index element={<IssueList />} />
             <Route path=":issueNumber" element={<IssuePage />} />
