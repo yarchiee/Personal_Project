@@ -3,7 +3,6 @@ import { Octokit } from "octokit";
 const octokit = new Octokit({
   auth: process.env.REACT_APP_PASSWORD,
 });
-// const getOctokit = new Octokit({});
 const setting = {
   owner: "yarchiee",
   repo: "Personal_Project",
@@ -126,7 +125,6 @@ const api = {
       {
         headers: {
           Accept: "application/vnd.github+json",
-          //  Authorization: `Bearer ${process.env.REACT_APP_OOATH}`,
         },
         method: "GET",
       }

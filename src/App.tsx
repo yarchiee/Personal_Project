@@ -18,6 +18,7 @@ function App() {
             <Route path="new" element={<NewIssuePage />}></Route>
           </Route>
           <Route path="labels" element={<Labels />}></Route>
+          <Route path="github-ooath" element={<GithubOauth />}></Route>
         </Route>
       </Routes>
       {/* <Routes>

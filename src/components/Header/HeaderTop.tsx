@@ -1,15 +1,8 @@
 import styled from "styled-components";
 import { MarkGithubIcon, ThreeBarsIcon } from "@primer/octicons-react";
-// import api from "../../services/api";
+import api from "../../services/api";
 import { useEffect, useState } from "react";
-// import { supabase } from "../../Client";
 
-// export async function signOut(setUser) {
-//   /* sign the user out */
-
-//   await supabase.auth.signOut();
-//   setUser(null);
-// }
 const HeaderBar = styled.header`
   background-color: #24292f;
   height: 62px;

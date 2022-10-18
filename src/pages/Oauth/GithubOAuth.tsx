@@ -5,14 +5,15 @@ function GithubOauth() {
   const { code, state } = Object.fromEntries([...searchParams]);
 
   const onRequest = () => {
-    fetch("https://github.com/login/oauth/access_token", {
+    fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
       method: "POST",
       body: JSON.stringify({
-        client_id: "370b490cfd21ad6b64d3",
-        client_secret: "5d84aeda7a813d646ecbf85dafa071243505a019",
+        client_id: "Iv1.26af70ff6861a253",
+        client_secret: "7ffa3c681276c2c0369bec0c11facf000c4c77b7",
         code: code,
       }),
       headers: {
+        "content-type": "application/json",
         Accept: "application/json",
       },
     }).then(async (res) => {
@@ -38,10 +39,10 @@ function GithubOauth() {
         通關密語、login 欲登入的使用者
       </p>
       <p>
-        https://github.com/login/oauth/authorize?client_id=32754547eed859645423&redirect_uri=http://localhost:3000/github-project/github-ooath&state=abcdefg
+        https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000/checkout&state=abcdefg&login=yarchiee
       </p>
       <p>組合網址這邊先寫死，之後會需要動態組出</p>
-      <a href="https://github.com/login/oauth/authorize?client_id=32754547eed859645423&redirect_uri=http://localhost:3000/github-project/github-ooath&state=abcdefg">
+      <a href="https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000/github-ooath&state=abcdefg&login=yarchiee">
         GO Github
       </a>
       <p>
@@ -50,7 +51,8 @@ function GithubOauth() {
       </p>
       <p>{`state: ${state}, code: ${code}`}</p>
       <p>
-        使用 API 取得 token，POST https://github.com/login/oauth/access_token
+        3. 使用 API 搭配指定 body 取得 access token，POST
+        https://github.com/login/oauth/access_token
       </p>
       <button onClick={onRequest}>REQUEST API</button>
     </>
