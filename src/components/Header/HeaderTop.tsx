@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { MarkGithubIcon, ThreeBarsIcon } from "@primer/octicons-react";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const HeaderBar = styled.header`
   background-color: #24292f;
@@ -95,13 +96,13 @@ const SignOut = styled.div`
   }
 `;
 // const Hello = styled(SignOut)``;
-const ProfileImg = styled.div`
-  background-color: #fff;
-  width: 20px;
-  height: 20px;
-  border-radius: 50px;
-  /* background-image: url("https://qvtvnktztxmigxjrdmig.supabase.co/auth/v1"); */
-`;
+// const ProfileImg = styled.img`
+//   background-color: #fff;
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50px;
+//   background-image: url(`${userData.avatar_url}`);
+// `;
 
 const categories1 = [
   {
@@ -149,37 +150,39 @@ const categories2 = [
 ];
 
 function Header() {
-  // const [user, setUser] = useState(null);
-  // useEffect(() => {
-  //   /* when the app loads, check to see if the user is signed in */
-  //   checkUser();
-  //   /* check user on OAuth redirect */
-  //   window.addEventListener("hashchange", function () {
-  //     checkUser();
-  //   });
-  // }, []);
-  // async function checkUser() {
-  //   /* if a user is signed in, update local state */
-  //   const user = supabase.auth.user();
-  //   console.log(user);
-  //   setUser(user);
-  // }
+  const [searchParams] = useSearchParams();
+  const { code, state } = Object.fromEntries([...searchParams]);
+  const [token, setToken] = useState({});
+  const [userData, setUserData] = useState<any>({});
 
-  // const signInWithGithub = () => {
-  //   api.signInWithGithub().then(() => {
-  //     console.log("123");
-  //   });
-  // };
+  const onRequest = () => {
+    fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
+      method: "POST",
+      body: JSON.stringify({
+        client_id: "Iv1.26af70ff6861a253",
+        client_secret: "7ffa3c681276c2c0369bec0c11facf000c4c77b7",
+        code: code,
+      }),
+      headers: {
+        "content-type": "application/json",
+        Accept: "application/json",
+      },
+    }).then(async (res) => {
+      const token = await res.json();
+      console.log(token.access_token);
+      setToken(token.access_token);
+      window.localStorage.setItem("loginToken", token.access_token);
+      getUser();
+      // return await res.json();
+    });
+  };
+  const getUser = () => {
+    api.getUser().then((res) => {
+      console.log(res);
+      setUserData(res);
+    });
+  };
 
-  // async function session() {
-  /* authenticate with GitHub */
-  // const session = supabase.auth.session();
-  // console.log("session");
-  // console.log(session.provider_token);
-  // return session.provider_token;
-  // }
-  // signOut(setUser);
-  // if (user) {
   return (
     <>
       <HeaderBar>
@@ -203,43 +206,21 @@ function Header() {
           </CategoryLinks>
         </HeaderItem>
         <HeaderToolArea>
-          {/* <Hello>{user.email}</Hello> */}
-          {/* <SignOut onClick={signOut}>Sign Out</SignOut> */}
-          <ProfileImg />
+          <SignOut>
+            <a href="https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000&state=abcdefg&login=yarchiee">
+              Sign In /
+            </a>
+            <button onClick={onRequest}> REQUEST API</button>
+          </SignOut>
+          <img
+            src={userData?.avatar_url}
+            alt=""
+            className="w-[20px] h-[20px] rounded-[50%] border border-solid  "
+          />
         </HeaderToolArea>
       </HeaderBar>
     </>
   );
 }
-// return (
-//   <>
-//     <HeaderBar>
-//       <ThreeBarsIconControl>
-//         <ThreeBarsIcon size={24} fill="#fff" />
-//       </ThreeBarsIconControl>
-//       <MarkGithubIconControl>
-//         <MarkGithubIcon size={32} fill="#fff" />
-//       </MarkGithubIconControl>
-//       <HeaderItem>
-//         <HeaderSearch>
-//           <HeaderSearchInput placeholder="Search or jump to..."></HeaderSearchInput>
-//         </HeaderSearch>
-//         <CategoryLinks>
-//           {categories1.map(({ displayText }) => (
-//             <CategoryLink1>{displayText}</CategoryLink1>
-//           ))}
-//           {categories2.map(({ displayText }) => (
-//             <CategoryLink2>{displayText}</CategoryLink2>
-//           ))}
-//         </CategoryLinks>
-//       </HeaderItem>
-//       <HeaderToolArea>
-//         {/* <SignOut onClick={signInWithGithub}>Sign out</SignOut> */}
-//         <ProfileImg />
-//       </HeaderToolArea>
-//     </HeaderBar>
-//   </>
-// );
-// }
 
 export default Header;

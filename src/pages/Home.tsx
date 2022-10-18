@@ -3,6 +3,7 @@ import Footer from "../components/Footer/Footer";
 import { ResetStyle, GlobalStyle } from "../components/globalStyle";
 
 import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Home() {
   return (

@@ -219,6 +219,11 @@ const api = {
     );
     return result;
   },
+  async getUser() {
+    const res = await octokit.request("GET /user", {});
+    const result = res.data;
+    return result;
+  },
 };
 
 export default api;
