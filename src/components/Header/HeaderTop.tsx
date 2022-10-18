@@ -154,6 +154,7 @@ function Header() {
   const { code, state } = Object.fromEntries([...searchParams]);
   const [token, setToken] = useState({});
   const [userData, setUserData] = useState<any>({});
+  const [userRepo, setUserRepo] = useState([]);
 
   const onRequest = () => {
     fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
@@ -180,6 +181,17 @@ function Header() {
     api.getUser().then((res) => {
       console.log(res);
       setUserData(res);
+    });
+
+    getUserRepo();
+  };
+
+  const getUserRepo = () => {
+    const userName = userData.login;
+
+    api.getUserRepo(userName).then((res) => {
+      console.log(res);
+      setUserRepo(res);
     });
   };
 

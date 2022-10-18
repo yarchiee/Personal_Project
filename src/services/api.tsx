@@ -63,22 +63,7 @@ const api = {
     );
     return await response.json();
   },
-  async signInWithGithub() {
-    /* authenticate with GitHub */
-    await supabase.auth.signIn({
-      provider: "github",
-    });
-    console.log("sign in");
-  },
-  async signOut() {
-    /* sign the user out */
-    await supabase.auth.signOut();
-  },
-  async session() {
-    /* sign the user out */
-    await supabase.auth.session();
-  },
-  //////////////post data////////////////////
+
   async markDown() {
     return await octokit.request("POST /markdown", {
       text: "**sdf**",
@@ -97,7 +82,6 @@ const api = {
     });
   },
 
-  ///////////////get data///////////////////
   async listRepositoryIssue() {
     const res = await octokit.request(
       "GET /repos/{owner}/{repo}/issues?per_page={perPage}&page={page}",
@@ -138,17 +122,7 @@ const api = {
     const result = res.data;
     return result;
   },
-  async getIssueCommentsPer() {
-    const res = await octokit.request(
-      "GET /repos/{owner}/{repo}/issues/comments/{comment_id}",
-      {
-        ...setting,
-        comment_id: 1260647455,
-      }
-    );
-    const result = res.data;
-    return result;
-  },
+
   async getTimeLineEvent(newCreateIssue) {
     const res = await octokit.request(
       "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline",
@@ -221,6 +195,13 @@ const api = {
   },
   async getUser() {
     const res = await octokit.request("GET /user", {});
+    const result = res.data;
+    return result;
+  },
+  async getUserRepo(userName) {
+    const res = await octokit.request("GET /users/{username}/repos", {
+      username: userName,
+    });
     const result = res.data;
     return result;
   },

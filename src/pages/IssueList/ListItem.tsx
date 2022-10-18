@@ -7,31 +7,7 @@ import {
 } from "@primer/octicons-react";
 import { CommentIcon } from "@primer/octicons-react";
 import { useNavigate } from "react-router-dom";
-
-function calculateTime(createTime: string): string {
-  const currentTime = Date.now();
-  const inputTime = new Date(createTime);
-  const timeLag = currentTime - inputTime.getTime();
-  if (Math.floor(timeLag / (12 * 30 * 24 * 3600 * 1000)) > 0) {
-    return `${Math.floor(timeLag / (12 * 30 * 24 * 3600 * 1000))} years`;
-  }
-  if (Math.floor(timeLag / (30 * 24 * 3600 * 1000)) > 0) {
-    return `${Math.floor(timeLag / (30 * 24 * 3600 * 1000))} months`;
-  }
-  if (Math.floor(timeLag / (24 * 3600 * 1000)) > 0) {
-    return `${Math.round(timeLag / (24 * 3600 * 1000))} days`;
-  }
-  if (Math.floor(timeLag / (3600 * 1000)) > 0) {
-    return `${Math.floor(timeLag / (3600 * 1000))} hours`;
-  }
-  if (Math.floor(timeLag / (60 * 1000)) > 0) {
-    return `${Math.floor(timeLag / (60 * 1000))} minutes`;
-  }
-  if (Math.floor(timeLag / 1000) > 0) {
-    return `${Math.floor(timeLag / 1000)} seconds`;
-  }
-  return "";
-}
+import calculateTime from "../../utils/Time";
 
 const ListItem = ({ data, isOpenIssue }) => {
   const time = calculateTime(data.created_at);
@@ -87,8 +63,13 @@ const ListItem = ({ data, isOpenIssue }) => {
             );
           })}
         </span>
-        {data.comments > 0 && (
-          <span className="ml-[15px] flex-nowrap flex-1 flex justify-center hover:text-[#0969da] cursor-pointer ">
+        {data.comments > 0 ? (
+          <span className=" ml-[15px] flex-nowrap flex-1 flex justify-center hover:text-[#0969da] cursor-pointer ">
+            <CommentIcon size={16} />
+            <span className="ml-[3px] text-[3px]">{data.comments}</span>
+          </span>
+        ) : (
+          <span className="opacity-0 ml-[15px] flex-nowrap flex-1 flex justify-center hover:text-[#0969da] cursor-pointer ">
             <CommentIcon size={16} />
             <span className="ml-[3px] text-[3px]">{data.comments}</span>
           </span>
