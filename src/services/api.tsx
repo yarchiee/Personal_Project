@@ -60,20 +60,12 @@ const api = {
       {
         headers: {
           Accept: "application/vnd.github+json",
-          // Authorization: `Bearer ${process.env.REACT_APP_OOATH}`,
+          "if-none-match": "",
         },
         method: "GET",
       }
     );
     return await response.json();
-  },
-
-  async markDown() {
-    return await octokit.request("POST /markdown", {
-      text: "**sdf**",
-      mode: "gfm",
-      context: "octo-org/octo-repo",
-    });
   },
 
   async createIssue(data) {
@@ -86,20 +78,11 @@ const api = {
     });
   },
 
-  async listRepositoryIssue() {
-    const res = await octokit.request(
-      "GET /repos/{owner}/{repo}/issues?per_page={perPage}&page={page}",
-      {
-        ...setting,
-        //   perPage:,
-        // page:,
-      }
-    );
-    const result = res.data;
-    return result;
-  },
   async githubSeach(query, currentpage) {
     const res = await octokit.request("GET /search/issues", {
+      headers: {
+        "if-none-match": "",
+      },
       q: `repo:${setting.owner}/${setting.repo} ${query}`,
       per_page: 10,
       page: currentpage,
@@ -121,6 +104,9 @@ const api = {
   },
   async getAssigneeMenber() {
     const res = await octokit.request("GET /repos/{owner}/{repo}/assignees", {
+      headers: {
+        Accept: "application/vnd.github+json",
+      },
       ...setting,
     });
     const result = res.data;
@@ -131,6 +117,9 @@ const api = {
     const res = await octokit.request(
       "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline",
       {
+        headers: {
+          Accept: "application/vnd.github+json",
+        },
         ...setting,
         issue_number: newCreateIssue.issueNumber,
       }
@@ -142,6 +131,9 @@ const api = {
     const res = await octokit.request(
       "GET /repos/{owner}/{repo}/issues/{issue_number}",
       {
+        headers: {
+          Accept: "application/vnd.github+json",
+        },
         ...setting,
         issue_number: newCreateIssue.issueNumber,
       }
@@ -198,12 +190,19 @@ const api = {
     return result;
   },
   async getUser() {
-    const res = await octokit.request("GET /user", {});
+    const res = await octokit.request("GET /user", {
+      headers: {
+        Accept: "application/vnd.github+json",
+      },
+    });
     const result = res.data;
     return result;
   },
   async getUserRepo(userName) {
     const res = await octokit.request("GET /users/{username}/repos", {
+      headers: {
+        Accept: "application/vnd.github+json",
+      },
       username: userName,
     });
     const result = res.data;

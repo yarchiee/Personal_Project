@@ -90,10 +90,13 @@ const HeaderToolArea = styled.div`
 const SignOut = styled.div`
   line-height: 30px;
   font-weight: 400;
-  color: #fff;
+  color: #d0d7de;
   margin-right: 16px;
-  @media screen and (max-width: 768px) {
-    display: none;
+  border: 1px solid #d0d7de;
+  padding-right: 10px;
+  padding-left: 10px;
+  &:hover {
+    color: #fff;
   }
 `;
 
@@ -147,7 +150,6 @@ function Header() {
   const [searchParams] = useSearchParams();
   const { code } = Object.fromEntries([...searchParams]);
   const [userData, setUserData] = useState<any>({});
-  const [userRepo, setUserRepo] = useState([]);
   const pageState = useContext<any>(PageState);
   const { userInfo } = pageState;
   const setPageState = useContext<any>(SetPageState);
@@ -156,7 +158,7 @@ function Header() {
     fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
       method: "POST",
       body: JSON.stringify({
-        client_id: "Iv1.26af70ff6861a253",
+        client_id: process.env.REACT_APP_SUPABASE_PRO_ID,
         client_secret: "65d234d0a18062ef7fbca854eb7901d3c4ff45e6",
         code: code,
       }),
@@ -170,7 +172,6 @@ function Header() {
       if (token.access_token) {
         getUser(token.access_token);
       }
-      // return await res.json();
     });
   };
 
@@ -192,6 +193,7 @@ function Header() {
       navigate(loginName);
     });
   };
+  console.log(userInfo);
 
   return (
     <>
@@ -216,18 +218,20 @@ function Header() {
           </CategoryLinks>
         </HeaderItem>
         <HeaderToolArea>
-          <SignOut>
-            {!userInfo.token && (
-              <a href="https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000&state=abcdefg&login=yarchiee">
-                Sign In /
+          {!userInfo.token && (
+            <SignOut>
+              <a href="https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000&state=abcdefg">
+                Sign In
               </a>
-            )}
-          </SignOut>
-          <img
-            src={userData?.avatar_url}
-            alt=""
-            className="w-[20px] h-[20px] rounded-[50%] border-[#000]   "
-          />
+            </SignOut>
+          )}
+          {userInfo.token && (
+            <img
+              src={userData?.avatar_url}
+              alt=""
+              className="w-[20px] h-[20px] rounded-[50%] border-[#000]   "
+            />
+          )}
         </HeaderToolArea>
       </HeaderBar>
     </>

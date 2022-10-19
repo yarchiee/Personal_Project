@@ -27,7 +27,7 @@ const ListItem = ({ data, isOpenIssue }) => {
         <span
           className="cursor-pointer text-[14px] font-semibold leading-[21.6px] mr-[5px] hover:text-[#0969da]"
           onClick={(e) => {
-            navigate(`/issues/${data.number}`);
+            navigate(`${data.number}`);
             e.stopPropagation();
           }}
         >

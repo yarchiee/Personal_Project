@@ -26,12 +26,6 @@ function NewIssuePageMain() {
   const postCreateIssue = async () => {
     await api.createIssue(newCreateIssue);
   };
-  const getMarkDown = () => {
-    api.markDown().then((res) => {
-      // setMarkdown(res.data);
-    });
-  };
-  useEffect(getMarkDown, []);
 
   const fetchLabelData = () => {
     api.listLabelAll().then((res) => {
