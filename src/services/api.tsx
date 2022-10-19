@@ -1,7 +1,8 @@
 import { supabase } from "../Client";
 import { Octokit } from "octokit";
+const token = localStorage.getItem("loginToken");
 const octokit = new Octokit({
-  auth: process.env.REACT_APP_PASSWORD,
+  auth: token,
 });
 const setting = {
   owner: "yarchiee",

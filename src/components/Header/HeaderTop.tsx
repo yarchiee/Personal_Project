@@ -160,8 +160,8 @@ function Header() {
     fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
       method: "POST",
       body: JSON.stringify({
-        client_id: process.env.REACT_APP_SUPABASE_PRO_ID,
-        client_secret: process.env.REACT_APP_SUPABASE_PRO_SECRET,
+        client_id: "Iv1.26af70ff6861a253",
+        client_secret: "798e8bf1e9c14fac09ea902b3b3fa9e9874dbbd0",
         code: code,
       }),
       headers: {
@@ -220,7 +220,7 @@ function Header() {
         <HeaderToolArea>
           <SignOut>
             <a href="https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000&state=abcdefg&login=yarchiee">
-              Sign In /
+              Sign In /{code}
             </a>
             <button onClick={onRequest}> REQUEST API</button>
           </SignOut>
