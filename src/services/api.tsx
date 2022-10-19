@@ -25,7 +25,6 @@ const api = {
       }
      */
     const patchData = { ...setting, name: sourceName, data };
-    console.log("t");
     console.log(patchData);
     const result = await octokit.request(
       "PATCH /repos/{owner}/{repo}/labels/{name}",

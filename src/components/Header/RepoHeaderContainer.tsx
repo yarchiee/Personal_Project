@@ -127,7 +127,9 @@ const RepoHeaderContainer = () => {
             <CodeIcon size={16} fill="#57606a" />
             <UnderLineNavItemText>Code</UnderLineNavItemText>
           </UnderLineNavItemPerEach>
-          <UnderLineNavItemChoose onClick={() => navigate("/issues")}>
+          <UnderLineNavItemChoose
+            onClick={() => navigate(`/${userId}/${userRepo}/issues`)}
+          >
             <IssueOpenedIcon size={16} fill="#57606a" />
             <UnderLineNavItemText>Issues</UnderLineNavItemText>
           </UnderLineNavItemChoose>

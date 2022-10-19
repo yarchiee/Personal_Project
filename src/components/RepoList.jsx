@@ -47,7 +47,7 @@ function RepoList() {
   };
   const child = list.map(forMapItem);
   return (
-    <div className="px-[500px]">
+    <div className="px-[20%]">
       <ul className="mt-[50px] h-[470px] text-[20px] font-semibold mt w-full flex flex-col justify-center text-center leading-[50px]">
         <div className="text-[#000] mb-[20px]">Choose a repository.</div>
         <div className="flex-col">{child}</div>
