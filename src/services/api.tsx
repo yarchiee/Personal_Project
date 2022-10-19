@@ -4,11 +4,14 @@ const token = localStorage.getItem("loginToken");
 const octokit = new Octokit({
   auth: token,
 });
-const setting = {
+let setting = {
   owner: "yarchiee",
   repo: "Personal_Project",
 };
 const api = {
+  updateSetting(obj) {
+    setting = { ...obj };
+  },
   hostname: " https://api.github.com",
   async updateALabel(sourceName, data) {
     /**

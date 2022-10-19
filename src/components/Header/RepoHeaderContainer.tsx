@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { KebabHorizontalIcon } from "@primer/octicons-react";
 import {
@@ -110,15 +110,17 @@ const ThreeDotBotton = styled.button`
 `;
 const RepoHeaderContainer = () => {
   const navigate = useNavigate();
+  const { userId, userRepo } = useParams();
+  const isVisible = userId && userRepo;
 
   return (
     <>
-      <RepoContainerHeader>
+      <RepoContainerHeader style={!isVisible ? { display: "none" } : {}}>
         <RepoContainerUp>
           <RepoIcon size={16} fill="#57606a" />
-          <RepoOwner>yarchiee</RepoOwner>
+          <RepoOwner>{userId}</RepoOwner>
           <Reposlash>/</Reposlash>
-          <RepoName>Personal_Project</RepoName>
+          <RepoName>{userRepo}</RepoName>
         </RepoContainerUp>
         <UnderLineNavItem>
           <UnderLineNavItemPerEach>

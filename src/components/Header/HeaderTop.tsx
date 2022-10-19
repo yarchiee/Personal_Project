@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { MarkGithubIcon, ThreeBarsIcon } from "@primer/octicons-react";
 import api from "../../services/api";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { PageState, SetPageState } from "../../context";
 
 const HeaderBar = styled.header`
   background-color: #24292f;
@@ -95,14 +96,6 @@ const SignOut = styled.div`
     display: none;
   }
 `;
-// const Hello = styled(SignOut)``;
-// const ProfileImg = styled.img`
-//   background-color: #fff;
-//   width: 20px;
-//   height: 20px;
-//   border-radius: 50px;
-//   background-image: url(`${userData.avatar_url}`);
-// `;
 
 const categories1 = [
   {
@@ -150,18 +143,21 @@ const categories2 = [
 ];
 
 function Header() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { code, state } = Object.fromEntries([...searchParams]);
-  const [token, setToken] = useState({});
+  const { code } = Object.fromEntries([...searchParams]);
   const [userData, setUserData] = useState<any>({});
   const [userRepo, setUserRepo] = useState([]);
+  const pageState = useContext<any>(PageState);
+  const { userInfo } = pageState;
+  const setPageState = useContext<any>(SetPageState);
 
   const onRequest = () => {
     fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
       method: "POST",
       body: JSON.stringify({
         client_id: "Iv1.26af70ff6861a253",
-        client_secret: "798e8bf1e9c14fac09ea902b3b3fa9e9874dbbd0",
+        client_secret: "65d234d0a18062ef7fbca854eb7901d3c4ff45e6",
         code: code,
       }),
       headers: {
@@ -170,28 +166,30 @@ function Header() {
       },
     }).then(async (res) => {
       const token = await res.json();
-      console.log(token.access_token);
-      setToken(token.access_token);
       window.localStorage.setItem("loginToken", token.access_token);
-      getUser();
+      if (token.access_token) {
+        getUser(token.access_token);
+      }
       // return await res.json();
     });
   };
-  const getUser = () => {
-    api.getUser().then((res) => {
-      console.log(res);
-      setUserData(res);
-    });
 
-    getUserRepo();
+  const redirect = () => {
+    if (code) {
+      onRequest();
+    }
   };
 
-  const getUserRepo = () => {
-    const userName = userData.login;
+  useEffect(redirect, [code]);
 
-    api.getUserRepo(userName).then((res) => {
-      console.log(res);
-      setUserRepo(res);
+  const getUser = (token) => {
+    api.getUser().then((res) => {
+      setUserData(res);
+      const loginName = res.login;
+      const newUserInfo = { ...userInfo, userName: loginName, token: token };
+      const newPageState = { ...pageState, userInfo: newUserInfo };
+      setPageState(newPageState);
+      navigate(loginName);
     });
   };
 
@@ -219,15 +217,16 @@ function Header() {
         </HeaderItem>
         <HeaderToolArea>
           <SignOut>
-            <a href="https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000&state=abcdefg&login=yarchiee">
-              Sign In /{code}
-            </a>
-            <button onClick={onRequest}> REQUEST API</button>
+            {!userInfo.token && (
+              <a href="https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000&state=abcdefg&login=yarchiee">
+                Sign In /
+              </a>
+            )}
           </SignOut>
           <img
             src={userData?.avatar_url}
             alt=""
-            className="w-[20px] h-[20px] rounded-[50%] border border-solid  "
+            className="w-[20px] h-[20px] rounded-[50%] border-[#000]   "
           />
         </HeaderToolArea>
       </HeaderBar>
