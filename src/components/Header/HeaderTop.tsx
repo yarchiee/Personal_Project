@@ -148,54 +148,59 @@ const categories2 = [
 function Header() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { code } = Object.fromEntries([...searchParams]);
+  // const { code } = Object.fromEntries([...searchParams]);
   const [userData, setUserData] = useState<any>({});
   const pageState = useContext<any>(PageState);
   const { userInfo } = pageState;
   const setPageState = useContext<any>(SetPageState);
-  const token = localStorage.getItem("loginToken");
-  const onRequest = () => {
-    fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
-      method: "POST",
-      body: JSON.stringify({
-        client_id: process.env.REACT_APP_SUPABASE_PRO_ID,
-        client_secret: "65d234d0a18062ef7fbca854eb7901d3c4ff45e6",
-        code: code,
-      }),
-      headers: {
-        "content-type": "application/json",
-        Accept: "application/json",
-      },
-    }).then(async (res) => {
-      const token = await res.json();
-      window.localStorage.setItem("loginToken", token.access_token);
-      if (token.access_token) {
-        getUser(token.access_token);
-      }
-    });
-  };
+  // const token = localStorage.getItem("loginToken");
+  // const onRequest = () => {
+  //   fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       client_id: process.env.REACT_APP_SUPABASE_PRO_ID,
+  //       client_secret: "65d234d0a18062ef7fbca854eb7901d3c4ff45e6",
+  //       code: code,
+  //     }),
+  //     headers: {
+  //       "content-type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //   }).then(async (res) => {
+  //     const token = await res.json();
+  //     window.localStorage.setItem("loginToken", token.access_token);
+  //     if (token.access_token) {
+  //       getUser(token.access_token);
+  //     }
+  //   });
+  // };
 
-  const redirect = () => {
-    if (code) {
-      onRequest();
-    }
-  };
+  // const redirect = () => {
+  //   if (code) {
+  //     onRequest();
+  //   }
+  // };
 
-  useEffect(redirect, [code]);
+  // useEffect(redirect, [code]);
 
-  const getUser = (token) => {
-    api.getUser().then((res) => {
-      setUserData(res);
-      const loginName = res.login;
-      const newUserInfo = { ...userInfo, userName: loginName, token: token };
-      const newPageState = { ...pageState, userInfo: newUserInfo };
-      setPageState(newPageState);
-      navigate(loginName);
-    });
-  };
+  // const getUser = (token) => {
+  //   // api.getUser().then((res) => {
+  //   //   setUserData(res);
+  //   const loginName = user?.user_metadata.user_name;
+  //   const newUserInfo = { ...userInfo, userName: loginName, token: token };
+  //   const newPageState = { ...pageState, userInfo: newUserInfo };
+  //   setPageState(newPageState);
+  //   navigate(loginName);
+  //   // console.log(loginName);
+
+  //   // });
+  // };
+
   console.log(userInfo);
 
   const [user, setUser] = useState(null);
+  console.log(user);
+
   useEffect(() => {
     /* when the app loads, check to see if the user is signed in */
     checkUser();
@@ -207,14 +212,30 @@ function Header() {
   async function checkUser() {
     /* if a user is signed in, update local state */
     const user = supabase.auth.user();
-    const token = supabase.auth.session();
+    const tokenobj = supabase.auth.session();
+    const token = tokenobj.provider_token;
+    window.localStorage.setItem("loginToken", token);
+
     setUser(user);
+
+    const loginName = user?.user_metadata.user_name;
+    const newUserInfo = { ...userInfo, userName: loginName, token: token };
+    const newPageState = { ...pageState, userInfo: newUserInfo };
+    setPageState(newPageState);
+    navigate(`/${loginName}`);
   }
   async function signInWithGithub() {
     /* authenticate with GitHub */
-    await supabase.auth.signIn({
-      provider: "github",
-    });
+
+    await supabase.auth.signIn(
+      {
+        provider: "github",
+      },
+      {
+        scopes: "repo gist notifications",
+      }
+    );
+    supabase.auth.session();
   }
   async function signOut() {
     /* sign the user out */
@@ -223,43 +244,45 @@ function Header() {
   }
 
   return (
-    <>
-      <HeaderBar>
-        <ThreeBarsIconControl>
-          <ThreeBarsIcon size={24} fill="#fff" />
-        </ThreeBarsIconControl>
-        <MarkGithubIconControl>
-          <MarkGithubIcon size={32} fill="#fff" />
-        </MarkGithubIconControl>
-        <HeaderItem>
-          <HeaderSearch>
-            <HeaderSearchInput placeholder="Search or jump to..."></HeaderSearchInput>
-          </HeaderSearch>
-          <CategoryLinks>
-            {categories1.map(({ displayText, index }) => (
-              <CategoryLink1 key={index}>{displayText}</CategoryLink1>
-            ))}
-            {categories2.map(({ displayText, index }) => (
-              <CategoryLink2 key={index}>{displayText}</CategoryLink2>
-            ))}
-          </CategoryLinks>
-        </HeaderItem>
-        <HeaderToolArea>
-          {user && (
-            <div className="text-[#fff]">
-              <h1>Hello, {user.email}</h1>
-              <button onClick={signOut}>Sign out</button>
-            </div>
-          )}
+    <HeaderBar>
+      <ThreeBarsIconControl>
+        <ThreeBarsIcon size={24} fill="#fff" />
+      </ThreeBarsIconControl>
+      <MarkGithubIconControl>
+        <MarkGithubIcon size={32} fill="#fff" />
+      </MarkGithubIconControl>
+      <HeaderItem>
+        <HeaderSearch>
+          <HeaderSearchInput placeholder="Search or jump to..."></HeaderSearchInput>
+        </HeaderSearch>
+        <CategoryLinks>
+          {categories1.map(({ displayText, index }) => (
+            <CategoryLink1 key={index}>{displayText}</CategoryLink1>
+          ))}
+          {categories2.map(({ displayText, index }) => (
+            <CategoryLink2 key={index}>{displayText}</CategoryLink2>
+          ))}
+        </CategoryLinks>
+      </HeaderItem>
+      <HeaderToolArea>
+        {user && (
+          <div className="text-[#fff] flex">
+            <button onClick={signOut}>Sign out</button>
+            <img
+              src={user?.user_metadata.avatar_url}
+              alt=""
+              className="w-[20px] h-[20px] rounded-[50%] ml-[10px] border-[#000]   "
+            />
+          </div>
+        )}
 
-          {!user && (
-            <div className="text-[#fff]">
-              <h1>Hello, please sign in!</h1>
-              <button onClick={signInWithGithub}>Sign In</button>
-            </div>
-          )}
+        {!user && (
+          <div className="text-[#fff]">
+            <button onClick={signInWithGithub}>Sign In</button>
+          </div>
+        )}
 
-          {/* {!token && (
+        {/* {!token && (
             <SignOut>
               <a href="https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000&state=abcdefg">
                 Sign In
@@ -273,9 +296,8 @@ function Header() {
               className="w-[20px] h-[20px] rounded-[50%] border-[#000]   "
             />
           )} */}
-        </HeaderToolArea>
-      </HeaderBar>
-    </>
+      </HeaderToolArea>
+    </HeaderBar>
   );
 }
 

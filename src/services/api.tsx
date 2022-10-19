@@ -1,4 +1,3 @@
-import { supabase } from "../Client";
 import { Octokit } from "octokit";
 const token = localStorage.getItem("loginToken");
 const octokit = new Octokit({
@@ -14,45 +13,40 @@ const api = {
   },
   hostname: " https://api.github.com",
   async updateALabel(sourceName, data) {
-    /**
-     {
-      owner: setting.owner,
-      repo: setting.repo,
-      name: sourceName,
-      new_name: data.name,
-      description: data.description,
-      color: 'b01f26'
-      }
-     */
-    const patchData = { ...setting, name: sourceName, data };
-    console.log(patchData);
     const result = await octokit.request(
       "PATCH /repos/{owner}/{repo}/labels/{name}",
-      patchData
+      {
+        headers: {
+          "if-none-match": "",
+        },
+        ...setting,
+        name: sourceName,
+        data,
+      }
     );
     return result;
   },
   async deleteLabel(sourceName) {
-    const deleteData = { ...setting, name: sourceName };
-    await octokit.request(
-      "DELETE /repos/{owner}/{repo}/labels/{name}",
-      deleteData
-    );
+    await octokit.request("DELETE /repos/{owner}/{repo}/labels/{name}", {
+      headers: {
+        "if-none-match": "",
+      },
+      ...setting,
+      name: sourceName,
+    });
   },
   async createLabel(newCreateData) {
     await octokit.request("POST /repos/{owner}/{repo}/labels", {
+      headers: {
+        "if-none-match": "",
+      },
       ...setting,
       name: newCreateData.name,
       description: newCreateData.description,
       color: newCreateData.color,
     });
   },
-  async listLabelPerIssue(owner, issue_number) {
-    const response = await fetch(
-      `${this.hostname}/${owner}/personal-project/issues/${issue_number}/labels`
-    );
-    return await response.json();
-  },
+
   async listLabelAll() {
     const response = await fetch(
       `${this.hostname}/repos/yarchiee/Personal_Project/labels`,
@@ -69,6 +63,9 @@ const api = {
 
   async createIssue(data) {
     return await octokit.request("POST /repos/{owner}/{repo}/issues", {
+      headers: {
+        "if-none-match": "",
+      },
       ...setting,
       title: data.title,
       body: data.body,
@@ -95,6 +92,7 @@ const api = {
       {
         headers: {
           Accept: "application/vnd.github+json",
+          "if-none-match": "",
         },
         method: "GET",
       }
@@ -105,6 +103,7 @@ const api = {
     const res = await octokit.request("GET /repos/{owner}/{repo}/assignees", {
       headers: {
         Accept: "application/vnd.github+json",
+        "if-none-match": "",
       },
       ...setting,
     });
@@ -118,6 +117,7 @@ const api = {
       {
         headers: {
           Accept: "application/vnd.github+json",
+          "if-none-match": "",
         },
         ...setting,
         issue_number: newCreateIssue.issueNumber,
@@ -132,6 +132,7 @@ const api = {
       {
         headers: {
           Accept: "application/vnd.github+json",
+          "if-none-match": "",
         },
         ...setting,
         issue_number: newCreateIssue.issueNumber,
@@ -144,6 +145,9 @@ const api = {
     const result = await octokit.request(
       "POST /repos/{owner}/{repo}/issues/{issue_number}/comments",
       {
+        headers: {
+          "if-none-match": "",
+        },
         ...setting,
         issue_number: createData.issueNumber,
         body: createData.body,
@@ -155,6 +159,9 @@ const api = {
     const result = await octokit.request(
       "PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}",
       {
+        headers: {
+          "if-none-match": "",
+        },
         ...setting,
         ...obj,
       }
@@ -165,6 +172,9 @@ const api = {
     const result = await octokit.request(
       "DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}",
       {
+        headers: {
+          "if-none-match": "",
+        },
         ...setting,
         comment_id: id,
       }
@@ -172,11 +182,12 @@ const api = {
     return result;
   },
   async updateIssue(updateIssue) {
-    console.log(updateIssue);
-
     const result = await octokit.request(
       "PATCH /repos/{owner}/{repo}/issues/{issue_number}",
       {
+        headers: {
+          "if-none-match": "",
+        },
         ...setting,
         issue_number: updateIssue.issueNumber,
         title: updateIssue.title,
@@ -191,7 +202,7 @@ const api = {
   async getUser() {
     const res = await octokit.request("GET /user", {
       headers: {
-        Accept: "application/vnd.github+json",
+        "if-none-match": "",
       },
     });
     const result = res.data;
@@ -200,7 +211,7 @@ const api = {
   async getUserRepo(userName) {
     const res = await octokit.request("GET /users/{username}/repos", {
       headers: {
-        Accept: "application/vnd.github+json",
+        "if-none-match": "",
       },
       username: userName,
     });

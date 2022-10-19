@@ -25,7 +25,8 @@ export default function PopOverList({
     return (
       <>
         <div
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             let tmp = [...whoIsAssignee];
             let che = [...check];
             let url = [...selectedAvatarUrl];
@@ -76,7 +77,8 @@ export default function PopOverList({
       return (
         <>
           <div
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               let tmp = [...selectdLabel];
               let color = [...selectedLabelColor];
               if (check.includes(child.name)) {
@@ -135,6 +137,9 @@ export default function PopOverList({
 
     return (
       <a
+        onClick={(e) => {
+          e.preventDefault();
+        }}
         key={element.id}
         href="#/"
         className={`flex items-start w-full p-4 overflow-hidden text-left cursor-pointer border-b ${
@@ -205,7 +210,10 @@ export default function PopOverList({
             <div className="overflow-y-auto max-h-[calc(100%-126px)] md:max-h-[calc(485px-82px)]">
               {type === "assignee" && newCreateIssue.assignees.length > 0 && (
                 <a
-                  onClick={clearAll}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    clearAll();
+                  }}
                   href="#/"
                   className="flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b border-solid border-b-[hsla(210,18%,87%,1)] md:pt-[7px] md:pb-[7px] hover:bg-[#0969DA] hover:text-[#fff]"
                 >

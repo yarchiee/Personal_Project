@@ -9,6 +9,8 @@ const TextArea = ({ data, updateData, updateIssue, setUpdateIssue }, ref) => {
       setUpdateIssue(obj);
     }
   };
+  console.log(data);
+
   return (
     <>
       <div className="bg-[#fff] md:p-[8px] lg:border lg:border-solid lg:border-t-[#d0d7de] lg:border-r-0 lg:border-l-0 lg:border-b-0">

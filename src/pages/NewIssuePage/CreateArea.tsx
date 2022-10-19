@@ -98,6 +98,7 @@ const CreateArea = ({
   const [editData, setEditData] = useState({
     body: createData.body,
   });
+  console.log(createData);
 
   const updateEditData = (obj) => {
     const newData = { ...editData, ...obj };
@@ -105,7 +106,6 @@ const CreateArea = ({
   };
 
   const navigate = useNavigate();
-  const REPOSITORY = "github-project";
   const markdownref = useRef<TextareaMarkdownRef>(null);
 
   const toggleEditTool = () => {

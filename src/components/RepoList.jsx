@@ -9,7 +9,7 @@ function RepoList() {
   const pageState = useContext(PageState);
   const { userInfo } = pageState;
   const [list, setList] = useState([]);
-
+  console.log(list);
   const getUserRepo = (userName) => {
     console.log("repo");
     api.getUserRepo(userName).then((res) => {

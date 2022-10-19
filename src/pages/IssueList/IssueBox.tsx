@@ -21,10 +21,11 @@ const IssueBox = ({
         <div className="rounded-tl-md rounded-tr-md bg-[#f6f8fa] p-[16px] flex justify-between">
           <h2 className="hidden lg:block">
             <div className=" text-[14px] text-center lg:block">
-              <a href="#/">
+              <a href="/">
                 <IssueOpenedIcon size={16} className="mr-1" />
                 <span
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     let tmp = [...query];
                     tmp.forEach((element) => {
                       if (element.includes("close")) {
@@ -41,10 +42,11 @@ const IssueBox = ({
                   Open
                 </span>
               </a>
-              <a href="#/" className="ml-2.5">
+              <a href="/" className="ml-2.5">
                 <CheckIcon size={16} className="fill-fg-muted mr-1" />
                 <span
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     let tmp = [...query];
                     tmp.forEach((element) => {
                       if (element.includes("open")) {
