@@ -160,8 +160,8 @@ function Header() {
     fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
       method: "POST",
       body: JSON.stringify({
-        client_id: "Iv1.26af70ff6861a253",
-        client_secret: "7ffa3c681276c2c0369bec0c11facf000c4c77b7",
+        client_id: process.env.REACT_APP_SUPABASE_PRO_ID,
+        client_secret: process.env.REACT_APP_SUPABASE_PRO_SECRET,
         code: code,
       }),
       headers: {
