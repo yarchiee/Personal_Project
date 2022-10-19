@@ -4,6 +4,11 @@ import { useParams } from "react-router-dom";
 import TextareaMarkdown from "textarea-markdown-editor";
 const TextArea = ({ data, updateData, updateIssue, setUpdateIssue }, ref) => {
   let { issueNumber } = useParams();
+  const handleChange = (obj) => {
+    if (typeof setUpdateIssue === "function") {
+      setUpdateIssue(obj);
+    }
+  };
   return (
     <>
       <div className="bg-[#fff] md:p-[8px] lg:border lg:border-solid lg:border-t-[#d0d7de] lg:border-r-0 lg:border-l-0 lg:border-b-0">
@@ -15,7 +20,7 @@ const TextArea = ({ data, updateData, updateIssue, setUpdateIssue }, ref) => {
             value={data.body}
             onChange={(e) => {
               updateData({ issueNumber: issueNumber, body: e.target.value });
-              setUpdateIssue({ ...updateIssue, body: e.target.value });
+              handleChange({ ...updateIssue, body: e.target.value });
             }}
           />
           <label className="hidden  md:h-[30px]  md:border md:border-dashed md:border-[#D0D7DE] md:bg-[#f6f8fa] md:border-r-0 md:border-l-0 md:border-b-0 md:rounded-[6px] md:p-[5px] cursor-pointer md:leading-[20px] md:flex ">

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SubmitBtn from "./SubmitBtn";
 import SideBarArea from "./SideBarArea";
 import CreateArea from "./CreateArea";
@@ -26,7 +26,7 @@ function NewIssuePage({
   setSelectedLabelColor,
 }) {
   const navigate = useNavigate();
-
+  const { userId, userRepo } = useParams();
   return (
     <div className="mt-[24px] px-[16px] md:flex  md:px-[32px] xl:mx-[119.6px]">
       <img
@@ -72,7 +72,7 @@ function NewIssuePage({
           onClick={() => {
             postCreateIssue().then(() => {
               setTimeout(() => {
-                navigate("/issues");
+                navigate(`/${userId}/${userRepo}/issues`);
               }, 1000);
             });
           }}

@@ -1,5 +1,5 @@
 import { IssueOpenedIcon } from "@primer/octicons-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Input from "../../components/Input";
 import NewIssueBtn from "../IssueList/NewIssueBtn";
 import EditBtn from "../../components/EditBtn";
@@ -16,6 +16,7 @@ const HeaderEdit = ({
   setPerIssueData,
 }) => {
   const navigate = useNavigate();
+  const { userId, userRepo } = useParams();
   console.log(perIssueData);
   const [searchLabelInputText, setSearchLabelInputText] = useState(
     `${perIssueData?.title ?? ""}`
@@ -64,7 +65,7 @@ const HeaderEdit = ({
                 <NewIssueBtn
                   onClick={() => {
                     setTimeout(() => {
-                      navigate("/issues/new");
+                      navigate(`/${userId}/${userRepo}/issues/new`);
                     }, 1000);
                   }}
                 />
@@ -121,7 +122,7 @@ const HeaderEdit = ({
                   <NewIssueBtn
                     onClick={() => {
                       setTimeout(() => {
-                        navigate("/issues/new");
+                        navigate(`/${userId}/${userRepo}/issues/new`);
                       }, 1000);
                     }}
                   />

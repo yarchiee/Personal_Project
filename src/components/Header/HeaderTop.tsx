@@ -4,7 +4,7 @@ import api from "../../services/api";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { PageState, SetPageState } from "../../context";
-
+import { supabase } from "../../Client";
 const HeaderBar = styled.header`
   background-color: #24292f;
   height: 62px;
@@ -153,7 +153,7 @@ function Header() {
   const pageState = useContext<any>(PageState);
   const { userInfo } = pageState;
   const setPageState = useContext<any>(SetPageState);
-
+  const token = localStorage.getItem("loginToken");
   const onRequest = () => {
     fetch("https://fast-mesa-61999.herokuapp.com/oauth", {
       method: "POST",
@@ -195,6 +195,33 @@ function Header() {
   };
   console.log(userInfo);
 
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    /* when the app loads, check to see if the user is signed in */
+    checkUser();
+    /* check user on OAuth redirect */
+    window.addEventListener("hashchange", function () {
+      checkUser();
+    });
+  }, []);
+  async function checkUser() {
+    /* if a user is signed in, update local state */
+    const user = supabase.auth.user();
+    const token = supabase.auth.session();
+    setUser(user);
+  }
+  async function signInWithGithub() {
+    /* authenticate with GitHub */
+    await supabase.auth.signIn({
+      provider: "github",
+    });
+  }
+  async function signOut() {
+    /* sign the user out */
+    await supabase.auth.signOut();
+    setUser(null);
+  }
+
   return (
     <>
       <HeaderBar>
@@ -218,20 +245,34 @@ function Header() {
           </CategoryLinks>
         </HeaderItem>
         <HeaderToolArea>
-          {!userInfo.token && (
+          {user && (
+            <div className="text-[#fff]">
+              <h1>Hello, {user.email}</h1>
+              <button onClick={signOut}>Sign out</button>
+            </div>
+          )}
+
+          {!user && (
+            <div className="text-[#fff]">
+              <h1>Hello, please sign in!</h1>
+              <button onClick={signInWithGithub}>Sign In</button>
+            </div>
+          )}
+
+          {/* {!token && (
             <SignOut>
               <a href="https://github.com/login/oauth/authorize?client_id=Iv1.26af70ff6861a253&redirect_uri=http://localhost:3000&state=abcdefg">
                 Sign In
               </a>
             </SignOut>
           )}
-          {userInfo.token && (
+          {token && (
             <img
               src={userData?.avatar_url}
               alt=""
               className="w-[20px] h-[20px] rounded-[50%] border-[#000]   "
             />
-          )}
+          )} */}
         </HeaderToolArea>
       </HeaderBar>
     </>

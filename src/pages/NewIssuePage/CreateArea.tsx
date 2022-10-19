@@ -90,9 +90,20 @@ const CreateArea = ({
   setcreateData,
   setTimeLineEvent,
 }) => {
+  const { userId, userRepo } = useParams();
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
   const [openWrite, setOpenWrite] = useState(true);
+
+  const [editData, setEditData] = useState({
+    body: createData.body,
+  });
+
+  const updateEditData = (obj) => {
+    const newData = { ...editData, ...obj };
+    setEditData(newData);
+  };
+
   const navigate = useNavigate();
   const REPOSITORY = "github-project";
   const markdownref = useRef<TextareaMarkdownRef>(null);
@@ -238,8 +249,8 @@ const CreateArea = ({
         {openWrite && (
           <TextArea
             ref={markdownref}
-            data={createData}
-            updateData={setcreateData}
+            data={editData}
+            updateData={updateEditData}
             updateIssue={""}
             setUpdateIssue={""}
           />
@@ -258,7 +269,7 @@ const CreateArea = ({
             />
           </div>
         )}
-        {openMarkDown && <MarkDownArea leaveComment={createData.body} />}
+        {openMarkDown && <MarkDownArea leaveComment={editData.body} />}
         <div className="text-[#57606a] mt-[16px] mb-[8px] leading-[20px] block  md:hidden">
           <InfoIcon size={16} className="mr-[4px] align-text-bottom" />
           Remember, contributions to this repository should follow our
@@ -293,7 +304,7 @@ const CreateArea = ({
               onClick={() => {
                 postCreateIssue().then(() => {
                   setTimeout(() => {
-                    navigate("/issues");
+                    navigate(`/${userId}/${userRepo}/issues`);
                   }, 1000);
                 });
               }}
