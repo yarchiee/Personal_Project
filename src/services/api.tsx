@@ -47,7 +47,7 @@ const api = {
     });
   },
 
-  async listLabelAll() {
+  async listLabelAllbak() {
     const response = await fetch(
       `${this.hostname}/repos/yarchiee/Personal_Project/labels`,
       {
@@ -60,7 +60,17 @@ const api = {
     );
     return await response.json();
   },
+  async listLabelAll() {
+    const res = await octokit.request("GET /repos/{owner}/{repo}/labels", {
+      headers: {
+        "if-none-match": "",
+      },
+      ...setting,
+    });
 
+    const result = res.data;
+    return result;
+  },
   async createIssue(data) {
     return await octokit.request("POST /repos/{owner}/{repo}/issues", {
       headers: {
