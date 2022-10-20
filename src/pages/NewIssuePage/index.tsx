@@ -1,10 +1,7 @@
-// import { useState, useEffect } from "react";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import NewIssuePage from "./NewIssuePage";
-// import api from "../../services/api";
 function NewIssuePageMain() {
-  // const [markdown, setMarkdown] = useState("");
   const [labelData, setLabelData] = useState([]);
   const [isAssignee, setIsAssignee] = useState([]);
   const [typeIssuelName, setTypeIssueName] = useState("");
@@ -29,7 +26,6 @@ function NewIssuePageMain() {
 
   const fetchLabelData = () => {
     api.listLabelAll().then((res) => {
-      // console.log(res);
       setLabelData(res);
     });
   };
@@ -37,7 +33,6 @@ function NewIssuePageMain() {
 
   const fetchAssigneeData = () => {
     api.getAssigneeMenber().then((res) => {
-      // console.log(res);
       setIsAssignee(res);
     });
   };
@@ -69,8 +64,6 @@ function NewIssuePageMain() {
         selectedLabelColor={selectedLabelColor}
         setSelectedLabelColor={setSelectedLabelColor}
       />
-
-      {/* <div dangerouslySetInnerHTML={{ __html: markdown }} /> */}
     </>
   );
 }

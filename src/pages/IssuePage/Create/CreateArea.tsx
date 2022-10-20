@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
-import SubmitBtn from "./SubmitBtn";
+import SubmitBtn from "../SubmitBtn";
 import TextArea from "./TextArea";
 import MarkDownArea from "./MarkDownArea";
 import { useEffect, useRef, useState } from "react";
-import CommentBtn from "../../components/CommentBtn";
+import CommentBtn from "../../../components/CommentBtn";
 import TextareaMarkdown, {
   TextareaMarkdownRef,
 } from "textarea-markdown-editor";
@@ -27,7 +27,7 @@ import {
   InfoIcon,
   MarkdownIcon,
 } from "@primer/octicons-react";
-import api from "../../services/api";
+import api from "../../../services/api";
 
 const toolIconList = [
   [
@@ -82,7 +82,7 @@ const CreateArea = ({
   leaveComment,
   setLeaveComment,
   newCreateIssue,
-  postCreateIssue,
+
   displayTitle,
   displayMargin,
   displaySubmit,
@@ -297,20 +297,6 @@ const CreateArea = ({
                 });
               }}
               disabled={false}
-            />
-          )}
-
-          {displaySubmit && (
-            <SubmitBtn
-              onClick={() => {
-                postCreateIssue().then(() => {
-                  setTimeout(() => {
-                    navigate(`/${userId}/${userRepo}/issues`);
-                  }, 1000);
-                });
-              }}
-              typeIssuelName={typeIssuelName}
-              disabled={true}
             />
           )}
         </div>

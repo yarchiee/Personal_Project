@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import CommentItem from "../CommentItem";
+import CommentItem from "../Comment/CommentItem";
 // import DiscussionItem from "../../../components/DiscussionItem";
 
 export default {

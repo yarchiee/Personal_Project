@@ -1,9 +1,9 @@
 import { KebabHorizontalIcon, SmileyIcon } from "@primer/octicons-react";
 import { useState } from "react";
-import AuthorTag from "../../components/AuthorTag";
+import AuthorTag from "../../../components/AuthorTag";
 import PopOver from "./PopOver";
 import EditCommentArea from "./EditCommentArea";
-import api from "../../services/api";
+import api from "../../../services/api";
 
 const CommentItem = ({
   data,

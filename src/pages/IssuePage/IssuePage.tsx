@@ -1,40 +1,13 @@
 import { useState } from "react";
-import SideBarArea from "../NewIssuePage/SideBarArea";
-import CreateArea from "../NewIssuePage/CreateArea";
-import SubmitBtn from "../NewIssuePage/SubmitBtn";
+import SideBarArea from "./Create/SideBarArea";
+import CreateArea from "./Create/CreateArea";
+import SubmitBtn from "./SubmitBtn";
 import CommentBtn from "../../components/CommentBtn";
 import MobileAssignLabel from "./MobileAssignLabel";
 import HeaderEdit from "./HeaderEdit";
-import CommentItem from "./CommentItem";
+import CommentItem from "./Comment/CommentItem";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
-
-type Props = {
-  labelData: any;
-  setLabelData: any;
-  isAssignee: any;
-  setIsAssignee: any;
-  whoIsAssignee: any;
-  setWhoIsAssignee: any;
-  selectdLabel: any;
-  setSelectedLabel: any;
-  newCreateIssue: any;
-  check: any;
-  setCheck: any;
-  selectedAvatarUrl: any;
-  setSelectedAvatarUrl: any;
-  selectedLabelColor: any;
-  setSelectedLabelColor: any;
-  typeIssuelName?: string;
-  setTypeIssueName: any;
-  leaveComment: any;
-  setLeaveComment: any;
-  postCreateIssue: any;
-  timeLineEvent: any;
-  setTimeLineEvent: any;
-  perIssueData: any;
-  setPerIssueData: any;
-};
 
 function IssuePage({
   labelData,
@@ -56,12 +29,13 @@ function IssuePage({
   setTypeIssueName,
   leaveComment,
   setLeaveComment,
-  postCreateIssue,
+  typeIssueName,
   timeLineEvent,
   setTimeLineEvent,
   perIssueData,
   setPerIssueData,
-}: Props) {
+  postCreateIssue,
+}) {
   let { issueNumber } = useParams();
   const [createData, setcreateData] = useState({
     issueNumber: Number(issueNumber),
@@ -135,7 +109,6 @@ function IssuePage({
               leaveComment={leaveComment}
               setLeaveComment={setLeaveComment}
               newCreateIssue={newCreateIssue}
-              postCreateIssue={postCreateIssue}
               displayTitle={false}
               displayMargin={false}
               displaySubmit={false}

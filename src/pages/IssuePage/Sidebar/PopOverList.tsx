@@ -1,5 +1,5 @@
 import { XIcon, CheckIcon, PencilIcon } from "@primer/octicons-react";
-import Input from "./Input";
+import Input from "../../../components/Input";
 import { uniq, remove } from "lodash";
 import { useState } from "react";
 export default function PopOverList({

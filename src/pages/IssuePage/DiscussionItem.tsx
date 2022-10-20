@@ -1,8 +1,8 @@
 import { GearIcon } from "@primer/octicons-react";
 import { useEffect, useState } from "react";
-import PopOverList from "./PopOverList";
-import LabelItem from "./LabelItem";
-import api from "../services/api";
+import PopOverList from "./Sidebar/PopOverList";
+import LabelItem from "./Sidebar/LabelItem";
+import api from "../../services/api";
 
 export default function DiscussionItem({
   title,

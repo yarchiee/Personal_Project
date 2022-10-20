@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 // import SubmitBtn from "../NewIssuePage/SubmitBtn";
-import TextArea from "../NewIssuePage/TextArea";
-import MarkDownArea from "../NewIssuePage/MarkDownArea";
-import UpdateBtn from "../../components/UpdateBtn";
-import CancelBtn from "../../components/CancelBtn";
+import TextArea from "../../NewIssuePage/TextArea";
+import MarkDownArea from "../../NewIssuePage/MarkDownArea";
+import UpdateBtn from "../../../components/UpdateBtn";
+import CancelBtn from "../../../components/CancelBtn";
 import { useEffect, useRef, useState } from "react";
 import TextareaMarkdown, {
   TextareaMarkdownRef,
@@ -28,7 +28,7 @@ import {
   InfoIcon,
   MarkdownIcon,
 } from "@primer/octicons-react";
-import api from "../../services/api";
+import api from "../../../services/api";
 
 const toolIconList = [
   [
@@ -273,6 +273,7 @@ const EditCommentArea = ({
             updateData={updateEditData}
             updateIssue={updateIssue}
             setUpdateIssue={setUpdateIssue}
+            setLeaveComment={setLeaveComment}
           />
         )}
         {openMarkDown && <MarkDownArea leaveComment={editData.body} />}

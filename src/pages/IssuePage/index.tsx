@@ -65,7 +65,7 @@ function IssuePageMain() {
   }
   return (
     <>
-      <IssuePage
+      {/* <IssuePage
         labelData={labelData}
         setLabelData={setLabelData}
         isAssignee={isAssignee}
@@ -89,7 +89,7 @@ function IssuePageMain() {
         setTimeLineEvent={setTimeLineEvent}
         perIssueData={perIssueData}
         setPerIssueData={setPerIssueData}
-      />
+      /> */}
     </>
   );
 }
