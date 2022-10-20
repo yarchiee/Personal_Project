@@ -60,6 +60,7 @@ const NewLabelBtnText = styled.div`
   line-height: 23px;
   margin-left: 5px;
   color: #fff;
+  cursor: pointer;
 `;
 const LabelBox = styled.div`
   width: 100%;
@@ -80,7 +81,7 @@ const LabelBoxTitle = styled.div`
   line-height: 21px;
 `;
 
-function LabelList({ list, callback }) {
+function LabelList({ list, callback, setList }) {
   const [createNewLabel, setCreateNewLabel] = useState(false);
   const toggleNewLabelBtn = () => {
     setCreateNewLabel(!createNewLabel);
@@ -101,7 +102,11 @@ function LabelList({ list, callback }) {
           <SearchLabelsInput placeholder="Search all labels"></SearchLabelsInput>
         </SearchAllLabelsMobile>
         {createNewLabel && (
-          <NewLabel onCancel={toggleNewLabelBtn} callback={callback} />
+          <NewLabel
+            onCancel={toggleNewLabelBtn}
+            callback={callback}
+            setList={setList}
+          />
         )}
 
         <LabelBox>
@@ -112,7 +117,14 @@ function LabelList({ list, callback }) {
           </LabelBoxHeader>
 
           {list.map((data) => {
-            return <Label data={data} key={data.id} callback={callback} />;
+            return (
+              <Label
+                data={data}
+                key={data.id}
+                callback={callback}
+                setList={setList}
+              />
+            );
           })}
         </LabelBox>
       </RepoContentContainer>

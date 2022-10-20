@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import { BrowserRouter } from "react-router-dom";
 import Header from "../HeaderTop";
 
 export default {
@@ -11,7 +11,11 @@ export default {
   },
 };
 
-const Template = (args) => <Header {...args} />;
+const Template = (args) => (
+  <BrowserRouter>
+    <Header {...args} />
+  </BrowserRouter>
+);
 
 export const Default = Template.bind({});
 Default.args = {};

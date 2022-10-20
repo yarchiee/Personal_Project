@@ -4,7 +4,7 @@ import api from "../../services/api";
 
 function Labels() {
   const [list, setList] = useState([]);
-  const [refresh, setRefresh] = useState(false);
+  const [, setRefresh] = useState(false);
 
   const fetchData = () => {
     api.listLabelAll().then((res) => {
@@ -14,7 +14,7 @@ function Labels() {
     });
   };
   useEffect(fetchData, []);
-  return <LabelList list={list} callback={fetchData} />;
+  return <LabelList list={list} callback={fetchData} setList={setList} />;
 }
 
 export default Labels;

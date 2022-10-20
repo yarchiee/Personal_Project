@@ -1,4 +1,5 @@
 import { useState } from "react";
+import lightOrDark from "../../utils/lightCal";
 import styled from "styled-components";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
@@ -257,7 +258,7 @@ const ButtonColor = {
     "D4C5F9",
   ],
 };
-const NewLabel = ({ onCancel, callback }) => {
+const NewLabel = ({ onCancel, callback, setList }) => {
   const [fieldValue, setFieldValue] = useState(false);
   const [createLabelData, setCreateLabelData] = useState<CreateLabelData>(
     [] as unknown as CreateLabelData
@@ -283,21 +284,17 @@ const NewLabel = ({ onCancel, callback }) => {
     setSelectColorCode(newData.color);
   };
 
-  const createLabel = async () => {
-    await api.createLabel(newCreateData);
-    callback();
+  const createLabel = () => {
+    api.createLabel(newCreateData).then(() => {
+      setTimeout(() => {
+        api.listLabelAll().then((res) => {
+          const data = [...res];
+          setList(data);
+        });
+      }, 2000);
+    });
   };
-  function lightOrDark(bgcolor) {
-    const r = parseInt(bgcolor.slice(0, 2), 16);
-    const g = parseInt(bgcolor.slice(2, 4), 16);
-    const b = parseInt(bgcolor.slice(4, 6), 16);
-    const hsp = r * 0.3 + g * 0.6 + b * 0.1;
-    if (hsp > 127.5) {
-      return "black";
-    } else {
-      return "white";
-    }
-  }
+
   const alertMessage = () => {
     alert(
       "Are you sure?Delete a label will remove it from all issues and pull requests."

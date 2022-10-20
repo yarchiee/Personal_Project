@@ -97,12 +97,13 @@ const ThreeDotIcon = styled(KebabHorizontalIcon)`
   display: none;
   @media screen and (max-width: 1011.9px) {
     display: block;
+    margin-bottom: 8px;
     &:hover {
       color: #fff;
     }
   }
 `;
-const Label = ({ data, callback }) => {
+const Label = ({ data, callback, setList }) => {
   const [editModal, setEditModal] = useState(false);
   const [openReviseBtn, setOpenReviseBtn] = useState(true);
 
@@ -164,7 +165,12 @@ const Label = ({ data, callback }) => {
       </EachLabelContainer>
 
       {editModal && (
-        <EditArea onCancel={toggleEditModal} data={data} callback={callback} />
+        <EditArea
+          onCancel={toggleEditModal}
+          data={data}
+          callback={callback}
+          setList={setList}
+        />
       )}
     </>
   );

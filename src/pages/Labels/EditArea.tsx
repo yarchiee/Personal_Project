@@ -1,4 +1,5 @@
 import { useState } from "react";
+import lightOrDark from "../../utils/lightCal";
 import styled from "styled-components";
 import { KebabHorizontalIcon, SyncIcon } from "@primer/octicons-react";
 import { randomBase16 } from "../../utils/random";
@@ -143,6 +144,7 @@ const EditLabelCancel = styled.div`
   line-height: 22px;
   margin-bottom: 16px;
   margin-left: 8px;
+  cursor: pointer;
   @media screen and (max-width: 768px) {
     margin-left: 0;
     margin-right: 8px;
@@ -253,7 +255,7 @@ const ButtonColor = {
   ],
 };
 
-const EditArea = ({ data, onCancel, callback }) => {
+const EditArea = ({ data, onCancel, callback, setList }) => {
   const [fieldValue, setFieldValue] = useState(false);
   const [editData, setEditData] = useState({
     name: data.name,
@@ -283,11 +285,17 @@ const EditArea = ({ data, onCancel, callback }) => {
     }
     return patchData;
   };
-  const updateLabel = async () => {
+  const updateLabel = () => {
     const patchData = mapPatchData(data, editData);
     const sourceName = data.name;
-    await api.updateALabel(sourceName, patchData);
-    callback();
+    api.updateALabel(sourceName, patchData).then(() => {
+      setTimeout(() => {
+        api.listLabelAll().then((res) => {
+          const data = [...res];
+          setList(data);
+        });
+      }, 2000);
+    });
   };
   const popconfirm = () => {
     const confirm = window.confirm(
@@ -297,23 +305,17 @@ const EditArea = ({ data, onCancel, callback }) => {
       deleteLabel();
     }
   };
-  const deleteLabel = async () => {
+  const deleteLabel = () => {
     const sourceName = data.name;
-    await api.deleteLabel(sourceName);
-    callback();
+    api.deleteLabel(sourceName).then(() => {
+      setTimeout(() => {
+        api.listLabelAll().then((res) => {
+          const data = [...res];
+          setList(data);
+        });
+      }, 2000);
+    });
   };
-
-  function lightOrDark(bgcolor) {
-    const r = parseInt(bgcolor.slice(0, 2), 16);
-    const g = parseInt(bgcolor.slice(2, 4), 16);
-    const b = parseInt(bgcolor.slice(4, 6), 16);
-    const hsp = r * 0.3 + g * 0.6 + b * 0.1;
-    if (hsp > 127.5) {
-      return "black";
-    } else {
-      return "white";
-    }
-  }
 
   return (
     <>
