@@ -5,8 +5,6 @@ import RepoList from "./components/RepoList";
 import IssueList from "./pages/IssueList";
 import IssuePage from "./pages/IssuePage";
 import NewIssuePage from "./pages/NewIssuePage";
-// import Oauth from "./pages/Oauth/Oauth";
-import GithubOauth from "./pages/Oauth/GithubOAuth";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { PageState, SetPageState } from "./context";
 import Loader from "./context/Loader";
@@ -57,10 +55,6 @@ function App() {
                       <Route path="new" element={<NewIssuePage />}></Route>
                     </Route>
                     <Route path="labels" element={<Labels />}></Route>
-                    <Route
-                      path="github-ooath"
-                      element={<GithubOauth />}
-                    ></Route>
                   </Route>
                 </Route>
               </Route>

@@ -98,8 +98,6 @@ const CreateArea = ({
   const [editData, setEditData] = useState({
     body: createData.body,
   });
-  console.log(createData);
-
   const updateEditData = (obj) => {
     const newData = { ...editData, ...obj };
     setEditData(newData);

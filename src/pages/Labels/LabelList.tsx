@@ -81,7 +81,6 @@ const LabelBoxTitle = styled.div`
 `;
 
 function LabelList({ list, callback }) {
-  // const list = props.list ? props.list : [];
   const [createNewLabel, setCreateNewLabel] = useState(false);
   const toggleNewLabelBtn = () => {
     setCreateNewLabel(!createNewLabel);
@@ -92,7 +91,6 @@ function LabelList({ list, callback }) {
       <RepoContentContainer>
         <SubNavBox>
           <LabelsMilestone />
-
           <SearchAllLabels />
           <NewLabelBtn onClick={toggleNewLabelBtn}>
             <NewLabelBtnText>New label</NewLabelBtnText>

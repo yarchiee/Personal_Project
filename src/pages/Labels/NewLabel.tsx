@@ -270,7 +270,6 @@ const NewLabel = ({ onCancel, callback }) => {
     description: typeDescription,
     color: selectColorCode,
   };
-  console.log(newCreateData);
 
   const randomColor = () => {
     const newColor = {
@@ -289,8 +288,6 @@ const NewLabel = ({ onCancel, callback }) => {
     callback();
   };
   function lightOrDark(bgcolor) {
-    console.log(bgcolor);
-
     const r = parseInt(bgcolor.slice(0, 2), 16);
     const g = parseInt(bgcolor.slice(2, 4), 16);
     const b = parseInt(bgcolor.slice(4, 6), 16);

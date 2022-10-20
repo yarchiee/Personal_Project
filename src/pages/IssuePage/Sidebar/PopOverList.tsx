@@ -208,7 +208,7 @@ export default function PopOverList({
               />
             </div>
             <div className="overflow-y-auto max-h-[calc(100%-126px)] md:max-h-[calc(485px-82px)]">
-              {type === "assignee" && newCreateIssue.assignees.length > 0 && (
+              {/* {type === "assignee" && updateIssue.assignees.length > 0 && (
                 <a
                   onClick={(e) => {
                     e.preventDefault();
@@ -222,7 +222,7 @@ export default function PopOverList({
                   </div>
                   <span className="font-semibold">Clear assignees</span>
                 </a>
-              )}
+              )} */}
 
               <div className="bg-[#f6f8fa] flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b border-solid border-b-[hsla(210,18%,87%,1)] md:pt-[7px] md:pb-[7px]">
                 {type === "assignee" && (

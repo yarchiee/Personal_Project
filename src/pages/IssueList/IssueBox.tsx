@@ -29,7 +29,6 @@ const IssueBox = ({
                     let tmp = [...query];
                     tmp.forEach((element) => {
                       if (element.includes("close")) {
-                        console.log("close", element);
                         tmp = tmp.filter((item) => item !== element);
                       }
                     });
@@ -50,7 +49,6 @@ const IssueBox = ({
                     let tmp = [...query];
                     tmp.forEach((element) => {
                       if (element.includes("open")) {
-                        console.log("open", element);
                         tmp = tmp.filter((item) => item !== element);
                       }
                     });

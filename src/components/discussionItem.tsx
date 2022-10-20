@@ -33,7 +33,6 @@ export default function DiscussionItem({
     setWhoIsAssignee(["yarchiee"]);
     setCheck(["yarchiee"]);
   };
-  console.log(newCreateIssue);
 
   const fetchLabelData = () => {
     api.listLabelAll().then((res) => {

@@ -7,7 +7,12 @@ const MobileAssignLabel = ({ perIssueData }) => {
           <span className="w-1/6 font-semibold">Assignees</span>
           <div className="flex">
             {perIssueData?.assignees.map((item) => (
-              <a href="#/">
+              <a
+                href="#/"
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 <img
                   key={item?.avatar_url}
                   src={`${item?.avatar_url}`}

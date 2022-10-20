@@ -17,7 +17,6 @@ function GithubOauth() {
         Accept: "application/json",
       },
     }).then(async (res) => {
-      console.log(await res.json());
       return await res.json();
     });
   };

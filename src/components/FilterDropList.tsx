@@ -65,6 +65,9 @@ export default function FilterDropList({ isDisplayDropDown }) {
             <div className="overflow-y-auto max-h-[calc(100%-126px)] sm:max-h-[calc(485px-82px)]">
               <a
                 href="#/"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
                 className="flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]"
               >
                 <div className="flex items-start mr-2">
@@ -75,6 +78,9 @@ export default function FilterDropList({ isDisplayDropDown }) {
               {labelslist.map((element, index) => {
                 return (
                   <a
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
                     href="#/"
                     className={`flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b ${
                       labelslist.length - 1 !== index

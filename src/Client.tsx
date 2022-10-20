@@ -8,7 +8,6 @@
 // export { supabase };
 
 import { createClient } from "@supabase/supabase-js";
-console.log(process.env.NODE_ENV);
 
 const url =
   process.env.NODE_ENV === "production"
@@ -19,7 +18,6 @@ const key =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_SUPABASE_DEV_KEY
     : process.env.REACT_APP_SUPABASE_PRO_KEY;
-console.log(key, url);
 
 const supabase = createClient(url as string, key as string);
 

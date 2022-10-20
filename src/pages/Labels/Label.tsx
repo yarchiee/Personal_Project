@@ -3,7 +3,7 @@ import { KebabHorizontalIcon } from "@primer/octicons-react";
 import EditArea from "./EditArea";
 import DeleteBtn from "./DeleteBtn";
 import MobileEditDelete from "./MobileEditDelete";
-
+import lightOrDark from "../../utils/lightCal";
 import api from "../../services/api";
 import { useState } from "react";
 
@@ -115,17 +115,6 @@ const Label = ({ data, callback }) => {
     callback();
   };
 
-  function lightOrDark(bgcolor) {
-    const r = parseInt(bgcolor.slice(0, 2), 16);
-    const g = parseInt(bgcolor.slice(2, 4), 16);
-    const b = parseInt(bgcolor.slice(4, 6), 16);
-    const hsp = r * 0.3 + g * 0.6 + b * 0.1;
-    if (hsp > 127.5) {
-      return "black";
-    } else {
-      return "white";
-    }
-  }
   const popconfirm = () => {
     const confirm = window.confirm(
       "Are you sure?Delete a label will remove it from all issues and pull requests."

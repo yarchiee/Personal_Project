@@ -66,12 +66,10 @@ const toolIconList = [
     <QuoteIcon className="block-quotes" />,
     <CodeIcon className="code" />,
     <LinkIcon className="link" />,
-
     <ListUnorderedIcon className="unordered-list" />,
     <ListOrderedIcon className="ordered-list" />,
     <TasklistIcon className="tasklist" />,
     <MentionIcon />,
-
     <CrossReferenceIcon />,
     <ReplyIcon />,
   ],
@@ -81,7 +79,6 @@ const CreateArea = ({
   setTypeIssueName,
   leaveComment,
   setLeaveComment,
-  newCreateIssue,
 
   displayTitle,
   displayMargin,
@@ -90,7 +87,6 @@ const CreateArea = ({
   setcreateData,
   setTimeLineEvent,
 }) => {
-  const { userId, userRepo } = useParams();
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
   const [openWrite, setOpenWrite] = useState(true);
@@ -98,14 +94,11 @@ const CreateArea = ({
   const [editData, setEditData] = useState({
     body: createData.body,
   });
-  console.log(createData);
-
   const updateEditData = (obj) => {
     const newData = { ...editData, ...obj };
     setEditData(newData);
   };
 
-  const navigate = useNavigate();
   const markdownref = useRef<TextareaMarkdownRef>(null);
 
   const toggleEditTool = () => {
@@ -124,10 +117,18 @@ const CreateArea = ({
   };
 
   const postCreateComment = () => {
-    api.createComment(createData).then((res) => {
-      api.getTimeLineEvent(createData).then((res) => {
-        setTimeLineEvent(res);
-      });
+    api.createComment(editData).then((res) => {
+      api
+        .getTimeLineEvent(editData)
+        .then((res) => {
+          setTimeLineEvent(res);
+        })
+        .finally(() => {
+          setEditData({
+            ...createData,
+            body: "",
+          });
+        });
     });
   };
   return (
@@ -254,6 +255,8 @@ const CreateArea = ({
             updateIssue={""}
             setUpdateIssue={""}
             setLeaveComment={setLeaveComment}
+            leaveComment={leaveComment}
+            createData={createData}
           />
         )}
         {!displaySubmit && (
@@ -261,16 +264,12 @@ const CreateArea = ({
             <CommentBtn
               onClick={() => {
                 updateData(createData);
-                setcreateData({
-                  ...createData,
-                  body: "",
-                });
               }}
               disabled={false}
             />
           </div>
         )}
-        {openMarkDown && <MarkDownArea leaveComment={editData.body} />}
+        {openMarkDown && <MarkDownArea leaveComment={createData.body} />}
         <div className="text-[#57606a] mt-[16px] mb-[8px] leading-[20px] block  md:hidden">
           <InfoIcon size={16} className="mr-[4px] align-text-bottom" />
           Remember, contributions to this repository should follow our
@@ -291,10 +290,6 @@ const CreateArea = ({
             <CommentBtn
               onClick={() => {
                 updateData(createData);
-                setcreateData({
-                  ...createData,
-                  body: "",
-                });
               }}
               disabled={false}
             />

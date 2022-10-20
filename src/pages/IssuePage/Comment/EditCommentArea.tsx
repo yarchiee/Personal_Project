@@ -88,6 +88,7 @@ const EditCommentArea = ({
   updateIssue,
   setUpdateIssue,
   data,
+  type,
 }) => {
   const [openEditTool, setOpenEditModal] = useState(false);
   const [openMarkDown, setOpenMarkDown] = useState(false);
@@ -125,16 +126,19 @@ const EditCommentArea = ({
     setUpdateIssue(newData);
     patchIssueData();
   };
-  console.log(updateIssue);
   const patchIssueData = () => {
-    api.updateIssue(updateIssue).then(() => {
-      console.log("update");
-      setTimeout(() => {
-        api.getAnIssue(updateIssue).then((res) => {
-          setPerIssueData(res);
-        });
-      }, 1000);
-    });
+    api
+      .updateIssue(updateIssue)
+      .then(() => {
+        setTimeout(() => {
+          api.getAnIssue(updateIssue).then((res) => {
+            setPerIssueData(res);
+          });
+        }, 1000);
+      })
+      .finally(() => {
+        toggleEditModal();
+      });
   };
 
   const markdownref = useRef<TextareaMarkdownRef>(null);
@@ -285,13 +289,22 @@ const EditCommentArea = ({
             }}
             disabled={false}
           />
-          <UpdateBtn
-            onClick={() => {
-              updateComment();
-              updateData({ body: updateIssue.body });
-            }}
-            disabled={false}
-          />
+          {type === "issue" && (
+            <UpdateBtn
+              onClick={() => {
+                updateData({ body: updateIssue.body });
+              }}
+              disabled={false}
+            />
+          )}
+          {type === "comments" && (
+            <UpdateBtn
+              onClick={() => {
+                updateComment();
+              }}
+              disabled={false}
+            />
+          )}
         </div>
       </div>
     </div>

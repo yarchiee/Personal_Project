@@ -46,7 +46,6 @@ const CommentItem = ({
       closeDetails();
     }
   };
-  console.log(data);
 
   return (
     <>
@@ -75,6 +74,9 @@ const CommentItem = ({
               >
                 <div className="rounded-[6px] flex-auto h-[21px] leading-[21px] text-[14px]">
                   <a
+                    onClick={(e) => {
+                      e.preventDefault();
+                    }}
                     href="#/"
                     className="rounded-[6px] max-w-[125px] mr-[10px] font-semibold"
                   >
@@ -124,6 +126,7 @@ const CommentItem = ({
             setTimeLineEvent={setTimeLineEvent}
             setPerIssueData={setPerIssueData}
             updateIssue={updateIssue}
+            type={type}
             setUpdateIssue={setUpdateIssue}
           />
         )}

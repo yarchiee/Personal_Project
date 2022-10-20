@@ -17,7 +17,6 @@ const HeaderEdit = ({
 }) => {
   const navigate = useNavigate();
   const { userId, userRepo } = useParams();
-  console.log(perIssueData);
   const [searchLabelInputText, setSearchLabelInputText] = useState(
     `${perIssueData?.title ?? ""}`
   );
@@ -31,10 +30,9 @@ const HeaderEdit = ({
     setUpdateIssue(newData);
     patchIssueData();
   };
-  console.log(updateIssue);
+
   const patchIssueData = () => {
     api.updateIssue(updateIssue).then(() => {
-      console.log("update");
       setTimeout(() => {
         api.getAnIssue(updateIssue).then((res) => {
           setPerIssueData(res);
@@ -85,10 +83,13 @@ const HeaderEdit = ({
             {!openInput && (
               <div className=" block flex-auto text-right h-[21px] leading-[21px] md:hidden ">
                 <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
                   href="#/"
                   className="text-[#0969da] text-[14px] pt-[4px] pb-[4px] "
                 >
-                  jump to bottom{" "}
+                  jump to bottom
                 </a>
               </div>
             )}
@@ -154,7 +155,13 @@ const HeaderEdit = ({
             <span className="font-semibold text-[#fff]"> Open</span>
           </div>
           <div className="flex mb-[8px] text-[14px] h-[25px] leading-[25px]">
-            <a href="#/" className="text-[#57606a] font-semibold mr-[5px]">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+              href="#/"
+              className="text-[#57606a] font-semibold mr-[5px]"
+            >
               {perIssueData ? perIssueData.user.login : ""}
             </a>
             opened this issue 16 days ago ·

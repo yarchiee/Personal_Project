@@ -7,12 +7,6 @@ const TextArea = (
   ref
 ) => {
   let { issueNumber } = useParams();
-  // const handleChange = (obj) => {
-  //   if (typeof setUpdateIssue === "function") {
-  //     setUpdateIssue(obj);
-  //   }
-  // };
-  // console.log(data);
 
   return (
     <>
@@ -33,14 +27,14 @@ const TextArea = (
               accept=".gif,.jpg,.svg,.png"
               type="file"
               className="  opacity-10 w-[60%] h-[30px] md:absolute  "
-              onClick={() => {
-                console.log("input");
-              }}
             />
             <span className="md:rounded-[6px] md:relative text-[#6E7781]">
               Attach files by dragging & droppind, selecting or pasting them.
             </span>
             <a
+              onClick={(e) => {
+                e.preventDefault();
+              }}
               href="/"
               className="md:ml-auto md:relative md:right:0 md:align-bottom md:text-[#6E7781]"
             >

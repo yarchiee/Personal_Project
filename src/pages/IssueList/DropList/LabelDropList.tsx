@@ -34,6 +34,9 @@ export default function LabelDropList({
             </div>
             <div className="overflow-y-auto max-h-[calc(100%-126px)] sm:max-h-[calc(485px-82px)]">
               <a
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
                 href="#/"
                 className="flex items-start w-full p-4 overflow-hidden text-[#24292f] text-left cursor-pointer border-b border-solid border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]"
               >
@@ -57,7 +60,9 @@ export default function LabelDropList({
                         : "border-none"
                     } hover:bg-[rgba(234,238,242,0.5)] border-b-[hsla(210,18%,87%,1)] sm:pt-[7px] sm:pb-[7px]`}
                     key={element.name}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
+
                       let tmp = [...query];
                       if (check.includes(element.name)) {
                         setCheck(

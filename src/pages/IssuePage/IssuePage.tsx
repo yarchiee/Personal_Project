@@ -1,42 +1,27 @@
-import { useState } from "react";
-import SideBarArea from "./Create/SideBarArea";
+import { useEffect, useState } from "react";
+import SideBarArea from "./Sidebar/SideBarArea";
 import CreateArea from "./Create/CreateArea";
-import SubmitBtn from "./SubmitBtn";
-import CommentBtn from "../../components/CommentBtn";
 import MobileAssignLabel from "./MobileAssignLabel";
 import HeaderEdit from "./HeaderEdit";
 import CommentItem from "./Comment/CommentItem";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/api";
 
-function IssuePage({
-  labelData,
-  setLabelData,
-  isAssignee,
-  setIsAssignee,
-  whoIsAssignee,
-  setWhoIsAssignee,
-  selectdLabel,
-  setSelectedLabel,
-  newCreateIssue,
-  check,
-  setCheck,
-  selectedAvatarUrl,
-  setSelectedAvatarUrl,
-  selectedLabelColor,
-  setSelectedLabelColor,
-  typeIssuelName,
-  setTypeIssueName,
-  leaveComment,
-  setLeaveComment,
-  typeIssueName,
-  timeLineEvent,
-  setTimeLineEvent,
-  perIssueData,
-  setPerIssueData,
-  postCreateIssue,
-}) {
+function IssuePage() {
+  const navigate = useNavigate();
   let { issueNumber } = useParams();
+  const { userId, userRepo } = useParams();
+  const [timeLineEvent, setTimeLineEvent] = useState([]);
+  const [perIssueData, setPerIssueData] = useState<any>();
+  const [labelData, setLabelData] = useState([]);
+  const [isAssignee, setIsAssignee] = useState([]);
+  const [typeIssuelName, setTypeIssueName] = useState("");
+  const [leaveComment, setLeaveComment] = useState("");
+  const [whoIsAssignee, setWhoIsAssignee] = useState("");
+  const [selectdLabel, setSelectedLabel] = useState("");
+  const [selectedAvatarUrl, setSelectedAvatarUrl] = useState("");
+  const [selectedLabelColor, setSelectedLabelColor] = useState("");
+  const [check, setCheck] = useState<string[]>([]);
   const [createData, setcreateData] = useState({
     issueNumber: Number(issueNumber),
     body: leaveComment,
@@ -45,13 +30,40 @@ function IssuePage({
     issueNumber: issueNumber,
     title: perIssueData?.title,
     body: perIssueData?.body,
-    state: perIssueData?.state,
-    assignees: perIssueData?.assignees,
-    labels: perIssueData?.labels,
+    assignees: [...whoIsAssignee],
+    labels: [...selectdLabel],
+    avatarUrl: [...selectedAvatarUrl],
+    labelColor: [...selectedLabelColor],
+    checkone: [...check],
   });
-  const assignMenber = perIssueData?.assignees.login;
-  console.log(assignMenber);
 
+  const getTimeLineEvent = () => {
+    api.getTimeLineEvent(createData).then((res) => {
+      setTimeLineEvent(res);
+    });
+  };
+  const getAnIssue = () => {
+    api
+      .getAnIssue(createData)
+      .then((res) => {
+        setPerIssueData(res);
+        console.dir("PER", res);
+        getTimeLineEvent();
+      })
+      .catch(() => {
+        navigate(`/${userId}/${userRepo}/issues`);
+      });
+  };
+  useEffect(getAnIssue, []);
+  const fetchAssigneeData = () => {
+    api.getAssigneeMenber().then((res) => {
+      setIsAssignee(res);
+    });
+  };
+  useEffect(fetchAssigneeData, []);
+  if (perIssueData === undefined) {
+    return <></>;
+  }
   return (
     <>
       <div className="mt-[24px] mb-[16px]  px-[16px] md:mx-[32px] xl:mx-[119.6px] md:px-0 ">
@@ -108,7 +120,6 @@ function IssuePage({
               setTypeIssueName={setTypeIssueName}
               leaveComment={leaveComment}
               setLeaveComment={setLeaveComment}
-              newCreateIssue={newCreateIssue}
               displayTitle={false}
               displayMargin={false}
               displaySubmit={false}
@@ -128,7 +139,6 @@ function IssuePage({
           setWhoIsAssignee={setWhoIsAssignee}
           selectdLabel={selectdLabel}
           setSelectedLabel={setSelectedLabel}
-          newCreateIssue={newCreateIssue}
           check={check}
           setCheck={setCheck}
           selectedAvatarUrl={selectedAvatarUrl}
@@ -136,6 +146,7 @@ function IssuePage({
           selectedLabelColor={selectedLabelColor}
           setSelectedLabelColor={setSelectedLabelColor}
           updateIssue={updateIssue}
+          perIssueData={perIssueData}
         />
       </div>
     </>

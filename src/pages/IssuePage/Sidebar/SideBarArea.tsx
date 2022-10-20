@@ -1,4 +1,4 @@
-import DiscussionItem from "../../../components/DiscussionItem";
+import DiscussionItem from "./DiscussionItem";
 
 const SideBarArea = ({
   labelData,
@@ -9,7 +9,6 @@ const SideBarArea = ({
   setWhoIsAssignee,
   selectdLabel,
   setSelectedLabel,
-  newCreateIssue,
   check,
   setCheck,
   selectedAvatarUrl,
@@ -17,9 +16,8 @@ const SideBarArea = ({
   selectedLabelColor,
   setSelectedLabelColor,
   updateIssue,
+  perIssueData,
 }) => {
-  console.log(newCreateIssue);
-
   return (
     <div className=" md:w-[390px] md:mt-[16px] lg:w-[340px]">
       <DiscussionItem
@@ -39,6 +37,8 @@ const SideBarArea = ({
         setSelectedAvatarUrl={setSelectedAvatarUrl}
         selectedLabelColor={selectedLabelColor}
         setSelectedLabelColor={setSelectedLabelColor}
+        updateIssue={updateIssue}
+        perIssueData={perIssueData}
       />
       <DiscussionItem
         list={labelData}
@@ -57,6 +57,8 @@ const SideBarArea = ({
         setSelectedAvatarUrl={setSelectedAvatarUrl}
         selectedLabelColor={selectedLabelColor}
         setSelectedLabelColor={setSelectedLabelColor}
+        updateIssue={updateIssue}
+        perIssueData={perIssueData}
       />
       <div className=" border border-solid border-t-[hsla(210,18%,87%,1)] border-l-0 border-r-0 border-b-0 border-t-0">
         <details className="group">

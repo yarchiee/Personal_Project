@@ -1,8 +1,8 @@
 import { GearIcon } from "@primer/octicons-react";
 import { useEffect, useState } from "react";
-import PopOverList from "./Sidebar/PopOverList";
-import LabelItem from "./Sidebar/LabelItem";
-import api from "../../services/api";
+import PopOverList from "./PopOverList";
+import LabelItem from "./LabelItem";
+import api from "../../../services/api";
 
 export default function DiscussionItem({
   title,
@@ -21,6 +21,8 @@ export default function DiscussionItem({
   setSelectedLabelColor,
   setLabelData,
   setIsAssignee,
+  updateIssue,
+  perIssueData,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDetail = () => {
@@ -33,7 +35,6 @@ export default function DiscussionItem({
     setWhoIsAssignee(["yarchiee"]);
     setCheck(["yarchiee"]);
   };
-  console.log(newCreateIssue);
 
   const fetchLabelData = () => {
     api.listLabelAll().then((res) => {
@@ -48,7 +49,7 @@ export default function DiscussionItem({
     });
   };
   useEffect(fetchAssigneeData, []);
-  if (newCreateIssue === undefined) {
+  if (perIssueData === undefined) {
     return <></>;
   }
   return (
@@ -79,15 +80,15 @@ export default function DiscussionItem({
         />
       </details>
 
-      {title === "Labels" && newCreateIssue?.labelColor.length > 0 ? (
-        newCreateIssue?.labelColor.map((item, index) => (
+      {title === "Labels" && updateIssue?.labels.length > 0 ? (
+        updateIssue?.labels.map((item, index) => (
           <LabelItem
             selectdLabel={selectdLabel[index]}
             selectedLabelColor={selectedLabelColor[index]}
           />
         ))
-      ) : title === "Assignees" && newCreateIssue?.avatarUrl.length > 0 ? (
-        newCreateIssue?.avatarUrl.map((item, index) => (
+      ) : title === "Assignees" && updateIssue?.assignees.length > 0 ? (
+        newCreateIssue?.assignees.map((item, index) => (
           <div className="flex mt-[8px] mb-[8px]">
             <img className="w-[20px] h-[20px] mr-[12px]" src={item} alt="" />
             <div className="leading-tight min-w-0">

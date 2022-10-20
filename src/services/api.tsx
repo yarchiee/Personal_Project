@@ -192,9 +192,9 @@ const api = {
         issue_number: updateIssue.issueNumber,
         title: updateIssue.title,
         body: updateIssue.body,
-        assignees: updateIssue.assignees.login,
+        // assignees: updateIssue.assignees.login,
         state: updateIssue.state,
-        labels: updateIssue.labels.name,
+        // labels: updateIssue.labels.name,
       }
     );
     return result;

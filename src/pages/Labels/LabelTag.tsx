@@ -24,7 +24,6 @@ const IssueLabelP = styled.p<PropsTypes>`
 `;
 
 const LabelTag = ({ selectColorCode, typeLabelName, lightordark }) => {
-  console.log(selectColorCode);
   function lightOrDark(bgcolor) {
     const r = parseInt(bgcolor.slice(0, 2), 16);
     const g = parseInt(bgcolor.slice(2, 4), 16);

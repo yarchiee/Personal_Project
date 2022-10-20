@@ -85,7 +85,9 @@ function LabelHeader({
         <a href="#/">
           <IssueOpenedIcon size={16} className="mr-1" />
           <span
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
+
               let tmp = [...query];
               tmp.forEach((element) => {
                 if (element.includes("close")) {
@@ -103,7 +105,9 @@ function LabelHeader({
         <a href="#/" className="ml-2.5">
           <CheckIcon size={16} className="fill-fg-muted mr-1" />
           <span
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
+
               let tmp = [...query];
               tmp.forEach((element) => {
                 if (element.includes("open")) {

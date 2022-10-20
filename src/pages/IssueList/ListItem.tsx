@@ -11,7 +11,6 @@ import calculateTime from "../../utils/Time";
 
 const ListItem = ({ data, isOpenIssue }) => {
   const time = calculateTime(data.created_at);
-
   const navigate = useNavigate();
   return (
     <div className="border border-t-0  px-[16px] py-[8px] flex border-border border-solid border-[#d0d7de] hover:bg-[rgba(234,238,242,0.5)] ">

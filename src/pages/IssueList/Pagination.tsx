@@ -11,6 +11,9 @@ export default function Pagination({ currentpage, setCurrentPage }) {
   return (
     <div className="flex justify-center items-center text-sm my-4 px-1">
       <a
+        onClick={(e) => {
+          e.preventDefault();
+        }}
         href="#/"
         className="place-items-center grid-flow-col	text-[#8c959f] flex items-center py-5px px-2.5 border border-solid border-transparent hover:border-primary-border hover:rounded-md"
       >
@@ -18,6 +21,9 @@ export default function Pagination({ currentpage, setCurrentPage }) {
         <span onClick={previousPage}>Previous</span>
       </a>
       <a
+        onClick={(e) => {
+          e.preventDefault();
+        }}
         href="#/"
         className=" place-items-center grid-flow-col text-[#0969da] flex items-center py-5px px-2.5 border border-solid border-transparent hover:border-primary-border hover:rounded-md"
       >
