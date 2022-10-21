@@ -1,5 +1,5 @@
 // import styled from "styled-components";
-
+import lightOrDark from "../../utils/lightCal";
 import {
   IssueOpenedIcon,
   IssueClosedIcon,
@@ -36,7 +36,7 @@ const ListItem = ({ data, isOpenIssue }) => {
           return (
             <span className="lg:inline cursor-pointer">
               <div
-                style={{ backgroundColor: `#${item.color}` }}
+                style={{ backgroundColor: `#${lightOrDark(item.color)}` }}
                 className="font-semibold inline-block h-[20px]  leading-[20px] px-[7px] rounded-[10px] mr-[5px] text-[5px]   "
               >
                 {item.name}

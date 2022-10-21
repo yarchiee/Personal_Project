@@ -1,4 +1,5 @@
 import * as React from "react";
+import { BrowserRouter } from "react-router-dom";
 
 import ListItem from "../ListItem";
 
@@ -12,15 +13,17 @@ export default {
 };
 
 const Template = (args) => (
-  <div
-    style={{
-      position: "absolute",
-      width: "100%",
-      top: "40%",
-    }}
-  >
-    <ListItem {...args} />
-  </div>
+  <BrowserRouter>
+    <div
+      style={{
+        position: "absolute",
+        width: "100%",
+        top: "40%",
+      }}
+    >
+      <ListItem {...args} />
+    </div>
+  </BrowserRouter>
 );
 
 export const Default = Template.bind({});

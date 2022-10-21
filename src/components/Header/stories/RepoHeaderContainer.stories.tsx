@@ -1,4 +1,5 @@
 import * as React from "react";
+import { BrowserRouter } from "react-router-dom";
 
 import RepoHeaderContainer from "../RepoHeaderContainer";
 
@@ -11,7 +12,11 @@ export default {
   },
 };
 
-const Template = (args) => <RepoHeaderContainer {...args} />;
+const Template = (args) => (
+  <BrowserRouter>
+    <RepoHeaderContainer {...args} />
+  </BrowserRouter>
+);
 
 export const Default = Template.bind({});
 Default.args = {};
