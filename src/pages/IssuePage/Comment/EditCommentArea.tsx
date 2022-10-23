@@ -4,7 +4,7 @@ import TextArea from "../../NewIssuePage/TextArea";
 import MarkDownArea from "../../NewIssuePage/MarkDownArea";
 import UpdateBtn from "../../../components/UpdateBtn";
 import CancelBtn from "../../../components/CancelBtn";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import TextareaMarkdown, {
   TextareaMarkdownRef,
 } from "textarea-markdown-editor";
@@ -25,8 +25,6 @@ import {
   ListUnorderedIcon,
   ListOrderedIcon,
   TasklistIcon,
-  InfoIcon,
-  MarkdownIcon,
 } from "@primer/octicons-react";
 import api from "../../../services/api";
 

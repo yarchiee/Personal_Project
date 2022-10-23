@@ -5,7 +5,7 @@ import RepoList from "./components/RepoList";
 import IssueList from "./pages/IssueList";
 import IssuePage from "./pages/IssuePage";
 import NewIssuePage from "./pages/NewIssuePage";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { PageState, SetPageState } from "./context";
 import Loader from "./context/Loader";
 import { useState, useEffect, useContext } from "react";

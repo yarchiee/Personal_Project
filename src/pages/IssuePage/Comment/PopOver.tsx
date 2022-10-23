@@ -1,7 +1,5 @@
 import styled from "styled-components";
-type DisplayProps = {
-  display: string;
-};
+
 const ReviseMenu = styled.div`
   width: 185px;
   margin-top: 2px;

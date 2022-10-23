@@ -1,5 +1,4 @@
 import { TriangleDownIcon, XIcon, CheckIcon } from "@primer/octicons-react";
-import styled from "styled-components";
 
 const labelslist = [
   {

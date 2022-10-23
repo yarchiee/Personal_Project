@@ -1,4 +1,3 @@
-// import styled from "styled-components";
 import lightOrDark from "../../utils/lightCal";
 import {
   IssueOpenedIcon,

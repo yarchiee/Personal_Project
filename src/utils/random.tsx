@@ -1,5 +1,3 @@
-// import { randomInt } from "crypto";
-
 export const randomBase16 = (length) => random("0123456789abcdef", length);
 
 const random = (chars, length) => {

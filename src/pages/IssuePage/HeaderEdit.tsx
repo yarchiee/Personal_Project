@@ -1,6 +1,5 @@
 import { IssueOpenedIcon } from "@primer/octicons-react";
 import { useNavigate, useParams } from "react-router-dom";
-import Input from "../../components/Input";
 import NewIssueBtn from "../IssueList/NewIssueBtn";
 import EditBtn from "../../components/EditBtn";
 import SaveBtn from "../../components/SaveBtn";

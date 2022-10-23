@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import SubmitBtn from "./SubmitBtn";
 import TextArea from "./TextArea";
 import MarkDownArea from "./MarkDownArea";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import CommentBtn from "../../components/CommentBtn";
 import TextareaMarkdown, {
   TextareaMarkdownRef,

@@ -18,13 +18,11 @@ const EachLabelContainer = styled.div`
   border: 1px solid #d0d7de;
   border-bottom: none;
   border-top: none;
-  /* border-bottom: none; */
   padding: 16px;
   padding-bottom: 0;
   display: flex;
   line-height: 26px;
   @media screen and (max-width: 768px) {
-    /* height: 340px; */
     flex-direction: column;
   }
 `;

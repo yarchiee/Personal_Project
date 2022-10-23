@@ -32,6 +32,9 @@ const AreaLabelLinks = styled.div`
   width: 720px;
   justify-content: space-around;
   width: 900px;
+  @media screen and (max-width: 1248px) {
+    display: none;
+  }
 `;
 const AreaLabelLink = styled.div`
   color: #0969da;
@@ -89,11 +92,11 @@ function Footer() {
         <FooterItemContainer>
           <MarkGithubIcon size={24} fill="#6e7781" />
           <FooterItemText>@ 2022 Github,Inc.</FooterItemText>
-          {/* <AreaLabelLinks>
+          <AreaLabelLinks>
             {footertext.map(({ displayText }) => (
               <AreaLabelLink>{displayText}</AreaLabelLink>
             ))}
-          </AreaLabelLinks> */}
+          </AreaLabelLinks>
         </FooterItemContainer>
       </FooterWidthFullContainer>
     </>
