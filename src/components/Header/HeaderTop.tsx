@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { MarkGithubIcon, ThreeBarsIcon } from "@primer/octicons-react";
-import api from "../../services/api";
 import { useEffect, useState, useContext } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PageState, SetPageState } from "../../context";
 import { supabase } from "../../Client";
 const HeaderBar = styled.header`
@@ -86,18 +85,6 @@ const HeaderToolArea = styled.div`
   margin-left: auto;
   display: flex;
   align-items: center;
-`;
-const SignOut = styled.div`
-  line-height: 30px;
-  font-weight: 400;
-  color: #d0d7de;
-  margin-right: 16px;
-  border: 1px solid #d0d7de;
-  padding-right: 10px;
-  padding-left: 10px;
-  &:hover {
-    color: #fff;
-  }
 `;
 
 const categories1 = [

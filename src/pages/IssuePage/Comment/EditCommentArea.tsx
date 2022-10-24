@@ -1,13 +1,9 @@
-import { useNavigate } from "react-router-dom";
-// import SubmitBtn from "../NewIssuePage/SubmitBtn";
 import TextArea from "../../NewIssuePage/TextArea";
 import MarkDownArea from "../../NewIssuePage/MarkDownArea";
 import UpdateBtn from "../../../components/UpdateBtn";
 import CancelBtn from "../../../components/CancelBtn";
 import { useRef, useState } from "react";
-import TextareaMarkdown, {
-  TextareaMarkdownRef,
-} from "textarea-markdown-editor";
+import { TextareaMarkdownRef } from "textarea-markdown-editor";
 import {
   TypographyIcon,
   ChevronUpIcon,

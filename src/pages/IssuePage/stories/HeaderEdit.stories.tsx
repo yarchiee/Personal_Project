@@ -1,8 +1,6 @@
-import * as React from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import HeaderEdit from "../HeaderEdit";
-// import DiscussionItem from "../../../components/DiscussionItem";
 
 export default {
   title: "Example/HeaderEdit",

@@ -2,9 +2,7 @@ import TextArea from "./TextArea";
 import MarkDownArea from "./MarkDownArea";
 import { useRef, useState } from "react";
 import CommentBtn from "../../../components/CommentBtn";
-import TextareaMarkdown, {
-  TextareaMarkdownRef,
-} from "textarea-markdown-editor";
+import { TextareaMarkdownRef } from "textarea-markdown-editor";
 import {
   TypographyIcon,
   ChevronUpIcon,

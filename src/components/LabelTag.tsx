@@ -21,7 +21,6 @@ const IssueLabelP = styled.p<PropsTypes>`
   font-size: 10px;
   background-color: ${(props) => `#${props.isChange}`};
   color: ${(props) => props.lightordark};
-  /* border: 0.5px solid #e1e2e3; */
   line-height: 20px;
   border-radius: 2em;
   font-weight: 600;

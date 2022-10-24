@@ -16,7 +16,7 @@ export default function AssigneeDropList({
   clearStatus,
   setClearStatus,
 }) {
-  const [searchLabelInputText, setSearchLabelInputText] = useState("");
+  const [, setSearchLabelInputText] = useState("");
   const [isAssignee, setIsAssignee] = useState([]);
   const fetchIsOpenIssue = () => {
     api.getAssigneeMenber().then((res) => {
