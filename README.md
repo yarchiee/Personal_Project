@@ -1,70 +1,83 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GitHub Mockup Website
 
-## Available Scripts
+Mock GitHub issue page from Front-End design to product
 
-In the project directory, you can run:
+## About GitHub Mockup
+ 
+ ☑️ User can login and choose a repository
+ 
+ ☑️ User can create / delete / edit comments, issues, and labels
 
-### `npm start`
+ ☑️ User can search / filter issues, labels and assignees
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Developed with **TypeScript**, **React**, **React Router v6**, **Tailwind** and **Styled Components** for **RWD layout**, and **CSS animation**.
+- Used **Supabase** to resolve **OAuth login**
+- Used **Context** and **useReducer** to handle state management (User registration and login state management),
+- Used **Firebase** to **deploy website** and hosted App on Firebase server
+- Connected to GitHub API to **GET/PATCH/DELETE/POST** user data by **Octokit** and researched official documents
+- Built **reusable code** and **UI components** for future use and displayed on **Storybook**
+- Supported **Markdown** in textarea by using **Marked** and **Textarea-Markdown-Editor** 
+- Supported **pagination** when issues are created over than 10 records
+- Supported **Responsive Web Design** to adjust for different screen sizes and viewports automatically
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### Project Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Logo]()
 
-### `npm run build`
+### Router Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Logo]()
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Flow Chart
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Logo]()
 
-### `npm run eject`
+### Component Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Logo]()
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Develop Tools
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- React
+- TypeScript
+- React Router v6
+- Taiwind CSS
+- Styled Components
+- Supabase
+- Octokit
+- Storybook
+- Firebase
+- Marked
+- Textarea-Markdown-Editor
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Demo 🌟
+ #### Login Page
+- After login, user can choose a repository and show issues
+- Selected repository and user name will show on http url
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![App Screenshot](https://i.imgur.com/T8xGcqA.gif)
 
-### Code Splitting
+ #### Label Page
+- User can create / edit / delete a label
+- User can choose random color or select color from colorboard
+![App Screenshot](https://i.imgur.com/77endt0.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+ #### IssueList Page
+- User can filter and search issues 
+- User can click dropdown list to mutiple search 
+- User can clear all search params 
+- All dropdown list support keywords search  
+- If there is 0 records to display that will show no result page 
+- Supported pagination when issues are created over than 10 records
+![App Screenshot](https://img.onl/MrpANz)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ #### NewIssue Page
+- User can create a new issue 
+- User can assign collaborator or assign yourself
+- User can add or delete a label from sidebar
+- Supported Markdown in textarea with Marked and Texarea-Markdown-Editor
+![App Screenshot](https://img.onl/gXiySA)
