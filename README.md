@@ -13,7 +13,7 @@ Mock GitHub issue page from Front-End design to product
 
 - Developed with **TypeScript**, **React**, **React Router v6**, **Tailwind** and **Styled Components** for **RWD layout**, and **CSS animation**.
 - Used **Supabase** to resolve **OAuth login**
-- Used **Context** and **useReducer** to handle state management (User registration and login state management),
+- Used **Context** and **useReducer** to handle state management (User registration and login state management)
 - Used **Firebase** to **deploy website** and hosted App on Firebase server
 - Connected to GitHub API to **GET/PATCH/DELETE/POST** user data by **Octokit** and researched official documents
 - Built **reusable code** and **UI components** for future use and displayed on **Storybook**
@@ -58,7 +58,6 @@ Mock GitHub issue page from Front-End design to product
  #### Login Page
 - After login, user can choose a repository and show issues
 - Selected repository and user name will show on http url
-
 ![App Screenshot](https://i.imgur.com/T8xGcqA.gif)
 
  #### Label Page
