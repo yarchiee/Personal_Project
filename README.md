@@ -1,7 +1,14 @@
+<div align=center>
+<img src="https://user-images.githubusercontent.com/105163825/200102501-63189dba-7645-409b-935c-28227e861405.jpg"  width="20%"/>
+</div>
 
 # GitHub Mockup Website
 
-Mock GitHub issue page from Front-End design to product
+☀️ **Mock GitHub issue page from Front-End design to product** <br>
+
+<img src="https://user-images.githubusercontent.com/105163825/200102169-b094711f-7607-4e1f-a584-630f60ede7fd.PNG"  width="50%"  class="rm-style"/>
+<img src="https://user-images.githubusercontent.com/105163825/200104180-50ec2004-9d1e-43d1-a262-d3d6c1c49883.PNG"  width="50%"  class="rm-style"/>
+
 
 ## About GitHub Mockup
  
@@ -59,7 +66,7 @@ Mock GitHub issue page from Front-End design to product
 - After login, user can choose a repository and show issues
 - Selected repository and user name will show on http url
 
- ![t5sa2-jmjl8](https://user-images.githubusercontent.com/105163825/200102110-3e1eb5a1-88a3-4cfa-9f34-bb86ad6630c8.gif)
+![kekdh-yu44x](https://user-images.githubusercontent.com/105163825/200104305-258e7b36-3fc8-4605-bc0e-e6e88b9a4277.gif)
 
  #### Label Page
 - User can create / edit / delete a label
