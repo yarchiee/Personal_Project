@@ -44,7 +44,7 @@ Mock GitHub issue page from Front-End design to product
 - React
 - TypeScript
 - React Router v6
-- Taiwind CSS
+- Tailwind CSS
 - Styled Components
 - Supabase
 - Octokit
