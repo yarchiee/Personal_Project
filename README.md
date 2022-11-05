@@ -29,27 +29,24 @@
 - Supported **Responsive Web Design** to adjust for different screen sizes and viewports automatically
 
 ##
-### Project Setting
+### Project Setting 📝
 
-<img src="https://user-images.githubusercontent.com/105163825/200131264-9eca798f-f9d0-492e-9cd4-a35385997955.PNG"  width="70%"/>
+<img src="https://user-images.githubusercontent.com/105163825/200131264-9eca798f-f9d0-492e-9cd4-a35385997955.PNG" width="83%" />
 
-### Router Setting
 
-<img src="https://user-images.githubusercontent.com/105163825/200130979-d27135e2-e2a0-4bf5-b9de-814dca80e211.PNG"  width="70%"/>
+### Router Setting 📝
 
-### Flow Chart
+<img src="https://user-images.githubusercontent.com/105163825/200130979-d27135e2-e2a0-4bf5-b9de-814dca80e211.PNG" width="83%"  />
 
-![Logo]()
 
-### Component Setting
+### Component Setting 📝
 
-<div>
-<img src="https://user-images.githubusercontent.com/105163825/200130802-b9cfe934-2f2e-4bde-81de-1fc260e9f890.PNG"  width="48.5%"  />
- <img src="https://user-images.githubusercontent.com/105163825/200130841-ca19adee-8e61-4829-9f9e-b26e48c68d0c.PNG"  width="51%"/>
-</div>
+<img src="https://user-images.githubusercontent.com/105163825/200130802-b9cfe934-2f2e-4bde-81de-1fc260e9f890.PNG"   />
+<img src="https://user-images.githubusercontent.com/105163825/200130841-ca19adee-8e61-4829-9f9e-b26e48c68d0c.PNG"  />
+
 
 ##
-### Develop Tools 🔧
+## Develop Tools 🔧
 
 - React
 - TypeScript
