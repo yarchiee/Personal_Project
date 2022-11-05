@@ -108,7 +108,8 @@
  <img src="https://user-images.githubusercontent.com/105163825/200128846-b49164b7-f2f2-4f0c-8b61-310a1b81dae9.gif"  width="25%"  />
 </div>
 
-##
+
+
 ## Future Feature 🔜
 - Add timeline to record user event on issuepage
 - Can select page on issuelist page
