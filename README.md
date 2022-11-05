@@ -4,14 +4,11 @@
 
 # GitHub Mockup Website
 
-☀️ **Mock GitHub issue page from Front-End design to product** <br>
+☀️ **Mock [GitHub issue page](https://github-project-798b6.web.app/) from Front-End design to product** <br>
 <div>
 <img src="https://user-images.githubusercontent.com/105163825/200102169-b094711f-7607-4e1f-a584-630f60ede7fd.PNG"  width="44.5%"  />
  <img src="https://user-images.githubusercontent.com/105163825/200125062-bf949f5d-90b3-4472-853d-bfaa9ae0c8b7.PNG"  width="42.5%"/>
 </div>
-
-
-
 
 ## About GitHub Mockup
  
@@ -65,19 +62,20 @@
 
 
 ## Demo 🌟
- #### Login Page
+
+#### Login Page ☁️
 - After login, user can choose a repository and show issues
 - Selected repository and user name will show on http url
 
 ![kekdh-yu44x](https://user-images.githubusercontent.com/105163825/200104305-258e7b36-3fc8-4605-bc0e-e6e88b9a4277.gif)
 
- #### Label Page
+#### Label Page ☁️
 - User can create / edit / delete a label
 - User can choose random color or select color from colorboard
  
 ![bizso-j547d](https://user-images.githubusercontent.com/105163825/199945759-6bfdf2bb-3f95-4ea3-9235-cb73f285ebf5.gif)
 
- #### IssueList Page
+#### IssueList Page ☁️
 - User can filter and search issues 
 - User can click dropdown list to mutiple search 
 - User can clear all search params 
@@ -87,7 +85,7 @@
  
 ![9nvtd-29eba](https://user-images.githubusercontent.com/105163825/200101443-138a72a9-05a6-414c-896b-9f4667e25d1b.gif)
 
- #### NewIssue Page
+#### NewIssue Page ☁️
 - User can create a new issue 
 - User can assign collaborator or assign yourself
 - User can add or delete a label from sidebar
@@ -95,11 +93,23 @@
  
 ![1aif0-reesz](https://user-images.githubusercontent.com/105163825/199945842-5a06046b-ba97-427e-8fb0-d851901f4a56.gif)
 
- #### IssuePage
+#### IssuePage ☁️
 - User can create / edit / delete a comment 
 - The comment box will show defferent color according to owner or collaborator
 
 ![k4lc5-5gpry](https://user-images.githubusercontent.com/105163825/200101108-93b324c1-0425-4df3-b95f-163ee339ef0d.gif)
 
+#### RWD Layout ☁️
+- Supported Responsive Web Design to adjust for different screen sizes and viewports automatically
 
+<div>
+<img src="https://user-images.githubusercontent.com/105163825/200127855-3be36043-84b4-4012-a963-3eb847101743.gif"  width="25%" />&nbsp; &nbsp; &nbsp;
+<img src="https://user-images.githubusercontent.com/105163825/200128139-244a50c3-55a4-425c-a328-45ced7840a11.gif"  width="25%"  />&nbsp; &nbsp; &nbsp;
+ <img src="https://user-images.githubusercontent.com/105163825/200128846-b49164b7-f2f2-4f0c-8b61-310a1b81dae9.gif"  width="25%"  />
+</div>
+
+##
+## Future Feature 🔜
+- Add timeline to record user event on issuepage
+- Can select page on issuelist page
 
