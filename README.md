@@ -5,9 +5,12 @@
 # GitHub Mockup Website
 
 ☀️ **Mock GitHub issue page from Front-End design to product** <br>
+<div>
+<img src="https://user-images.githubusercontent.com/105163825/200102169-b094711f-7607-4e1f-a584-630f60ede7fd.PNG"  width="44.5%"  />
+ <img src="https://user-images.githubusercontent.com/105163825/200125062-bf949f5d-90b3-4472-853d-bfaa9ae0c8b7.PNG"  width="42.5%"/>
+</div>
 
-<img src="https://user-images.githubusercontent.com/105163825/200102169-b094711f-7607-4e1f-a584-630f60ede7fd.PNG"  width="50%"  class="rm-style"/>
-<img src="https://user-images.githubusercontent.com/105163825/200104180-50ec2004-9d1e-43d1-a262-d3d6c1c49883.PNG"  width="50%"  class="rm-style"/>
+
 
 
 ## About GitHub Mockup
@@ -28,7 +31,7 @@
 - Supported **pagination** when issues are created over than 10 records
 - Supported **Responsive Web Design** to adjust for different screen sizes and viewports automatically
 
-
+##
 ### Project Structure
 
 ![Logo]()
@@ -45,8 +48,8 @@
 
 ![Logo]()
 
-
-### Develop Tools
+##
+### Develop Tools 🔧
 
 - React
 - TypeScript
