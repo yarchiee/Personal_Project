@@ -58,8 +58,8 @@ Mock GitHub issue page from Front-End design to product
  #### Login Page
 - After login, user can choose a repository and show issues
 - Selected repository and user name will show on http url
- 
-![f5qrx-p5o52](https://user-images.githubusercontent.com/105163825/199945698-6dfc3696-62aa-4cc6-9bf8-c2a2b27e23ca.gif)
+
+ ![t5sa2-jmjl8](https://user-images.githubusercontent.com/105163825/200102110-3e1eb5a1-88a3-4cfa-9f34-bb86ad6630c8.gif)
 
  #### Label Page
 - User can create / edit / delete a label
@@ -76,7 +76,6 @@ Mock GitHub issue page from Front-End design to product
 - Supported pagination when issues are created over than 10 records
  
 ![9nvtd-29eba](https://user-images.githubusercontent.com/105163825/200101443-138a72a9-05a6-414c-896b-9f4667e25d1b.gif)
-
 
  #### NewIssue Page
 - User can create a new issue 
