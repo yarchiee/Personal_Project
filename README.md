@@ -85,4 +85,11 @@ Mock GitHub issue page from Front-End design to product
  
 ![1aif0-reesz](https://user-images.githubusercontent.com/105163825/199945842-5a06046b-ba97-427e-8fb0-d851901f4a56.gif)
 
+ #### IssuePage
+- User can create / edit / delete a comment 
+- The comment box will show defferent color according to owner or collaborator
+
+![k4lc5-5gpry](https://user-images.githubusercontent.com/105163825/200101108-93b324c1-0425-4df3-b95f-163ee339ef0d.gif)
+
+
 
