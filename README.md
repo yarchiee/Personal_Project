@@ -6,8 +6,8 @@
 
 ☀️ **Mock [GitHub issue page](https://github-project-798b6.web.app/) from Front-End design to product** <br>
 <div>
-<img src="https://user-images.githubusercontent.com/105163825/200102169-b094711f-7607-4e1f-a584-630f60ede7fd.PNG"  width="44.5%"  />
- <img src="https://user-images.githubusercontent.com/105163825/200125062-bf949f5d-90b3-4472-853d-bfaa9ae0c8b7.PNG"  width="42.5%"/>
+<img src="https://user-images.githubusercontent.com/105163825/200102169-b094711f-7607-4e1f-a584-630f60ede7fd.PNG"  width="50.5%"  />
+ <img src="https://user-images.githubusercontent.com/105163825/200125062-bf949f5d-90b3-4472-853d-bfaa9ae0c8b7.PNG"  width="48.5%"/>
 </div>
 
 ## About GitHub Mockup
@@ -29,21 +29,24 @@
 - Supported **Responsive Web Design** to adjust for different screen sizes and viewports automatically
 
 ##
-### Project Structure
+### Project Setting
 
-![Logo]()
+<img src="https://user-images.githubusercontent.com/105163825/200131264-9eca798f-f9d0-492e-9cd4-a35385997955.PNG"  width="70%"/>
 
-### Router Structure
+### Router Setting
 
-![Logo]()
+<img src="https://user-images.githubusercontent.com/105163825/200130979-d27135e2-e2a0-4bf5-b9de-814dca80e211.PNG"  width="70%"/>
 
 ### Flow Chart
 
 ![Logo]()
 
-### Component Structure
+### Component Setting
 
-![Logo]()
+<div>
+<img src="https://user-images.githubusercontent.com/105163825/200130802-b9cfe934-2f2e-4bde-81de-1fc260e9f890.PNG"  width="48.5%"  />
+ <img src="https://user-images.githubusercontent.com/105163825/200130841-ca19adee-8e61-4829-9f9e-b26e48c68d0c.PNG"  width="51%"/>
+</div>
 
 ##
 ### Develop Tools 🔧
