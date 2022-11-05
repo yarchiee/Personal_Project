@@ -20,7 +20,7 @@
 
 - Developed with **TypeScript**, **React**, **React Router v6**, **Tailwind** and **Styled Components** for **RWD layout**, and **CSS animation**.
 - Used **Supabase** to resolve **OAuth login**
-- Used **Context** and **useReducer** to handle state management (User registration and login state management)
+- Used **Context** and **useReducer** to handle state management ( User registration and login state management )
 - Used **Firebase** to **deploy website** and hosted App on Firebase server
 - Connected to GitHub API to **GET/PATCH/DELETE/POST** user data by **Octokit** and researched official documents
 - Built **reusable code** and **UI components** for future use and displayed on **Storybook**
