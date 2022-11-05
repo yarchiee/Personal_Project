@@ -75,7 +75,8 @@ Mock GitHub issue page from Front-End design to product
 - If there is 0 records to display that will show no result page 
 - Supported pagination when issues are created over than 10 records
  
-![App Screenshot](https://img.onl/MrpANz)
+![9nvtd-29eba](https://user-images.githubusercontent.com/105163825/200101443-138a72a9-05a6-414c-896b-9f4667e25d1b.gif)
+
 
  #### NewIssue Page
 - User can create a new issue 
