@@ -46,7 +46,7 @@
 
 
 ### Component Setting 📝
-- Built **reusable code** and **UI components** for future use 
+- Built **reusable code** and **UI components** for future use and displayed on **[Storybook](https://github-storybook.web.app/)**
 
 <img src="https://user-images.githubusercontent.com/105163825/200130802-b9cfe934-2f2e-4bde-81de-1fc260e9f890.PNG"   />
 <img src="https://user-images.githubusercontent.com/105163825/200130841-ca19adee-8e61-4829-9f9e-b26e48c68d0c.PNG"  />
