@@ -33,7 +33,7 @@
 - **API files** store in **service document**
 - **Utils files** store **reusable function** like **calculate time** and **calculate random color**
 - **Context files** store **user registration data** and **login state management**
-- **Components file**s store **reusable code** and **UI components** like **header**, **footer** 
+- **Components files** store **reusable code** and **UI components** like **header**, **footer** 
 
 <img src="https://user-images.githubusercontent.com/105163825/200131264-9eca798f-f9d0-492e-9cd4-a35385997955.PNG" width="83%" />
 
