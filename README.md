@@ -4,7 +4,7 @@
 
 # GitHub Mockup Website
 
-☀️ **Mock [GitHub issue page](https://github-project-798b6.web.app/) from Front-End design to product** <br>
+☀️ **Mock GitHub issue page from Front-End design to product** <br>
 <div>
 <img src="https://user-images.githubusercontent.com/105163825/200102169-b094711f-7607-4e1f-a584-630f60ede7fd.PNG"  width="50.5%"  />
  <img src="https://user-images.githubusercontent.com/105163825/200125062-bf949f5d-90b3-4472-853d-bfaa9ae0c8b7.PNG"  width="48.5%"/>
